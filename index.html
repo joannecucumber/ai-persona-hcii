@@ -457,6 +457,7 @@
   ];
 
   function show(n){
+    try{player.pause();}catch(e){}
     i=Math.max(0,Math.min(tot-1,n));
     slides.forEach((s,k)=>s.classList.toggle('active',k===i));
     document.getElementById('cur').textContent=i+1;
@@ -491,18 +492,26 @@
   function toggleNotes(){document.body.classList.toggle('notes-open')}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
   document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='s')toggleNotes()});
-  /* ===== pronunciation：整段英文朗讀 (Web Speech API) ===== */
+  /* ===== pronunciation：整段英文朗讀（預先生成的真人音檔，失敗時退回系統語音）===== */
   let RATE=0.85;
-  function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=RATE;speechSynthesis.speak(u);}catch(e){}}
-  document.getElementById('readBtn').onclick=()=>{
-    const t=(NOTES[i].en||'').replace(/[：]/g,', ').replace(/[；]/g,'; ').replace(/[（）]/g,' ');
-    speak(t);
-  };
-  document.getElementById('stopBtn').onclick=()=>{try{speechSynthesis.cancel();}catch(e){}};
+  const player=new Audio(); player.preload='none';
+  function speakFallback(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=RATE;speechSynthesis.speak(u);}catch(e){}}
+  function readAloud(){
+    try{speechSynthesis.cancel();}catch(e){}
+    const en=NOTES[i].en||'';
+    player.onerror=()=>{speakFallback(en.replace(/[：]/g,', ').replace(/[；]/g,'; ').replace(/[（）]/g,' '));};
+    player.src='audio/s'+i+'.mp3';
+    player.playbackRate=RATE;
+    try{player.currentTime=0;}catch(e){}
+    player.play().catch(()=>{});
+  }
+  document.getElementById('readBtn').onclick=readAloud;
+  document.getElementById('stopBtn').onclick=()=>{try{player.pause();player.currentTime=0;}catch(e){}try{speechSynthesis.cancel();}catch(e){}};
   document.querySelectorAll('.rate').forEach(b=>b.onclick=()=>{
     RATE=parseFloat(b.dataset.r);
     document.querySelectorAll('.rate').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');
+    try{player.playbackRate=RATE;}catch(e){}
   });
 
   document.body.classList.add('notes-open');
