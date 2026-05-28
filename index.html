@@ -81,6 +81,18 @@
   .notes .src::before{content:"論文原文 · PAPER TEXT";display:block;color:var(--warn);font-size:.72rem;font-weight:700;letter-spacing:.12em;margin-bottom:.5rem}
   .notes .src .se{font-size:1rem;line-height:1.58;color:var(--ink)}
   .notes .src .sz{font-size:1rem;line-height:1.75;color:var(--muted);margin-top:.7rem}
+  /* practice tool */
+  .notes .ctrl{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem}
+  .notes .ctrl button{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:.32rem .62rem;font-size:.82rem;cursor:pointer;transition:.15s}
+  .notes .ctrl button:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  .notes .ctrl button.on{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  .notes .ctrl .ch{color:var(--muted);font-size:.74rem;margin-left:.2rem}
+  .notes .lk{display:none;background:rgba(15,199,123,.10);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:.9rem}
+  .notes .lk .lkw{font-size:1.15rem;font-weight:800;color:var(--accent)}
+  .notes .lk .ipa{color:var(--muted);margin-left:.5rem;font-size:.95rem}
+  .notes .lk .zh2{display:block;color:var(--ink);margin-top:.35rem;font-size:1rem;line-height:1.5}
+  .notes .en .w{cursor:pointer;border-bottom:1px dotted rgba(15,199,123,.45)}
+  .notes .en .w:hover{color:var(--accent);border-bottom-color:var(--accent)}
   body.notes-open .pageno,body.notes-open .hint{display:none}
 </style>
 </head>
@@ -324,6 +336,15 @@
   <div class="nlabel">Speaker Script · 報告稿</div>
   <div class="tm" id="tm"></div>
   <div class="sn" id="sn"></div>
+  <div class="ctrl">
+    <button id="readBtn" title="朗讀整段英文">🔊 朗讀</button>
+    <button class="rate" data-r="0.7">0.7×</button>
+    <button class="rate on" data-r="0.85">0.85×</button>
+    <button class="rate" data-r="1">1×</button>
+    <button id="stopBtn" title="停止">■</button>
+    <span class="ch">點單字查發音</span>
+  </div>
+  <div class="lk" id="lk"><span class="lkw" id="lkw"></span><span class="ipa" id="lkipa"></span><span class="zh2" id="lkzh"></span></div>
   <div class="en" id="nen"></div>
   <div class="zhs" id="nzh"></div>
   <div class="src" id="src"><div class="se" id="srcen"></div><div class="sz" id="srczh"></div></div>
@@ -450,7 +471,8 @@
     const nt=NOTES[i]||{t:'',en:'',zh:''};
     document.getElementById('tm').textContent='⏱ '+(TIMES[i]||'')+'　(running '+runningTime(i)+')';
     document.getElementById('sn').textContent=nt.t;
-    document.getElementById('nen').textContent=nt.en;
+    renderWords(document.getElementById('nen'),nt.en);
+    document.getElementById('lk').style.display='none';
     document.getElementById('nzh').textContent=nt.zh;
     const sr=SRC[i]||{en:'',zh:''};
     const srcEl=document.getElementById('src');
@@ -477,6 +499,80 @@
   function toggleNotes(){document.body.classList.toggle('notes-open')}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
   document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='s')toggleNotes()});
+  /* ===== practice tool：發音 + 單字解釋 (Web Speech API) ===== */
+  const GLOSSARY={
+    persona:{ipa:"/pərˈsoʊnə/",zh:"人物誌；角色原型"},personas:{ipa:"/pərˈsoʊnəz/",zh:"人物誌（複數）"},
+    discriminable:{ipa:"/dɪˈskrɪmɪnəbəl/",zh:"可區辨的"},discriminability:{ipa:"/dɪˌskrɪmɪnəˈbɪləti/",zh:"可區辨性"},
+    consistent:{ipa:"/kənˈsɪstənt/",zh:"一致的"},consistency:{ipa:"/kənˈsɪstənsi/",zh:"一致性"},
+    synthetic:{ipa:"/sɪnˈθetɪk/",zh:"合成的"},experiential:{ipa:"/ɪkˌspɪriˈenʃəl/",zh:"經歷／經驗性的"},
+    fidelity:{ipa:"/fɪˈdeləti/",zh:"擬真度；保真度"},methodology:{ipa:"/ˌmeθəˈdɑlədʒi/",zh:"方法論"},
+    dimension:{ipa:"/dɪˈmenʃən/",zh:"維度"},dimensions:{ipa:"/dɪˈmenʃənz/",zh:"維度（複數）"},
+    reflective:{ipa:"/rɪˈflektɪv/",zh:"反思的"},reflection:{ipa:"/rɪˈflekʃən/",zh:"反思"},
+    hesitation:{ipa:"/ˌhezɪˈteɪʃən/",zh:"遲疑"},contradiction:{ipa:"/ˌkɑntrəˈdɪkʃən/",zh:"矛盾"},
+    authenticity:{ipa:"/ˌɔːθenˈtɪsəti/",zh:"真實性"},authentic:{ipa:"/ɔːˈθentɪk/",zh:"真實的"},
+    coherence:{ipa:"/koʊˈhɪrəns/",zh:"連貫性"},coherent:{ipa:"/koʊˈhɪrənt/",zh:"連貫的"},
+    narrative:{ipa:"/ˈnærətɪv/",zh:"敘事"},probe:{ipa:"/proʊb/",zh:"探針；探測"},
+    complementary:{ipa:"/ˌkɑmplɪˈmentəri/",zh:"互補的"},nourishment:{ipa:"/ˈnɜːrɪʃmənt/",zh:"養分；滋養"},
+    evolution:{ipa:"/ˌevəˈluːʃən/",zh:"演化"},evolve:{ipa:"/ɪˈvɑlv/",zh:"演化；發展"},
+    baseline:{ipa:"/ˈbeɪslaɪn/",zh:"基準"},reference:{ipa:"/ˈrefərəns/",zh:"參照；參考"},
+    qualitative:{ipa:"/ˈkwɑlɪteɪtɪv/",zh:"質性的"},generative:{ipa:"/ˈdʒenərətɪv/",zh:"生成式的"},
+    temporality:{ipa:"/ˌtempəˈræləti/",zh:"時間性"},ecological:{ipa:"/ˌiːkəˈlɑdʒɪkəl/",zh:"生態的"},
+    prerequisite:{ipa:"/ˌpriːˈrekwəzɪt/",zh:"先決條件"},variability:{ipa:"/ˌveriəˈbɪləti/",zh:"變化性"},
+    underexplored:{ipa:"/ˌʌndərɪkˈsplɔːrd/",zh:"未被充分探討的"},intern:{ipa:"/ˈɪntɜːrn/",zh:"實習生"},
+    analyst:{ipa:"/ˈænəlɪst/",zh:"分析師"},disciplined:{ipa:"/ˈdɪsəplɪnd/",zh:"有紀律的"},
+    validation:{ipa:"/ˌvælɪˈdeɪʃən/",zh:"驗證"},validate:{ipa:"/ˈvælɪdeɪt/",zh:"驗證"},
+    anchor:{ipa:"/ˈæŋkər/",zh:"錨定；固定"},framework:{ipa:"/ˈfreɪmwɜːrk/",zh:"框架"},
+    stimuli:{ipa:"/ˈstɪmjəlaɪ/",zh:"刺激物（複數）"},scenario:{ipa:"/səˈnærioʊ/",zh:"情境；劇本"},
+    scenarios:{ipa:"/səˈnærioʊz/",zh:"情境（複數）"},repertoire:{ipa:"/ˈrepərtwɑːr/",zh:"（語言）庫；曲目"},
+    discussion:{ipa:"/dɪˈskʌʃən/",zh:"討論"},approach:{ipa:"/əˈproʊtʃ/",zh:"取徑；方法"}
+  };
+  let RATE=0.85;
+  function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=RATE;speechSynthesis.speak(u);}catch(e){}}
+  function renderWords(el,text){
+    el.innerHTML='';
+    text.split(/(\s+)/).forEach(p=>{
+      if(/^\s*$/.test(p)){el.appendChild(document.createTextNode(p));return;}
+      const m=p.match(/^([^A-Za-z]*)([A-Za-z][A-Za-z'’-]*)?([^A-Za-z]*)$/);
+      if(m&&m[2]){
+        if(m[1])el.appendChild(document.createTextNode(m[1]));
+        const s=document.createElement('span');s.className='w';s.textContent=m[2];el.appendChild(s);
+        if(m[3])el.appendChild(document.createTextNode(m[3]));
+      }else{el.appendChild(document.createTextNode(p));}
+    });
+  }
+  function lookup(word){
+    const key=word.toLowerCase().replace(/[^a-z'-]/g,'');
+    const lk=document.getElementById('lk');
+    document.getElementById('lkw').textContent=word;
+    const g=GLOSSARY[key];
+    if(g){document.getElementById('lkipa').textContent=g.ipa;document.getElementById('lkzh').textContent=g.zh;lk.style.display='block';return;}
+    document.getElementById('lkipa').textContent='';
+    document.getElementById('lkzh').textContent='查詢中…';
+    lk.style.display='block';
+    fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key))
+      .then(r=>r.ok?r.json():null).then(d=>{
+        if(!d||!d[0]){document.getElementById('lkzh').textContent='（詞庫無此字，已發音）';return;}
+        const e=d[0];
+        const ph=e.phonetic||((e.phonetics||[]).find(p=>p&&p.text)||{}).text||'';
+        const def=((((e.meanings||[])[0]||{}).definitions||[])[0]||{}).definition||'';
+        document.getElementById('lkipa').textContent=ph;
+        document.getElementById('lkzh').textContent=def||'（無定義，已發音）';
+      }).catch(()=>{document.getElementById('lkzh').textContent='（離線，已發音）';});
+  }
+  document.getElementById('nen').addEventListener('click',e=>{
+    if(e.target.classList.contains('w')){const w=e.target.textContent;speak(w);lookup(w);}
+  });
+  document.getElementById('readBtn').onclick=()=>{
+    const t=(NOTES[i].en||'').replace(/[：]/g,', ').replace(/[；]/g,'; ').replace(/[（）]/g,' ');
+    speak(t);
+  };
+  document.getElementById('stopBtn').onclick=()=>{try{speechSynthesis.cancel();}catch(e){}};
+  document.querySelectorAll('.rate').forEach(b=>b.onclick=()=>{
+    RATE=parseFloat(b.dataset.r);
+    document.querySelectorAll('.rate').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+  });
+
   document.body.classList.add('notes-open');
   show(0);
 </script>
