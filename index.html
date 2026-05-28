@@ -142,10 +142,10 @@
 
   <!-- 5 研究方法 -->
   <section class="slide">
-    <div class="kicker">Method · Action Research</div>
-    <h2>Two studies, one <span class="u">context</span></h2>
+    <div class="kicker">Method · Design Science Research (DSR)</div>
+    <h2>Build an artifact, then <span class="u">evaluate it</span></h2>
     <div class="grid g2">
-      <div class="card"><h3>Approach</h3><p>An action-research process of human-AI co-construction, then evaluation through two studies.</p></div>
+      <div class="card"><h3>Approach</h3><p>Design Science Research：we treat the AI persona as an artifact, constructing it then evaluating it across two studies (Hevner et al., 2004; Peffers et al., 2007).</p></div>
       <div class="card"><h3>Context：Gen Z ETF investors</h3><p>Strong emotional-behavioral coupling："I know I should hold long-term, but I can't help checking the market every hour."</p></div>
     </div>
   </section>
@@ -362,8 +362,8 @@
 
   const NOTES=[
     {t:"開場｜Title",
-     en:"Good morning. Our paper is 'From Static Snapshot to Living System.' The core idea is this：an AI persona shouldn't be a frozen document. Once it's consistent, it can become a system that evolves. I'll show how we build one, how it differs from real people, and where that leads.",
-     zh:"大家好。我們的論文題目是『From Static Snapshot to Living System』。核心想法是：AI 人物誌不該是凍結的文件，只要它夠穩定，就能變成一個會演化的系統。我會講怎麼建、它跟真人差在哪、最後會往哪裡走。"},
+     en:"Good morning. Personas have always been static documents. Now with AI, everyone is talking about AI personas, but mostly asking how human-like they are. We ask a different question: how do they differ from real people, and what can that difference do for design research?",
+     zh:"大家好。人物誌一直是靜態的文件。AI 出現後大家開始談 AI 人物誌，但多半在問「像不像真人」。我們問的是另一個問題：它跟真人差在哪？這個差異又能為設計研究帶來什麼？"},
     {t:"背景｜Background",
      en:"Personas anchor design in users, but they're static；once written, they freeze. Generative AI changes that：a persona becomes an agent you can talk to. But how an AI persona actually differs from a real participant is still underexplored, and that's our entry point.",
      zh:"人物誌讓設計錨定使用者，但它是靜態的，寫完就凍結。生成式 AI 改變了這點：人物誌變成可以對話的代理。但 AI 人物誌跟真人到底差在哪，目前還很少被探討，這就是我們的切入點。"},
@@ -374,8 +374,8 @@
      en:"Two questions. RQ1：how to construct consistent and discriminable AI personas for design research. RQ2：what structural differences in language exist between AI personas and human participants. Not 'do they resemble humans,' but 'where do they differ, and so what.'",
      zh:"兩個問題。RQ1：怎麼建構一致且可區辨、可用於設計研究的 AI 人物誌。RQ2：AI 人物誌與真人在語言表現上有哪些結構性差異。不是問『像不像真人』，而是問『差在哪、那又如何』。"},
     {t:"研究方法｜Method",
-     en:"We use an action-research approach：human-AI co-construction, then two studies. Context：Taiwan's Gen Z ETF investors, chosen for strong emotional-behavioral coupling. They say things like 'I know I should hold long-term, but I can't help checking every hour.'",
-     zh:"我們採行動研究：人機共構，再做兩個研究。情境選台灣 Z 世代 ETF 投資者，因為情緒與行為高度連動，他們會說『我知道該長期持有，但忍不住每小時看盤』。"},
+     en:"Our method is Design Science Research. We treat the AI persona as an artifact: we construct it, then evaluate it across two studies. The context is Taiwan's Gen Z ETF investors, chosen for their strong emotional-behavioral coupling. They say things like 'I know I should hold long-term, but I can't help checking every hour.'",
+     zh:"我們的方法是設計科學研究。把 AI 人物誌當成一個人造物：先建構，再用兩個研究評估。情境選台灣 Z 世代 ETF 投資者，因為情緒與行為高度連動，他們會說『我知道該長期持有，但忍不住每小時看盤』。"},
     {t:"建構流程｜Construction",
      en:"We build the persona through three stages, all with Gemini 2.5. Stage one：a market analyst produces a market report. Stage two：an extraction assistant pulls real first-person posts from PTT and Dcard, where the authentic voice comes from. Stage three：it writes a six-dimension script. Then we deploy it as a GPT, which fixes the instructions so the role isn't overwritten.",
      zh:"我們用三階段建角色，全程用 Gemini 2.5。第一階段：市場分析師產出市場報告。第二階段：擷取助理從 PTT、Dcard 抓真實第一人稱貼文，真實聲音來自這裡。第三階段：寫成六維度劇本。再部署成 GPT，把指令固定在後台，角色不會被覆寫。"},
@@ -426,8 +426,8 @@
      zh:"比起問 AI 人物誌像不像真人，更重要的問題是它們差在哪、這些差異對設計研究有何意義（差異分析取向，而非擬真度評估取向）。"},
     {en:"RQ1: How can we construct consistent and discriminable AI personas for design research? RQ2: What are the structural differences in linguistic performance between AI personas and human participants?",
      zh:"RQ1：如何建構一致且可區辨、可用於設計研究的 AI 人物誌？RQ2：AI 人物誌與真人受訪者在語言表現上有哪些結構性差異？"},
-    {en:"We adopted an action research approach, developing a Six-Dimension Script Methodology through a human-AI co-construction process. We selected Gen Z ETF investors as the context, based on highly evident emotional and behavioral coupling characteristics.",
-     zh:"本研究採行動研究，透過人機共構發展出六維度劇本方法論。情境選擇台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動的明顯特性。"},
+    {en:"This study adopts Design Science Research (DSR) as its core approach, constructing and evaluating artifacts to solve a practical problem and accumulate generalizable design knowledge (Hevner et al., 2004; Peffers et al., 2007). It proceeds in two stages: construction and validation. Context: Taiwan's Gen Z ETF investors, for their evident emotional-behavioral coupling.",
+     zh:"本研究以設計科學研究方法（Design Science Research, DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007），分為建構與驗證兩階段。情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
     {en:"Data collection proceeded in three stages. Stage 1 (Secondary): Gemini 2.5 as a senior market analyst produced an exploratory market report. Stage 2 (Primary): Gemini 2.5 as a precise data extraction assistant extracted first-person narratives from PTT and Dcard. Stage 3: Script Generation integrated the data into the six-dimension script, then deployed it via GPTs.",
      zh:"資料蒐集分三階段。第一階段（二手）：Gemini 2.5 化身資深市場分析師產出探索性市場報告。第二階段（一手）：Gemini 2.5 化身精準資料擷取助理，從 PTT 與 Dcard 擷取第一人稱敘事。第三階段：劇本生成整合資料為六維度劇本，再部署於 GPTs。"},
     {en:"The six dimensions: Basic Information, Worldview, Psychological State, Behavioral Patterns, Linguistic Repertoire, and Daily Life Scenarios. They serve three functions: suppressing drift (Basic Information + Worldview), enabling agency (Behavioral Patterns + Daily Life Scenarios), and enhancing reflection (Psychological State + Linguistic Repertoire).",
