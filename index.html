@@ -549,15 +549,19 @@
     document.getElementById('lkipa').textContent='';
     document.getElementById('lkzh').textContent='查詢中…';
     lk.style.display='block';
+    // 中文解釋：免費翻譯 API（回繁體中文）
+    fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(key)+'&langpair=en|zh-TW')
+      .then(r=>r.ok?r.json():null).then(d=>{
+        const zh=d&&d.responseData&&d.responseData.translatedText;
+        document.getElementById('lkzh').textContent=(zh&&zh.trim())?zh:'（查無翻譯，已發音）';
+      }).catch(()=>{document.getElementById('lkzh').textContent='（離線，已發音）';});
+    // IPA：免費字典 API（補音標，可有可無）
     fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(key))
       .then(r=>r.ok?r.json():null).then(d=>{
-        if(!d||!d[0]){document.getElementById('lkzh').textContent='（詞庫無此字，已發音）';return;}
-        const e=d[0];
-        const ph=e.phonetic||((e.phonetics||[]).find(p=>p&&p.text)||{}).text||'';
-        const def=((((e.meanings||[])[0]||{}).definitions||[])[0]||{}).definition||'';
-        document.getElementById('lkipa').textContent=ph;
-        document.getElementById('lkzh').textContent=def||'（無定義，已發音）';
-      }).catch(()=>{document.getElementById('lkzh').textContent='（離線，已發音）';});
+        if(!d||!d[0])return;
+        const ph=d[0].phonetic||((d[0].phonetics||[]).find(p=>p&&p.text)||{}).text||'';
+        if(ph)document.getElementById('lkipa').textContent=ph;
+      }).catch(()=>{});
   }
   document.getElementById('nen').addEventListener('click',e=>{
     if(e.target.classList.contains('w')){const w=e.target.textContent;speak(w);lookup(w);}
