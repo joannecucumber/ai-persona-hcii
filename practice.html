@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>練習行事曆｜HCII 7/15 · 口試 7/31</title>
+<style>
+  :root{--bg:#232323;--ink:#f1f3f2;--muted:#9aa39d;--accent:#0FC77B;--warn:#fbbf24;--bad:#fb7185;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);--grid:rgba(15,199,123,.07)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    font-family:-apple-system,"Segoe UI",Helvetica,Arial,"PingFang TC","Noto Sans TC",sans-serif;color:var(--ink);
+    background-color:var(--bg);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),radial-gradient(1000px 700px at 75% -12%,rgba(15,199,123,.10),transparent 60%);
+    background-size:48px 48px,48px 48px,100% 100%;background-repeat:repeat,repeat,no-repeat;
+    padding:4vh 5vw 8vh;line-height:1.5
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.4rem}
+  .sub{color:var(--muted);font-size:1rem;margin-bottom:2.4rem}
+  /* countdown */
+  .cd{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:2rem}
+  .cd .b{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem 1.7rem}
+  .cd .b .label{color:var(--muted);font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:.4rem}
+  .cd .b .title{font-size:1.25rem;font-weight:800;margin-bottom:.7rem}
+  .cd .b .n{font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.03em}
+  .cd .b .n.warn{color:var(--warn)}.cd .b .n.bad{color:var(--bad)}.cd .b .n.done{color:var(--muted)}
+  .cd .b .unit{color:var(--muted);font-size:1.1rem;margin-left:.3rem}
+  .cd .b .date{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+  /* phase pill */
+  .phase{display:inline-block;background:rgba(15,199,123,.16);color:var(--accent);font-weight:800;font-size:.85rem;padding:.32rem .8rem;border-radius:999px;margin-bottom:1rem}
+  /* sections */
+  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+  @media (max-width:780px){.grid2{grid-template-columns:1fr}.cd{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.5rem}
+  .card h2{font-size:1.15rem;font-weight:800;margin-bottom:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+  .card h2 .meta{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  /* tasks */
+  ul.tasks{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+  ul.tasks li{display:flex;align-items:flex-start;gap:.7rem;font-size:.98rem;line-height:1.4;cursor:pointer;padding:.45rem .6rem;border-radius:8px;transition:.15s}
+  ul.tasks li:hover{background:rgba(255,255,255,.04)}
+  ul.tasks li .ck{flex-shrink:0;width:18px;height:18px;border:2px solid var(--muted);border-radius:5px;margin-top:.18rem;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#04121a;font-weight:900}
+  ul.tasks li.done .ck{background:var(--accent);border-color:var(--accent)}
+  ul.tasks li.done .ck::after{content:"✓"}
+  ul.tasks li.done .txt{color:var(--muted);text-decoration:line-through}
+  ul.tasks li small{display:block;color:var(--muted);font-size:.8em;margin-top:.18rem}
+  /* drill lists */
+  .drill{display:flex;flex-direction:column;gap:.7rem;font-size:.95rem}
+  .drill .d{padding:.55rem .8rem;background:rgba(15,199,123,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+  .drill .d b{display:block;color:var(--ink);font-weight:800;margin-bottom:.2rem}
+  .drill .d span{color:var(--muted);font-size:.88rem}
+  /* links */
+  ul.links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+  ul.links li a{display:flex;align-items:center;gap:.6rem;color:var(--ink);text-decoration:none;background:rgba(255,255,255,.04);padding:.55rem .8rem;border-radius:8px;border:1px solid var(--line);font-size:.95rem;transition:.15s}
+  ul.links li a:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  ul.links li a .arr{margin-left:auto;color:var(--muted);font-size:.85rem}
+  ul.links li a:hover .arr{color:#04121a}
+  /* phase roadmap */
+  .road{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;margin-top:.5rem}
+  @media (max-width:780px){.road{grid-template-columns:1fr 1fr}}
+  .road .p{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem;font-size:.88rem}
+  .road .p.cur{border-color:var(--accent);background:rgba(15,199,123,.08)}
+  .road .p .d{color:var(--muted);font-size:.76rem;letter-spacing:.08em;margin-bottom:.2rem}
+  .road .p .n{font-weight:800;color:var(--ink);margin-bottom:.25rem}
+  .road .p .g{color:var(--muted);font-size:.83rem;line-height:1.4}
+  .reset{margin-top:1rem;color:var(--muted);font-size:.8rem;text-align:right}
+  .reset a{color:var(--muted);cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>練習行事曆</h1>
+  <p class="sub" id="today"></p>
+
+  <!-- 倒數 -->
+  <div class="cd">
+    <div class="b">
+      <div class="label">HCII 發表</div>
+      <div class="title">From Static Snapshot to Living System</div>
+      <div><span class="n" id="d1">--</span><span class="unit">天</span></div>
+      <div class="date">2026/07/15 · 線上</div>
+    </div>
+    <div class="b">
+      <div class="label">論文口試</div>
+      <div class="title">碩士論文口試</div>
+      <div><span class="n" id="d2">--</span><span class="unit">天</span></div>
+      <div class="date">2026/07/31 · 唐玄輝指導</div>
+    </div>
+  </div>
+
+  <!-- 階段 -->
+  <div class="phase" id="phase"></div>
+
+  <!-- 今日 + 必練 -->
+  <div class="grid2">
+    <div class="card">
+      <h2>今日任務 <span class="meta" id="tdate"></span></h2>
+      <ul class="tasks" id="tasks"></ul>
+      <div class="reset"><a onclick="clearToday()">清掉今日勾選</a></div>
+    </div>
+
+    <div class="card">
+      <h2>英文必練內容</h2>
+      <div class="drill">
+        <div class="d"><b>開場 hook（老師版）</b><span>"…mostly asking how human-like they are. We ask a different question: how do they differ from real people…"</span></div>
+        <div class="d"><b>核心立場英文</b><span>"from how human-like to how different" / "the difference itself is the productive signal"</span></div>
+        <div class="d"><b>六維度英文</b><span>Basic Information · Worldview · Psychological State · Behavioral Patterns · Linguistic Repertoire · Daily Life Scenarios</span></div>
+        <div class="d"><b>兩種思考</b><span>Synthetic thinking (pre-formed) vs Experiential thinking (being-formed)</span></div>
+        <div class="d"><b>方法名（依口試版）</b><span>Design Science Research (DSR) · Hevner et al. 2004; Peffers et al. 2007</span></div>
+        <div class="d"><b>數字念法</b><span>4.17 · 4.58 · 6.22 · 3.67 · plus 43% · minus 79% · N equals 6 · 60-minute design probe</span></div>
+        <div class="d"><b>收尾</b><span>"From static snapshot to a living system" + Designer Interview Data + Automated CRM Data</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 連結 + Q&A -->
+  <div class="grid2">
+    <div class="card">
+      <h2>Q&amp;A 預期題庫</h2>
+      <ul class="tasks" id="qa">
+        <li><span class="ck"></span><div class="txt"><b>樣本太小？</b><small>N=6 designers + 2 humans, generalizability?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>真人怎麼篩？</b><small>How did you ensure 2 humans matched Xiao-An's profile?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>為什麼選 Gen Z ETF？</b><small>Why this context? Does it generalize?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>AI 模型會過時</b><small>findings tied to specific model — how to update?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>研究倫理？</b><small>PTT/Dcard scraping, persona ethics</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>Living System 具體怎麼做？</b><small>What does the evolution mechanism actually look like?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>可信度 3.67 偏低？</b><small>Doesn't this weaken your method?</small></div></li>
+        <li><span class="ck"></span><div class="txt"><b>跟既有 AI Persona 研究的差別？</b><small>vs PersonaCraft / PersonaGym / Whose Personae</small></div></li>
+      </ul>
+      <div class="reset"><a onclick="clearQA()">清掉 Q&amp;A 勾選</a></div>
+    </div>
+
+    <div class="card">
+      <h2>快速連結</h2>
+      <ul class="links">
+        <li><a href="https://joannecucumber.github.io/ai-persona-hcii/" target="_blank">🎤 HCII 簡報（含真人朗讀）<span class="arr">↗</span></a></li>
+        <li><a href="https://v0-ai-persona.vercel.app/" target="_blank">🌐 AI Persona 方法論網站<span class="arr">↗</span></a></li>
+        <li><a href="https://docs.google.com/document/d/1wcEynlxsRUeNySwWjUrEHiNqosnvhd_hFAaDw4Xxj_0/edit" target="_blank">📄 口試論文（Google Doc）<span class="arr">↗</span></a></li>
+        <li><a href="https://docs.google.com/document/d/1Aam6QuzJT6ggkXo8612aY0wF4jQR_xmlop59L9_FEJo/edit" target="_blank">📄 v3 研究方法整理<span class="arr">↗</span></a></li>
+        <li><a href="https://www.notion.so/36b04d380234807bbc3dce012ce46b24" target="_blank">📝 第三章重寫 Notion<span class="arr">↗</span></a></li>
+        <li><a href="https://www.notion.so/36c04d380234807da529fd9f24451155" target="_blank">📝 第五章重寫 Notion<span class="arr">↗</span></a></li>
+        <li><a href="https://github.com/joannecucumber/ai-persona-hcii" target="_blank">💻 簡報 repo<span class="arr">↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 階段路線圖 -->
+  <div class="card">
+    <h2>階段路線圖</h2>
+    <div class="road" id="road"></div>
+  </div>
+
+</div>
+
+<script>
+  const HCII=new Date('2026-07-15T00:00:00');
+  const ORAL=new Date('2026-07-31T00:00:00');
+  const PHASES=[
+    {key:'p1',start:'2026-06-03',end:'2026-06-15',name:'結構與內容定稿',goal:'簡報精簡到 ~12 頁、英文潤稿、Q&A 雛形'},
+    {key:'p2',start:'2026-06-16',end:'2026-07-14',name:'練到順',goal:'每日對著每頁亂講 1 分鐘、卡字記下查；每週 ≥2 次完整 15 分鐘 timed run'},
+    {key:'p3',start:'2026-07-15',end:'2026-07-15',name:'HCII 發表日',goal:'線上發表 · 別緊張'},
+    {key:'p4',start:'2026-07-16',end:'2026-07-30',name:'口試備戰',goal:'第三章 evidence、第七章補引用、口試簡報、模擬口委問答'},
+    {key:'p5',start:'2026-07-31',end:'2026-07-31',name:'口試日',goal:'今天就是你的！'}
+  ];
+  const TASKS={
+    p1:[
+      {id:'p1-1',t:'把簡報精簡到 ~12 頁的版本（老師建議）',s:'每頁 1 分鐘、要很順'},
+      {id:'p1-2',t:'用自己的話重寫英文講稿',s:'別用 AI 版背，老師說會變很文學'},
+      {id:'p1-3',t:'整份英文丟 AI 調成「正式但口語」',s:'比較幾版、選最順的'},
+      {id:'p1-4',t:'投影片改成圖文並茂、關鍵字為主',s:'不要整頁字'},
+      {id:'p1-5',t:'準備 5 題 Q&A 預期答案',s:'用右側 Q&A 題庫起手'}
+    ],
+    p2:[
+      {id:'p2-1',t:'對著每頁亂講 1 分鐘（跑一輪 ~18-20 分）',s:'卡到的字寫下來查、隔天再跑'},
+      {id:'p2-2',t:'聽簡報的真人朗讀，跟著念',s:'用 0.85× 速度 shadowing'},
+      {id:'p2-3',t:'背一題 Q&A（從題庫挑一題練到順）',s:'目標：可以不打草稿答 2 分鐘'},
+      {id:'p2-4',t:'記 3 個今天卡住的單字、查 IPA + 中文',s:'累積個人弱點詞庫'},
+      {id:'p2-5',t:'（週一/週四）完整 15 分鐘 timed run-through',s:'錄音、聽自己'}
+    ],
+    p3:[
+      {id:'p3-1',t:'早睡、不再大改內容',s:'相信練過的版本'},
+      {id:'p3-2',t:'線上發表前 30 分鐘：開測試連線、麥克風、簡報',s:''},
+      {id:'p3-3',t:'發表完：記下 Q&A 被問什麼',s:'給口試備戰用'}
+    ],
+    p4:[
+      {id:'p4-1',t:'第三章 evidence 補強（時間軸＋附錄）',s:'老師說「只看第三章」'},
+      {id:'p4-2',t:'第七章補三筆參考文獻',s:'PersonaGym / Eval4Sim / Whose Personae?'},
+      {id:'p4-3',t:'全文六維度名詞統一',s:'語言詞彙庫→語言風格、日常生活分鏡→日常情境'},
+      {id:'p4-4',t:'表格編號重整',s:'表 3-1/3-2/3-3 對齊'},
+      {id:'p4-5',t:'口試簡報製作（與 HCII 不同的部分）',s:'活系統、限制、未來都要講清楚'},
+      {id:'p4-6',t:'模擬口委問答（找朋友／自己錄）',s:'每天 30 分鐘'}
+    ],
+    p5:[
+      {id:'p5-1',t:'深呼吸',s:''},
+      {id:'p5-2',t:'記得：第三章扎實＝畢業判準（老師原話）',s:''},
+      {id:'p5-3',t:'試著答；不會就退；別說「我之後想」',s:'老師原話'}
+    ]
+  };
+
+  function daysTo(d){const now=new Date();now.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.round((t-now)/86400000)}
+  function today(){const d=new Date();return d.toISOString().slice(0,10)}
+  function fmtToday(){const d=new Date();const w=['日','一','二','三','四','五','六'][d.getDay()];return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} (週${w})`}
+  function currentPhase(){const t=today();return PHASES.find(p=>t>=p.start&&t<=p.end)||PHASES[0]}
+
+  function renderCountdown(){
+    const a=daysTo(HCII),b=daysTo(ORAL);
+    const e1=document.getElementById('d1'),e2=document.getElementById('d2');
+    e1.textContent=a>=0?a:'發表完成';
+    e2.textContent=b>=0?b:'口試完成';
+    if(a<0)e1.classList.add('done');else if(a<=7)e1.classList.add('bad');else if(a<=21)e1.classList.add('warn');
+    if(b<0)e2.classList.add('done');else if(b<=7)e2.classList.add('bad');else if(b<=21)e2.classList.add('warn');
+  }
+  function renderToday(){
+    document.getElementById('today').textContent=fmtToday()+' · 開始練習';
+    document.getElementById('tdate').textContent=today();
+  }
+  function renderPhase(){
+    const p=currentPhase();
+    document.getElementById('phase').textContent='現在階段：'+p.name+'（'+p.start.replace(/-/g,'/')+' to '+p.end.replace(/-/g,'/')+'）';
+    const ul=document.getElementById('tasks');ul.innerHTML='';
+    (TASKS[p.key]||[]).forEach(t=>{
+      const key='practice_'+today()+'_'+t.id;
+      const done=localStorage.getItem(key)==='1';
+      const li=document.createElement('li');
+      li.className=done?'done':'';
+      li.innerHTML=`<span class="ck"></span><div class="txt">${t.t}${t.s?`<small>${t.s}</small>`:''}</div>`;
+      li.onclick=()=>{
+        const d=!li.classList.contains('done');
+        li.classList.toggle('done',d);
+        if(d)localStorage.setItem(key,'1');else localStorage.removeItem(key);
+      };
+      ul.appendChild(li);
+    });
+  }
+  function renderQA(){
+    document.querySelectorAll('#qa li').forEach((li,i)=>{
+      const key='qa_'+i;
+      if(localStorage.getItem(key)==='1')li.classList.add('done');
+      li.onclick=()=>{
+        const d=!li.classList.contains('done');
+        li.classList.toggle('done',d);
+        if(d)localStorage.setItem(key,'1');else localStorage.removeItem(key);
+      };
+    });
+  }
+  function renderRoad(){
+    const cur=currentPhase().key;
+    const html=PHASES.map(p=>`<div class="p${p.key===cur?' cur':''}"><div class="d">${p.start.slice(5).replace('-','/')} → ${p.end.slice(5).replace('-','/')}</div><div class="n">${p.name}</div><div class="g">${p.goal}</div></div>`).join('');
+    document.getElementById('road').innerHTML=html;
+  }
+  function clearToday(){const t=today();Object.keys(localStorage).filter(k=>k.startsWith('practice_'+t+'_')).forEach(k=>localStorage.removeItem(k));renderPhase()}
+  function clearQA(){Object.keys(localStorage).filter(k=>k.startsWith('qa_')).forEach(k=>localStorage.removeItem(k));document.querySelectorAll('#qa li').forEach(li=>li.classList.remove('done'))}
+
+  renderCountdown();renderToday();renderPhase();renderQA();renderRoad();
+</script>
+</body>
+</html>
