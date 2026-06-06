@@ -30,39 +30,39 @@
   .slide.active{display:flex;opacity:1}
   .kicker{color:var(--accent);font-weight:700;letter-spacing:.16em;font-size:.95rem;margin-bottom:1.2rem;text-transform:uppercase}
   h1{font-size:clamp(2rem,4.4vw,3.7rem);line-height:1.14;font-weight:800;letter-spacing:-.02em}
-  h2{font-size:clamp(1.55rem,3.1vw,2.5rem);line-height:1.2;font-weight:800;margin-bottom:1.6rem;letter-spacing:-.01em}
+  h2{font-size:clamp(1.55rem,3.1vw,2.5rem);line-height:1.2;font-weight:800;margin-bottom:1.4rem;letter-spacing:-.01em}
   h2 .u{color:var(--accent)}
-  p.lead{font-size:clamp(1.05rem,1.7vw,1.38rem);color:var(--muted);line-height:1.62;max-width:64ch}
-  ul{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin-top:.4rem}
+  p.lead{font-size:clamp(1.05rem,1.7vw,1.38rem);color:var(--muted);line-height:1.6;max-width:64ch}
+  ul{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.4rem}
   li{font-size:clamp(1rem,1.65vw,1.34rem);line-height:1.45;padding-left:1.5rem;position:relative;max-width:64ch}
   li::before{content:"";position:absolute;left:0;top:.6em;width:.55rem;height:.55rem;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
   li small{display:block;color:var(--muted);font-size:.76em;margin-top:.2rem}
-  .grid{display:grid;gap:1.1rem;margin-top:.4rem}
+  .grid{display:grid;gap:1rem;margin-top:.4rem}
   .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.35rem 1.45rem}
-  .card h3{font-size:1.18rem;margin-bottom:.5rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem}
+  .card h3{font-size:1.15rem;margin-bottom:.5rem}
   .card .who{color:var(--accent);font-weight:700}
   .card .step{color:var(--accent);font-weight:800;font-size:.9rem;letter-spacing:.04em;margin-bottom:.3rem}
   .card p{color:var(--muted);line-height:1.5;font-size:.96rem}
   .stat{display:flex;gap:3vw;flex-wrap:wrap;margin-top:.7rem}
-  .stat .n{font-size:clamp(2.1rem,4.6vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+  .stat .n{font-size:clamp(2rem,4.4vw,3.8rem);font-weight:800;letter-spacing:-.02em;line-height:1}
   .stat .n.good{color:var(--accent2)} .stat .n.bad{color:var(--bad)}
   .stat .lbl{color:var(--muted);font-size:.9rem;margin-top:.5rem;max-width:30ch}
-  .six{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-top:.45rem}
-  .six div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;font-weight:700;font-size:1.02rem}
-  .six div span{display:block;color:var(--muted);font-weight:400;font-size:.8rem;margin-top:.22rem}
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.9rem;margin-top:.4rem}
-  .col h3{font-size:1.25rem;margin-bottom:.85rem;display:flex;align-items:center;gap:.55rem}
+  .six{display:grid;grid-template-columns:repeat(6,1fr);gap:.55rem;margin:.4rem 0 1rem}
+  .six div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.55rem .65rem;font-weight:700;font-size:.88rem;text-align:center}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.7rem;margin-top:.4rem}
+  .col h3{font-size:1.2rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.55rem}
   .tag{font-size:.74rem;padding:.16rem .6rem;border-radius:999px;font-weight:700}
   .tag.ai{background:rgba(15,199,123,.16);color:var(--accent)}
   .tag.hu{background:rgba(251,191,36,.16);color:var(--warn)}
   .title-wrap .meta{margin-top:2.4rem;color:var(--muted);font-size:1.02rem;line-height:1.9}
   .title-wrap .meta b{color:var(--ink);font-weight:700}
-  .big{font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.3;font-weight:800;letter-spacing:-.01em;max-width:24ch}
+  .big{font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.3;font-weight:800;letter-spacing:-.01em;max-width:26ch}
   .big .u{color:var(--accent)}
-  .arrow{display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;margin-top:.6rem;font-weight:800;font-size:clamp(1.1rem,2vw,1.7rem)}
+  .arrow{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin:.4rem 0 .9rem;font-weight:800;font-size:clamp(1rem,1.9vw,1.45rem)}
   .arrow .s1{color:var(--muted)} .arrow .s2{color:var(--accent)} .arrow .ar{color:var(--accent);font-size:1.3em}
-  .meta2{margin-top:1.4rem;color:var(--muted);font-size:1.02rem}
+  .meta2{margin-top:1.2rem;color:var(--muted);font-size:1.02rem}
+  .divline{height:1px;background:var(--line);margin:1rem 0 .9rem}
   .bar{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s;z-index:10}
   .nav{position:fixed;bottom:2.4vh;right:3vw;display:flex;align-items:center;gap:1rem;color:var(--muted);font-size:.95rem;z-index:10}
   .nav button{background:var(--card);border:1px solid var(--line);color:var(--ink);width:42px;height:42px;border-radius:10px;font-size:1.2rem;cursor:pointer;transition:.2s}
@@ -77,16 +77,15 @@
   .notes .en{font-size:1.05rem;line-height:1.6;color:var(--ink)}
   .notes .zhs{font-size:1.02rem;line-height:1.8;color:var(--muted);margin-top:1.2rem}
   .notes .zhs::before{content:"中文";display:block;color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.16em;margin-bottom:.4rem}
-  .notes .src{margin-top:1.5rem;padding-top:1.2rem;border-top:1px dashed var(--line)}
-  .notes .src::before{content:"論文原文 · PAPER TEXT";display:block;color:var(--warn);font-size:.72rem;font-weight:700;letter-spacing:.12em;margin-bottom:.5rem}
-  .notes .src .se{font-size:1rem;line-height:1.58;color:var(--ink)}
-  .notes .src .sz{font-size:1rem;line-height:1.75;color:var(--muted);margin-top:.7rem}
-  /* practice tool */
   .notes .ctrl{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem}
   .notes .ctrl button{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:.32rem .62rem;font-size:.82rem;cursor:pointer;transition:.15s}
   .notes .ctrl button:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
   .notes .ctrl button.on{background:var(--accent);color:#04121a;border-color:var(--accent)}
   .notes .ctrl .ch{color:var(--muted);font-size:.74rem;margin-left:.2rem}
+  .notes .src{margin-top:1.5rem;padding-top:1.2rem;border-top:1px dashed var(--line)}
+  .notes .src::before{content:"論文原文 · PAPER TEXT";display:block;color:var(--warn);font-size:.72rem;font-weight:700;letter-spacing:.12em;margin-bottom:.5rem}
+  .notes .src .se{font-size:1rem;line-height:1.58;color:var(--ink)}
+  .notes .src .sz{font-size:1rem;line-height:1.75;color:var(--muted);margin-top:.7rem}
   body.notes-open .pageno,body.notes-open .hint{display:none}
 </style>
 </head>
@@ -105,126 +104,93 @@
     </div>
   </section>
 
-  <!-- 2 背景 -->
+  <!-- 2 背景 + 文獻缺口 -->
   <section class="slide">
-    <div class="kicker">Background</div>
-    <h2>Personas are powerful, yet <span class="u">static</span></h2>
+    <div class="kicker">Background &amp; Gap</div>
+    <h2>Personas are static. We ask a <span class="u">different question</span>.</h2>
     <ul>
-      <li>Personas anchor design in users, yet once written they freeze, missing how users shift with context and emotion</li>
-      <li>Generative AI turns a persona into an <b style="color:var(--ink)">interactive agent</b> you can talk to, not just read</li>
-      <li>But the differences between an AI persona and a real participant remain <b style="color:var(--accent)">underexplored</b></li>
+      <li>Personas anchor design in users, but they are static documents.</li>
+      <li>Generative AI turns personas into agents you can talk to.</li>
+      <li>Existing AI-persona work mostly asks "how human-like" (fidelity).</li>
+      <li>We ask <b style="color:var(--accent)">"how different"</b>, and treat the difference itself as data.</li>
     </ul>
   </section>
 
-  <!-- 3 文獻缺口 -->
-  <section class="slide">
-    <div class="kicker">Related Work & Research Gap</div>
-    <h2>From "how human-like" to <span class="u">"how different"</span></h2>
-    <ul>
-      <li>Cooper：personas anchor design in user goals, but remain documents to read</li>
-      <li>Park et al.：concrete life-context makes AI roles believable <small>directly inspired our six dimensions</small></li>
-      <li>Role-playing LLMs：capable, but prone to role drift and inconsistency</li>
-      <li>Existing AI-persona work follows a <b style="color:var(--ink)">fidelity</b> approach："how human-like?"</li>
-    </ul>
-    <p class="lead" style="margin-top:1.4rem">We take a <b style="color:var(--accent)">difference-analysis</b> approach. The difference itself is the productive signal.</p>
-  </section>
-
-  <!-- 4 研究問題 -->
+  <!-- 3 研究問題 -->
   <section class="slide">
     <div class="kicker">Research Questions</div>
     <h2>Two questions</h2>
     <ul>
-      <li><b style="color:var(--accent)">RQ1</b>　How can we construct consistent and discriminable AI personas for design research?</li>
-      <li><b style="color:var(--accent)">RQ2</b>　What are the structural differences in linguistic performance between AI personas and human participants?</li>
+      <li><b style="color:var(--accent)">RQ1</b>　How to build an AI persona that is <b style="color:var(--ink)">consistent</b> and <b style="color:var(--ink)">discriminable</b>?</li>
+      <li><b style="color:var(--accent)">RQ2</b>　What are the <b style="color:var(--ink)">structural differences</b> in language between AI personas and human participants?</li>
     </ul>
-    <p class="lead" style="margin-top:1.6rem">Rather than asking whether AI personas resemble humans, we ask where they differ, and what that means for design research.</p>
   </section>
 
-  <!-- 5 研究方法 -->
+  <!-- 4 方法 DSR -->
   <section class="slide">
     <div class="kicker">Method · Design Science Research (DSR)</div>
-    <h2>Build an artifact, then <span class="u">evaluate it</span></h2>
+    <h2>Build the artifact, then <span class="u">evaluate it</span></h2>
     <div class="grid g2">
-      <div class="card"><h3>Approach</h3><p>Design Science Research：we treat the AI persona as an artifact, constructing it then evaluating it across two studies (Hevner et al., 2004; Peffers et al., 2007).</p></div>
-      <div class="card"><h3>Context：Gen Z ETF investors</h3><p>Strong emotional-behavioral coupling："I know I should hold long-term, but I can't help checking the market every hour."</p></div>
+      <div class="card"><h3>Approach</h3><p>We treat the AI persona as an artifact: construct, then evaluate across two studies (Hevner et al., 2004; Peffers et al., 2007).</p></div>
+      <div class="card"><h3>Context：Gen Z ETF investors</h3><p>Strong emotional-behavioral coupling："I should hold long-term, but I keep checking the market every hour."</p></div>
     </div>
   </section>
 
-  <!-- 6 建構流程 -->
+  <!-- 5 建構流程 -->
   <section class="slide">
-    <div class="kicker">Construct · Three-stage data collection (Gemini 2.5)</div>
-    <h2>How the persona is <span class="u">built</span></h2>
-    <div class="grid g4">
-      <div class="card"><div class="step">① Secondary</div><p>Gemini as a market analyst, producing an exploratory report on Gen Z ETF investing.</p></div>
-      <div class="card"><div class="step">② Primary</div><p>Gemini as an extraction assistant, pulling real first-person posts from <b style="color:var(--ink)">PTT &amp; Dcard</b> (the authentic voice).</p></div>
-      <div class="card"><div class="step">③ Script</div><p>Gemini as a scriptwriter, integrating it into a complete six-dimension character script.</p></div>
-      <div class="card"><div class="step">④ Deploy</div><p>Script as system instructions in <b style="color:var(--ink)">GPTs</b>, creating an interviewable persona.</p></div>
+    <div class="kicker">Construct · Three stages, all with Gemini</div>
+    <h2>How we <span class="u">built</span> the persona</h2>
+    <div class="grid g3">
+      <div class="card"><div class="step">① Secondary</div><p>Gemini as a market analyst → exploratory report on Gen Z ETF investing.</p></div>
+      <div class="card"><div class="step">② Primary</div><p>Gemini as an extractor → real first-person posts from <b style="color:var(--ink)">PTT &amp; Dcard</b>.</p></div>
+      <div class="card"><div class="step">③ Script</div><p>Gemini as a scriptwriter → a six-dimension script, then deployed as a <b style="color:var(--ink)">GPT</b>.</p></div>
     </div>
-    <p class="lead" style="margin-top:1.4rem">GPTs fix the instructions in the backend, so the role isn't overwritten across multi-turn conversations.</p>
+    <p class="lead" style="margin-top:1.1rem">GPTs lock the instructions in the backend, so the role does not get overwritten in long conversations.</p>
   </section>
 
-  <!-- 7 六維度 -->
+  <!-- 6 六維度 + 兩位角色 -->
   <section class="slide">
-    <div class="kicker">Six-Dimension Script Methodology</div>
-    <h2>Six dimensions, <span class="u">three functions</span></h2>
+    <div class="kicker">Six-Dimension Script + Two Personas</div>
+    <h2>Six dimensions, <span class="u">two characters</span></h2>
     <div class="six">
-      <div>Basic Information<span>identity · consistency</span></div>
-      <div>Worldview<span>belief · decision logic</span></div>
-      <div>Psychological State<span>emotional profile</span></div>
-      <div>Behavioral Patterns<span>everyday coping</span></div>
-      <div>Linguistic Repertoire<span>tone · slang · markers</span></div>
-      <div>Daily Life Scenarios<span>concrete scenes</span></div>
+      <div>Basic Info</div>
+      <div>Worldview</div>
+      <div>Psych. State</div>
+      <div>Behavior</div>
+      <div>Linguistic</div>
+      <div>Scenarios</div>
     </div>
-    <p class="lead" style="margin-top:1.3rem"><b style="color:var(--accent)">Suppress drift</b> (Basic + Worldview) · <b style="color:var(--accent)">enable agency</b> (Behavior + Scenarios) · <b style="color:var(--accent)">enhance reflection</b> (Psych + Linguistic)</p>
-  </section>
-
-  <!-- 8 建構結果 -->
-  <section class="slide">
-    <div class="kicker">Construction Output · Two contrasting personas</div>
-    <h2>Two ends of one axis：<span class="u">source of confidence</span></h2>
     <div class="grid g2">
-      <div class="card"><h3 class="who">Xiao-An</h3><p><b>Emotional · External-validation</b><br>23, marketing intern. Checks prices on her commute, scrolls investment communities at night; needs social connection to ease anxiety.</p></div>
-      <div class="card"><h3 class="who">Emily</h3><p><b>Rational · Internal-belief</b><br>25, data analyst. Disciplined low-cost indexing; her main challenge is blocking out market noise.</p></div>
+      <div class="card"><h3 class="who">Xiao-An</h3><p><b>Emotional · External-validation</b>　23, marketing intern. Needs social connection to ease anxiety.</p></div>
+      <div class="card"><h3 class="who">Emily</h3><p><b>Rational · Internal-belief</b>　25, data analyst. Disciplined low-cost indexing.</p></div>
     </div>
   </section>
 
-  <!-- 9 驗證設計 -->
+  <!-- 7 研究一與結果 -->
   <section class="slide">
-    <div class="kicker">Validate · How we run the experiments</div>
-    <h2>Two studies, <span class="u">two questions</span></h2>
-    <div class="grid g2">
-      <div class="card"><h3 class="who">Study 1：the persona itself</h3><p>Does the methodology produce a <b style="color:var(--ink)">consistent and discriminable</b> persona? Evaluated by expert designers, plus a perception scale.</p></div>
-      <div class="card"><h3 class="who">Study 2：AI vs. human</h3><p>How does the persona <b style="color:var(--ink)">differ from real people</b>? A researcher-led design probe interview, coded on six dimensions.</p></div>
-    </div>
-    <p class="lead" style="margin-top:1.3rem">Study 1 validates the tool；Study 2 reveals the difference. Details and results on the next two slides.</p>
-  </section>
-
-  <!-- 10 研究一與結果 -->
-  <section class="slide">
-    <div class="kicker">Study 1 · Design &amp; Result</div>
+    <div class="kicker">Study 1 · Methodology Validation</div>
     <h2>Consistent and <span class="u">discriminable</span></h2>
-    <p class="lead" style="margin-bottom:.8rem">Six expert designers：3 rounds with Xiao-An (consistency) + 1 round with Emily (discriminability), six questions (one per dimension), then the Persona Perception Scale.</p>
+    <p class="lead" style="margin-bottom:.7rem">Six expert designers：3 rounds with Xiao-An (consistency) + 1 round with Emily (discriminability) + Persona Perception Scale.</p>
     <div class="stat">
-      <div><div class="n good">4.17</div><div class="lbl">Consistency (87.5% in 4 to 5)</div></div>
-      <div><div class="n good">4.58</div><div class="lbl">Discriminability (95.8% in 4 to 5)</div></div>
-      <div><div class="n">6.22</div><div class="lbl">PPS Clarity highest · Credibility lowest 3.67</div></div>
+      <div><div class="n good">4.17</div><div class="lbl">Consistency · 87.5% in 4 to 5</div></div>
+      <div><div class="n good">4.58</div><div class="lbl">Discriminability · 95.8% in 4 to 5</div></div>
+      <div><div class="n">6.22</div><div class="lbl">PPS Clarity highest · Credibility 3.67 lowest</div></div>
     </div>
-    <p class="lead" style="margin-top:1.2rem">Core personality holds across rounds, the two are clearly distinct, and low credibility shows healthy skepticism about real-data grounding.</p>
+    <p class="lead" style="margin-top:1rem">Low credibility = healthy skepticism about real-data grounding.</p>
   </section>
 
-  <!-- 11 研究二與結果 -->
+  <!-- 8 研究二與結果 -->
   <section class="slide">
-    <div class="kicker">Study 2 · Design &amp; Result</div>
-    <h2>A <span class="u">structurally excellent, authenticity-poor</span> respondent</h2>
-    <p class="lead" style="margin-bottom:.8rem">60-min design probe：Xiao-An + two screened participants (24 &amp; 26). Three design concepts (past / present / future) as stimuli, coded on six dimensions (C1 to C6).</p>
+    <div class="kicker">Study 2 · AI vs. Human</div>
+    <h2>Structurally excellent, <span class="u">authenticity-poor</span></h2>
+    <p class="lead" style="margin-bottom:.7rem">60-min design probe with Xiao-An + 2 screened humans (24 &amp; 26). Three design concepts (past / present / future). Coded on six dimensions (C1 to C6).</p>
     <div class="stat">
-      <div><div class="n good">+43%</div><div class="lbl">Structural (C1 reasoning + C5 coherence)：AI 5.0 / Human 3.5</div></div>
+      <div><div class="n good">+43%</div><div class="lbl">Structural (C1 + C5)：AI 5.0 / Human 3.5</div></div>
       <div><div class="n bad">−79%</div><div class="lbl">Authenticity (C2 + C3 + C4 + C6)：Human 4.88 / AI 1.05</div></div>
     </div>
-    <p class="lead" style="margin-top:1.2rem">The AI is logically clear and complete, yet lacks the variability, friction, emotion, and thinking-delay of human talk.</p>
   </section>
 
-  <!-- 12 兩種思考 -->
+  <!-- 9 兩種思考 -->
   <section class="slide">
     <div class="kicker">Core Finding · Two modes of thinking</div>
     <h2>Synthetic　<span class="u">vs.</span>　Experiential</h2>
@@ -232,96 +198,56 @@
       <div class="col">
         <h3><span class="tag ai">AI</span>Synthetic</h3>
         <ul>
-          <li>Pre-formed：the answer exists before the question ends</li>
-          <li>Immediacy · completeness · stability · predictability</li>
-          <li>Only 3 interaction markers · zero delay</li>
+          <li>Pre-formed：answer exists before the question ends</li>
+          <li>Only 3 interaction markers</li>
+          <li>Zero delay</li>
         </ul>
       </div>
       <div class="col">
         <h3><span class="tag hu">Human</span>Experiential</h3>
         <ul>
-          <li>Being-formed：thinking happens visibly while speaking</li>
-          <li>Temporality · fragmentation · emotion · unpredictability</li>
-          <li>45 interaction markers · reflection ~4 min later</li>
+          <li>Being-formed：thinking happens while speaking</li>
+          <li>45 interaction markers</li>
+          <li>Reflection ~4 min later</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 13 對照基準 -->
+  <!-- 10 對照基準 + 互補 -->
   <section class="slide">
-    <div class="kicker">AI Personas as a Reference Baseline</div>
-    <h2>Human "noise" is a <span class="u">trace of cognition</span></h2>
+    <div class="kicker">AI as Reference Baseline · Complementary</div>
+    <h2>The AI's value：<span class="u">make human signals visible</span></h2>
     <ul>
-      <li>Hesitation：not unclear thought, but <b style="color:var(--accent)">thinking-in-progress</b></li>
-      <li>Contradiction："I should hold long-term, but I keep checking" reveals <b style="color:var(--accent)">rationality vs. emotion</b></li>
-      <li>Emotional disruption：an indicator of <b style="color:var(--accent)">genuine involvement</b>, not a defect</li>
+      <li>Hesitation, contradiction, emotion in human talk are <b style="color:var(--accent)">signals, not noise</b></li>
+      <li>The AI's fluency is what makes those signals stand out</li>
     </ul>
-    <p class="lead" style="margin-top:1.6rem">The AI's fluency makes these human signals visible. Its value isn't to simulate humans; it's to be a <b style="color:var(--ink)">reference baseline</b>.</p>
-  </section>
-
-  <!-- 14 互補關係 -->
-  <section class="slide">
-    <div class="kicker">Discussion · Complementary relationship</div>
-    <h2>Different tools, <span class="u">not competitors</span></h2>
+    <div class="divline"></div>
     <div class="grid g2">
-      <div class="card"><h3 class="who">AI persona</h3><p>Efficient, complete, always available, reproducible. Best for <b style="color:var(--ink)">early exploration &amp; hypothesis generation</b>.</p></div>
-      <div class="card"><h3 class="who">Human interview</h3><p>Authentic friction, real emotion, unexpected insight. Best for <b style="color:var(--ink)">later validation &amp; depth</b>.</p></div>
+      <div class="card"><h3 class="who">AI persona</h3><p>Efficient, always available. Best for <b style="color:var(--ink)">early exploration</b>.</p></div>
+      <div class="card"><h3 class="who">Human interview</h3><p>Authentic, unexpected. Best for <b style="color:var(--ink)">later validation &amp; depth</b>.</p></div>
     </div>
-    <p class="lead" style="margin-top:1.4rem"><b style="color:var(--accent)">AI-supported breadth + human-supported depth</b>：a new standard configuration.</p>
   </section>
 
-  <!-- 15 Living System -->
+  <!-- 11 Living System + 貢獻 -->
   <section class="slide">
-    <div class="kicker">Toward a Living System</div>
-    <h2>Consistency is the prerequisite for <span class="u">evolution</span></h2>
-    <div class="arrow"><span class="s1">Static snapshot</span><span class="ar">→</span><span class="s2">Living system</span></div>
-    <div class="grid g2" style="margin-top:1.3rem">
-      <div class="card"><h3 class="who">Designer Interview Data</h3><p>Transcripts, insights, user quotes feed the script, adding depth &amp; context. <b style="color:var(--ink)">Each interview becomes nourishment.</b></p></div>
-      <div class="card"><h3 class="who">Automated CRM Data</h3><p>Behavioral &amp; transaction records update behavior and language, adding breadth &amp; currency.</p></div>
-    </div>
-    <p class="lead" style="margin-top:1.1rem">A consistent persona can be coherently updated, turning from a frozen document into a system that evolves. <small>(Evolution mechanism = future work.)</small></p>
-  </section>
-
-  <!-- 16 貢獻 -->
-  <section class="slide">
-    <div class="kicker">Contributions</div>
-    <h2>Three contributions</h2>
+    <div class="kicker">Toward a Living System · Contributions</div>
+    <h2>From snapshot to <span class="u">a system that evolves</span></h2>
+    <div class="arrow"><span class="s1">Static snapshot</span><span class="ar">→</span><span class="s2">Living system (with Designer Interview Data + CRM)</span></div>
+    <div class="divline"></div>
     <ul>
-      <li><b style="color:var(--accent)">Methodological</b>：a validated Six-Dimension Script Methodology for AI persona construction</li>
-      <li><b style="color:var(--accent)">Conceptual</b>：synthetic vs. experiential thinking, understanding AI-human difference beyond fidelity</li>
-      <li><b style="color:var(--accent)">Practical</b>：complementary positioning, AI for breadth, humans for depth</li>
+      <li><b style="color:var(--accent)">Methodological</b>：a validated Six-Dimension Script Methodology</li>
+      <li><b style="color:var(--accent)">Conceptual</b>：synthetic vs. experiential thinking (beyond fidelity)</li>
+      <li><b style="color:var(--accent)">Practical</b>：AI for breadth, humans for depth</li>
     </ul>
   </section>
 
-  <!-- 17 限制與未來 -->
-  <section class="slide">
-    <div class="kicker">Limitations & Future Work</div>
-    <h2>Scope and <span class="u">what's next</span></h2>
-    <div class="two-col">
-      <div class="col"><h3 style="color:var(--bad)">Limitations</h3>
-        <ul style="gap:.6rem">
-          <li>6 evaluators + 2 human interviewees</li>
-          <li>Single context (Gen Z ETF)</li>
-          <li>Specific AI model at a specific time</li>
-        </ul>
-      </div>
-      <div class="col"><h3 style="color:var(--accent2)">Future Work</h3>
-        <ul style="gap:.6rem">
-          <li>Diverse user types and domains</li>
-          <li>Workflows for the living-system evolution</li>
-          <li>Co-design, prototype testing, team tools</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 18 結論 -->
-  <section class="slide" style="align-items:flex-start">
+  <!-- 12 結論 -->
+  <section class="slide title-wrap" style="align-items:flex-start">
     <div class="kicker">Conclusion</div>
-    <p class="big">From static snapshot<br>to a <span class="u">living system</span>.</p>
-    <p class="lead" style="margin-top:1.5rem">We built consistent, discriminable AI personas, revealed a structural difference from humans (synthetic vs. experiential thinking), and positioned AI as a complement that, once consistent, can evolve through continuous data. The difference is not a defect; it is what makes both the user and the researcher's practice visible.</p>
-    <p class="meta2"><b style="color:var(--ink)">Thank you</b> · questions &amp; discussion welcome　|　簡潔安 (Jie-An Chien) · Advisor 唐玄輝 (Hsien-Hui Tang)</p>
+    <p class="big">From static snapshot to a <span class="u">living system</span>.</p>
+    <p class="lead" style="margin-top:1.4rem">AI personas do not replace humans, they complement. Once consistent, they can keep growing with continuous data.</p>
+    <p class="meta2"><b style="color:var(--ink)">Thank you</b> · questions welcome　|　簡潔安 (Jie-An Chien) · Advisor 唐玄輝 (Hsien-Hui Tang)</p>
   </section>
 
 </div>
@@ -343,7 +269,7 @@
   <div class="src" id="src"><div class="se" id="srcen"></div><div class="sz" id="srczh"></div></div>
 </aside>
 
-<div class="pageno"><span id="cur">1</span> / <span id="tot">18</span></div>
+<div class="pageno"><span id="cur">1</span> / <span id="tot">12</span></div>
 <div class="hint">← → navigate · F fullscreen · S script</div>
 <div class="nav">
   <button id="toggle" title="Toggle script (S)">▤</button>
@@ -356,102 +282,72 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","1:00","0:45","1:00","1:15","1:10","1:00","0:50","1:20","1:30","1:10","1:00","1:00","1:30","0:50","0:50","0:50"];
+  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:20","1:15","1:15","1:10","1:15","1:30","0:30"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
   const NOTES=[
     {t:"開場｜Title",
-     en:"Good morning. Personas have always been static documents. Now with AI, everyone is talking about AI personas, but mostly asking how human-like they are. We ask a different question: how do they differ from real people, and what can that difference do for design research?",
-     zh:"大家好。人物誌一直是靜態的文件。AI 出現後大家開始談 AI 人物誌，但多半在問「像不像真人」。我們問的是另一個問題：它跟真人差在哪？這個差異又能為設計研究帶來什麼？"},
-    {t:"背景｜Background",
-     en:"Personas anchor design in users, but they're static；once written, they freeze. Generative AI changes that：a persona becomes an agent you can talk to. But how an AI persona actually differs from a real participant is still underexplored, and that's our entry point.",
-     zh:"人物誌讓設計錨定使用者，但它是靜態的，寫完就凍結。生成式 AI 改變了這點：人物誌變成可以對話的代理。但 AI 人物誌跟真人到底差在哪，目前還很少被探討，這就是我們的切入點。"},
-    {t:"文獻缺口｜Related Work",
-     en:"Briefly：Cooper gave us personas to anchor design, but as documents to read. Park's generative agents showed concrete life-context makes an AI role believable, which inspired our six dimensions. Role-playing LLMs are capable but drift. And existing AI-persona work keeps asking 'how human-like,' a fidelity lens. We flip it to a difference-analysis approach.",
-     zh:"簡短交代：Cooper 讓人物誌錨定設計，但它是拿來讀的文件。Park 的生成式代理證明具體生活脈絡能讓 AI 角色可信，啟發了我們的六維度。角色扮演 LLM 很強但會漂移。而現有 AI 人物誌研究一直問『像不像真人』，這是擬真度視角。我們翻轉成差異分析取向。"},
+     en:"Good morning. Personas have always been static documents. With AI, everyone is talking about AI personas, but mostly asking how human-like they are. We ask a different question: how do they differ from real people, and what can that difference do for design research?",
+     zh:"大家好。人物誌一直是靜態的文件。AI 出現後，大家都在談 AI 人物誌，但多半在問「像不像真人」。我們問的是另一個問題：它跟真人差在哪？這差異又能為設計研究帶來什麼？"},
+    {t:"背景與缺口｜Background & Gap",
+     en:"Two things to set up. Personas anchor design in users, but they are static documents. Generative AI changes that: a persona becomes something you can talk to. The problem is, existing work keeps asking 'how human-like is the AI?' We think that is the wrong question. We treat the difference between AI and humans as the actual data.",
+     zh:"先講兩件事。人物誌讓設計錨定使用者，但它是靜態的文件。生成式 AI 改變了這點：人物誌變成可以對話的對象。問題是現有研究一直在問「AI 像不像真人」。我們覺得這個問題問錯了，我們把 AI 跟真人之間的差異當成資料。"},
     {t:"研究問題｜RQ",
-     en:"Two questions. RQ1：how to construct consistent and discriminable AI personas for design research. RQ2：what structural differences in language exist between AI personas and human participants. Not 'do they resemble humans,' but 'where do they differ, and so what.'",
-     zh:"兩個問題。RQ1：怎麼建構一致且可區辨、可用於設計研究的 AI 人物誌。RQ2：AI 人物誌與真人在語言表現上有哪些結構性差異。不是問『像不像真人』，而是問『差在哪、那又如何』。"},
-    {t:"研究方法｜Method",
-     en:"Our method is Design Science Research. We treat the AI persona as an artifact: we construct it, then evaluate it across two studies. The context is Taiwan's Gen Z ETF investors, chosen for their strong emotional-behavioral coupling. They say things like 'I know I should hold long-term, but I can't help checking every hour.'",
-     zh:"我們的方法是設計科學研究。把 AI 人物誌當成一個人造物：先建構，再用兩個研究評估。情境選台灣 Z 世代 ETF 投資者，因為情緒與行為高度連動，他們會說『我知道該長期持有，但忍不住每小時看盤』。"},
-    {t:"建構流程｜Construction",
-     en:"We build the persona through three stages, all with Gemini 2.5. Stage one：a market analyst produces a market report. Stage two：an extraction assistant pulls real first-person posts from PTT and Dcard, where the authentic voice comes from. Stage three：it writes a six-dimension script. Then we deploy it as a GPT, which fixes the instructions so the role isn't overwritten.",
-     zh:"我們用三階段建角色，全程用 Gemini 2.5。第一階段：市場分析師產出市場報告。第二階段：擷取助理從 PTT、Dcard 抓真實第一人稱貼文，真實聲音來自這裡。第三階段：寫成六維度劇本。再部署成 GPT，把指令固定在後台，角色不會被覆寫。"},
-    {t:"六維度｜Six Dimensions",
-     en:"The script has six dimensions：basic information, worldview, psychological state, behavioral patterns, linguistic repertoire, and daily life scenarios. They do three jobs：suppress role drift, enable the character to act in context, and enhance reflection.",
-     zh:"劇本有六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。它們做三件事：抑制漂移、讓角色在情境中行動、強化反思。"},
-    {t:"建構結果｜Two Personas",
-     en:"We built two contrasting personas on one axis：the source of confidence. Xiao-An is emotional and externally validated, a 23-year-old intern who needs social connection to ease anxiety. Emily is rational and internally driven, a 25-year-old analyst who tunes out the noise.",
-     zh:"我們用『信心來源』這條軸線建了兩個對比角色。小安是情緒型、外部確認型，23 歲實習生，需要社群連結緩解焦慮。艾蜜莉是理性型、內在信念型，25 歲分析師，隔絕市場噪音。"},
-    {t:"驗證設計｜Validation Plan",
-     en:"Now, how we test it, with two studies. Study one asks whether the methodology produces a consistent and discriminable persona, evaluated by expert designers plus a perception scale. Study two asks how the persona differs from real people, through a researcher-led design probe interview coded on six dimensions. The next two slides give each study's design and result.",
-     zh:"接著講怎麼驗證，用兩個研究。研究一問：方法論建出來的人物誌是否一致、可區辨，由資深設計師評估再加感知量表。研究二問：人物誌跟真人差在哪，用研究者主持的設計探針訪談、以六維度編碼。接下來兩張分別給每個研究的設計與結果。"},
+     en:"So we ask two questions. First, how to build an AI persona that stays consistent and is clearly different from other personas. Second, what are the structural differences in language between AI personas and real people.",
+     zh:"我們問兩個問題。第一，怎麼建構一個一致、可區辨的 AI 人物誌。第二，AI 人物誌跟真人在語言表現上有哪些結構性差異。"},
+    {t:"研究方法｜Method DSR",
+     en:"Our method is Design Science Research. We treat the AI persona as an artifact: we build it, then we evaluate it across two studies. The context is Taiwan's Gen Z ETF investors, because their emotions and behavior are tightly coupled. They say things like 'I should hold long-term, but I keep checking the market every hour.'",
+     zh:"我們的方法是設計科學研究。把 AI 人物誌當成一個人造物：先建構，再用兩個研究評估。情境選台灣 Z 世代 ETF 投資者，因為他們情緒跟行為高度連動，他們會說「我知道該長期持有，但忍不住每小時看盤」。"},
+    {t:"建構流程｜Construct",
+     en:"We build the persona in three stages, all with Gemini. First, a market report. Second, real first-person posts from PTT and Dcard, which is where the authentic voice comes from. Third, integrate everything into a six-dimension script, then deploy it as a GPT.",
+     zh:"我們用三階段建角色，全程用 Gemini。第一階段：市場報告。第二階段：從 PTT、Dcard 抓真實第一人稱貼文，角色的聲音來自這裡。第三階段：整合成六維度劇本，再部署成 GPT。"},
+    {t:"六維度與兩位角色｜Six Dimensions + Personas",
+     en:"The script has six dimensions: basic information, worldview, psychological state, behavior, linguistic repertoire, and daily scenarios. Using one axis, source of confidence, we built two contrasting personas. Xiao-An is emotional, 23, a marketing intern who needs external validation. Emily is rational, 25, a data analyst who follows her own discipline.",
+     zh:"劇本有六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。我們用「信心來源」這條軸線，建了兩個對比角色。小安是情緒型、23 歲行銷實習生，需要外部確認。艾蜜莉是理性型、25 歲分析師，靠自己的紀律。"},
     {t:"研究一與結果｜Study 1",
-     en:"Study one：six expert designers run three rounds with Xiao-An for consistency and one round with Emily for discriminability, six questions, one per dimension, then the perception scale. The persona stayed consistent at 4.17 and the two were clearly distinct at 4.58. Clarity scored highest; credibility lowest at 3.67, which I read as healthy skepticism about whether she's grounded in real data.",
-     zh:"研究一：六位資深設計師跟小安做三輪測一致性、跟艾蜜莉做一輪測差異性，六題、每題對一個維度，最後填感知量表。人物誌一致性 4.17，兩角色差異性 4.58、清楚可辨。清晰度最高、可信度最低 3.67，我把它讀成『對是否基於真實資料的健康懷疑』。"},
+     en:"Study one: six expert designers, three rounds with Xiao-An for consistency, one round with Emily for discriminability, then the perception scale. Xiao-An stayed consistent at 4.17, the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest. Credibility was lowest at 3.67, which I read as healthy skepticism about whether she is grounded in real data.",
+     zh:"研究一：六位資深設計師，三輪跟小安測一致性、一輪跟艾蜜莉測差異性，再填感知量表。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67，我把它讀成「對是否基於真實資料的健康懷疑」。"},
     {t:"研究二與結果｜Study 2",
-     en:"Study two compares Xiao-An with two screened humans, aged 24 and 26, in a 60-minute design probe, using three design concepts for past, present, and future as stimuli, coded on six dimensions. The result：on structural dimensions the AI beats humans by 43%, but on authenticity it falls 79% short. So the AI is a structurally excellent but authenticity-poor respondent.",
-     zh:"研究二把小安跟兩位篩選過的真人（24、26 歲）做 60 分鐘設計探針訪談，用對應過去、現在、未來的三個設計方案當刺激物，以六維度編碼。結果：結構性維度 AI 高真人 43%，真實性維度低了 79%。所以 AI 是結構優異、真實性不足的受訪者。"},
+     en:"Study two: a 60-minute design probe with Xiao-An and two screened humans, aged 24 and 26. Three design concepts as stimuli, coded on six dimensions, C1 to C6. The result: the AI beats humans by 43% on structural dimensions like reasoning and coherence, but falls 79% short on authenticity, that is variability, friction, emotion, and tempo. The AI is structurally excellent, but authenticity-poor.",
+     zh:"研究二：60 分鐘設計探針訪談，小安跟兩位篩選過的真人（24、26 歲）。三個設計方案當刺激物，用六維度（C1 到 C6）編碼。結果：結構性維度 AI 高真人 43%，真實性維度低了 79%。AI 是結構優異、真實性不足的受訪者。"},
     {t:"兩種思考｜Two Modes",
-     en:"This is a difference in kind. AI does synthetic thinking：the answer is pre-formed, it exists before the question even ends, with only three interaction markers and zero delay. Humans do experiential thinking：being formed while speaking, with 45 interaction markers, and reflection that surfaced about four minutes later.",
-     zh:"這是種類的差異。AI 是合成式思考：答案是預先成形的，問題還沒講完答案就在了，只有三個互動標記、零延遲。真人是經歷中的思考：邊講邊成形，45 個互動標記，反思大約四分鐘後才浮現。"},
-    {t:"對照基準｜Reference Baseline",
-     en:"So the AI's real value isn't to simulate humans; it's to be a reference baseline. Because the AI is so fluent, the human's hesitation, contradiction, and emotion stand out as meaningful signals, not noise. Hesitation is thinking-in-progress；contradiction is rationality versus emotion；emotional disruption is genuine involvement.",
-     zh:"所以 AI 真正的價值不是模擬真人，而是當對照基準。正因為 AI 太流暢，真人的遲疑、矛盾、情緒才被凸顯成有意義的訊號，而非雜訊。遲疑是正在思考；矛盾是理性對情緒；情緒干擾是真實涉入。"},
-    {t:"互補關係｜Complementary",
-     en:"That makes AI and human interviews complementary, not competing. The AI is efficient, complete, always available, great for early exploration. Humans bring authenticity and unexpected insight, essential for later validation. AI-supported breadth plus human-supported depth.",
-     zh:"所以 AI 和真人訪談是互補、不是競爭。AI 高效、完整、隨時可用，適合前期探索。真人帶來真實與意外洞察，後期驗證不可少。AI 支持廣度，真人支持深度。"},
-    {t:"Living System｜活系統",
-     en:"And this is the heart of the paper. A complementary relationship points to evolution, and consistency is the prerequisite, because an inconsistent character can't be coherently updated. Two data sources feed the evolution. Designer interview data gives depth and context；each interview is nourishment. Automated CRM data gives breadth and currency. That's how a persona turns from a static snapshot into a living system. The evolution mechanism itself is our future work.",
-     zh:"這是整篇論文的核心。互補關係指向演化，而一致性是前提，因為不一致的角色無法被連貫更新。兩個資料源餵養演化：設計師訪談資料給深度與脈絡，每次訪談都是養分；自動化 CRM 資料給廣度與即時性。這就是人物誌從靜態快照變成活系統的方式。演化機制本身是我們的未來工作。"},
-    {t:"貢獻｜Contributions",
-     en:"Three contributions. Methodological：a validated six-dimension methodology. Conceptual：the synthetic-versus-experiential framework, which moves us beyond fidelity metrics. Practical：the complementary positioning, AI for breadth, humans for depth.",
-     zh:"三個貢獻。方法上：一套經驗證的六維度方法論。概念上：合成式 vs 經歷中思考的框架，讓我們跳脫擬真度指標。實務上：互補定位，AI 廣度、真人深度。"},
-    {t:"限制與未來｜Limitations & Future",
-     en:"To be candid about scope：six evaluators and two interviewees, a single context, and findings tied to one AI model at one point in time. Future work extends the method to other domains, builds the actual living-system evolution workflow, and explores uses like co-design workshops and prototype testing.",
-     zh:"坦白講範圍：六位評估者、兩位受訪者、單一情境，結果也綁在特定時間的特定模型。未來會把方法擴到其他領域、把活系統的演化流程真正做出來、並探索共創工作坊與原型測試等應用。"},
+     en:"This is a difference in kind, not in degree. The AI does synthetic thinking: the answer is pre-formed, zero delay, only three interaction markers. The human does experiential thinking: formed while speaking, 45 interaction markers, and reflection that surfaces about four minutes later.",
+     zh:"這是「種類」的差異，不只是程度。AI 是合成式思考：答案預先成形、零延遲、只有三個互動標記。真人是經歷中的思考：邊講邊成形，45 個互動標記，反思大約四分鐘後才浮現。"},
+    {t:"對照基準與互補｜Baseline & Complementary",
+     en:"So the AI's real value is not to simulate humans, it is to be a reference baseline. Because the AI is so fluent, the human's hesitation, contradiction, and emotion become meaningful signals, not noise. That makes AI and human interviews complementary: AI for breadth in early exploration, humans for depth in later validation.",
+     zh:"所以 AI 真正的價值不是模擬真人，而是當對照基準。正因為 AI 太流暢，真人的遲疑、矛盾、情緒才被凸顯成有意義的訊號，而非雜訊。這讓 AI 和真人訪談是互補的：AI 適合前期廣度探索，真人適合後期深度驗證。"},
+    {t:"活系統與貢獻｜Living + Contributions",
+     en:"This points to a future direction we call a living system. Consistency is the prerequisite; once a persona is consistent, it can evolve by integrating designer interview data and CRM data. Three contributions to wrap up: methodological, the validated six-dimension methodology; conceptual, the synthetic-versus-experiential framework, which moves beyond fidelity; and practical, the complementary positioning, AI for breadth and humans for depth.",
+     zh:"這指向一個未來方向，我們叫它「活系統」。一致性是前提；只要人物誌一致，就能透過設計師訪談資料跟 CRM 資料持續演化。三個貢獻總結：方法上，經驗證的六維度方法論；概念上，合成式 vs 經歷中思考的框架，跳脫擬真度指標；實務上，互補定位，AI 廣度、真人深度。"},
     {t:"結論｜Conclusion",
-     en:"To conclude：we built consistent, discriminable AI personas, revealed a structural difference between synthetic and experiential thinking, and positioned AI as a complement that, once consistent, can evolve. The difference isn't a defect; it's what makes both the user and the researcher's own practice visible. From static snapshot to living system. Thank you, I'd love to take your questions.",
-     zh:"總結：我們建出一致、可區辨的 AI 人物誌，揭示了合成式與經歷中思考的結構性差異，並把 AI 定位成互補、且一旦一致就能演化的工具。差異不是缺陷，而是讓使用者、也讓研究者自身實踐被看見的東西。從靜態快照到活系統。謝謝，很歡迎提問。"}
+     en:"From static snapshot to a living system. AI personas don't replace humans, they complement; and once consistent, they can keep growing with continuous data. Thank you, I would love to take your questions.",
+     zh:"從靜態快照到活系統。AI 人物誌不取代真人，而是互補；一旦一致，就能透過資料持續成長。謝謝，很歡迎提問。"}
   ];
 
   const SRC=[
     {en:"From Static Snapshot to Living System: The Evolution of AI Personas and the Researcher's Reflective Practice.",
      zh:"從靜態快照到活系統：AI 人物誌的演化與研究者的反思實踐。"},
-    {en:"Personas are widely used in design research, yet their static nature limits capturing users' dynamic changes. Generative AI enables personas to become interactive agents, but the differences between AI personas and human participants remain underexplored.",
-     zh:"人物誌廣泛用於設計研究，但其靜態特質限制了捕捉使用者的動態變化。生成式 AI 使人物誌成為可互動的代理，但 AI 人物誌與真人受訪者之間的差異仍未被充分探討。"},
-    {en:"Rather than asking whether AI personas resemble humans, the more important questions are where they differ, and what these differences mean for design research (a difference-analysis approach rather than a fidelity-evaluation approach).",
-     zh:"比起問 AI 人物誌像不像真人，更重要的問題是它們差在哪、這些差異對設計研究有何意義（差異分析取向，而非擬真度評估取向）。"},
+    {en:"Personas are widely used in design research, yet their static nature limits capturing users' dynamic changes. Generative AI enables personas to become interactive agents, but the differences between AI personas and human participants remain underexplored. We take a difference-analysis approach rather than a fidelity-evaluation approach.",
+     zh:"人物誌廣泛用於設計研究，但其靜態特質限制了捕捉使用者的動態變化。生成式 AI 使人物誌成為可互動的代理，但 AI 人物誌與真人受訪者之間的差異仍未被充分探討。我們採差異分析取向，而非擬真度評估取向。"},
     {en:"RQ1: How can we construct consistent and discriminable AI personas for design research? RQ2: What are the structural differences in linguistic performance between AI personas and human participants?",
      zh:"RQ1：如何建構一致且可區辨、可用於設計研究的 AI 人物誌？RQ2：AI 人物誌與真人受訪者在語言表現上有哪些結構性差異？"},
-    {en:"This study adopts Design Science Research (DSR) as its core approach, constructing and evaluating artifacts to solve a practical problem and accumulate generalizable design knowledge (Hevner et al., 2004; Peffers et al., 2007). It proceeds in two stages: construction and validation. Context: Taiwan's Gen Z ETF investors, for their evident emotional-behavioral coupling.",
-     zh:"本研究以設計科學研究方法（Design Science Research, DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007），分為建構與驗證兩階段。情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
-    {en:"Data collection proceeded in three stages. Stage 1 (Secondary): Gemini 2.5 as a senior market analyst produced an exploratory market report. Stage 2 (Primary): Gemini 2.5 as a precise data extraction assistant extracted first-person narratives from PTT and Dcard. Stage 3: Script Generation integrated the data into the six-dimension script, then deployed it via GPTs.",
-     zh:"資料蒐集分三階段。第一階段（二手）：Gemini 2.5 化身資深市場分析師產出探索性市場報告。第二階段（一手）：Gemini 2.5 化身精準資料擷取助理，從 PTT 與 Dcard 擷取第一人稱敘事。第三階段：劇本生成整合資料為六維度劇本，再部署於 GPTs。"},
-    {en:"The six dimensions: Basic Information, Worldview, Psychological State, Behavioral Patterns, Linguistic Repertoire, and Daily Life Scenarios. They serve three functions: suppressing drift (Basic Information + Worldview), enabling agency (Behavioral Patterns + Daily Life Scenarios), and enhancing reflection (Psychological State + Linguistic Repertoire).",
-     zh:"六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。三項功能：抑制漂移（基本資料＋世界觀）、賦予行動力（行為模式＋日常生活分鏡）、強化反思（心理狀態＋語言詞彙庫）。"},
-    {en:"Xiao-An: a 23-year-old marketing intern who checks prices during commutes and scrolls investment communities at night, with confidence built on external validation. Emily: a 25-year-old data analyst practicing low-cost indexing, with confidence built on internal beliefs.",
-     zh:"小安：23 歲行銷實習生，通勤看盤、晚上滑投資社群，信心建立在外部確認上。艾蜜莉：25 歲數據分析師，奉行低成本指數化投資，信心建立在內在信念上。"},
-    {en:"We validated the methodology through two studies: expert evaluation of consistency and discriminability, and comparative design probe interviews between an AI persona and two human participants.",
-     zh:"我們透過兩個研究驗證方法論：專家評估一致性與差異性，以及 AI 人物誌與兩位真人受訪者的比較式設計探針訪談。"},
-    {en:"Study 1 recruited six expert evaluators (product designers with 3+ years' experience). Consistency reached M = 4.17 (SD = 0.85), 87.5% in the 4 to 5 range; discriminability reached M = 4.58 (SD = 0.70). On the Persona Perception Scale, Clarity was highest (6.22) and Credibility lowest (3.67).",
-     zh:"研究一招募六位專家評估者（三年以上經驗的產品設計師）。一致性 M = 4.17（SD = 0.85），87.5% 落在 4 到 5；差異性 M = 4.58（SD = 0.70）。人物誌感知量表中，清晰度最高（6.22）、可信度最低（3.67）。"},
-    {en:"We conducted 60-minute design probe interviews with Xiao-An and two human participants (aged 24 and 26), using three design concepts mapped to past, present, and future. On structural dimensions (C1, C5), AI scored 5.0 vs humans 3.5 (a 43% advantage); on authenticity dimensions (C2, C3, C4, C6), humans scored 4.88 vs AI 1.05 (a 79% disadvantage). The AI is a respondent with excellent structure but limited authenticity.",
-     zh:"我們以小安與兩位真人受訪者（24、26 歲）進行 60 分鐘設計探針訪談，使用對應過去、現在、未來的三個設計方案。結構性維度（C1、C5）AI 得 5.0、真人 3.5（優勢 43%）；真實性維度（C2、C3、C4、C6）真人 4.88、AI 1.05（劣勢 79%）。AI 是一個結構優異但真實性不足的受訪者。"},
-    {en:"Synthetic Thinking (AI): immediate assembly of patterns with zero delay; the answer is 'pre-formed': it exists before the question ends. Experiential Thinking (humans): gradual construction through perception, memory, and emotion; the answer is 'being formed': thinking happens visibly while speaking.",
-     zh:"合成式思考（AI）：即時組裝模式、零延遲；答案是『預先成形』的，問題還沒講完答案就在了。經歷中的思考（真人）：透過感知、記憶、情緒逐步建構；答案是『正在成形』的，思考在說話時可見地發生。"},
-    {en:"AI personas' value lies not in simulating humans, but in serving as a reference baseline that makes human cognitive patterns visible. Hesitation is not unclear thinking but evidence of thinking-in-progress; contradiction is the visible tension between rationality and emotion; emotional disruption is an indicator of genuine involvement.",
-     zh:"AI 人物誌的價值不在於模擬真人，而在於作為對照基準，讓真人的認知模式被看見。遲疑不是想不清楚，而是正在思考的證據；矛盾是理性與情緒之間可見的張力；情緒干擾是真實涉入的指標。"},
-    {en:"Different tools serve different purposes, not competing alternatives: AI personas fit early exploration and hypothesis generation, while human interviews fit later validation and deep insight. AI-supported breadth plus human-supported depth may become a standard configuration.",
-     zh:"不同工具各司其職，而非相互競爭：AI 人物誌適合前期探索與假設生成，真人訪談適合後期驗證與深度洞察。AI 支持廣度加上真人支持深度，可能成為標準配置。"},
-    {en:"The complementary relationship points toward an evolutionary possibility. Consistency is the prerequisite for meaningful evolution. Designer interview data provides depth and context (each human interview becomes nourishment); automated CRM data provides breadth and currency, completing the evolution from static snapshot to living system.",
-     zh:"互補關係指向一種演化的可能。一致性是有意義演化的前提。設計師訪談資料提供深度與脈絡（每次訪談都是養分）；自動化 CRM 資料提供廣度與即時性，完成從靜態快照到活系統的演化。"},
-    {en:"Contributions: (1) a validated Six-Dimension Script Methodology for AI persona construction; (2) a conceptual framework distinguishing synthetic thinking from experiential thinking; (3) practical guidance positioning AI personas as complementary tools (AI for breadth, humans for depth).",
-     zh:"貢獻：(1) 一套經驗證的六維度劇本方法論；(2) 區分合成式思考與經歷中思考的概念框架；(3) 將 AI 人物誌定位為互補工具的實務指引（AI 廣度、真人深度）。"},
-    {en:"Limitations: sample sizes were limited to 6 expert evaluators and 2 human interviewees; the Gen Z ETF context may limit generalizability; findings reflect specific AI model capabilities at a specific time. Future work: diverse user types and domains; workflows for the living-system evolution mechanism; other applications such as co-design workshops and prototype testing.",
-     zh:"限制：樣本僅 6 位專家評估者與 2 位真人受訪者；Z 世代 ETF 情境可能限制推廣性；結果反映特定時間特定 AI 模型的能力。未來工作：擴展至多元使用者與領域；發展活系統演化機制的流程；探索共創工作坊、原型測試等其他應用。"},
+    {en:"This study adopts Design Science Research (DSR) as its core approach, constructing and evaluating artifacts to solve a practical problem and accumulate generalizable design knowledge (Hevner et al., 2004; Peffers et al., 2007). Context: Taiwan's Gen Z ETF investors, for their evident emotional-behavioral coupling.",
+     zh:"本研究以設計科學研究方法（DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007）。情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
+    {en:"Data collection proceeded in three stages, all using Gemini 2.5. Stage 1 (Secondary): a senior market analyst produced an exploratory market report. Stage 2 (Primary): a precise data extraction assistant pulled first-person narratives from PTT and Dcard. Stage 3 (Script): integrated the data into the six-dimension script, then deployed as a GPT.",
+     zh:"資料蒐集分三階段，全程用 Gemini 2.5。第一階段（二手）：化身資深市場分析師產出探索性市場報告。第二階段（一手）：化身精準資料擷取助理，從 PTT 與 Dcard 擷取第一人稱敘事。第三階段（劇本）：整合資料為六維度劇本，再部署為 GPT。"},
+    {en:"The six dimensions: Basic Information, Worldview, Psychological State, Behavioral Patterns, Linguistic Repertoire, Daily Life Scenarios. We built two contrasting personas: Xiao-An, 23, marketing intern, externally validated; Emily, 25, data analyst, internally driven.",
+     zh:"六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。建構兩位對比角色：小安，23 歲行銷實習生，外部確認型；艾蜜莉，25 歲數據分析師，內在信念型。"},
+    {en:"Six expert evaluators (3+ years). Consistency M = 4.17 (SD = 0.85), 87.5% in 4 to 5 range; discriminability M = 4.58 (SD = 0.70). On the Persona Perception Scale, Clarity was highest (6.22), Credibility lowest (3.67).",
+     zh:"六位專家評估者（三年以上經驗）。一致性 M = 4.17（SD = 0.85），87.5% 落在 4 到 5；差異性 M = 4.58（SD = 0.70）。人物誌感知量表中，清晰度最高（6.22）、可信度最低（3.67）。"},
+    {en:"60-minute design probe interviews with Xiao-An and two human participants (24 and 26), using three design concepts (past / present / future) as stimuli. On structural dimensions (C1, C5), AI scored 5.0 vs humans 3.5 (a 43% advantage). On authenticity dimensions (C2, C3, C4, C6), humans scored 4.88 vs AI 1.05 (a 79% disadvantage). The AI is a respondent with excellent structure but limited authenticity.",
+     zh:"以小安與兩位真人受訪者（24、26 歲）進行 60 分鐘設計探針訪談，用三個設計方案（過去／現在／未來）作為刺激物。結構性維度（C1、C5）AI 得 5.0、真人 3.5（優勢 43%）；真實性維度（C2、C3、C4、C6）真人 4.88、AI 1.05（劣勢 79%）。AI 是一個結構優異但真實性不足的受訪者。"},
+    {en:"Synthetic Thinking (AI): immediate assembly of patterns with zero delay; the answer is 'pre-formed', it exists before the question ends. Experiential Thinking (humans): gradual construction through perception, memory, and emotion; the answer is 'being formed', thinking happens while speaking.",
+     zh:"合成式思考（AI）：即時組裝模式、零延遲；答案是「預先成形」的，問題還沒講完答案就在了。經歷中的思考（真人）：透過感知、記憶、情緒逐步建構；答案是「正在成形」的，思考在說話時發生。"},
+    {en:"AI personas' value lies not in simulating humans, but in serving as a reference baseline that makes human cognitive patterns visible. Different tools serve different purposes, not competing alternatives: AI fits early exploration; human interviews fit later validation and depth.",
+     zh:"AI 人物誌的價值不在於模擬真人，而在於作為對照基準，讓真人的認知模式被看見。不同工具各司其職，而非相互競爭：AI 適合前期探索；真人訪談適合後期驗證與深度。"},
+    {en:"Consistency is the prerequisite for meaningful evolution. With Designer Interview Data (depth and context) and Automated CRM Data (breadth and currency), a persona can turn from a static snapshot into a living system. Contributions: (1) a validated Six-Dimension Script Methodology; (2) a conceptual framework distinguishing synthetic from experiential thinking; (3) practical guidance positioning AI personas as complementary tools (AI for breadth, humans for depth).",
+     zh:"一致性是有意義演化的前提。透過設計師訪談資料（深度與脈絡）與自動化 CRM 資料（廣度與即時性），人物誌可以從靜態快照轉為活系統。貢獻：(1) 經驗證的六維度劇本方法論；(2) 區分合成式與經歷中思考的概念框架；(3) 將 AI 人物誌定位為互補工具的實務指引（AI 廣度、真人深度）。"},
     {en:"We constructed consistent, discriminable AI personas and revealed a structural difference between synthetic and experiential thinking. AI personas are best positioned as complementary tools that, once consistent, can evolve through continuous data integration: from static snapshot to living system.",
      zh:"我們建構出一致且可區辨的 AI 人物誌，並揭示合成式與經歷中思考的結構性差異。AI 人物誌最適合定位為互補工具，一旦一致就能透過持續的資料整合演化：從靜態快照到活系統。"}
   ];
@@ -492,7 +388,8 @@
   function toggleNotes(){document.body.classList.toggle('notes-open')}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
   document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='s')toggleNotes()});
-  /* ===== pronunciation：整段英文朗讀（預先生成的真人音檔，失敗時退回系統語音）===== */
+
+  /* ===== 朗讀（預先生成音檔，失敗退回系統語音）===== */
   let RATE=0.85;
   const player=new Audio(); player.preload='none';
   function speakFallback(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=RATE;speechSynthesis.speak(u);}catch(e){}}
