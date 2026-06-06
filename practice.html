@@ -27,6 +27,10 @@
   .cd .b .n.warn{color:var(--warn)}.cd .b .n.bad{color:var(--bad)}.cd .b .n.done{color:var(--muted)}
   .cd .b .unit{color:var(--muted);font-size:1.1rem;margin-left:.3rem}
   .cd .b .date{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+  a.b{text-decoration:none;color:inherit;display:block;transition:.18s;position:relative}
+  a.b:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 24px rgba(15,199,123,.15)}
+  a.b .open{position:absolute;top:1rem;right:1.2rem;color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.12em;opacity:.6;transition:.15s}
+  a.b:hover .open{opacity:1}
   /* phase pill */
   .phase{display:inline-block;background:rgba(15,199,123,.16);color:var(--accent);font-weight:800;font-size:.85rem;padding:.32rem .8rem;border-radius:999px;margin-bottom:1rem}
   /* sections */
@@ -75,12 +79,13 @@
 
   <!-- 倒數 -->
   <div class="cd">
-    <div class="b">
+    <a class="b" href="https://joannecucumber.github.io/ai-persona-hcii/" target="_blank">
+      <span class="open">▶ 打開簡報</span>
       <div class="label">HCII 發表</div>
       <div class="title">From Static Snapshot to Living System</div>
       <div><span class="n" id="d1">--</span><span class="unit">天</span></div>
       <div class="date">2026/07/15 · 線上</div>
-    </div>
+    </a>
     <div class="b">
       <div class="label">論文口試</div>
       <div class="title">碩士論文口試</div>
