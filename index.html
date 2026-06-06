@@ -91,6 +91,47 @@
   .flow .ar2{color:var(--accent);font-weight:800;font-size:2rem}
   .feeders{display:flex;justify-content:center;gap:.6rem;color:var(--muted);font-size:.92rem;margin-bottom:.7rem}
   .feeders .f{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem}
+  /* hook (scenario split) */
+  .hook{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem}
+  .hook .scene{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+  .hook .scene.left{background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(251,113,133,.08))}
+  .hook .scene.right{background:linear-gradient(135deg,rgba(15,199,123,.18),rgba(79,224,166,.08))}
+  .hook .scene .photo{position:absolute;top:.7rem;right:.7rem;background:rgba(0,0,0,.35);color:var(--muted);font-size:.7rem;padding:.25rem .55rem;border-radius:6px;letter-spacing:.04em}
+  .hook .scene .scenario{padding:1.1rem 1.2rem;background:rgba(0,0,0,.55);backdrop-filter:blur(6px)}
+  .hook .scene .label{color:var(--ink);font-weight:800;font-size:1.05rem;margin-bottom:.3rem}
+  .hook .scene .sub{color:var(--muted);font-size:.92rem;line-height:1.4}
+  .hook .scene .icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:4rem;opacity:.4}
+  /* photo placeholder (used in body of other slides) */
+  .ph{background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 10px,rgba(255,255,255,.02) 10px 20px);border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;letter-spacing:.04em;min-height:120px;flex-direction:column;gap:.3rem}
+  .ph .ic{font-size:1.6rem;opacity:.7}
+  /* hero tagline (giant centered) */
+  .tagline{font-size:clamp(1.8rem,3.6vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--accent);margin:.4rem 0 .9rem}
+  .tagline .ink{color:var(--ink)}
+  /* insight callout box */
+  .insight{background:rgba(15,199,123,.10);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:.85rem 1.1rem;margin-top:.9rem;font-size:1rem}
+  .insight::before{content:"INSIGHT";display:inline-block;background:var(--accent);color:#04121a;font-size:.7rem;font-weight:800;letter-spacing:.14em;padding:.18rem .55rem;border-radius:4px;margin-right:.6rem;vertical-align:middle}
+  .insight.warn{background:rgba(251,191,36,.10);border-left-color:var(--warn)}
+  .insight.warn::before{background:var(--warn)}
+  /* quote contrast */
+  .qc{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:.4rem}
+  .qc .qb{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.3rem;position:relative}
+  .qc .qb.ai{border-color:rgba(15,199,123,.4)}
+  .qc .qb.hu{border-color:rgba(251,191,36,.4)}
+  .qc .qb .who{font-size:.75rem;letter-spacing:.16em;font-weight:800;text-transform:uppercase;margin-bottom:.6rem}
+  .qc .qb.ai .who{color:var(--accent)} .qc .qb.hu .who{color:var(--warn)}
+  .qc .qb .q{font-style:italic;font-size:1.02rem;line-height:1.5;color:var(--ink);margin-bottom:.55rem}
+  .qc .qb .n{color:var(--muted);font-size:.85rem}
+  /* RQ centered whitespace */
+  .rq-center{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:1.4rem}
+  .rq-center .rq{font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:700;line-height:1.45;max-width:50ch;color:var(--ink)}
+  .rq-center .rq b{color:var(--accent);margin-right:.5rem}
+  /* QR codes */
+  .qrrow{display:flex;gap:1.6rem;margin-top:1.4rem;flex-wrap:wrap}
+  .qrrow .qrb{display:flex;align-items:center;gap:.85rem;background:#fff;border-radius:10px;padding:.6rem .8rem .6rem .6rem}
+  .qrrow .qrb img{width:96px;height:96px;display:block}
+  .qrrow .qrb .meta{color:#04121a;font-size:.8rem;font-weight:700;line-height:1.3}
+  .qrrow .qrb .meta b{display:block;font-size:.88rem;margin-bottom:.18rem}
+  .qrrow .qrb .meta span{color:#5a6470;font-weight:500}
   .bar{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s;z-index:10}
   .nav{position:fixed;bottom:2.4vh;right:3vw;display:flex;align-items:center;gap:1rem;color:var(--muted);font-size:.95rem;z-index:10}
   .nav button{background:var(--card);border:1px solid var(--line);color:var(--ink);width:42px;height:42px;border-radius:10px;font-size:1.2rem;cursor:pointer;transition:.2s}
@@ -132,26 +173,37 @@
     </div>
   </section>
 
-  <!-- 2 背景 + 文獻缺口 -->
+  <!-- 2 Hook：背景與缺口 -->
   <section class="slide">
-    <div class="kicker">Background &amp; Gap</div>
-    <h2>Personas are static. We ask a <span class="u">different question</span>.</h2>
-    <ul>
-      <li>Personas anchor design in users, but they are static documents.</li>
-      <li>Generative AI turns personas into agents you can talk to.</li>
-      <li>Existing AI-persona work mostly asks "how human-like" (fidelity).</li>
-      <li>We ask <b style="color:var(--accent)">"how different"</b>, and treat the difference itself as data.</li>
-    </ul>
+    <div class="kicker">Hook · The wrong question</div>
+    <h2>Existing work asks <span style="color:var(--warn)">"how human-like?"</span><br>We ask <span class="u">"how different?"</span></h2>
+    <div class="hook">
+      <div class="scene left">
+        <div class="photo">PHOTO: human interview</div>
+        <span class="icon">🗣️</span>
+        <div class="scenario">
+          <div class="label">Booking 8 real interviewees: 3 weeks.</div>
+          <div class="sub">Slow, expensive, hard to recruit. So designers keep asking AI to mimic them.</div>
+        </div>
+      </div>
+      <div class="scene right">
+        <div class="photo">PHOTO: GPT chat with Xiao-An</div>
+        <span class="icon">💬</span>
+        <div class="scenario">
+          <div class="label">AI persona, available 24/7.</div>
+          <div class="sub">Treat the difference from real people as data, not a defect.</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- 3 研究問題 -->
+  <!-- 3 研究問題 (RQ 留白) -->
   <section class="slide">
     <div class="kicker">Research Questions</div>
-    <h2>Two questions</h2>
-    <ul>
-      <li><b style="color:var(--accent)">RQ1</b>　How to build an AI persona that is <b style="color:var(--ink)">consistent</b> and <b style="color:var(--ink)">discriminable</b>?</li>
-      <li><b style="color:var(--accent)">RQ2</b>　What are the <b style="color:var(--ink)">structural differences</b> in language between AI personas and human participants?</li>
-    </ul>
+    <div class="rq-center">
+      <div class="rq"><b>RQ1</b>How to build an AI persona that is <span style="color:var(--accent)">consistent</span> and <span style="color:var(--accent)">discriminable</span>?</div>
+      <div class="rq"><b>RQ2</b>What are the <span style="color:var(--accent)">structural differences</span> in language between AI personas and real participants?</div>
+    </div>
   </section>
 
   <!-- 4 方法 DSR -->
@@ -204,14 +256,14 @@
       <div><div class="n good">4.58</div><div class="lbl">Discriminability · 95.8% in 4 to 5</div></div>
       <div><div class="n">6.22</div><div class="lbl">PPS Clarity highest · Credibility 3.67 lowest</div></div>
     </div>
-    <p class="lead" style="margin-top:1rem">Low credibility = healthy skepticism about real-data grounding.</p>
+    <div class="insight">Low credibility (3.67) is <b>healthy skepticism</b>, not a flaw of the method. Designers stayed critical about real-data grounding.</div>
   </section>
 
   <!-- 8 研究二與結果 -->
   <section class="slide">
     <div class="kicker">Study 2 · AI vs. Human</div>
-    <h2>Structurally excellent, <span class="u">authenticity-poor</span></h2>
-    <p class="lead" style="margin-bottom:.5rem">60-min design probe · Xiao-An + 2 humans · three design concepts · coded on C1–C6.</p>
+    <div class="tagline">The AI is <span class="ink">too perfect</span>.</div>
+    <p class="lead" style="margin-bottom:.5rem">60-min design probe · Xiao-An + 2 humans · three design concepts · coded on C1 to C6.</p>
     <div class="chart">
       <div class="leg"><span><span class="sw" style="background:var(--accent)"></span>AI</span><span><span class="sw" style="background:var(--warn)"></span>Human</span></div>
       <div class="row"><div class="lbl">C1 Reasoning</div><div class="bars"><div class="bar ai" style="width:100%"></div><div class="bar hu" style="width:70%"></div></div><div class="val"><span class="a">5.0</span> / <span class="h">3.5</span></div></div>
@@ -222,28 +274,23 @@
       <div class="row"><div class="lbl">C6 Tempo</div><div class="bars"><div class="bar ai" style="width:20%"></div><div class="bar hu" style="width:90%"></div></div><div class="val"><span class="a">1.0</span> / <span class="h">4.5</span></div></div>
       <div class="sum"><div class="good"><b>+43%</b><span>structural (C1+C5)</span></div><div class="bad"><b>−79%</b><span>authenticity (C2+C3+C4+C6)</span></div></div>
     </div>
+    <div class="insight warn">Structurally excellent, <b>authenticity-poor</b>. The AI lacks the variability, friction, emotion, and tempo of human talk.</div>
   </section>
 
   <!-- 9 兩種思考 -->
   <section class="slide">
     <div class="kicker">Core Finding · Two modes of thinking</div>
-    <h2>Synthetic　<span class="u">vs.</span>　Experiential</h2>
-    <div class="two-col">
-      <div class="col">
-        <h3><span class="tag ai">AI</span>Synthetic</h3>
-        <ul>
-          <li>Pre-formed：answer exists before the question ends</li>
-          <li>Only 3 interaction markers</li>
-          <li>Zero delay</li>
-        </ul>
+    <div class="tagline"><span class="ink">Pre-formed</span> vs <span class="ink">being-formed</span>.</div>
+    <div class="qc">
+      <div class="qb ai">
+        <div class="who">AI · Synthetic</div>
+        <div class="q">"I was anxious too. My paper loss kept growing, I wanted to sell every day, checked the app three times a day."</div>
+        <div class="n">0-sec delay · 3 interaction markers · answer exists before the question ends</div>
       </div>
-      <div class="col">
-        <h3><span class="tag hu">Human</span>Experiential</h3>
-        <ul>
-          <li>Being-formed：thinking happens while speaking</li>
-          <li>45 interaction markers</li>
-          <li>Reflection ~4 min later</li>
-        </ul>
+      <div class="qb hu">
+        <div class="who">Human · Experiential</div>
+        <div class="q">"…seeing the money in the account keep dropping, I got pretty… panicked. wondering if it's a long-term trend, like…"</div>
+        <div class="n">~4 min later before reflection surfaces · 45 interaction markers · thinking happens while speaking</div>
       </div>
     </div>
   </section>
@@ -266,7 +313,7 @@
   <!-- 11 Living System + 貢獻 -->
   <section class="slide">
     <div class="kicker">Toward a Living System · Contributions</div>
-    <h2>From snapshot to <span class="u">a system that evolves</span></h2>
+    <div class="tagline"><span class="ink">Consistency</span> before evolution.</div>
     <div class="flow">
       <div class="node"><span class="ic">▢</span><div class="nm">Static snapshot</div></div>
       <div class="ar2">→</div>
@@ -287,6 +334,10 @@
     <p class="big">From static snapshot to a <span class="u">living system</span>.</p>
     <p class="lead" style="margin-top:1.4rem">AI personas do not replace humans, they complement. Once consistent, they can keep growing with continuous data.</p>
     <p class="meta2"><b style="color:var(--ink)">Thank you</b> · questions welcome　|　簡潔安 (Jie-An Chien) · Advisor 唐玄輝 (Hsien-Hui Tang)</p>
+    <div class="qrrow">
+      <div class="qrb"><img src="qr/deck.png" alt="Deck QR"><div class="meta"><b>This deck</b><span>joannecucumber.github.io/ai-persona-hcii</span></div></div>
+      <div class="qrb"><img src="qr/methodology.png" alt="Methodology QR"><div class="meta"><b>Methodology toolkit</b><span>v0-ai-persona.vercel.app</span></div></div>
+    </div>
   </section>
 
 </div>
