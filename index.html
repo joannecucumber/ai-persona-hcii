@@ -102,6 +102,14 @@
   .s1-stats .n.big{font-size:clamp(3rem,6vw,5.2rem)}
   .s1-stats .lbl{color:var(--muted);font-size:.85rem;margin-top:.45rem;line-height:1.35}
   .s1-photo{margin-top:auto;background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:10px;min-height:130px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  /* discussion: 3-role layout */
+  .role-img{background:#1a1f1c;border:1px solid var(--line);border-radius:10px;height:190px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;overflow:hidden}
+  .role-bar{display:flex;align-items:center;margin:.95rem 0 .55rem}
+  .role-bar .dia{width:11px;height:11px;background:var(--accent);transform:rotate(45deg);flex-shrink:0;margin-right:.5rem}
+  .role-bar::after{content:'';flex:1;height:1.5px;background:var(--accent)}
+  .role-phase{color:var(--accent);font-weight:800;font-size:1.05rem;margin-bottom:.45rem;letter-spacing:.01em}
+  .role-body{color:var(--ink);font-size:.92rem;line-height:1.55}
+  .role-body .em{color:var(--accent2)}
   /* hook (scenario split) */
   .hook{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem}
   .hook .scene{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
@@ -338,15 +346,26 @@
   <!-- 11 對照基準 + 互補 -->
   <section class="slide">
     <div class="kicker">Discussion</div>
-    <h2>The AI's job is not to replace humans. It sets a <span class="u">structural baseline</span> that makes <span class="u">real human signals visible</span>.</h2>
-    <ul>
-      <li>Hesitation, contradiction, emotion in human talk are <b style="color:var(--accent)">signals, not noise</b></li>
-      <li>The AI's fluency is what makes those signals stand out</li>
-    </ul>
-    <div class="divline"></div>
-    <div class="grid g2">
-      <div class="card"><h3 class="who">AI persona</h3><p>Efficient, always available. Best for <b style="color:var(--ink)">early exploration</b>.</p></div>
-      <div class="card"><h3 class="who">Human interview</h3><p>Authentic, unexpected. Best for <b style="color:var(--ink)">later validation &amp; depth</b>.</p></div>
+    <h2>AI Persona plays <span class="u">three roles</span> across the design process.</h2>
+    <div class="grid g3" style="margin-top:.3rem">
+      <div>
+        <div class="role-img">PHOTO: early stage</div>
+        <div class="role-bar"><span class="dia"></span></div>
+        <div class="role-phase">Early · Practice Interviewee</div>
+        <p class="role-body">When the design team is still unfamiliar with the problem space, <span class="em">exploratory dialogues with AI Personas of varied personalities</span> surface latent pain points quickly, building initial understanding before committing major resources.</p>
+      </div>
+      <div>
+        <div class="role-img">PHOTO: mid stage</div>
+        <div class="role-bar"><span class="dia"></span></div>
+        <div class="role-phase">Mid · Reference Baseline</div>
+        <p class="role-body">Presenting the same concept to AI Personas of different personalities <span class="em">systematically gathers diverse perspectives</span>. Anne's external-validation contrasts with Emily's internal-belief, revealing how a concept lands differently across user groups.</p>
+      </div>
+      <div>
+        <div class="role-img">PHOTO: late stage</div>
+        <div class="role-bar"><span class="dia"></span></div>
+        <div class="role-phase">Late · Living Material</div>
+        <p class="role-body"><span class="em">The six-dimension script keeps evolving with real data</span>, such as product metrics and the team's human interview records. It becomes a research infrastructure that runs through the entire design process.</p>
+      </div>
     </div>
   </section>
 
@@ -447,9 +466,9 @@
     {t:"兩種思考｜Two Modes",
      en:"This is a difference in kind, not in degree. The AI does synthetic thinking: the answer is pre-formed, zero delay, only three interaction markers. The human does experiential thinking: formed while speaking, 45 interaction markers, and reflection that surfaces about four minutes later.",
      zh:"這是「種類」的差異，不只是程度。AI 是合成式思考：答案預先成形、零延遲、只有三個互動標記。真人是經歷中的思考：邊講邊成形，45 個互動標記，反思大約四分鐘後才浮現。"},
-    {t:"對照基準與互補｜Baseline & Complementary",
-     en:"So the AI's real value is not to simulate humans, it is to be a reference baseline. Because the AI is so fluent, the human's hesitation, contradiction, and emotion become meaningful signals, not noise. That makes AI and human interviews complementary: AI for breadth in early exploration, humans for depth in later validation.",
-     zh:"所以 AI 真正的價值不是模擬真人，而是當對照基準。正因為 AI 太流暢，真人的遲疑、矛盾、情緒才被凸顯成有意義的訊號，而非雜訊。這讓 AI 和真人訪談是互補的：AI 適合前期廣度探索，真人適合後期深度驗證。"},
+    {t:"三種角色｜Three Roles in the Design Process",
+     en:"Let me show what that complementary role looks like in practice. AI Persona plays three roles across the design process. Early stage, as a practice interviewee: when the team is still unfamiliar with the problem space, talking to AI Personas of different personalities surfaces latent pain points quickly, before the team commits major resources. Mid stage, as a reference baseline: showing the same concept to Anne and Emily creates a structural contrast, externally validated versus internally driven, revealing how the concept lands differently across user groups. Late stage, as living material: the six-dimension script keeps evolving with real data, like product metrics and the team's own human interview records, becoming a research infrastructure that runs through the whole design process.",
+     zh:"讓我具體說明這個互補在實作上長什麼樣子。AI Persona 在設計流程中可以扮演三種角色。前期是練習受訪者：當團隊還不熟悉問題空間時，跟不同性格的 AI Persona 對話可以快速找出潛在痛點，在投入大量資源前先建立初步理解。中期是對照基準：把同一個方案分別呈現給 Anne 跟 Emily，外部確認型跟內在信念型形成鮮明對比，預見方案對不同族群的差異化效果。後期是演化素材：六維度劇本能隨真實數據持續更新，例如產品的量化數據跟研究團隊的真人訪談資料，成為貫穿整個設計流程的研究基礎設施。"},
     {t:"活系統與貢獻｜Living + Contributions",
      en:"This points to a future direction we call a living system. Consistency is the prerequisite; once a persona is consistent, it can evolve by integrating designer interview data and CRM data. Three contributions to wrap up: methodological, the validated six-dimension methodology; conceptual, the synthetic-versus-experiential framework, which moves beyond fidelity; and practical, the complementary positioning, AI for breadth and humans for depth.",
      zh:"這指向一個未來方向，我們叫它「活系統」。一致性是前提；只要人物誌一致，就能透過設計師訪談資料跟 CRM 資料持續演化。三個貢獻總結：方法上，經驗證的六維度方法論；概念上，合成式 vs 經歷中思考的框架，跳脫擬真度指標；實務上，互補定位，AI 廣度、真人深度。"},
