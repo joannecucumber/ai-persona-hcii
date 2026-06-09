@@ -48,8 +48,10 @@
   .stat .n{font-size:clamp(2rem,4.4vw,3.8rem);font-weight:800;letter-spacing:-.02em;line-height:1}
   .stat .n.good{color:var(--accent2)} .stat .n.bad{color:var(--bad)}
   .stat .lbl{color:var(--muted);font-size:.9rem;margin-top:.5rem;max-width:30ch}
-  .six{display:grid;grid-template-columns:repeat(6,1fr);gap:.55rem;margin:.4rem 0 1rem}
-  .six div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.55rem .65rem;font-weight:700;font-size:.88rem;text-align:center}
+  .six{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:.4rem 0 1rem}
+  .six .d{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem}
+  .six .d b{display:block;color:var(--accent);font-size:.98rem;margin-bottom:.3rem;letter-spacing:.01em;font-weight:800}
+  .six .d span{color:var(--muted);font-size:.85rem;line-height:1.4;display:block}
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.7rem;margin-top:.4rem}
   .col h3{font-size:1.2rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.55rem}
   .tag{font-size:.74rem;padding:.16rem .6rem;border-radius:999px;font-weight:700}
@@ -230,25 +232,41 @@
     <p class="lead" style="margin-top:1.1rem">GPT backend locks the script, so the role does not get overwritten in long conversations.</p>
   </section>
 
-  <!-- 6 六維度 + 兩位角色 -->
+  <!-- 6 六維度 -->
   <section class="slide">
-    <div class="kicker">Method · Output</div>
-    <h2>A <span class="u">six-dimension script</span> holds two opposing characters stable across long conversations.</h2>
+    <div class="kicker">Method · Six Dimensions</div>
+    <h2>Six dimensions hold one stable character — from <span class="u">identity</span> to <span class="u">daily scenarios</span>.</h2>
     <div class="six">
-      <div>Basic Info</div>
-      <div>Worldview</div>
-      <div>Psych. State</div>
-      <div>Behavior</div>
-      <div>Linguistic</div>
-      <div>Scenarios</div>
-    </div>
-    <div class="grid g2">
-      <div class="card"><h3 class="who">Xiao-An</h3><p><b>Emotional · External-validation</b>　23, marketing intern. Needs social connection to ease anxiety.</p></div>
-      <div class="card"><h3 class="who">Emily</h3><p><b>Rational · Internal-belief</b>　25, data analyst. Disciplined low-cost indexing.</p></div>
+      <div class="d"><b>① Basic Information</b><span>Age, role, life stage. Anchors identity for narrative consistency.</span></div>
+      <div class="d"><b>② Worldview</b><span>How she interprets the market, money, and the future — shapes decision logic.</span></div>
+      <div class="d"><b>③ Psychological State</b><span>Anxiety profile and source of confidence. Drives emotional behavior.</span></div>
+      <div class="d"><b>④ Behavior</b><span>Daily coping rituals (checking the app, talking to friends). Reveals action under pressure.</span></div>
+      <div class="d"><b>⑤ Linguistic Style</b><span>Slang, particles, code-switching, tempo. Makes the voice instantly recognizable.</span></div>
+      <div class="d"><b>⑥ Daily Scenarios</b><span>Commute, payday, market crash. Places the persona in ecologically valid contexts.</span></div>
     </div>
   </section>
 
-  <!-- 7 研究一與結果 -->
+  <!-- 7 兩位角色 -->
+  <section class="slide">
+    <div class="kicker">Method · Two Personas</div>
+    <h2>Same six-dimension script, <span class="u">opposite source of confidence</span> — two contrasting characters.</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="who">Xiao-An · 小安</h3>
+        <p><b style="color:var(--warn)">Emotional · External-validation</b>　23, marketing intern (~30k NTD/mo)</p>
+        <p style="margin-top:.6rem">Checks the app 3–5 times a day. Loss makes her anxious; she steadies herself by chatting with friends and scrolling KOLs and IG groups.</p>
+        <p style="margin-top:.5rem;color:var(--muted);font-style:italic">"Did you see the dip today? I almost sold…"</p>
+      </div>
+      <div class="card">
+        <h3 class="who">Emily</h3>
+        <p><b style="color:var(--accent)">Rational · Internal-belief</b>　25, data analyst (~60k NTD/mo)</p>
+        <p style="margin-top:.6rem">Disciplined low-cost indexing. Does not check daily. Confidence comes from her own plan, backtest, and long-term thesis.</p>
+        <p style="margin-top:.5rem;color:var(--muted);font-style:italic">"Short-term noise doesn't change a ten-year plan."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 研究一與結果 -->
   <section class="slide">
     <div class="kicker">Findings · Study 1</div>
     <h2>Across six expert raters, the persona is <span class="u">consistent</span> within itself and clearly <span class="u">distinct</span> from its counterpart.</h2>
@@ -261,7 +279,7 @@
     <div class="insight">Low credibility (3.67) is <b>healthy skepticism</b>, not a flaw of the method. Designers stayed critical about real-data grounding.</div>
   </section>
 
-  <!-- 8 研究二與結果 -->
+  <!-- 9 研究二與結果 -->
   <section class="slide">
     <div class="kicker">Findings · Study 2</div>
     <h2>The AI is <span class="u">too perfect</span> — structurally excellent but missing the broken authenticity of real humans.</h2>
@@ -279,7 +297,7 @@
     <div class="insight warn">Structurally excellent, <b>authenticity-poor</b>. The AI lacks the variability, friction, emotion, and tempo of human talk.</div>
   </section>
 
-  <!-- 9 兩種思考 -->
+  <!-- 10 兩種思考 -->
   <section class="slide">
     <div class="kicker">Findings · Two Modes</div>
     <h2>Real participants don't speak from a <span class="u">pre-formed self</span>; they form thoughts in the <span class="u">act of speaking</span>.</h2>
@@ -297,7 +315,7 @@
     </div>
   </section>
 
-  <!-- 10 對照基準 + 互補 -->
+  <!-- 11 對照基準 + 互補 -->
   <section class="slide">
     <div class="kicker">Discussion</div>
     <h2>The AI's job is not to replace humans — it sets a <span class="u">structural baseline</span> that makes <span class="u">real human signals visible</span>.</h2>
@@ -312,7 +330,7 @@
     </div>
   </section>
 
-  <!-- 11 Living System + 貢獻 -->
+  <!-- 12 Living System + 貢獻 -->
   <section class="slide">
     <div class="kicker">Future · Living System</div>
     <h2>Get <span class="u">consistency</span> first; then let the persona evolve as a <span class="u">living system</span> fed by real-world data.</h2>
@@ -330,7 +348,7 @@
     </ul>
   </section>
 
-  <!-- 12 結論 -->
+  <!-- 13 結論 -->
   <section class="slide title-wrap" style="align-items:flex-start">
     <div class="kicker">Conclusion</div>
     <p class="big">AI personas evolve from <span class="u">scripted snapshots</span> into <span class="u">living systems</span> that grow with continuous data.</p>
@@ -374,7 +392,7 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:20","1:15","1:15","1:10","1:15","1:30","0:30"];
+  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:00","0:45","1:15","1:15","1:10","1:15","1:30","0:30"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
@@ -394,9 +412,12 @@
     {t:"建構流程｜Construct",
      en:"We build the persona in four stages. First, context: Gemini Deep Research runs twice — round one identifies two core axes and four user types; round two builds a full profile for each quadrant. Second, corpus: ChatGPT Deep Research pulls thirty to fifty first-person posts from PTT and Dcard — that is where the persona's voice comes from. Third, script: Gemini writes a seventy-five-hundred-word six-dimension script. Fourth, deploy: we ship the script as a GPT with five behavior constraints and role-internalization instructions, so the persona stays in character through long conversations.",
      zh:"我們分四階段建角色。第一階段，建立脈絡：Gemini Deep Research 跑兩輪——第一輪找出兩條核心軸線跟四種用戶類型；第二輪把十字象限四個類型完整刻劃出來。第二階段，語料蒐集：用 ChatGPT Deep Research 從 PTT、Dcard 抓 30 到 50 則第一人稱貼文，角色的聲音來自這裡。第三階段，劇本生成：Gemini 寫出 7500 字的六維度劇本。第四階段，部署：把劇本上 GPT，加上 5 條行為限制跟角色內化指令，讓角色在長對話中不脫線。"},
-    {t:"六維度與兩位角色｜Six Dimensions + Personas",
-     en:"The script has six dimensions: basic information, worldview, psychological state, behavior, linguistic repertoire, and daily scenarios. Using one axis, source of confidence, we built two contrasting personas. Xiao-An is emotional, 23, a marketing intern who needs external validation. Emily is rational, 25, a data analyst who follows her own discipline.",
-     zh:"劇本有六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。我們用「信心來源」這條軸線，建了兩個對比角色。小安是情緒型、23 歲行銷實習生，需要外部確認。艾蜜莉是理性型、25 歲分析師，靠自己的紀律。"},
+    {t:"六維度｜Six Dimensions",
+     en:"The script has six dimensions. Basic information anchors identity — age, role, life stage. Worldview shapes how she interprets the market, money, and the future. Psychological state captures her anxiety profile and where her confidence comes from. Behavior covers daily coping rituals — checking the app, talking to friends, scrolling KOLs. Linguistic style locks in the verbal markers — slang, particles, tempo — that make her instantly recognizable. And daily scenarios place her in real-life contexts like commute, payday, or a market crash. These six dimensions together hold one stable character across hundreds of conversational turns.",
+     zh:"劇本有六個維度。基本資料負責錨定身份——年齡、角色、人生階段。世界觀形塑她怎麼詮釋市場、金錢與未來。心理狀態抓住她的焦慮輪廓跟信心來源。行為模式涵蓋日常應對——刷盤、找朋友聊、滑 KOL。語言風格鎖住她的口語標記——俚語、語助詞、節奏，一聽就知道是她。日常情境把人物誌放回真實場景，比如通勤、發薪日、市場崩盤。這六個維度合起來，撐住一個穩定的角色，撐過上百回合的對話。"},
+    {t:"兩位角色｜Two Personas",
+     en:"With the same six-dimension script, we shift one axis — source of confidence — and get two contrasting personas. Xiao-An is emotional and externally validated. Twenty-three, marketing intern, around thirty thousand NTD a month. She checks the app three to five times a day; when she sees a loss she gets anxious, and she steadies herself by chatting with friends and scrolling KOLs. Emily is rational and internally driven. Twenty-five, data analyst, around sixty thousand a month. Disciplined low-cost indexing, doesn't check daily, confidence comes from her own plan and her own backtest.",
+     zh:"用同一份六維度劇本，只改一條軸線——信心來源——就得到兩個對比角色。小安，情緒型、外部確認。23 歲行銷實習生，月薪約三萬。一天刷盤 3 到 5 次，看到帳面虧損就焦慮，靠跟朋友聊天、滑 KOL 跟 IG 群組找回鎮定。艾蜜莉，理性型、內在信念。25 歲數據分析師，月薪約六萬。紀律性的低成本指數投資，不每天看盤，信心來自自己的計畫跟自己跑過的回測。"},
     {t:"研究一與結果｜Study 1",
      en:"Study one: six expert designers, three rounds with Xiao-An for consistency, one round with Emily for discriminability, then the perception scale. Xiao-An stayed consistent at 4.17, the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest. Credibility was lowest at 3.67, which I read as healthy skepticism about whether she is grounded in real data.",
      zh:"研究一：六位資深設計師，三輪跟小安測一致性、一輪跟艾蜜莉測差異性，再填感知量表。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67，我把它讀成「對是否基於真實資料的健康懷疑」。"},
@@ -428,8 +449,10 @@
      zh:"本研究以設計科學研究方法（DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007）。情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
     {en:"Data collection proceeded in three stages, all using Gemini 2.5. Stage 1 (Secondary): a senior market analyst produced an exploratory market report. Stage 2 (Primary): a precise data extraction assistant pulled first-person narratives from PTT and Dcard. Stage 3 (Script): integrated the data into the six-dimension script, then deployed as a GPT.",
      zh:"資料蒐集分三階段，全程用 Gemini 2.5。第一階段（二手）：化身資深市場分析師產出探索性市場報告。第二階段（一手）：化身精準資料擷取助理，從 PTT 與 Dcard 擷取第一人稱敘事。第三階段（劇本）：整合資料為六維度劇本，再部署為 GPT。"},
-    {en:"The six dimensions: Basic Information, Worldview, Psychological State, Behavioral Patterns, Linguistic Repertoire, Daily Life Scenarios. We built two contrasting personas: Xiao-An, 23, marketing intern, externally validated; Emily, 25, data analyst, internally driven.",
-     zh:"六個維度：基本資料、世界觀、心理狀態、行為模式、語言詞彙庫、日常生活分鏡。建構兩位對比角色：小安，23 歲行銷實習生，外部確認型；艾蜜莉，25 歲數據分析師，內在信念型。"},
+    {en:"The six dimensions: Basic Information (identity anchoring), Worldview (interpretive tendencies and decision logic), Psychological State (emotional contour and narrative drive), Behavioral Patterns (daily coping strategies), Linguistic Repertoire (recognizable verbal markers), Daily Life Scenarios (ecologically valid contexts).",
+     zh:"六個維度：基本資料（身份錨定）、世界觀（詮釋傾向與決策邏輯）、心理狀態（情感輪廓與敘事動力）、行為模式（日常應對策略）、語言詞彙庫（可辨識的口語標記）、日常生活分鏡（生態有效情境）。"},
+    {en:"Two contrasting personas built on the same script: Xiao-An, 23, marketing intern, emotional / externally validated; Emily, 25, data analyst, rational / internally driven. They share the six-dimension scaffold but invert on the source-of-confidence axis.",
+     zh:"以同一劇本建構兩位對比角色：小安，23 歲行銷實習生，情緒型／外部確認型；艾蜜莉，25 歲數據分析師，理性型／內在信念型。共用六維度框架，但在「信心來源」軸上相反。"},
     {en:"Six expert evaluators (3+ years). Consistency M = 4.17 (SD = 0.85), 87.5% in 4 to 5 range; discriminability M = 4.58 (SD = 0.70). On the Persona Perception Scale, Clarity was highest (6.22), Credibility lowest (3.67).",
      zh:"六位專家評估者（三年以上經驗）。一致性 M = 4.17（SD = 0.85），87.5% 落在 4 到 5；差異性 M = 4.58（SD = 0.70）。人物誌感知量表中，清晰度最高（6.22）、可信度最低（3.67）。"},
     {en:"60-minute design probe interviews with Xiao-An and two human participants (24 and 26), using three design concepts (past / present / future) as stimuli. On structural dimensions (C1, C5), AI scored 5.0 vs humans 3.5 (a 43% advantage). On authenticity dimensions (C2, C3, C4, C6), humans scored 4.88 vs AI 1.05 (a 79% disadvantage). The AI is a respondent with excellent structure but limited authenticity.",
