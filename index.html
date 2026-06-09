@@ -93,6 +93,15 @@
   .flow .ar2{color:var(--accent);font-weight:800;font-size:2rem}
   .feeders{display:flex;justify-content:center;gap:.6rem;color:var(--muted);font-size:.92rem;margin-bottom:.7rem}
   .feeders .f{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem}
+  /* study 1 layout (design card + stats) */
+  .s1-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:.4rem 0 .9rem;align-items:stretch}
+  .s1-grid .card{display:flex;flex-direction:column}
+  .s1-stats{display:flex;flex-direction:column;justify-content:center;gap:1.4rem}
+  .s1-stats .row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+  .s1-stats .n{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1;color:var(--accent2);letter-spacing:-.02em}
+  .s1-stats .n.big{font-size:clamp(3rem,6vw,5.2rem)}
+  .s1-stats .lbl{color:var(--muted);font-size:.85rem;margin-top:.45rem;line-height:1.35}
+  .s1-photo{margin-top:auto;background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:10px;min-height:130px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
   /* hook (scenario split) */
   .hook{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem}
   .hook .scene{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
@@ -270,11 +279,22 @@
   <section class="slide">
     <div class="kicker">Findings · Study 1</div>
     <h2>Across six expert raters, the persona is <span class="u">consistent</span> within itself and clearly <span class="u">distinct</span> from its counterpart.</h2>
-    <p class="lead" style="margin-bottom:.7rem">Six expert designers：3 rounds with Anne (consistency) + 1 round with Emily (discriminability) + Persona Perception Scale.</p>
-    <div class="stat">
-      <div><div class="n good">4.17</div><div class="lbl">Consistency · 87.5% in 4 to 5</div></div>
-      <div><div class="n good">4.58</div><div class="lbl">Discriminability · 95.8% in 4 to 5</div></div>
-      <div><div class="n">6.22</div><div class="lbl">PPS Clarity highest · Credibility 3.67 lowest</div></div>
+    <div class="s1-grid">
+      <div class="card">
+        <div class="step">實驗設計 · Study Design</div>
+        <p>Six expert designers: 3 rounds with Anne (consistency) + 1 round with Emily (discriminability) + Persona Perception Scale.</p>
+        <div class="s1-photo">PHOTO: study session</div>
+      </div>
+      <div class="s1-stats">
+        <div class="row">
+          <div><div class="n">4.17</div><div class="lbl">Consistency · 87.5% in 4 to 5</div></div>
+          <div><div class="n">4.58</div><div class="lbl">Discriminability · 95.8% in 4 to 5</div></div>
+        </div>
+        <div>
+          <div class="n big">6.22</div>
+          <div class="lbl">PPS Clarity highest · Credibility 3.67 lowest</div>
+        </div>
+      </div>
     </div>
     <div class="insight">Low credibility (3.67) is <b>healthy skepticism</b>, not a flaw of the method. Designers stayed critical about real-data grounding.</div>
   </section>
