@@ -217,7 +217,7 @@
 </aside>
 
 <div class="pageno"><span id="cur">1</span> / <span id="tot">12</span></div>
-<div class="hint">click ‹ › buttons to navigate</div>
+<div class="hint">← → or ‹ › to navigate</div>
 <div class="nav">
   <button id="toggle" title="Toggle script (S)">▤</button>
   <button id="prev">‹</button>
@@ -327,6 +327,10 @@
   function next(){show(i+1)} function prev(){show(i-1)}
   document.getElementById('next').onclick=next;
   document.getElementById('prev').onclick=prev;
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')next();
+    else if(e.key==='ArrowLeft')prev();
+  });
   function toggleNotes(){document.body.classList.toggle('notes-open')}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
 
