@@ -28,6 +28,8 @@
   body.notes-open .deck{right:36%}
   .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:6vh 8vw;opacity:0;transition:opacity .35s ease}
   .slide.active{display:flex;opacity:1}
+  .slide.canva{padding:0;flex-direction:row;align-items:center;justify-content:center;background:#000}
+  .slide.canva img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
   .kicker{color:var(--accent);font-weight:700;letter-spacing:.16em;font-size:.95rem;margin-bottom:1.2rem;text-transform:uppercase}
   h1{font-size:clamp(2rem,4.4vw,3.7rem);line-height:1.14;font-weight:800;letter-spacing:-.02em}
   h2{font-size:clamp(1.55rem,3.1vw,2.5rem);line-height:1.2;font-weight:800;margin-bottom:1.4rem;letter-spacing:-.01em}
@@ -181,218 +183,20 @@
 <div class="bar" id="bar"></div>
 <div class="deck" id="deck">
 
-  <!-- 1 開場 -->
-  <section class="slide active title-wrap">
-    <div class="kicker">HCII · AI Persona × Design Research</div>
-    <h1>From Static Snapshot<br>to <span style="color:var(--accent)">Living System</span></h1>
-    <p class="lead" style="margin-top:1.3rem">The Evolution of AI Personas and the Researcher's Reflective Practice</p>
-    <div class="meta">
-      <b>簡潔安 (Jie-An Chien)</b>　·　Advisor: <b>唐玄輝 (Hsien-Hui Tang)</b><br>
-      Department of Design, National Taiwan University of Science and Technology
-    </div>
-  </section>
-
-  <!-- 2 Hook：背景與缺口 -->
-  <section class="slide">
-    <div class="kicker">Background</div>
-    <h2>Existing AI persona research asks <span style="color:var(--warn)">"how human-like?"</span>. We ask <span class="u">"how is it different from a real human?"</span></h2>
-    <div class="hook">
-      <div class="scene left">
-        <div class="photo">Static</div>
-        <span class="icon">📄</span>
-        <div class="scenario">
-          <div class="label">Personas: static documents.</div>
-          <div class="sub">Widely used in design research, but cannot capture how users dynamically change.</div>
-        </div>
-      </div>
-      <div class="scene right">
-        <div class="photo">Interactive</div>
-        <span class="icon">💬</span>
-        <div class="scenario">
-          <div class="label">Generative AI: interactive agents.</div>
-          <div class="sub">But the difference from real participants is underexplored. We make it the data.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 研究問題 (RQ 留白) -->
-  <section class="slide">
-    <div class="kicker">Research Questions</div>
-    <h2 style="text-align:center;margin-bottom:2rem">Can the persona stay <span class="u">coherent</span>, and where does its language <span class="u">diverge</span> from real participants?</h2>
-    <div class="rq-center">
-      <div class="rq"><b>RQ1</b>How to build an AI persona that is <span style="color:var(--accent)">consistent</span> and <span style="color:var(--accent)">discriminable</span>?</div>
-      <div class="rq"><b>RQ2</b>What are the <span style="color:var(--accent)">structural differences</span> in language between AI personas and real participants?</div>
-    </div>
-  </section>
-
-  <!-- 4 方法 DSR -->
-  <section class="slide">
-    <div class="kicker">Method · DSR</div>
-    <h2>We treat the AI persona as a <span class="u">designed artifact</span> and evaluate it through two studies.</h2>
-    <div class="grid g2">
-      <div class="card"><h3>Approach</h3><p>We treat the AI persona as an artifact: construct, then evaluate across two studies (Hevner et al., 2004; Peffers et al., 2007).</p></div>
-      <div class="card"><h3>Context：Gen Z ETF investors</h3><p>Strong emotional-behavioral coupling："I should hold long-term, but I keep checking the market every hour."</p></div>
-    </div>
-  </section>
-
-  <!-- 5 建構流程 -->
-  <section class="slide">
-    <div class="kicker">Method · Construct</div>
-    <h2>Four stages produce a persona that speaks in <span class="u">one consistent voice</span>.</h2>
-    <div class="pipeline">
-      <div class="card"><div class="step">① Context</div><p><b style="color:var(--ink)">Gemini Deep Research × 2</b>: round 1 finds two core axes + 4 user types; round 2 builds a full profile per quadrant.</p></div>
-      <div class="card"><div class="step">② Corpus</div><p><b style="color:var(--ink)">ChatGPT Deep Research</b>: 30–50 first-person posts from <b style="color:var(--ink)">PTT &amp; Dcard</b> as the persona's voice.</p></div>
-      <div class="card"><div class="step">③ Script</div><p><b style="color:var(--ink)">Gemini</b> integrates everything into a <b style="color:var(--ink)">7,500-word</b> six-dimension script.</p></div>
-      <div class="card"><div class="step">④ Deploy</div><p>Deployed as a <b style="color:var(--ink)">GPT</b> with <b style="color:var(--ink)">5 behavior constraints</b> + role-internalization instructions.</p></div>
-    </div>
-    <p class="lead" style="margin-top:1.1rem">GPT backend locks the script, so the role does not get overwritten in long conversations.</p>
-  </section>
-
-  <!-- 6 六維度 -->
-  <section class="slide">
-    <div class="kicker">Method · Six Dimensions</div>
-    <h2>Six dimensions hold one stable character, from <span class="u">identity</span> to <span class="u">daily scenarios</span>.</h2>
-    <div class="six">
-      <div class="d"><b>① Basic Information</b><span>Age, role, life stage. Anchors identity for narrative consistency.</span></div>
-      <div class="d"><b>② Worldview</b><span>How she interprets the market, money, and the future. Shapes decision logic.</span></div>
-      <div class="d"><b>③ Psychological State</b><span>Anxiety profile and source of confidence. Drives emotional behavior.</span></div>
-      <div class="d"><b>④ Behavior</b><span>Daily coping rituals (checking the app, talking to friends). Reveals action under pressure.</span></div>
-      <div class="d"><b>⑤ Linguistic Style</b><span>Slang, particles, code-switching, tempo. Makes the voice instantly recognizable.</span></div>
-      <div class="d"><b>⑥ Daily Scenarios</b><span>Commute, payday, market crash. Places the persona in ecologically valid contexts.</span></div>
-    </div>
-  </section>
-
-  <!-- 7 兩位角色 -->
-  <section class="slide">
-    <div class="kicker">Method · Two Personas</div>
-    <h2>Same six-dimension script, <span class="u">opposite source of confidence</span>. Two contrasting characters.</h2>
-    <div class="grid g2">
-      <div class="card">
-        <h3 class="who">Anne · 小安</h3>
-        <p><b style="color:var(--warn)">Emotional · External-validation</b>　23, marketing intern (~30k NTD/mo)</p>
-        <p style="margin-top:.6rem">Checks the app 3–5 times a day. Loss makes her anxious; she steadies herself by chatting with friends and scrolling KOLs and IG groups.</p>
-        <p style="margin-top:.5rem;color:var(--muted);font-style:italic">"Did you see the dip today? I almost sold…"</p>
-      </div>
-      <div class="card">
-        <h3 class="who">Emily</h3>
-        <p><b style="color:var(--accent)">Rational · Internal-belief</b>　25, data analyst (~60k NTD/mo)</p>
-        <p style="margin-top:.6rem">Disciplined low-cost indexing. Does not check daily. Confidence comes from her own plan, backtest, and long-term thesis.</p>
-        <p style="margin-top:.5rem;color:var(--muted);font-style:italic">"Short-term noise doesn't change a ten-year plan."</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 研究一與結果 -->
-  <section class="slide">
-    <div class="kicker">Findings · Study 1</div>
-    <h2>Across six expert raters, the persona is <span class="u">consistent</span> within itself and clearly <span class="u">distinct</span> from its counterpart.</h2>
-    <div class="s1-grid">
-      <div class="card">
-        <div class="step">實驗設計 · Study Design</div>
-        <p>Six expert designers: 3 rounds with Anne (consistency) + 1 round with Emily (discriminability) + Persona Perception Scale.</p>
-        <div class="s1-photo">PHOTO: study session</div>
-      </div>
-      <div class="s1-stats">
-        <div class="row">
-          <div><div class="n">4.17</div><div class="lbl">Consistency · 87.5% in 4 to 5</div></div>
-          <div><div class="n">4.58</div><div class="lbl">Discriminability · 95.8% in 4 to 5</div></div>
-        </div>
-        <div>
-          <div class="n big">6.22</div>
-          <div class="lbl">PPS Clarity highest · Credibility 3.67 lowest</div>
-        </div>
-      </div>
-    </div>
-    <div class="insight">Low credibility (3.67) is <b>healthy skepticism</b>, not a flaw of the method. Designers stayed critical about real-data grounding.</div>
-  </section>
-
-  <!-- 9 研究二與結果 -->
-  <section class="slide">
-    <div class="kicker">Findings · Study 2</div>
-    <h2>The AI is <span class="u">too perfect</span>. Structurally excellent but missing the broken authenticity of real humans.</h2>
-    <p class="lead" style="margin-bottom:.5rem">60-min design probe · Anne + 2 humans · three design concepts · coded on C1 to C6.</p>
-    <div class="chart">
-      <div class="leg"><span><span class="sw" style="background:var(--accent)"></span>AI</span><span><span class="sw" style="background:var(--warn)"></span>Human</span></div>
-      <div class="row"><div class="lbl">C1 Reasoning</div><div class="bars"><div class="bar ai" style="width:100%"></div><div class="bar hu" style="width:70%"></div></div><div class="val"><span class="a">5.0</span> / <span class="h">3.5</span></div></div>
-      <div class="row"><div class="lbl">C2 Variability</div><div class="bars"><div class="bar ai" style="width:24%"></div><div class="bar hu" style="width:100%"></div></div><div class="val"><span class="a">1.2</span> / <span class="h">5.0</span></div></div>
-      <div class="row"><div class="lbl">C3 Situational</div><div class="bars"><div class="bar ai" style="width:20%"></div><div class="bar hu" style="width:100%"></div></div><div class="val"><span class="a">1.0</span> / <span class="h">5.0</span></div></div>
-      <div class="row"><div class="lbl">C4 Emotional</div><div class="bars"><div class="bar ai" style="width:20%"></div><div class="bar hu" style="width:100%"></div></div><div class="val"><span class="a">1.0</span> / <span class="h">5.0</span></div></div>
-      <div class="row"><div class="lbl">C5 Coherence</div><div class="bars"><div class="bar ai" style="width:100%"></div><div class="bar hu" style="width:70%"></div></div><div class="val"><span class="a">5.0</span> / <span class="h">3.5</span></div></div>
-      <div class="row"><div class="lbl">C6 Tempo</div><div class="bars"><div class="bar ai" style="width:20%"></div><div class="bar hu" style="width:90%"></div></div><div class="val"><span class="a">1.0</span> / <span class="h">4.5</span></div></div>
-      <div class="sum"><div class="good"><b>+43%</b><span>structural (C1+C5)</span></div><div class="bad"><b>−79%</b><span>authenticity (C2+C3+C4+C6)</span></div></div>
-    </div>
-    <div class="insight warn">Structurally excellent, <b>authenticity-poor</b>. The AI lacks the variability, friction, emotion, and tempo of human talk.</div>
-  </section>
-
-  <!-- 10 兩種思考 -->
-  <section class="slide">
-    <div class="kicker">Findings · Two Modes</div>
-    <h2>Real participants don't speak from a <span class="u">pre-formed self</span>; they form thoughts in the <span class="u">act of speaking</span>.</h2>
-    <div class="qc">
-      <div class="qb ai">
-        <div class="who">AI · Synthetic</div>
-        <div class="q">"I was anxious too. My paper loss kept growing, I wanted to sell every day, checked the app three times a day."</div>
-        <div class="n">0-sec delay · 3 interaction markers · answer exists before the question ends</div>
-      </div>
-      <div class="qb hu">
-        <div class="who">Human · Experiential</div>
-        <div class="q">"…seeing the money in the account keep dropping, I got pretty… panicked. wondering if it's a long-term trend, like…"</div>
-        <div class="n">~4 min later before reflection surfaces · 45 interaction markers · thinking happens while speaking</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 對照基準 + 互補 -->
-  <section class="slide">
-    <div class="kicker">Discussion</div>
-    <h2>AI sets the <span class="u">structural baseline</span>. The contrast makes <span class="u">real human signals</span> visible.</h2>
-    <div class="grid g2" style="margin-top:.3rem">
-      <div>
-        <div class="role-img">PHOTO: AI persona chat</div>
-        <div class="role-bar"><span class="dia"></span></div>
-        <div class="role-phase">Early Exploration · AI Persona</div>
-        <p class="role-body">AI persona is <span class="em">efficient, always available, and fluent</span>. Best for early exploration: scanning the problem space, surfacing patterns, and giving designers a structural reference for what a "perfect" response sounds like.</p>
-      </div>
-      <div>
-        <div class="role-img">PHOTO: human interview</div>
-        <div class="role-bar"><span class="dia"></span></div>
-        <div class="role-phase">Later Validation · Human Interview</div>
-        <p class="role-body">Human interviews bring <span class="em">hesitation, contradiction, emotion</span>. Once you have the AI baseline, those become signals, not noise. The AI's fluency is exactly what makes those signals stand out. Best for later validation and depth.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12 Living System + 貢獻 -->
-  <section class="slide">
-    <div class="kicker">Future · Living System</div>
-    <h2>Get <span class="u">consistency</span> first; then let the persona evolve as a <span class="u">living system</span> fed by real-world data.</h2>
-    <div class="flow">
-      <div class="node"><span class="ic">▢</span><div class="nm">Static snapshot</div></div>
-      <div class="ar2">→</div>
-      <div class="node dest"><span class="ic">◉</span><div class="nm">Living system</div></div>
-    </div>
-    <div class="feeders"><span class="f">📝 Designer Interview Data</span><span class="f">📊 Automated CRM Data</span></div>
-    <div class="divline"></div>
-    <ul>
-      <li><b style="color:var(--accent)">Methodological</b>：a validated Six-Dimension Script Methodology</li>
-      <li><b style="color:var(--accent)">Conceptual</b>：synthetic vs. experiential thinking (beyond fidelity)</li>
-      <li><b style="color:var(--accent)">Practical</b>：AI for breadth, humans for depth</li>
-    </ul>
-  </section>
-
-  <!-- 13 結論 -->
-  <section class="slide title-wrap" style="align-items:flex-start">
-    <div class="kicker">Conclusion</div>
-    <p class="big">AI personas evolve from <span class="u">scripted snapshots</span> into <span class="u">living systems</span> that grow with continuous data.</p>
-    <p class="lead" style="margin-top:1.4rem">AI personas do not replace humans, they complement. Once consistent, they can keep growing with continuous data.</p>
-    <p class="meta2"><b style="color:var(--ink)">Thank you</b> · questions welcome　|　簡潔安 (Jie-An Chien) · Advisor 唐玄輝 (Hsien-Hui Tang)</p>
-    <div class="qrrow">
-      <div class="qrb"><img src="qr/deck.png" alt="Deck QR"><div class="meta"><b>This deck</b><span>joannecucumber.github.io/ai-persona-hcii</span></div></div>
-      <div class="qrb"><img src="qr/methodology.png" alt="Methodology QR"><div class="meta"><b>Methodology toolkit</b><span>v0-ai-persona.vercel.app</span></div></div>
-    </div>
-  </section>
-
+  <section class="slide canva"><img src="canva/s1.png" alt="slide 1"></section>
+  <section class="slide canva"><img src="canva/s2.png" alt="slide 2"></section>
+  <section class="slide canva"><img src="canva/s3.png" alt="slide 3"></section>
+  <section class="slide canva"><img src="canva/s4.png" alt="slide 4"></section>
+  <section class="slide canva"><img src="canva/s5.png" alt="slide 5"></section>
+  <section class="slide canva"><img src="canva/s6.png" alt="slide 6"></section>
+  <section class="slide canva"><img src="canva/s7.png" alt="slide 7"></section>
+  <section class="slide canva"><img src="canva/s8.png" alt="slide 8"></section>
+  <section class="slide canva"><img src="canva/s9.png" alt="slide 9"></section>
+  <section class="slide canva"><img src="canva/s10.png" alt="slide 10"></section>
+  <section class="slide canva"><img src="canva/s11.png" alt="slide 11"></section>
+  <section class="slide canva"><img src="canva/s12.png" alt="slide 12"></section>
+  <section class="slide canva"><img src="canva/s13.png" alt="slide 13"></section>
+  <section class="slide canva"><img src="canva/s14.png" alt="slide 14"></section>
 </div>
 
 <aside class="notes" id="notes">
@@ -425,7 +229,7 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:00","0:45","1:15","1:15","1:10","1:15","1:30","0:30"];
+  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:00","0:45","1:15","1:15","1:10","1:15","1:30","0:20","0:15"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
@@ -467,8 +271,11 @@
      en:"This points to a future direction we call a living system. Consistency is the prerequisite; once a persona is consistent, it can evolve by integrating designer interview data and CRM data. Three contributions to wrap up: methodological, the validated six-dimension methodology; conceptual, the synthetic-versus-experiential framework, which moves beyond fidelity; and practical, the complementary positioning, AI for breadth and humans for depth.",
      zh:"這指向一個未來方向，我們叫它「活系統」。一致性是前提；只要人物誌一致，就能透過設計師訪談資料跟 CRM 資料持續演化。三個貢獻總結：方法上，經驗證的六維度方法論；概念上，合成式 vs 經歷中思考的框架，跳脫擬真度指標；實務上，互補定位，AI 廣度、真人深度。"},
     {t:"結論｜Conclusion",
-     en:"From static snapshot to a living system. AI personas don't replace humans, they complement; and once consistent, they can keep growing with continuous data. Thank you, I would love to take your questions.",
-     zh:"從靜態快照到活系統。AI 人物誌不取代真人，而是互補；一旦一致，就能透過資料持續成長。謝謝，很歡迎提問。"}
+     en:"From static snapshot to a living system. AI personas don't replace humans, they complement; and once consistent, they can keep growing with continuous data.",
+     zh:"從靜態快照到活系統。AI 人物誌不取代真人，而是互補；一旦一致，就能透過資料持續成長。"},
+    {t:"致謝｜Thank You",
+     en:"Thank you. I would love to take your questions.",
+     zh:"謝謝聆聽，很歡迎提問。"}
   ];
 
   const SRC=[
@@ -497,7 +304,8 @@
     {en:"Consistency is the prerequisite for meaningful evolution. With Designer Interview Data (depth and context) and Automated CRM Data (breadth and currency), a persona can turn from a static snapshot into a living system. Contributions: (1) a validated Six-Dimension Script Methodology; (2) a conceptual framework distinguishing synthetic from experiential thinking; (3) practical guidance positioning AI personas as complementary tools (AI for breadth, humans for depth).",
      zh:"一致性是有意義演化的前提。透過設計師訪談資料（深度與脈絡）與自動化 CRM 資料（廣度與即時性），人物誌可以從靜態快照轉為活系統。貢獻：(1) 經驗證的六維度劇本方法論；(2) 區分合成式與經歷中思考的概念框架；(3) 將 AI 人物誌定位為互補工具的實務指引（AI 廣度、真人深度）。"},
     {en:"We constructed consistent, discriminable AI personas and revealed a structural difference between synthetic and experiential thinking. AI personas are best positioned as complementary tools that, once consistent, can evolve through continuous data integration: from static snapshot to living system.",
-     zh:"我們建構出一致且可區辨的 AI 人物誌，並揭示合成式與經歷中思考的結構性差異。AI 人物誌最適合定位為互補工具，一旦一致就能透過持續的資料整合演化：從靜態快照到活系統。"}
+     zh:"我們建構出一致且可區辨的 AI 人物誌，並揭示合成式與經歷中思考的結構性差異。AI 人物誌最適合定位為互補工具，一旦一致就能透過持續的資料整合演化：從靜態快照到活系統。"},
+    {en:"",zh:""}
   ];
 
   function show(n){
