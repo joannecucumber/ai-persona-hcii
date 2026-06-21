@@ -484,6 +484,7 @@
     const srcEl=document.getElementById('src');
     if(sr.en||sr.zh){srcEl.style.display='block';document.getElementById('srcen').textContent=sr.en;document.getElementById('srczh').textContent=sr.zh;}
     else{srcEl.style.display='none';}
+    requestAnimationFrame(()=>{try{fitMockups();}catch(e){}});
   }
   function next(){show(i+1)} function prev(){show(i-1)}
   document.getElementById('next').onclick=next;
