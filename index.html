@@ -197,6 +197,9 @@
   <section class="slide canva"><img src="canva/s12.png" alt="slide 12"></section>
   <section class="slide canva"><img src="canva/s13.png" alt="slide 13"></section>
   <section class="slide canva"><img src="canva/s14.png" alt="slide 14"></section>
+  <section class="slide canva"><img src="canva/s15.png" alt="slide 15"></section>
+  <section class="slide canva"><img src="canva/s16.png" alt="slide 16"></section>
+  <section class="slide canva"><img src="canva/s17.png" alt="slide 17"></section>
 </div>
 
 <aside class="notes" id="notes">
@@ -229,38 +232,47 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","1:00","1:00","1:00","0:45","1:15","1:15","1:10","1:15","1:30","0:20","0:15"];
+  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","0:30","1:15","0:30","1:15","1:10","1:15","1:30","0:20","0:15"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
   const NOTES=[
     {t:"開場｜Title",
-     en:"Good morning. Personas have always been static documents. With AI, everyone is talking about AI personas, but mostly asking how human-like they are. We ask a different question: how do they differ from real people, and what can that difference do for design research?",
-     zh:"大家好。人物誌一直是靜態的文件。AI 出現後，大家都在談 AI 人物誌，但多半在問「像不像真人」。我們問的是另一個問題：它跟真人差在哪？這差異又能為設計研究帶來什麼？"},
+     en:"Good morning. I'm Chieh-An from National Taiwan University of Science and Technology. Today I'd like to share with you the work I did with Prof. Tang on AI personas.",
+     zh:"大家好。我是來自台灣科技大學的簡潔安。今天要跟大家分享我跟唐玄輝教授一起做的 AI 人物誌研究。"},
     {t:"背景與缺口｜Background & Gap",
-     en:"Personas are widely used in design research, but they have always been static documents. They can't really capture how users change over time. Generative AI changes this: personas become interactive agents you can actually talk to. But how AI personas differ from real participants is still underexplored. Most existing work asks 'how human-like is the AI?' We take a different angle. We ask what value this difference brings, and how it changes the way we do design research.",
-     zh:"人物誌在設計研究裡用得很廣，但一直是靜態的文件，沒辦法捕捉使用者隨時間的變化。生成式 AI 改變了這點，人物誌變成可以對話的對象。但 AI 跟真人之間的差異還沒被充分探討。大多數研究都在問「AI 像不像真人」，我們換一個角度，看這個差異本身有什麼價值、對設計流程帶來什麼影響。"},
+     en:"With Generative AI, personas have become interactive agents you can actually talk to. Most existing work has asked 'how human-like is the AI?' But how AI personas differ from real participants still remains unclear. We looked at this question from a different angle. We wanted to know what value this difference brings, and how it changes the way we do design research.",
+     zh:"有了生成式 AI，人物誌變成可以對話的代理人。過去多數研究都在問「AI 像不像真人」，但 AI 人物誌跟真人之間的差異到底是什麼，目前還不清楚。我們從另一個角度切入，想知道這個差異本身有什麼價值、會如何改變我們做設計研究的方式。"},
     {t:"研究問題｜RQ",
-     en:"So we ask two questions. First, how to build an AI persona that stays consistent and is clearly different from other personas. Second, what are the structural differences in language between AI personas and real people.",
-     zh:"我們問兩個問題。第一，怎麼建構一個一致、可區辨的 AI 人物誌。第二，AI 人物誌跟真人在語言表現上有哪些結構性差異。"},
-    {t:"研究方法｜Method DSR",
-     en:"Our method is Design Science Research. We treat the AI persona as an artifact: we build it, then we evaluate it across two studies. The context is Taiwan's Gen Z ETF investors. We picked them because their feelings and behavior really feed into each other. They say things like 'I should hold long-term, but I keep checking the market every hour.'",
-     zh:"方法是設計科學研究。我們把 AI 人物誌當成一個人造物，先建構，再用兩個研究評估。情境選台灣 Z 世代 ETF 投資者，因為他們的情緒跟行為交互影響很強烈，他們會說「我知道該長期持有，但忍不住每小時看盤」。"},
+     en:"So we asked two questions. First, how to build an AI persona that stays consistent and is clearly different from other personas? Second, what are the structural differences in language between AI personas and real people?",
+     zh:"我們問了兩個問題。第一，怎麼建構一個一致、可區辨的 AI 人物誌？第二，AI 人物誌跟真人在語言表現上有哪些結構性差異？"},
+    {t:"研究流程 + DSR｜Method · Research Process",
+     en:"We built our AI persona using Design Science Research. We treated the AI persona as an artifact: we build it, then we evaluated it across two studies that were designed to answer our two RQs.",
+     zh:"我們用設計科學研究方法建構 AI 人物誌。把它當成一個人造物：先建構出來，再用兩個對應我們兩個 RQ 的研究去評估它。"},
+    {t:"研究情境｜Method · Context",
+     en:"To test if our AI persona can be truly consistent, we had to build two distinct and contradictory AI personas that can be compared to each other. We therefore needed a real-world context where two contradictory personas can be observed at the same time. We used Taiwan's Gen Z investors of ETF as our context. We picked them because they are as rational as they are emotional. This difference would allow us to build personas that have distinct behaviors.",
+     zh:"要測試 AI 人物誌是不是真的一致，我們需要做出兩個截然不同、甚至對立的 AI 人物誌來互相比對。所以我們需要一個真實世界的情境，在裡面同時看得到這兩種對立的角色。我們選了台灣 Z 世代 ETF 投資者當情境，因為他們又理性又情緒化，這種落差讓我們能建出行為差異明顯的角色。"},
     {t:"建構流程｜Construct",
-     en:"We build the persona in four stages. First, context: Gemini Deep Research runs twice. Round one identifies two core axes and four user types; round two builds a full profile for each quadrant. Second, corpus: ChatGPT Deep Research pulls thirty to fifty first-person posts from PTT and Dcard. That is where the persona's voice comes from. Third, script: Gemini writes a seventy-five-hundred-word six-dimension script. Fourth, deploy: we ship the script as a GPT with five behavior constraints and role-internalization instructions, so the persona stays in character through long conversations.",
-     zh:"我們分四階段建角色。第一階段，建立脈絡：Gemini Deep Research 跑兩輪。第一輪找出兩條核心軸線跟四種用戶類型；第二輪把十字象限四個類型完整刻劃出來。第二階段，語料蒐集：用 ChatGPT Deep Research 從 PTT、Dcard 抓 30 到 50 則第一人稱貼文，角色的聲音來自這裡。第三階段，劇本生成：Gemini 寫出 7500 字的六維度劇本。第四階段，部署：把劇本上 GPT，加上 5 條行為限制跟角色內化指令，讓角色在長對話中不脫線。"},
+     en:"We built the persona in four stages. In the first stage, we used Gemini Deep Research to identify two core axes and four user types, and then build a full profile for each quadrant. Second, to train our personas, we used ChatGPT Deep Research to pull thirty to fifty posts of a first-person voice from Taiwanese online forums. That is where the persona's voice comes from. Third, we wrote a six-dimension script for the personas. Finally, we shipped the script as a GPT with five behavior constraints and role-internalization instructions, so the persona stays in character through long conversations.",
+     zh:"我們分四階段建角色。第一階段，建立脈絡：用 Gemini Deep Research 找出兩條核心軸線跟四種用戶類型，再把十字象限四個類型完整刻劃出來。第二階段，語料蒐集：用 ChatGPT Deep Research 從台灣論壇 PTT、Dcard 抓 30 到 50 則第一人稱貼文，角色的聲音來自這裡。第三階段，劇本生成：寫出六維度劇本。第四階段，部署：把劇本上 GPT，加上 5 條行為限制跟角色內化指令，讓角色在長對話中不脫線。"},
     {t:"六維度｜Six Dimensions",
-     en:"The script has six dimensions. Basic information anchors identity: age, role, life stage. Worldview shapes how she sees the market, money, and the future. Psychological state captures what makes her anxious and where her confidence comes from. Behavior covers her daily rituals, like checking the app or chatting with friends. Linguistic style locks in the things that make her sound like herself: slang, particles, tempo. And daily scenarios put her into real situations like commute, payday, or a market crash. Together, these six dimensions hold one stable character across hundreds of turns.",
-     zh:"劇本有六個維度。基本資料負責錨定身份，年齡、角色、人生階段。世界觀形塑她怎麼看市場、金錢、未來。心理狀態抓住她在焦慮什麼、信心從哪裡來。行為模式涵蓋她每天的習慣，像是刷盤、找朋友聊天。語言風格鎖住「一聽就知道是她」的東西，俚語、語助詞、節奏。日常情境把她放進真實場景，像通勤、發薪日、市場崩盤。六個維度一起撐住一個穩定的角色，撐過上百回合對話。"},
+     en:"For the script, we considered six dimensions. Basic information anchors the identity of the persona, which is a she. Worldview shapes how she sees the market, money, and the future. Psychological state captures what makes her anxious and where her confidence comes from. Behavior covers her daily rituals, like checking the app or chatting with friends. Linguistic style locks in the things that make her sound like herself: slang, particles, tempo. And daily scenarios put her into real situations like commute, payday, or a market crash. Together, these six dimensions hold one stable character across hundreds of turns.",
+     zh:"劇本有六個維度。基本資料負責錨定角色身份，這個角色是一位女性，包含年齡、職業、人生階段。世界觀形塑她怎麼看市場、金錢、未來。心理狀態抓住她在焦慮什麼、信心從哪裡來。行為模式涵蓋她每天的習慣，像是刷盤、找朋友聊天。語言風格鎖住「一聽就知道是她」的東西，俚語、語助詞、節奏。日常情境把她放進真實場景，像通勤、發薪日、市場崩盤。六個維度一起撐住一個穩定的角色，撐過上百回合對話。"},
     {t:"兩位角色｜Two Personas",
-     en:"Same six-dimension script, but we flip one axis, source of confidence, and we get two opposite personas. Take a look at how they answer the same question. Ann's decisions get pulled along by social platforms. When PTT or her friends are talking about a stock, she follows. Her must-have features are price alerts and trending rankings, because she wants to react fast. Emily doesn't watch news or YouTube. Her decisions rest on principles she set from the start, low cost, global diversification, long-term returns. Her must-have features are automated recurring investments and rebalancing, because she wants the app to help her stay the course. Same questions, completely different answers.",
-     zh:"同一份六維度劇本，只翻轉一條軸線，信心來源，就得到兩個對立的角色。大家可以看一下她們對同樣問題的回答。小安的決定被社群平台帶著走，PTT 跟朋友在講什麼，她就想跟。她的必備功能是價格警示跟熱門排行，因為她想趕快反應。艾蜜莉不看新聞跟 YouTube，她的決定建立在自己一開始就設好的原則上，低成本、全球分散、長期報酬。她的必備功能是定期定額跟再平衡，因為她要 app 幫她守紀律。同樣的問題，完全不同的答案。"},
-    {t:"研究一與結果｜Study 1",
-     en:"Study one: six expert designers, three rounds with Anne for consistency, one round with Emily for discriminability, then they filled out the perception scale. Anne was consistent at 4.17, and the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest, and credibility was lowest at 3.67. This actually reflects a boundary. The evaluators could clearly distinguish AI from real people, which shows the designers maintained appropriate critical awareness about the nature of the tool.",
-     zh:"研究一：六位資深設計師，三輪跟小安測一致性、一輪跟艾蜜莉測差異性，最後填感知量表。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67。這正反映了一個邊界：評估者能清楚辨識 AI 與真人的差異，顯示設計師對工具本質保有批判意識。"},
-    {t:"研究二與結果｜Study 2",
-     en:"For study two, we ran 60-minute design probe interviews with Anne and two real participants, aged 24 and 26. We used three design concepts to spark conversation, then coded everything on six dimensions, C1 to C6. Now please look at the table. The first row, reasoning, and the fifth row, coherence, are the structural dimensions. The AI scored a perfect 5.0, humans were at 3.5. The AI is 43% stronger here. But look at the middle rows: variability, situational, emotional, tempo. Humans scored close to 5, the AI scored close to 1. That is a 79% gap. So the AI is structurally excellent, but authentically poor.",
-     zh:"研究二，我們跟小安以及兩位真人受訪者（24 跟 26 歲）做了 60 分鐘的設計探針訪談。用三個設計方案引導對話，再用六維度 C1 到 C6 編碼。大家可以看一下這個表。第一列推理跟第五列連貫度，這兩個是結構性維度，AI 都拿到滿分 5.0，真人是 3.5，AI 比真人強 43%。但看中間這幾列：變化度、情境感、情緒、節奏，真人接近 5，AI 接近 1，差距 79%。所以 AI 結構優異，但真實性不足。"},
+     en:"We built two opposite personas by flipping one axis, source of confidence, and keeping the rest the same. Take a look at how they answer the same question. Ann's decisions, quote unquote, get pulled along by social platforms. When PTT or her friends are talking about a stock, she follows. Her must-haves are price alerts and trending rankings, because she wants to react fast. On the other hand, Emily, quote unquote, doesn't watch news or YouTube. Her decisions rest on principles she set from the start, low cost, global diversification, long-term returns. Her must-haves are automated recurring investments and rebalancing, because she wants the app to help her stay the course. Same question, completely different answers.",
+     zh:"我們建了兩個對立的角色，只翻轉一條軸線——信心來源——其他都相同。大家可以看一下她們對同樣問題的回答。小安的決定，引用她原話，「被社群平台帶著走」。PTT 跟朋友在講什麼，她就想跟。她的必備功能是價格警示跟熱門排行，因為她想趕快反應。另一方面，艾蜜莉，引用她原話，「不看新聞跟 YouTube」。她的決定建立在自己一開始就設好的原則上：低成本、全球分散、長期報酬。她的必備功能是定期定額跟再平衡，因為她要 app 幫她守紀律。同樣的問題，完全不同的答案。"},
+    {t:"研究一設計｜Study 1 · Design",
+     en:"To answer RQ1, the consistency question, we ran Study 1. Six expert designers with three or more years of UX research experience tested the persona. The protocol had three parts. First, a consistency test with Anne across three rounds using the same six questions. Second, a discriminability test with Emily using the same six questions. And third, the Persona Perception Scale, which rates six dimensions like credibility, consistency, clarity, and willingness to use.",
+     zh:"為了回答 RQ1 一致性的問題，我們做了研究一。找了六位有三年以上 UX 研究經驗的資深設計師來測試。流程分三步：第一，跟小安進行三輪一致性測試，每輪用同樣的六道題；第二，跟艾蜜莉進行一輪差異性測試，用同樣的六道題；最後填寫人物誌感知量表，評估可信度、一致性、清晰度、使用意願等六個面向。"},
+    {t:"研究一結果｜Study 1 · Results",
+     en:"Now for the results. Anne was consistent at 4.17, and the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest, and credibility was lowest at 3.67. This actually reflects a boundary. The evaluators could clearly distinguish AI from real people, which shows the designers maintained appropriate critical awareness about the nature of the tool.",
+     zh:"結果這樣。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67。這正反映了一個邊界：評估者能清楚辨識 AI 與真人的差異，顯示設計師對工具本質保有批判意識。"},
+    {t:"研究二設計｜Study 2 · Design",
+     en:"For RQ2, the language differences, we ran Study 2: a 60-minute design probe interview, conducted online. Three participants in total: AI Anne, plus two screened humans aged 24 and 26. We used three design concepts past, present, and future as conversation prompts, then coded everything on six dimensions, C1 to C6. We also counted interaction markers: hesitations, fillers, clarifying questions, self-corrections, anything that shows the person is forming thought in real time.",
+     zh:"為了回答 RQ2 語言差異的問題，我們做了研究二：60 分鐘的設計探針線上訪談。三位受訪者：AI 小安加上兩位篩選過的真人受訪者，24 跟 26 歲。我們用三個設計方案——過去、現在、未來——當對話材料，再用六維度 C1 到 C6 編碼。另外還算了一個叫「互動標記」的指標：遲疑、口頭禪、追問、自我修正，任何顯示這個人是邊講邊想的痕跡。"},
+    {t:"研究二結果｜Study 2 · Results",
+     en:"Now let's look at the table. The first row, reasoning, and the fifth row, coherence, are the structural dimensions. The AI scored a perfect 5.0, humans were at 3.5. The AI is 43% stronger here. But look at the middle rows: variability, situational, emotional, tempo. Humans scored close to 5, the AI scored close to 1. That is a 79% gap. So the AI is structurally excellent, but authentically poor.",
+     zh:"大家可以看一下這個表。第一列推理跟第五列連貫度，這兩個是結構性維度，AI 都拿到滿分 5.0，真人是 3.5，AI 比真人強 43%。但看中間這幾列：變化度、情境感、情緒、節奏，真人接近 5，AI 接近 1，差距 79%。所以 AI 結構優異，但真實性不足。"},
     {t:"兩種思考｜Two Modes",
      en:"And this isn't just a small difference, it's a different kind of thinking. The AI does what we call synthetic thinking: the answer is already there before the question finishes, zero delay, only three interaction markers. The human does experiential thinking: the answer forms while she's speaking, 45 interaction markers, and the real reflection often only surfaces about four minutes later.",
      zh:"這不只是程度差異，是兩種思考方式的差別。AI 是我們說的「合成式思考」：答案在問題講完之前就成形了，零延遲、只有三個互動標記。真人是「經歷中的思考」：答案是邊講邊形成的，45 個互動標記，真正的反思常常是四分鐘後才浮現。"},
@@ -285,18 +297,24 @@
      zh:"人物誌廣泛用於設計研究，但其靜態特質限制了捕捉使用者的動態變化。生成式 AI 使人物誌成為可互動的代理，但 AI 人物誌與真人受訪者之間的差異仍未被充分探討。我們採差異分析取向，而非擬真度評估取向。"},
     {en:"RQ1: How can we construct consistent and discriminable AI personas for design research? RQ2: What are the structural differences in linguistic performance between AI personas and human participants?",
      zh:"RQ1：如何建構一致且可區辨、可用於設計研究的 AI 人物誌？RQ2：AI 人物誌與真人受訪者在語言表現上有哪些結構性差異？"},
-    {en:"This study adopts Design Science Research (DSR) as its core approach, constructing and evaluating artifacts to solve a practical problem and accumulate generalizable design knowledge (Hevner et al., 2004; Peffers et al., 2007). Context: Taiwan's Gen Z ETF investors, for their evident emotional-behavioral coupling.",
-     zh:"本研究以設計科學研究方法（DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007）。情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
+    {en:"This study adopts Design Science Research (DSR) as its core approach, constructing and evaluating artifacts to solve a practical problem and accumulate generalizable design knowledge (Hevner et al., 2004; Peffers et al., 2007).",
+     zh:"本研究以設計科學研究方法（DSR）為核心取徑，透過建構與評估人造物來解決實務問題、累積可推廣的設計知識（Hevner 等, 2004；Peffers 等, 2007）。"},
+    {en:"Context: Taiwan's Gen Z ETF investors, for their evident emotional-behavioral coupling.",
+     zh:"研究情境為台灣 Z 世代 ETF 投資者，因其情緒與行為高度連動。"},
     {en:"Data collection proceeded in three stages, all using Gemini 2.5. Stage 1 (Secondary): a senior market analyst produced an exploratory market report. Stage 2 (Primary): a precise data extraction assistant pulled first-person narratives from PTT and Dcard. Stage 3 (Script): integrated the data into the six-dimension script, then deployed as a GPT.",
      zh:"資料蒐集分三階段，全程用 Gemini 2.5。第一階段（二手）：化身資深市場分析師產出探索性市場報告。第二階段（一手）：化身精準資料擷取助理，從 PTT 與 Dcard 擷取第一人稱敘事。第三階段（劇本）：整合資料為六維度劇本，再部署為 GPT。"},
     {en:"The six dimensions: Basic Information (identity anchoring), Worldview (interpretive tendencies and decision logic), Psychological State (emotional contour and narrative drive), Behavioral Patterns (daily coping strategies), Linguistic Repertoire (recognizable verbal markers), Daily Life Scenarios (ecologically valid contexts).",
      zh:"六個維度：基本資料（身份錨定）、世界觀（詮釋傾向與決策邏輯）、心理狀態（情感輪廓與敘事動力）、行為模式（日常應對策略）、語言詞彙庫（可辨識的口語標記）、日常生活分鏡（生態有效情境）。"},
     {en:"Two contrasting personas built on the same script: Anne, 23, marketing intern, emotional / externally validated; Emily, 25, data analyst, rational / internally driven. They share the six-dimension scaffold but invert on the source-of-confidence axis.",
      zh:"以同一劇本建構兩位對比角色：小安，23 歲行銷實習生，情緒型／外部確認型；艾蜜莉，25 歲數據分析師，理性型／內在信念型。共用六維度框架，但在「信心來源」軸上相反。"},
+    {en:"Study 1 protocol: six expert evaluators (3+ years) ran three consistency rounds with Anne and one discriminability round with Emily, using identical questions, then completed the Persona Perception Scale (Salminen et al., 2020) which rates credibility, consistency, completeness, clarity, empathy, and willingness-to-use.",
+     zh:"研究一流程：六位專家評估者（三年以上經驗）與小安進行三輪一致性測試、與艾蜜莉進行一輪差異性測試，使用相同題目，最後填寫人物誌感知量表（Salminen 等, 2020），評估可信度、一致性、完整性、清晰度、同理心與使用意願。"},
     {en:"Six expert evaluators (3+ years). Consistency M = 4.17 (SD = 0.85), 87.5% in 4 to 5 range; discriminability M = 4.58 (SD = 0.70). On the Persona Perception Scale, Clarity was highest (6.22), Credibility lowest (3.67).",
      zh:"六位專家評估者（三年以上經驗）。一致性 M = 4.17（SD = 0.85），87.5% 落在 4 到 5；差異性 M = 4.58（SD = 0.70）。人物誌感知量表中，清晰度最高（6.22）、可信度最低（3.67）。"},
-    {en:"60-minute design probe interviews with Anne and two human participants (24 and 26), using three design concepts (past / present / future) as stimuli. On structural dimensions (C1, C5), AI scored 5.0 vs humans 3.5 (a 43% advantage). On authenticity dimensions (C2, C3, C4, C6), humans scored 4.88 vs AI 1.05 (a 79% disadvantage). The AI is a respondent with excellent structure but limited authenticity.",
-     zh:"以小安與兩位真人受訪者（24、26 歲）進行 60 分鐘設計探針訪談，用三個設計方案（過去／現在／未來）作為刺激物。結構性維度（C1、C5）AI 得 5.0、真人 3.5（優勢 43%）；真實性維度（C2、C3、C4、C6）真人 4.88、AI 1.05（劣勢 79%）。AI 是一個結構優異但真實性不足的受訪者。"},
+    {en:"Study 2 protocol: 60-minute design probe interviews with Anne and two human participants (24 and 26), using three design concepts (past / present / future) as stimuli, coded on six dimensions C1–C6 (1–5 scale). Interaction markers were counted as a real-time thinking signal: hesitations, fillers, clarifying questions, and self-corrections.",
+     zh:"研究二流程：以小安與兩位真人受訪者（24、26 歲）進行 60 分鐘設計探針訪談，用三個設計方案（過去／現在／未來）作為刺激物，以六維度 C1–C6（1–5 量表）編碼；另計算互動標記作為即時思考訊號：遲疑、口頭禪、追問與自我修正。"},
+    {en:"On structural dimensions (C1, C5), AI scored 5.0 vs humans 3.5 (a 43% advantage). On authenticity dimensions (C2, C3, C4, C6), humans scored 4.88 vs AI 1.05 (a 79% disadvantage). The AI is a respondent with excellent structure but limited authenticity.",
+     zh:"結構性維度（C1、C5）AI 得 5.0、真人 3.5（優勢 43%）；真實性維度（C2、C3、C4、C6）真人 4.88、AI 1.05（劣勢 79%）。AI 是一個結構優異但真實性不足的受訪者。"},
     {en:"Synthetic Thinking (AI): immediate assembly of patterns with zero delay; the answer is 'pre-formed', it exists before the question ends. Experiential Thinking (humans): gradual construction through perception, memory, and emotion; the answer is 'being formed', thinking happens while speaking.",
      zh:"合成式思考（AI）：即時組裝模式、零延遲；答案是「預先成形」的，問題還沒講完答案就在了。經歷中的思考（真人）：透過感知、記憶、情緒逐步建構；答案是「正在成形」的，思考在說話時發生。"},
     {en:"AI personas' value lies not in simulating humans, but in serving as a reference baseline that makes human cognitive patterns visible. Different tools serve different purposes, not competing alternatives: AI fits early exploration; human interviews fit later validation and depth.",
