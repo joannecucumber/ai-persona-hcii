@@ -373,28 +373,57 @@
   </div></section>
   <section class="slide mock-slide"><div class="mk">
     <div class="mk-kicker">Findings · Study 2 · Design</div>
-    <h1 class="mk-h1">A 60-minute design probe interview with Anne<br>and two real participants. Same protocol, same materials.</h1>
-    <div class="mk-params">
-      <div class="mk-param"><div class="lbl">Duration</div><div class="v">60 min<small>per session · online</small></div></div>
-      <div class="mk-param"><div class="lbl">Participants</div><div class="v">Anne + 2<small>real humans · 24 &amp; 26 y/o</small></div></div>
-      <div class="mk-param"><div class="lbl">Materials</div><div class="v">3 concepts<small>past · present · future</small></div></div>
-      <div class="mk-param"><div class="lbl">Analysis</div><div class="v">6-dim coding<small>C1–C6 · 1–5 scale</small></div></div>
-    </div>
-    <div class="mk-row2">
-      <div class="mk-coding">
-        <div class="hd">Six coding dimensions (Braun &amp; Clarke 2006; Heritage &amp; Clayman 2010)</div>
-        <div class="grid">
-          <div><b>C1</b> Reasoning style</div>
-          <div><b>C2</b> Variability (oral markers)</div>
-          <div><b>C3</b> Situational authenticity</div>
-          <div><b>C4</b> Emotional flow</div>
-          <div><b>C5</b> Narrative coherence</div>
-          <div><b>C6</b> Reflective tempo</div>
+    <h1 class="mk-h1">A simulation-validation interview: three design concepts for stabilizing emotional investors, tested with AI Anne and two real participants.</h1>
+    <div class="mk-row2" style="gap:24px;margin-bottom:18px">
+      <div class="mk-card">
+        <div class="mk-card-lbl">Participants</div>
+        <ul class="mk-card-list">
+          <li><b style="color:#fff">AI Anne</b>&nbsp;built via the six-dimension script</li>
+          <li><b style="color:#fff">Human A</b>&nbsp;26 y/o, new graduate</li>
+          <li><b style="color:#fff">Human B</b>&nbsp;24 y/o, new graduate</li>
+          <li><span style="color:#aab3ac">Real participants screened via questionnaire to match Anne's profile: Gen Z emotional / externally-validated investors</span></li>
+          <li><span style="color:#aab3ac">60-minute sessions, conducted online</span></li>
+        </ul>
+      </div>
+      <div class="mk-card">
+        <div class="mk-card-lbl">Experimental Design · Simulation-validation interview</div>
+        <div style="background:rgba(15,199,123,.08);border-left:3px solid #0FC77B;padding:12px 14px;border-radius:0 8px 8px 0;color:#cbd5cc;font-size:15px;line-height:1.5;margin:6px 0 12px">
+          <b style="color:#0FC77B;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px">Design brief</b>
+          <i>"When market volatility triggers panic, how do we stabilize emotional investors so they don't deviate from their investment plan?"</i>
         </div>
+        <div style="color:#cbd5cc;font-size:14.5px;line-height:1.5">We developed <b style="color:#fff">three design concepts</b> as interview stimuli, each addressing the brief from a different time perspective. Each participant reacted to all three.</div>
+      </div>
+    </div>
+    <div class="mk-row3" style="gap:18px;margin-bottom:18px">
+      <div class="mk-find">
+        <div class="tag" style="color:#fbbf24">⟵ Past</div>
+        <h3>Confidence Back-testing</h3>
+        <div style="color:#cbd5cc;font-size:14.5px;line-height:1.5">Shows users how previous market drops recovered. Builds confidence from <b style="color:#fff">historical data</b>.</div>
+      </div>
+      <div class="mk-find">
+        <div class="tag">◉ Present</div>
+        <h3>Emotional Buffer Zone</h3>
+        <div style="color:#cbd5cc;font-size:14.5px;line-height:1.5">Filters social-media noise and provides a <b style="color:#fff">breathing-exercise button</b> for in-the-moment calm.</div>
+      </div>
+      <div class="mk-find">
+        <div class="tag" style="color:#4fe0a6">⟶ Future</div>
+        <h3>Investment Vision Board</h3>
+        <div style="color:#cbd5cc;font-size:14.5px;line-height:1.5">Reminds users of <b style="color:#fff">long-term goals</b>, shifting attention away from short-term volatility.</div>
+      </div>
+    </div>
+    <div class="mk-row2" style="gap:24px;align-items:stretch">
+      <div class="mk-coding">
+        <div class="hd">Interview guide · 4 questions per concept</div>
+        <ul class="mk-card-list" style="margin-top:2px">
+          <li><b style="color:#0FC77B">Q1</b>&nbsp;First reaction to the concept</li>
+          <li><b style="color:#0FC77B">Q2</b>&nbsp;How would it affect your behavior or emotion?</li>
+          <li><b style="color:#0FC77B">Q3</b>&nbsp;Does it change how you understand the investing situation?</li>
+          <li><b style="color:#0FC77B">Q4</b>&nbsp;What works, what doesn't, and why?</li>
+        </ul>
       </div>
       <div class="mk-echo">
-        <div class="hd">What are interaction markers?</div>
-        <div class="body">We also counted <b>interaction markers</b>: hesitations, fillers, clarifying questions, self-corrections — anything that shows the person is forming a thought in real time, rather than playing back something pre-formed.</div>
+        <div class="hd">Analysis · 6 coding dimensions + interaction markers</div>
+        <div class="body"><b>C1</b> Reasoning · <b>C2</b> Variability · <b>C3</b> Situational · <b>C4</b> Emotional · <b>C5</b> Coherence · <b>C6</b> Tempo (1–5 scale).<br>Plus <b>interaction markers</b>: hesitations, fillers, clarifying questions, self-corrections — signs of forming thought in real time.</div>
       </div>
     </div>
   </div></section>
@@ -480,7 +509,7 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","1:00","1:15","0:30","1:30","1:10","1:15","1:30","0:20","0:15"];
+  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","1:00","1:15","1:00","1:30","1:10","1:15","1:30","0:20","0:15"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
@@ -516,8 +545,8 @@
      en:"Now for the results. Anne was consistent at 4.17, and the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest, and credibility was lowest at 3.67. This actually reflects a boundary. The evaluators could clearly distinguish AI from real people, which shows the designers maintained appropriate critical awareness about the nature of the tool.",
      zh:"結果這樣。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67。這正反映了一個邊界：評估者能清楚辨識 AI 與真人的差異，顯示設計師對工具本質保有批判意識。"},
     {t:"研究二設計｜Study 2 · Design",
-     en:"For RQ2, the language differences, we ran Study 2: a 60-minute design probe interview, conducted online. Three participants in total: AI Anne, plus two screened humans aged 24 and 26. We used three design concepts past, present, and future as conversation prompts, then coded everything on six dimensions, C1 to C6. We also counted interaction markers: hesitations, fillers, clarifying questions, self-corrections, anything that shows the person is forming thought in real time.",
-     zh:"為了回答 RQ2 語言差異的問題，我們做了研究二：60 分鐘的設計探針線上訪談。三位受訪者：AI 小安加上兩位篩選過的真人受訪者，24 跟 26 歲。我們用三個設計方案——過去、現在、未來——當對話材料，再用六維度 C1 到 C6 編碼。另外還算了一個叫「互動標記」的指標：遲疑、口頭禪、追問、自我修正，任何顯示這個人是邊講邊想的痕跡。"},
+     en:"For RQ2, we ran Study 2 as a simulation-validation interview. The design brief: how do we stabilize emotional investors during market volatility, so they don't deviate from their investment plan. We developed three design concepts as stimuli, each from a different time perspective. Confidence back-testing, for the past, showing how previous drops recovered. Emotional buffer zone, for the present, filtering noise and offering a breathing-exercise button. And an investment vision board, for the future, reminding users of long-term goals. AI Anne and two screened humans aged 24 and 26, matching her Gen Z emotional profile, each reacted to all three concepts. Sixty-minute online sessions, four questions per concept. We then coded everything on six dimensions, C1 to C6, and counted interaction markers: hesitations, fillers, clarifying questions, self-corrections, signs of forming thought in real time.",
+     zh:"為了回答 RQ2，我們做了研究二，採用「模擬驗證型訪談」。設計題目是：當市場波動引發恐慌時，如何穩定情緒型投資者讓他們不偏離投資計畫。我們做了三個設計方案當作刺激物，從三個時間視角切入。過去——信心回測工具，提示用戶過去大跌時的回穩案例。現在——情緒緩衝區，屏蔽社群資訊並提供深呼吸按鈕。未來——投資願景板，提示用戶長期目標。AI 小安加上兩位篩選過的真人受訪者，24 跟 26 歲，符合小安的 Z 世代情緒型投資者輪廓，三位都針對這三個方案回應。每場 60 分鐘線上訪談，每個方案問四題。然後用六維度 C1 到 C6 編碼，並計算「互動標記」：遲疑、口頭禪、追問、自我修正，這些都是邊講邊想的痕跡。"},
     {t:"研究二結果｜Study 2 · Results",
      en:"Look at the results. On the structural dimensions, reasoning and coherence, AI scored a perfect 5.0; humans were at 3.5. That's a 43% AI advantage. But on authenticity, the gap reverses completely: AI scored close to 1, humans close to 5, a 79% gap. Three findings stood out. First, suspicious perfection: real humans drop hundreds of hesitation markers per interview; the AI dropped zero, replaced by emoji. Second, the strangest finding: the AI uses 38% more emotion words than humans, but those words don't disrupt its language. Real emotion breaks language; AI emotion is just described. Third, the biggest paradox: AI gives deeper reflection than humans, but instantly, with zero delay. Real reflection takes about four minutes to surface. So the AI is structurally excellent, but its fluency is exactly what makes the authenticity gap visible.",
      zh:"看一下結果。結構性維度——推理跟連貫度，AI 拿到滿分 5.0，真人是 3.5，AI 強 43%。但真實性維度差距完全相反：AI 接近 1，真人接近 5，差距 79%。三個最關鍵的發現。第一，可疑的完美：真人每場訪談有幾百個語氣詞跟遲疑，AI 是零，用 emoji 代替。第二，最詭異的發現：AI 的情緒詞比真人多 38%，但這些情緒詞不會打斷語言。真人的情緒會體現在語言上、把句子打破；AI 的情緒只是被描述。第三，最大的矛盾：AI 反思的深度比真人還深，但是零延遲秒答。真人的反思大約要四分鐘才浮現。所以 AI 結構優異，但這份流暢正是讓真實性差距被看見的原因。"},
