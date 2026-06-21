@@ -30,6 +30,58 @@
   .slide.active{display:flex;opacity:1}
   .slide.canva{padding:0;flex-direction:row;align-items:center;justify-content:center;background:#000}
   .slide.canva img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+  /* mock slide (inline HTML, scales to fit) */
+  .slide.mock-slide{padding:0;overflow:hidden;background:#0a0e0b;background-image:
+    linear-gradient(rgba(15,199,123,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(15,199,123,.03) 1px,transparent 1px),
+    radial-gradient(800px 600px at 20% 0%,rgba(15,199,123,.08),transparent 60%);
+    background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat}
+  .slide.mock-slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18px;background:#0FC77B;z-index:2}
+  .mk{width:1920px;height:1080px;padding:90px 110px 110px;color:#f1f3f2;font-family:'Inter','PingFang TC',-apple-system,sans-serif;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);box-sizing:border-box;display:flex;flex-direction:column}
+  .mk *{box-sizing:border-box}
+  .mk-kicker{color:#0FC77B;font-weight:700;letter-spacing:.18em;font-size:22px;text-transform:uppercase;margin-bottom:24px}
+  .mk-h1{font-size:46px;line-height:1.18;font-weight:700;letter-spacing:-.01em;margin:0 0 38px 0;max-width:1500px}
+  .mk-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
+  .mk-row2{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+  .mk-card{background:rgba(255,255,255,.04);border:1.6px solid rgba(15,199,123,.22);border-radius:16px;padding:26px 26px}
+  .mk-card-lbl{color:#0FC77B;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+  .mk-card-big{color:#fff;font-weight:800;font-size:32px;line-height:1.15;margin-bottom:10px}
+  .mk-card-big small{display:block;color:#aab3ac;font-size:15px;font-weight:500;margin-top:6px}
+  .mk-card-sub{color:#aab3ac;font-size:16px;line-height:1.5}
+  .mk-card-sub b{color:#0FC77B;font-weight:600}
+  .mk-card-list{margin:8px 0 0;padding:0;list-style:none}
+  .mk-card-list li{color:#cbd5cc;font-size:16px;line-height:1.5;padding:5px 0;display:flex;gap:10px}
+  .mk-card-list li::before{content:'';width:6px;height:6px;background:#0FC77B;border-radius:50%;flex-shrink:0;margin-top:9px}
+  .mk-flow{display:flex;align-items:center;gap:22px;margin:38px 0}
+  .mk-node{flex:1;background:rgba(255,255,255,.04);border:1.8px solid rgba(15,199,123,.3);border-radius:18px;padding:28px 26px;text-align:center;min-height:240px;display:flex;flex-direction:column;justify-content:center}
+  .mk-node-step{color:#0FC77B;font-weight:800;font-size:17px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+  .mk-node-ttl{color:#fff;font-size:24px;font-weight:700;margin-bottom:12px;line-height:1.2}
+  .mk-node-sub{color:#aab3ac;font-size:16px;line-height:1.5}
+  .mk-arr{color:#0FC77B;font-size:40px;font-weight:300;flex-shrink:0}
+  .mk-rq{display:flex;gap:32px;margin-top:20px;justify-content:center}
+  .mk-rq .pill{background:rgba(15,199,123,.1);border:1.5px solid rgba(15,199,123,.4);border-radius:14px;padding:16px 26px;color:#cbd5cc;font-size:18px;line-height:1.45;max-width:520px}
+  .mk-rq .pill b{color:#0FC77B;display:block;margin-bottom:4px;font-size:15px;letter-spacing:.05em}
+  .mk-qtbl{margin-top:14px;background:rgba(255,255,255,.03);border:1.4px solid rgba(15,199,123,.18);border-radius:14px;padding:18px 24px}
+  .mk-qtbl .qhd{color:#0FC77B;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+  .mk-qtbl-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}
+  .mk-qrow{display:flex;align-items:center;gap:12px;padding:6px 0;border-top:1px solid rgba(255,255,255,.05)}
+  .mk-qrow b{color:#0FC77B;font-weight:800;font-size:15px;letter-spacing:.05em;flex-shrink:0;width:28px}
+  .mk-qrow .qtxt{color:#cbd5cc;font-size:14.5px;line-height:1.35;flex:1}
+  .mk-qrow .dim{color:#0FC77B;font-size:11px;text-transform:uppercase;letter-spacing:.08em;flex-shrink:0;opacity:.8;font-weight:700}
+  .mk-params{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px}
+  .mk-param{background:rgba(255,255,255,.04);border:1.5px solid rgba(15,199,123,.2);border-radius:14px;padding:20px 22px}
+  .mk-param .lbl{color:#0FC77B;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .mk-param .v{color:#fff;font-size:22px;font-weight:700;line-height:1.25}
+  .mk-param .v small{color:#aab3ac;font-size:13px;font-weight:500;display:block;margin-top:3px}
+  .mk-coding{background:rgba(255,255,255,.04);border:1.5px solid rgba(15,199,123,.2);border-radius:16px;padding:22px 26px}
+  .mk-coding .hd{color:#0FC77B;font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+  .mk-coding .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+  .mk-coding .grid div{color:#cbd5cc;font-size:15.5px;line-height:1.4}
+  .mk-coding .grid div b{color:#0FC77B}
+  .mk-echo{background:rgba(15,199,123,.08);border-left:4px solid #0FC77B;border-radius:0 14px 14px 0;padding:20px 24px}
+  .mk-echo .hd{color:#0FC77B;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+  .mk-echo .body{color:#cbd5cc;font-size:16px;line-height:1.5}
+  .mk-echo .body b{color:#fff;font-weight:600}
   .kicker{color:var(--accent);font-weight:700;letter-spacing:.16em;font-size:.95rem;margin-bottom:1.2rem;text-transform:uppercase}
   h1{font-size:clamp(2rem,4.4vw,3.7rem);line-height:1.14;font-weight:800;letter-spacing:-.02em}
   h2{font-size:clamp(1.55rem,3.1vw,2.5rem);line-height:1.2;font-weight:800;margin-bottom:1.4rem;letter-spacing:-.01em}
@@ -186,14 +238,105 @@
   <section class="slide canva"><img src="canva/s1.png" alt="slide 1"></section>
   <section class="slide canva"><img src="canva/s2.png" alt="slide 2"></section>
   <section class="slide canva"><img src="canva/s3.png" alt="slide 3"></section>
-  <section class="slide canva"><img src="canva/s4.png" alt="slide 4"></section>
+  <section class="slide mock-slide"><div class="mk">
+    <div class="mk-kicker">Method · Research Process</div>
+    <h1 class="mk-h1">We built and evaluated our AI persona using<br>Design Science Research.</h1>
+    <div class="mk-flow">
+      <div class="mk-node">
+        <div class="mk-node-step">① Build</div>
+        <div class="mk-node-ttl">Construct the AI persona artifact</div>
+        <div class="mk-node-sub">Six-dimension script → deployed as a GPT</div>
+      </div>
+      <div class="mk-arr">→</div>
+      <div class="mk-node">
+        <div class="mk-node-step">② Evaluate</div>
+        <div class="mk-node-ttl">Two studies test the artifact</div>
+        <div class="mk-node-sub">Study 1: consistency &amp; discriminability<br>Study 2: language differences vs. humans</div>
+      </div>
+      <div class="mk-arr">→</div>
+      <div class="mk-node">
+        <div class="mk-node-step">③ Answer</div>
+        <div class="mk-node-ttl">Studies map to our two RQs</div>
+        <div class="mk-node-sub">Each study targets one research question</div>
+      </div>
+    </div>
+    <div class="mk-rq">
+      <div class="pill"><b>RQ1</b>Can we build a consistent and discriminable AI persona?</div>
+      <div class="pill"><b>RQ2</b>Where does its language structurally diverge from real participants?</div>
+    </div>
+  </div></section>
   <section class="slide canva"><img src="canva/s5.png" alt="slide 5"></section>
   <section class="slide canva"><img src="canva/s6.png" alt="slide 6"></section>
   <section class="slide canva"><img src="canva/s7.png" alt="slide 7"></section>
   <section class="slide canva"><img src="canva/s8.png" alt="slide 8"></section>
-  <section class="slide canva"><img src="canva/s9.png" alt="slide 9"></section>
+  <section class="slide mock-slide"><div class="mk">
+    <div class="mk-kicker">Findings · Study 1 · Design</div>
+    <h1 class="mk-h1">Same six questions, three rounds with Anne and one round with Emily,<br>then the Persona Perception Scale.</h1>
+    <div class="mk-row3">
+      <div class="mk-card">
+        <div class="mk-card-lbl">Participants</div>
+        <div class="mk-card-big">6 senior designers<small>3+ years of UX research experience · non-participants of the study, to keep evaluation objective</small></div>
+      </div>
+      <div class="mk-card">
+        <div class="mk-card-lbl">Protocol · 3 parts (one session)</div>
+        <ul class="mk-card-list">
+          <li><b style="color:#fff">① Stability</b>&nbsp;3 rounds with Anne · rate each Q on a 1–5 scale (1 = completely inconsistent, 5 = completely consistent)</li>
+          <li><b style="color:#fff">② Discriminability</b>&nbsp;1 round with Emily · rate Anne vs. Emily on each Q on a 1–5 scale (1 = identical, 5 = very different)</li>
+          <li><b style="color:#fff">③ PPS scale + open feedback</b>&nbsp;Salminen et al. (2020), 1–7 Likert across 6 constructs</li>
+        </ul>
+      </div>
+      <div class="mk-card">
+        <div class="mk-card-lbl">PPS · 6 constructs measured</div>
+        <ul class="mk-card-list">
+          <li>Credibility</li>
+          <li>Consistency</li>
+          <li>Completeness</li>
+          <li>Clarity</li>
+          <li>Empathy</li>
+          <li>Willingness to Use</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mk-qtbl">
+      <div class="qhd">Six interview questions, each targeting one dimension of the script</div>
+      <div class="mk-qtbl-grid">
+        <div class="mk-qrow"><b>Q1</b><span class="qtxt">Can you briefly introduce yourself?</span><span class="dim">Basic Info</span></div>
+        <div class="mk-qrow"><b>Q4</b><span class="qtxt">If a friend told you to sell right now, what would you do?</span><span class="dim">Behavior</span></div>
+        <div class="mk-qrow"><b>Q2</b><span class="qtxt">What do you usually do after work? Do you check investment stuff?</span><span class="dim">Daily Scenarios</span></div>
+        <div class="mk-qrow"><b>Q5</b><span class="qtxt">What does investing mean to you? Why did you start?</span><span class="dim">Worldview</span></div>
+        <div class="mk-qrow"><b>Q3</b><span class="qtxt">The market dropped a lot recently. How do you feel?</span><span class="dim">Psych. State</span></div>
+        <div class="mk-qrow"><b>Q6</b><span class="qtxt">Can you share a recent investing moment that stuck with you?</span><span class="dim">Linguistic Style</span></div>
+      </div>
+    </div>
+  </div></section>
   <section class="slide canva"><img src="canva/s10.png" alt="slide 10"></section>
-  <section class="slide canva"><img src="canva/s11.png" alt="slide 11"></section>
+  <section class="slide mock-slide"><div class="mk">
+    <div class="mk-kicker">Findings · Study 2 · Design</div>
+    <h1 class="mk-h1">A 60-minute design probe interview with Anne<br>and two real participants. Same protocol, same materials.</h1>
+    <div class="mk-params">
+      <div class="mk-param"><div class="lbl">Duration</div><div class="v">60 min<small>per session · online</small></div></div>
+      <div class="mk-param"><div class="lbl">Participants</div><div class="v">Anne + 2<small>real humans · 24 &amp; 26 y/o</small></div></div>
+      <div class="mk-param"><div class="lbl">Materials</div><div class="v">3 concepts<small>past · present · future</small></div></div>
+      <div class="mk-param"><div class="lbl">Analysis</div><div class="v">6-dim coding<small>C1–C6 · 1–5 scale</small></div></div>
+    </div>
+    <div class="mk-row2">
+      <div class="mk-coding">
+        <div class="hd">Six coding dimensions (Braun &amp; Clarke 2006; Heritage &amp; Clayman 2010)</div>
+        <div class="grid">
+          <div><b>C1</b> Reasoning style</div>
+          <div><b>C2</b> Variability (oral markers)</div>
+          <div><b>C3</b> Situational authenticity</div>
+          <div><b>C4</b> Emotional flow</div>
+          <div><b>C5</b> Narrative coherence</div>
+          <div><b>C6</b> Reflective tempo</div>
+        </div>
+      </div>
+      <div class="mk-echo">
+        <div class="hd">What are interaction markers?</div>
+        <div class="body">We also counted <b>interaction markers</b>: hesitations, fillers, clarifying questions, self-corrections — anything that shows the person is forming a thought in real time, rather than playing back something pre-formed.</div>
+      </div>
+    </div>
+  </div></section>
   <section class="slide canva"><img src="canva/s12.png" alt="slide 12"></section>
   <section class="slide canva"><img src="canva/s13.png" alt="slide 13"></section>
   <section class="slide canva"><img src="canva/s14.png" alt="slide 14"></section>
@@ -232,7 +375,7 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","0:30","1:15","0:30","1:15","1:10","1:15","1:30","0:20","0:15"];
+  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","1:00","1:15","0:30","1:15","1:10","1:15","1:30","0:20","0:15"];
   const toSec=s=>{const[m,c]=s.split(':').map(Number);return m*60+c};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
@@ -262,8 +405,8 @@
      en:"We built two opposite personas by flipping one axis, source of confidence, and keeping the rest the same. Take a look at how they answer the same question. Ann's decisions, quote unquote, get pulled along by social platforms. When PTT or her friends are talking about a stock, she follows. Her must-haves are price alerts and trending rankings, because she wants to react fast. On the other hand, Emily, quote unquote, doesn't watch news or YouTube. Her decisions rest on principles she set from the start, low cost, global diversification, long-term returns. Her must-haves are automated recurring investments and rebalancing, because she wants the app to help her stay the course. Same question, completely different answers.",
      zh:"我們建了兩個對立的角色，只翻轉一條軸線——信心來源——其他都相同。大家可以看一下她們對同樣問題的回答。小安的決定，引用她原話，「被社群平台帶著走」。PTT 跟朋友在講什麼，她就想跟。她的必備功能是價格警示跟熱門排行，因為她想趕快反應。另一方面，艾蜜莉，引用她原話，「不看新聞跟 YouTube」。她的決定建立在自己一開始就設好的原則上：低成本、全球分散、長期報酬。她的必備功能是定期定額跟再平衡，因為她要 app 幫她守紀律。同樣的問題，完全不同的答案。"},
     {t:"研究一設計｜Study 1 · Design",
-     en:"To answer RQ1, the consistency question, we ran Study 1. Six expert designers with three or more years of UX research experience tested the persona. The protocol had three parts. First, a consistency test with Anne across three rounds using the same six questions. Second, a discriminability test with Emily using the same six questions. And third, the Persona Perception Scale, which rates six dimensions like credibility, consistency, clarity, and willingness to use.",
-     zh:"為了回答 RQ1 一致性的問題，我們做了研究一。找了六位有三年以上 UX 研究經驗的資深設計師來測試。流程分三步：第一，跟小安進行三輪一致性測試，每輪用同樣的六道題；第二，跟艾蜜莉進行一輪差異性測試，用同樣的六道題；最後填寫人物誌感知量表，評估可信度、一致性、清晰度、使用意願等六個面向。"},
+     en:"To answer RQ1, the consistency question, we ran Study 1. We invited six senior designers, each with three or more years of UX research experience. None of them were involved in building the persona, so they could evaluate it objectively. The protocol had three parts, all in one session. First, a stability test: three rounds with Anne, using the same six questions each round, rated on a five-point scale from completely inconsistent to completely consistent. Second, a discriminability test: one round with Emily using the same six questions, this time rating whether Anne and Emily's answers felt identical or very different. Third, the Persona Perception Scale, from Salminen and colleagues, which rates six constructs on a one-to-seven Likert. Each of the six interview questions targets one dimension of the script, so we could see exactly which dimensions hold up under repeated questioning.",
+     zh:"為了回答 RQ1 一致性的問題，我們做了研究一。我們邀請了六位資深設計師，都是有三年以上 UX 研究經驗的人。他們沒有參與人物誌的建構，所以可以客觀評估。流程分三個部分，都在同一場進行。第一，穩定性測試：跟小安進行三輪對話，每輪用同樣的六道題，用 1 到 5 分量表評分，1 是完全不一致、5 是完全一致。第二，差異性測試：跟艾蜜莉進行一輪對話，用同樣的六道題，這次評的是小安跟艾蜜莉的回答一樣或不同。第三，人物誌感知量表，這是 Salminen 等人 2020 年發展的，用 1 到 7 分量表評六個面向。這六題每題對應劇本的一個維度，所以可以看出哪些維度在重複提問下站得住腳。"},
     {t:"研究一結果｜Study 1 · Results",
      en:"Now for the results. Anne was consistent at 4.17, and the two personas were clearly distinct at 4.58. On the perception scale, clarity was highest, and credibility was lowest at 3.67. This actually reflects a boundary. The evaluators could clearly distinguish AI from real people, which shows the designers maintained appropriate critical awareness about the nature of the tool.",
      zh:"結果這樣。小安一致性 4.17，兩角色差異性 4.58、清楚可辨。感知量表清晰度最高、可信度最低 3.67。這正反映了一個邊界：評估者能清楚辨識 AI 與真人的差異，顯示設計師對工具本質保有批判意識。"},
@@ -349,8 +492,20 @@
     if(e.key==='ArrowRight')next();
     else if(e.key==='ArrowLeft')prev();
   });
-  function toggleNotes(){document.body.classList.toggle('notes-open')}
+  function toggleNotes(){document.body.classList.toggle('notes-open');requestAnimationFrame(()=>setTimeout(fitMockups,310))}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
+
+  /* ===== scale .mk to fit slide container ===== */
+  function fitMockups(){
+    document.querySelectorAll('.slide.mock-slide').forEach(s=>{
+      const mk=s.querySelector('.mk');if(!mk)return;
+      const cw=s.clientWidth,ch=s.clientHeight;if(!cw||!ch)return;
+      const sc=Math.min(cw/1920,ch/1080);
+      mk.style.transform=`translate(-50%,-50%) scale(${sc})`;
+    });
+  }
+  window.addEventListener('resize',fitMockups);
+  setTimeout(fitMockups,50);
 
   /* ===== 朗讀（預先生成音檔，失敗退回系統語音）===== */
   let RATE=0.85;
