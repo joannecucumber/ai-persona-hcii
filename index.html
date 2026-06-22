@@ -249,6 +249,78 @@
   .notes .src .se{font-size:1rem;line-height:1.58;color:var(--ink)}
   .notes .src .sz{font-size:1rem;line-height:1.75;color:var(--muted);margin-top:.7rem}
   body.notes-open .pageno,body.notes-open .hint{display:none}
+  /* mobile deck FAB (hidden on desktop) */
+  .mdeck-fab{display:none}
+  .mdeck-close{display:none}
+
+  /* ===== RWD: script-first on mobile, slide as floating overlay ===== */
+  @media (max-width: 900px){
+    /* deck becomes a full-screen overlay, hidden by default */
+    .deck{position:fixed;inset:0;z-index:1000;background:#000;display:none;transition:none}
+    body.notes-open .deck{right:0}
+    body.deck-show .deck{display:block}
+    body.deck-show .deck::before{
+      content:'';position:absolute;inset:0;background:rgba(0,0,0,.5);pointer-events:none
+    }
+
+    /* notes panel becomes the main view */
+    .notes{
+      position:fixed;inset:0;width:100%;height:100%;
+      padding:18px 18px 90px;border-left:0;background:var(--bg1);
+      display:block;z-index:1;font-size:15px
+    }
+    .notes .sn{font-size:1.05rem;margin-bottom:1rem;padding-bottom:.7rem}
+    .notes .tm{font-size:.78rem;padding:.2rem .55rem;margin-bottom:.6rem}
+    .notes .en{font-size:1rem;line-height:1.65}
+    .notes .zhs{font-size:.95rem;line-height:1.75;margin-top:1rem}
+    .notes .src{margin-top:1.2rem;padding-top:1rem}
+    .notes .src .se,.notes .src .sz{font-size:.92rem;line-height:1.65}
+
+    /* hide sidebar toggle (notes always open) */
+    #toggle{display:none}
+
+    /* mobile nav bar fixed bottom */
+    .nav{
+      position:fixed;bottom:0;left:0;right:0;top:auto;
+      display:flex;gap:8px;padding:8px 12px 10px;
+      background:rgba(15,15,15,.95);backdrop-filter:blur(6px);
+      border-top:1px solid var(--line);z-index:1002
+    }
+    .nav button{
+      flex:1;height:44px;font-size:20px;
+      background:var(--card);border:1px solid var(--line);
+      color:var(--ink);border-radius:10px;cursor:pointer
+    }
+    .nav button#mdeck-fab{flex:1.5;font-size:16px;background:var(--accent);color:#04121a;border-color:var(--accent);font-weight:700}
+
+    /* pageno floats above nav */
+    .pageno{
+      display:block !important;
+      position:fixed;bottom:74px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,.75);color:var(--muted);
+      padding:4px 12px;border-radius:999px;font-size:11px;
+      z-index:1001;letter-spacing:.05em
+    }
+    body.notes-open .pageno{display:block}
+
+    /* hide hint on mobile */
+    .hint{display:none}
+
+    /* close button for overlay (top right of slide) */
+    .mdeck-close{
+      display:flex;position:fixed;top:14px;right:14px;
+      width:42px;height:42px;border-radius:50%;
+      background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.2);
+      color:#fff;font-size:20px;font-weight:300;
+      align-items:center;justify-content:center;
+      z-index:1003;cursor:pointer;visibility:hidden
+    }
+    body.deck-show .mdeck-close{visibility:visible}
+
+    /* slide image fits screen with breathing */
+    .slide.canva{padding:8vh 4vw}
+    .slide.canva img{max-width:100%;max-height:84vh}
+  }
 </style>
 </head>
 <body>
@@ -296,8 +368,10 @@
 <div class="nav">
   <button id="toggle" title="Toggle script (S)">▤</button>
   <button id="prev">‹</button>
+  <button id="mdeck-fab" title="顯示簡報">📊 簡報</button>
   <button id="next">›</button>
 </div>
+<button class="mdeck-close" id="mdeck-close" aria-label="關閉簡報">✕</button>
 
 <script>
   const slides=[...document.querySelectorAll('.slide')];
@@ -424,6 +498,23 @@
   });
   function toggleNotes(){document.body.classList.toggle('notes-open');requestAnimationFrame(()=>setTimeout(fitMockups,310))}
   document.getElementById('toggle').onclick=(e)=>{e.stopPropagation();toggleNotes()};
+
+  /* ===== mobile FAB: toggle floating deck ===== */
+  function toggleMobileDeck(){
+    document.body.classList.toggle('deck-show');
+    requestAnimationFrame(()=>setTimeout(fitMockups,80));
+  }
+  const mfab=document.getElementById('mdeck-fab');
+  const mclose=document.getElementById('mdeck-close');
+  if(mfab) mfab.onclick=(e)=>{e.stopPropagation();toggleMobileDeck()};
+  if(mclose) mclose.onclick=(e)=>{e.stopPropagation();document.body.classList.remove('deck-show')};
+  /* tap slide backdrop to dismiss on mobile */
+  document.getElementById('deck').addEventListener('click',(e)=>{
+    if(window.innerWidth<=900 && document.body.classList.contains('deck-show')){
+      if(e.target.closest('.nav,img,section'))return;
+      document.body.classList.remove('deck-show');
+    }
+  },true);
 
   /* ===== scale .mk to fit slide container ===== */
   function fitMockups(){
