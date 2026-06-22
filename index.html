@@ -445,7 +445,7 @@
     try{speechSynthesis.cancel();}catch(e){}
     const en=NOTES[i].en||'';
     player.onerror=()=>{speakFallback(en.replace(/[：]/g,', ').replace(/[；]/g,'; ').replace(/[（）]/g,' '));};
-    player.src='audio/s'+i+'.mp3';
+    player.src='audio/s'+i+'.mp3?v='+Date.now();
     player.playbackRate=RATE;
     try{player.currentTime=0;}catch(e){}
     player.play().catch(()=>{});
