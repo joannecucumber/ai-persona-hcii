@@ -365,6 +365,7 @@
   <section class="slide canva"><img src="canva/s15.png" alt="slide 15"></section>
   <section class="slide canva"><img src="canva/s16.png" alt="slide 16"></section>
   <section class="slide canva"><img src="canva/s17.png" alt="slide 17"></section>
+  <section class="slide canva"><img src="canva/s18.png" alt="slide 18"></section>
 
   <!-- ===== Q&A Reference Slides (18-23) — for presenter use during live Q&A ===== -->
   <section class="slide mock-slide qa-slide"><div class="mk">
@@ -492,7 +493,7 @@
   let i=0; const tot=slides.length;
   document.getElementById('tot').textContent=tot;
 
-  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:45","1:00","1:15","1:00","1:30","1:10","1:15","1:30","0:20","0:15","Q&A","Q&A","Q&A","Q&A","Q&A","Q&A"];
+  const TIMES=["0:30","1:00","0:45","0:30","1:00","1:00","1:00","0:30","0:45","1:00","1:15","1:00","1:30","1:10","1:15","1:30","0:20","0:15","Q&A","Q&A","Q&A","Q&A","Q&A","Q&A"];
   const toSec=s=>{if(!s||!s.includes(':'))return 0;const[m,c]=s.split(':').map(Number);return (m||0)*60+(c||0)};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
@@ -518,6 +519,9 @@
     {t:"六維度｜Six Dimensions",
      en:"For the script, we considered six dimensions. Basic information anchors the identity of the persona, which is a she. Worldview shapes how she sees the market, money, and the future. Psychological state captures what makes her anxious and where her confidence comes from. Behavior covers her daily rituals, like checking the app or chatting with friends. Linguistic style locks in the things that make her sound like herself: slang, particles, tempo. And daily scenarios put her into real situations like commute, payday, or a market crash. Together, these six dimensions hold one stable character across hundreds of turns.",
      zh:"劇本有六個維度。基本資料負責錨定角色身份，這個角色是一位女性，包含年齡、職業、人生階段。世界觀形塑她怎麼看市場、金錢、未來。心理狀態抓住她在焦慮什麼、信心從哪裡來。行為模式涵蓋她每天的習慣，像是刷盤、找朋友聊天。語言風格鎖住「一聽就知道是她」的東西，俚語、語助詞、節奏。日常情境把她放進真實場景，像通勤、發薪日、市場崩盤。六個維度一起撐住一個穩定的角色，撐過上百回合對話。"},
+    {t:"劇本實例｜Script Sample",
+     en:"Here is what the script actually looks like. This is a live screen recording of the GPT system prompt — every line, written in Traditional Chinese, that the AI reads as her own memory. Now let's see what this script produces when we flip a single axis.",
+     zh:"這就是劇本真正的樣子。這是 GPT 後台的螢幕錄影，繁體中文撰寫，每一行都是 AI 把它當成自身記憶在讀的內容。接下來看看，當我們只翻轉一條軸線，劇本會產出什麼樣的角色。"},
     {t:"兩位角色｜Two Personas",
      en:"We built two opposite personas by flipping one axis, source of confidence, and keeping the rest the same. Take a look at how they answer the same question. Ann's decisions, quote unquote, get pulled along by social platforms. When PTT or her friends are talking about a stock, she follows. Her must-haves are price alerts and trending rankings, because she wants to react fast. On the other hand, Emily, quote unquote, doesn't watch news or YouTube. Her decisions rest on principles she set from the start, low cost, global diversification, long-term returns. Her must-haves are automated recurring investments and rebalancing, because she wants the app to help her stay the course. Same question, completely different answers.",
      zh:"我們建了兩個對立的角色，只翻轉一條軸線——信心來源——其他都相同。大家可以看一下她們對同樣問題的回答。小安的決定，引用她原話，「被社群平台帶著走」。PTT 跟朋友在講什麼，她就想跟。她的必備功能是價格警示跟熱門排行，因為她想趕快反應。另一方面，艾蜜莉，引用她原話，「不看新聞跟 YouTube」。她的決定建立在自己一開始就設好的原則上：低成本、全球分散、長期報酬。她的必備功能是定期定額跟再平衡，因為她要 app 幫她守紀律。同樣的問題，完全不同的答案。"},
