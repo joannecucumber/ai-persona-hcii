@@ -30,14 +30,16 @@
   .slide.active{display:flex;opacity:1}
   .slide.canva{padding:0;flex-direction:row;align-items:center;justify-content:center;background:#000}
   .slide.canva img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
-  /* mock slide (inline HTML, scales to fit) */
-  .slide.mock-slide{padding:0;overflow:hidden;background:#0a0e0b;background-image:
-    linear-gradient(rgba(15,199,123,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(15,199,123,.03) 1px,transparent 1px),
-    radial-gradient(800px 600px at 20% 0%,rgba(15,199,123,.08),transparent 60%);
-    background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat}
-  .slide.mock-slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18px;background:#0FC77B;z-index:2}
-  .mk{width:1920px;height:1080px;padding:90px 110px 110px;color:#f1f3f2;font-family:'Inter','PingFang TC',-apple-system,sans-serif;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);box-sizing:border-box;display:flex;flex-direction:column}
+  /* mock slide (inline HTML, scales to fit, 16:9 letterbox like canva) */
+  .slide.mock-slide{padding:0;overflow:hidden;background:#000}
+  .mk{width:1920px;height:1080px;padding:90px 110px 110px;color:#f1f3f2;font-family:'Inter','PingFang TC',-apple-system,sans-serif;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);box-sizing:border-box;display:flex;flex-direction:column;
+    background:#0a0e0b;background-image:
+      linear-gradient(rgba(15,199,123,.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(15,199,123,.03) 1px,transparent 1px),
+      radial-gradient(800px 600px at 20% 0%,rgba(15,199,123,.08),transparent 60%);
+    background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat;
+    overflow:hidden}
+  .mk::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18px;background:#0FC77B;z-index:2}
   .mk *{box-sizing:border-box}
   .mk-kicker{color:#0FC77B;font-weight:700;letter-spacing:.18em;font-size:22px;text-transform:uppercase;margin-bottom:24px}
   .mk-h1{font-size:46px;line-height:1.18;font-weight:700;letter-spacing:-.01em;margin:0 0 38px 0;max-width:1500px}
