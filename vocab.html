@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HCII 生字表 · Vocabulary</title>
+<style>
+  :root{--bg:#0a0e0b;--card:#141a15;--line:rgba(15,199,123,.22);--accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','PingFang TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.5;padding:32px 24px 80px;max-width:960px;margin:0 auto}
+  header{border-bottom:1.5px solid var(--line);padding-bottom:18px;margin-bottom:24px}
+  h1{color:var(--ink);font-size:28px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+  h1 .accent{color:var(--accent)}
+  .sub{color:var(--muted);font-size:14px}
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:20px 0 8px}
+  #q{flex:1;min-width:200px;background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:10px 14px;border-radius:10px;font-size:15px;outline:none}
+  #q:focus{border-color:var(--accent)}
+  .count{color:var(--muted);font-size:13px}
+  .btn{background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;transition:.15s}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.on{background:var(--accent);color:#04121a;border-color:var(--accent);font-weight:700}
+  section.group{margin-top:32px}
+  h2{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .list{display:grid;grid-template-columns:1fr;gap:8px}
+  .row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;transition:.15s}
+  .row:hover{border-color:var(--accent)}
+  .row.hidden{display:none}
+  .w{display:flex;flex-direction:column;gap:4px;min-width:0}
+  .w .en{color:var(--ink);font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .w .kk{color:var(--accent);font-size:14px;font-family:'Consolas','SF Mono',monospace;letter-spacing:.02em}
+  .w .zh{color:var(--muted);font-size:14px}
+  .w .zh b{color:#cbd5cc;font-weight:600}
+  .play{width:42px;height:42px;border-radius:50%;background:transparent;border:1.5px solid var(--line);color:var(--accent);font-size:16px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .play:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  .play.playing{background:var(--accent);color:#04121a;border-color:var(--accent);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid var(--line)}
+  @media (max-width:600px){body{padding:20px 14px 60px}h1{font-size:22px}.w .en{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HCII <span class="accent">生字表</span> · Vocabulary</h1>
+  <div class="sub">90 個常用學術詞 + 台灣人容易念錯的關鍵字 · 點播放按鈕聽發音</div>
+</header>
+
+<div class="toolbar">
+  <input id="q" type="text" placeholder="搜尋英文 / 中文 / KK …">
+  <button class="btn" id="rateBtn" data-rate="0.85">0.85×</button>
+  <span class="count" id="count"></span>
+</div>
+
+<div id="content"></div>
+
+<footer>KK 音標 · 中英對照 · 使用 Web Speech API 或 Google TTS 發音 · Deck: <a href="./" style="color:var(--accent)">index</a></footer>
+
+<script>
+const DATA = [
+  {group:"1️⃣ 開場 · Background & RQ", words:[
+    {en:"persona", kk:"pɚˈsonə", zh:"<b>人物誌</b>；虛擬人物模型"},
+    {en:"personas", kk:"pɚˈsonəz", zh:"<b>人物誌</b>（複數）"},
+    {en:"interactive", kk:"ˌɪntɚˈæktɪv", zh:"<b>互動的</b>"},
+    {en:"agents", kk:"ˈeʤənts", zh:"<b>代理人</b>；(AI) 代理"},
+    {en:"participants", kk:"pɑrˈtɪsəpənts", zh:"<b>參與者</b>；受訪者"},
+    {en:"structural", kk:"ˈstrʌktʃərəl", zh:"<b>結構性的</b>"},
+    {en:"consistent", kk:"kənˈsɪstənt", zh:"<b>一致的</b>；穩定的"},
+    {en:"discriminable", kk:"dɪˈskrɪmɪnəbl̩", zh:"<b>可區辨的</b>"},
+  ]},
+  {group:"2️⃣ 方法 · Method + Context", words:[
+    {en:"Design Science Research", kk:"dɪˈzaɪn ˈsaɪəns rɪˈsɝtʃ", zh:"<b>設計科學研究</b> (DSR)"},
+    {en:"artifact", kk:"ˈɑrtəˌfækt", zh:"<b>人造物</b>；設計產出物"},
+    {en:"evaluated", kk:"ɪˈvæljuˌetɪd", zh:"<b>評估</b>（過去式）"},
+    {en:"stable", kk:"ˈstebl̩", zh:"<b>穩定的</b>"},
+    {en:"opposing", kk:"əˈpozɪŋ", zh:"<b>對立的</b>"},
+    {en:"commercial", kk:"kəˈmɝʃəl", zh:"<b>商業的</b>"},
+    {en:"contrast", kk:"ˈkɑntræst", zh:"<b>對比</b>"},
+    {en:"grounded", kk:"ˈɡraʊndɪd", zh:"<b>立基於</b>；有根據的"},
+    {en:"labels", kk:"ˈlebl̩z", zh:"<b>標籤</b>"},
+  ]},
+  {group:"3️⃣ 建構 · Construct & Six Dimensions", words:[
+    {en:"identify", kk:"aɪˈdɛntəˌfaɪ", zh:"<b>辨認</b>；識別"},
+    {en:"axes", kk:"ˈæksiz", zh:"<b>軸線</b>（axis 的複數，念 ˈæk-siz）"},
+    {en:"quadrant", kk:"ˈkwɑdrənt", zh:"<b>象限</b>"},
+    {en:"deploy", kk:"dɪˈplɔɪ", zh:"<b>部署</b>"},
+    {en:"constraints", kk:"kənˈstrents", zh:"<b>限制</b>；約束條件"},
+    {en:"role-internalization", kk:"rol ɪnˌtɝnələˈzeʃən", zh:"<b>角色內化</b>"},
+    {en:"character", kk:"ˈkærɪktɚ", zh:"<b>角色</b>；人格特質"},
+    {en:"worldview", kk:"ˈwɝldˌvju", zh:"<b>世界觀</b>"},
+    {en:"psychological", kk:"ˌsaɪkəˈlɑdʒɪkl̩", zh:"<b>心理的</b>（小心 p 不發音）"},
+    {en:"anxious", kk:"ˈæŋkʃəs", zh:"<b>焦慮的</b>"},
+    {en:"confidence", kk:"ˈkɑnfədəns", zh:"<b>信心</b>"},
+    {en:"rituals", kk:"ˈrɪtʃuəlz", zh:"<b>儀式</b>；日常習慣"},
+    {en:"linguistic", kk:"lɪŋˈɡwɪstɪk", zh:"<b>語言的</b>"},
+    {en:"slang", kk:"slæŋ", zh:"<b>俚語</b>"},
+    {en:"particles", kk:"ˈpɑrtɪkl̩z", zh:"<b>語助詞</b>（啊、耶、喔）"},
+    {en:"tempo", kk:"ˈtɛmpo", zh:"<b>節奏</b>；速度"},
+    {en:"scenarios", kk:"sɪˈnɛrioz", zh:"<b>情境</b>；場景"},
+    {en:"commute", kk:"kəˈmjut", zh:"<b>通勤</b>"},
+  ]},
+  {group:"4️⃣ 劇本 & 兩位角色 · Script Sample + Two Personas", words:[
+    {en:"intentionally", kk:"ɪnˈtɛnʃənəli", zh:"<b>刻意地</b>；有意地"},
+    {en:"flip", kk:"flɪp", zh:"<b>翻轉</b>；翻面"},
+    {en:"axis", kk:"ˈæksɪs", zh:"<b>軸線</b>（單數，念 ˈæk-sɪs）"},
+    {en:"principles", kk:"ˈprɪnsəpl̩z", zh:"<b>原則</b>"},
+    {en:"diversification", kk:"daɪˌvɝsəfəˈkeʃən", zh:"<b>分散化</b>；多元化"},
+    {en:"returns", kk:"rɪˈtɝnz", zh:"<b>報酬</b>（投資語境）"},
+    {en:"automated", kk:"ˈɔtəˌmetɪd", zh:"<b>自動化的</b>"},
+    {en:"recurring", kk:"rɪˈkɝɪŋ", zh:"<b>定期的</b>；反覆出現的"},
+    {en:"rebalancing", kk:"riˈbælənsɪŋ", zh:"<b>再平衡</b>；重新分配"},
+  ]},
+  {group:"5️⃣ 研究一 · Study 1 (Design + Results)", words:[
+    {en:"senior", kk:"ˈsinjɚ", zh:"<b>資深的</b>；年長的"},
+    {en:"objectively", kk:"əbˈdʒɛktɪvli", zh:"<b>客觀地</b>"},
+    {en:"stability", kk:"stəˈbɪləti", zh:"<b>穩定性</b>"},
+    {en:"rounds", kk:"raʊndz", zh:"<b>回合</b>；輪次"},
+    {en:"Likert", kk:"ˈlɪkɚt", zh:"<b>李克特</b>（量表發明人姓氏）"},
+    {en:"inconsistent", kk:"ˌɪnkənˈsɪstənt", zh:"<b>不一致的</b>"},
+    {en:"discriminability", kk:"dɪˌskrɪmɪnəˈbɪləti", zh:"<b>可區辨性</b>（8 音節注意分節）"},
+    {en:"identical", kk:"aɪˈdɛntɪkl̩", zh:"<b>完全相同的</b>"},
+    {en:"perception", kk:"pɚˈsɛpʃən", zh:"<b>感知</b>"},
+    {en:"constructs", kk:"ˈkɑnstrʌkts", zh:"<b>構面</b>（研究語境；名詞重音在前）"},
+    {en:"distinction", kk:"dɪˈstɪŋkʃən", zh:"<b>差異</b>；區別"},
+    {en:"credibility", kk:"ˌkrɛdəˈbɪləti", zh:"<b>可信度</b>"},
+    {en:"distinguish", kk:"dɪˈstɪŋɡwɪʃ", zh:"<b>區分</b>"},
+    {en:"aware", kk:"əˈwɛr", zh:"<b>意識到的</b>"},
+    {en:"nature", kk:"ˈnetʃɚ", zh:"<b>本質</b>；性質"},
+  ]},
+  {group:"6️⃣ 研究二 · Study 2 (Design + Results)", words:[
+    {en:"simulation", kk:"ˌsɪmjəˈleʃən", zh:"<b>模擬</b>"},
+    {en:"validation", kk:"ˌvæləˈdeʃən", zh:"<b>驗證</b>"},
+    {en:"screened", kk:"skrind", zh:"<b>篩選過的</b>"},
+    {en:"matching", kk:"ˈmætʃɪŋ", zh:"<b>符合的</b>"},
+    {en:"profile", kk:"ˈproˌfaɪl", zh:"<b>輪廓</b>；剪影"},
+    {en:"volatility", kk:"ˌvɑləˈtɪləti", zh:"<b>波動</b>；起伏"},
+    {en:"panic", kk:"ˈpænɪk", zh:"<b>恐慌</b>"},
+    {en:"stabilize", kk:"ˈstebəˌlaɪz", zh:"<b>穩定</b>（動詞）"},
+    {en:"deviate", kk:"ˈdiviˌet", zh:"<b>偏離</b>"},
+    {en:"coded", kk:"ˈkodɪd", zh:"<b>編碼</b>（過去式，質性研究常用）"},
+    {en:"capturing", kk:"ˈkæptʃɚɪŋ", zh:"<b>捕捉</b>；抓住"},
+    {en:"aspect", kk:"ˈæspɛkt", zh:"<b>面向</b>"},
+    {en:"variability", kk:"ˌvɛrɪəˈbɪləti", zh:"<b>變化性</b>"},
+    {en:"hesitation", kk:"ˌhɛzəˈteʃən", zh:"<b>遲疑</b>"},
+    {en:"markers", kk:"ˈmɑrkɚz", zh:"<b>標記</b>"},
+    {en:"fillers", kk:"ˈfɪlɚz", zh:"<b>口頭禪</b>；填空詞（uh, um）"},
+    {en:"polished", kk:"ˈpɑlɪʃt", zh:"<b>精緻的</b>；打磨過的"},
+    {en:"reflection", kk:"rɪˈflɛkʃən", zh:"<b>反思</b>"},
+    {en:"surface", kk:"ˈsɝfɪs", zh:"<b>浮現</b>（動詞用法）"},
+    {en:"constructed", kk:"kənˈstrʌktɪd", zh:"<b>被建構</b>"},
+    {en:"instantly", kk:"ˈɪnstəntli", zh:"<b>立即地</b>"},
+    {en:"authenticity", kk:"ˌɔθɛnˈtɪsəti", zh:"<b>真實性</b>（th 發音注意）"},
+    {en:"fluency", kk:"ˈfluənsi", zh:"<b>流暢度</b>"},
+  ]},
+  {group:"7️⃣ 兩種思考 · Findings · Two Modes", words:[
+    {en:"takeaway", kk:"ˈtekəˌwe", zh:"<b>主要重點</b>；結論"},
+    {en:"demonstrate", kk:"ˈdɛmənˌstret", zh:"<b>展現</b>；示範"},
+    {en:"organize", kk:"ˈɔrɡəˌnaɪz", zh:"<b>組織</b>"},
+    {en:"synthetic", kk:"sɪnˈθɛtɪk", zh:"<b>合成的</b>（th → θ）"},
+    {en:"experiential", kk:"ɪkˌspɪriˈɛnʃəl", zh:"<b>經歷的</b>；經驗性的"},
+    {en:"delay", kk:"dɪˈle", zh:"<b>延遲</b>"},
+  ]},
+  {group:"8️⃣ 討論 · Discussion / Baseline", words:[
+    {en:"simulating", kk:"ˈsɪmjəˌletɪŋ", zh:"<b>模擬</b>（進行式）"},
+    {en:"revealing", kk:"rɪˈvilɪŋ", zh:"<b>揭露</b>（進行式）"},
+    {en:"deserves", kk:"dɪˈzɝvz", zh:"<b>值得</b>"},
+    {en:"contradiction", kk:"ˌkɑntrəˈdɪkʃən", zh:"<b>矛盾</b>"},
+    {en:"fluent", kk:"ˈfluənt", zh:"<b>流暢的</b>"},
+    {en:"interaction", kk:"ˌɪntɚˈækʃən", zh:"<b>互動</b>"},
+    {en:"meaningful", kk:"ˈminɪŋfl̩", zh:"<b>有意義的</b>"},
+    {en:"cues", kk:"kjuz", zh:"<b>線索</b>；提示（老師建議取代 signals）"},
+    {en:"noise", kk:"nɔɪz", zh:"<b>雜訊</b>"},
+    {en:"inviting", kk:"ɪnˈvaɪtɪŋ", zh:"<b>邀請</b>；促使"},
+    {en:"probe", kk:"prob", zh:"<b>探究</b>；深入問"},
+    {en:"efficient", kk:"ɪˈfɪʃənt", zh:"<b>有效率的</b>"},
+    {en:"exploring", kk:"ɪkˈsplɔrɪŋ", zh:"<b>探索</b>"},
+    {en:"patterns", kk:"ˈpætɚnz", zh:"<b>模式</b>"},
+    {en:"complementary", kk:"ˌkɑmpləˈmɛntəri", zh:"<b>互補的</b>（≠ complimentary 讚美）"},
+    {en:"competing", kk:"kəmˈpitɪŋ", zh:"<b>競爭的</b>"},
+    {en:"breadth", kk:"brɛdθ", zh:"<b>廣度</b>（th 發音，短 e）"},
+    {en:"depth", kk:"dɛpθ", zh:"<b>深度</b>（th 發音）"},
+  ]},
+  {group:"9️⃣ 貢獻 & 活系統 · Contributions + Living System", words:[
+    {en:"wrap up", kk:"ræp ʌp", zh:"<b>收尾</b>；總結"},
+    {en:"contributions", kk:"ˌkɑntrəˈbjuʃənz", zh:"<b>貢獻</b>"},
+    {en:"methodologically", kk:"ˌmɛθədəˈlɑdʒɪkl̩i", zh:"<b>方法上</b>（7 音節）"},
+    {en:"validated", kk:"ˈvæləˌdetɪd", zh:"<b>經過驗證的</b>"},
+    {en:"framework", kk:"ˈfremˌwɝk", zh:"<b>框架</b>"},
+    {en:"conceptually", kk:"kənˈsɛptʃuəli", zh:"<b>概念上</b>"},
+    {en:"fidelity", kk:"fəˈdɛləti", zh:"<b>擬真度</b>；忠實度"},
+    {en:"practically", kk:"ˈpræktɪkl̩i", zh:"<b>實務上</b>"},
+    {en:"positioning", kk:"pəˈzɪʃənɪŋ", zh:"<b>定位</b>"},
+    {en:"evolves", kk:"ɪˈvɑlvz", zh:"<b>演化</b>（v 音要清楚）"},
+  ]},
+  {group:"🔟 結尾 · Conclusion", words:[
+    {en:"static", kk:"ˈstætɪk", zh:"<b>靜態的</b>"},
+    {en:"snapshot", kk:"ˈsnæpˌʃɑt", zh:"<b>快照</b>"},
+    {en:"complement", kk:"ˈkɑmpləmɛnt", zh:"<b>互補</b>（動詞）"},
+    {en:"continuous", kk:"kənˈtɪnjuəs", zh:"<b>持續的</b>"},
+  ]},
+];
+
+let RATE = 0.85;
+
+function renderAll(){
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+  let total = 0;
+  DATA.forEach(g=>{
+    const section = document.createElement('section');
+    section.className = 'group';
+    section.innerHTML = `<h2>${g.group}</h2><div class="list"></div>`;
+    const list = section.querySelector('.list');
+    g.words.forEach(w=>{
+      total++;
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.dataset.search = (w.en + ' ' + w.kk + ' ' + w.zh.replace(/<[^>]+>/g,'')).toLowerCase();
+      row.innerHTML = `
+        <div class="w">
+          <div class="en">${w.en}</div>
+          <div class="kk">/ ${w.kk} /</div>
+          <div class="zh">${w.zh}</div>
+        </div>
+        <button class="play" title="播放發音" data-word="${w.en}">▶</button>`;
+      list.appendChild(row);
+    });
+    container.appendChild(section);
+  });
+  document.getElementById('count').textContent = `共 ${total} 字`;
+}
+
+renderAll();
+
+// Search filter
+document.getElementById('q').addEventListener('input', e=>{
+  const q = e.target.value.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.row').forEach(r=>{
+    const match = !q || r.dataset.search.includes(q);
+    r.classList.toggle('hidden', !match);
+    if(match) visible++;
+  });
+  // hide empty groups
+  document.querySelectorAll('.group').forEach(g=>{
+    const has = g.querySelector('.row:not(.hidden)');
+    g.style.display = has ? '' : 'none';
+  });
+  document.getElementById('count').textContent = q ? `搜到 ${visible} 字` : `共 ${visible} 字`;
+});
+
+// Rate cycle
+document.getElementById('rateBtn').addEventListener('click', e=>{
+  const rates = [0.7, 0.85, 1.0];
+  const idx = (rates.indexOf(RATE) + 1) % rates.length;
+  RATE = rates[idx];
+  e.target.textContent = RATE + '×';
+});
+
+// Pronunciation: try Web Speech API first, fall back to Google TTS
+let currentBtn = null;
+let currentAudio = null;
+function stopAll(){
+  try{ speechSynthesis.cancel(); }catch(e){}
+  if(currentAudio){ currentAudio.pause(); currentAudio = null; }
+  if(currentBtn){ currentBtn.classList.remove('playing'); currentBtn = null; }
+}
+
+function speakGoogle(text, btn){
+  const url = 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=en&client=tw-ob';
+  const audio = new Audio(url);
+  audio.playbackRate = RATE;
+  audio.onended = ()=>{ btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
+  audio.onerror = ()=>{ btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
+  currentAudio = audio;
+  audio.play().catch(err=>{
+    btn.classList.remove('playing'); currentAudio = null; currentBtn = null;
+  });
+}
+
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('.play');
+  if(!btn) return;
+  stopAll();
+  const word = btn.dataset.word;
+  btn.classList.add('playing');
+  currentBtn = btn;
+  // try Web Speech API
+  if('speechSynthesis' in window && speechSynthesis.getVoices().length > 0){
+    const utter = new SpeechSynthesisUtterance(word);
+    utter.lang = 'en-US';
+    utter.rate = RATE;
+    const voices = speechSynthesis.getVoices();
+    const enVoice = voices.find(v => v.lang.startsWith('en-US') && v.name.includes('Google'))
+                 || voices.find(v => v.lang.startsWith('en-US'))
+                 || voices.find(v => v.lang.startsWith('en'));
+    if(enVoice) utter.voice = enVoice;
+    utter.onend = ()=>{ btn.classList.remove('playing'); currentBtn = null; };
+    utter.onerror = ()=>{ speakGoogle(word, btn); };
+    speechSynthesis.speak(utter);
+  } else {
+    speakGoogle(word, btn);
+  }
+});
+
+// Preload voices
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged = ()=>{};
+  speechSynthesis.getVoices();
+}
+</script>
+</body>
+</html>
