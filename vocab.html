@@ -3,248 +3,374 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HCII 生字表 · Vocabulary</title>
+<title>HCII 講稿 × 生字 · Script & Vocabulary</title>
 <style>
-  :root{--bg:#0a0e0b;--card:#141a15;--line:rgba(15,199,123,.22);--accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac}
+  :root{--bg:#0a0e0b;--card:#141a15;--line:rgba(15,199,123,.22);--accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac;--hl:rgba(15,199,123,.28)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:'Inter','PingFang TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.5;padding:32px 24px 80px;max-width:960px;margin:0 auto}
-  header{border-bottom:1.5px solid var(--line);padding-bottom:18px;margin-bottom:24px}
-  h1{color:var(--ink);font-size:28px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','PingFang TC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;padding:32px 24px 80px;max-width:1200px;margin:0 auto}
+  header{border-bottom:1.5px solid var(--line);padding-bottom:18px;margin-bottom:20px}
+  h1{color:var(--ink);font-size:26px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
   h1 .accent{color:var(--accent)}
   .sub{color:var(--muted);font-size:14px}
-  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:20px 0 8px}
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:16px 0 8px;position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:10;border-bottom:1px solid rgba(15,199,123,.1)}
   #q{flex:1;min-width:200px;background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:10px 14px;border-radius:10px;font-size:15px;outline:none}
   #q:focus{border-color:var(--accent)}
   .count{color:var(--muted);font-size:13px}
-  .btn{background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;transition:.15s}
+  .btn{background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:10px;font-size:13px;cursor:pointer;transition:.15s;white-space:nowrap}
   .btn:hover{border-color:var(--accent);color:var(--accent)}
   .btn.on{background:var(--accent);color:#04121a;border-color:var(--accent);font-weight:700}
-  section.group{margin-top:32px}
-  h2{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-  .list{display:grid;grid-template-columns:1fr;gap:8px}
-  .row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;transition:.15s}
-  .row:hover{border-color:var(--accent)}
-  .row.hidden{display:none}
-  .w{display:flex;flex-direction:column;gap:4px;min-width:0}
-  .w .en{color:var(--ink);font-size:19px;font-weight:700;letter-spacing:-.01em}
-  .w .kk{color:var(--accent);font-size:14px;font-family:'Consolas','SF Mono',monospace;letter-spacing:.02em}
-  .w .zh{color:var(--muted);font-size:14px}
-  .w .zh b{color:#cbd5cc;font-weight:600}
-  .play{width:42px;height:42px;border-radius:50%;background:transparent;border:1.5px solid var(--line);color:var(--accent);font-size:16px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  section.slide{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;transition:.15s}
+  section.slide.hidden{display:none}
+  .slide-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(15,199,123,.12);flex-wrap:wrap}
+  .slide-num{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .slide-ttl{color:var(--ink);font-size:18px;font-weight:700}
+  .slide-time{color:var(--muted);font-size:12px;font-family:'Consolas','SF Mono',monospace}
+  .slide-body{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+  @media (max-width:820px){.slide-body{grid-template-columns:1fr}}
+  .script .lang{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .script .en{color:var(--ink);font-size:15.5px;line-height:1.7;margin-bottom:14px}
+  .script .zh{color:var(--muted);font-size:14px;line-height:1.9}
+  mark.hl{background:var(--hl);color:var(--ink);padding:1px 3px;border-radius:3px;font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--accent);transition:.1s}
+  mark.hl:hover{background:var(--accent);color:#04121a}
+  .vocab-col .vlabel{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .vocab-col .vlabel .cnt{background:rgba(15,199,123,.16);color:var(--accent);font-size:10px;padding:2px 6px;border-radius:4px}
+  .vlist{display:flex;flex-direction:column;gap:6px}
+  .vrow{background:rgba(0,0,0,.24);border:1px solid rgba(15,199,123,.14);border-radius:8px;padding:9px 12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;transition:.15s}
+  .vrow:hover{border-color:var(--accent)}
+  .vrow .w{min-width:0}
+  .vrow .en{color:var(--ink);font-size:14px;font-weight:700;letter-spacing:-.01em}
+  .vrow .kk{color:var(--accent);font-size:11.5px;font-family:'Consolas','SF Mono',monospace;letter-spacing:.02em;margin-top:1px}
+  .vrow .zh{color:var(--muted);font-size:11.5px;margin-top:2px}
+  .vrow .zh b{color:#cbd5cc;font-weight:600}
+  .play{width:32px;height:32px;border-radius:50%;background:transparent;border:1.3px solid var(--line);color:var(--accent);font-size:11px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .play:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
   .play.playing{background:var(--accent);color:#04121a;border-color:var(--accent);animation:pulse 1s infinite}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid var(--line)}
-  @media (max-width:600px){body{padding:20px 14px 60px}h1{font-size:22px}.w .en{font-size:17px}}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  @media (max-width:600px){body{padding:20px 14px 60px}h1{font-size:20px}.script .en{font-size:14.5px}.slide-ttl{font-size:16px}}
 </style>
 </head>
 <body>
 <header>
-  <h1>HCII <span class="accent">生字表</span> · Vocabulary</h1>
-  <div class="sub">90 個常用學術詞 + 台灣人容易念錯的關鍵字 · 點播放按鈕聽發音</div>
+  <h1>HCII <span class="accent">講稿 × 生字</span> · Script &amp; Vocabulary</h1>
+  <div class="sub">18 頁講稿 · 螢光筆標出關鍵生字 · 點畫線字或播放鈕聽發音</div>
 </header>
 
 <div class="toolbar">
   <input id="q" type="text" placeholder="搜尋英文 / 中文 / KK …">
   <button class="btn" id="rateBtn" data-rate="0.85">0.85×</button>
+  <button class="btn" id="modeBtn">📖 只看講稿</button>
   <span class="count" id="count"></span>
 </div>
 
 <div id="content"></div>
 
-<footer>KK 音標 · 中英對照 · 使用 Web Speech API 或 Google TTS 發音 · Deck: <a href="./" style="color:var(--accent)">index</a></footer>
+<footer>KK 音標 · 中英對照 · Web Speech API + Google TTS · <a href="./">回主 deck</a></footer>
 
 <script>
-const DATA = [
-  {group:"1️⃣ 開場 · Background & RQ", words:[
-    {en:"persona", kk:"pɚˈsonə", zh:"<b>人物誌</b>；虛擬人物模型"},
-    {en:"personas", kk:"pɚˈsonəz", zh:"<b>人物誌</b>（複數）"},
-    {en:"interactive", kk:"ˌɪntɚˈæktɪv", zh:"<b>互動的</b>"},
-    {en:"agents", kk:"ˈeʤənts", zh:"<b>代理人</b>；(AI) 代理"},
-    {en:"participants", kk:"pɑrˈtɪsəpənts", zh:"<b>參與者</b>；受訪者"},
-    {en:"structural", kk:"ˈstrʌktʃərəl", zh:"<b>結構性的</b>"},
-    {en:"consistent", kk:"kənˈsɪstənt", zh:"<b>一致的</b>；穩定的"},
-    {en:"discriminable", kk:"dɪˈskrɪmɪnəbl̩", zh:"<b>可區辨的</b>"},
-  ]},
-  {group:"2️⃣ 方法 · Method + Context", words:[
-    {en:"Design Science Research", kk:"dɪˈzaɪn ˈsaɪəns rɪˈsɝtʃ", zh:"<b>設計科學研究</b> (DSR)"},
-    {en:"artifact", kk:"ˈɑrtəˌfækt", zh:"<b>人造物</b>；設計產出物"},
-    {en:"evaluated", kk:"ɪˈvæljuˌetɪd", zh:"<b>評估</b>（過去式）"},
-    {en:"stable", kk:"ˈstebl̩", zh:"<b>穩定的</b>"},
-    {en:"opposing", kk:"əˈpozɪŋ", zh:"<b>對立的</b>"},
-    {en:"commercial", kk:"kəˈmɝʃəl", zh:"<b>商業的</b>"},
-    {en:"contrast", kk:"ˈkɑntræst", zh:"<b>對比</b>"},
-    {en:"grounded", kk:"ˈɡraʊndɪd", zh:"<b>立基於</b>；有根據的"},
-    {en:"labels", kk:"ˈlebl̩z", zh:"<b>標籤</b>"},
-  ]},
-  {group:"3️⃣ 建構 · Construct & Six Dimensions", words:[
-    {en:"identify", kk:"aɪˈdɛntəˌfaɪ", zh:"<b>辨認</b>；識別"},
-    {en:"axes", kk:"ˈæksiz", zh:"<b>軸線</b>（axis 的複數，念 ˈæk-siz）"},
-    {en:"quadrant", kk:"ˈkwɑdrənt", zh:"<b>象限</b>"},
-    {en:"deploy", kk:"dɪˈplɔɪ", zh:"<b>部署</b>"},
-    {en:"constraints", kk:"kənˈstrents", zh:"<b>限制</b>；約束條件"},
-    {en:"role-internalization", kk:"rol ɪnˌtɝnələˈzeʃən", zh:"<b>角色內化</b>"},
-    {en:"character", kk:"ˈkærɪktɚ", zh:"<b>角色</b>；人格特質"},
-    {en:"worldview", kk:"ˈwɝldˌvju", zh:"<b>世界觀</b>"},
-    {en:"psychological", kk:"ˌsaɪkəˈlɑdʒɪkl̩", zh:"<b>心理的</b>（小心 p 不發音）"},
-    {en:"anxious", kk:"ˈæŋkʃəs", zh:"<b>焦慮的</b>"},
-    {en:"confidence", kk:"ˈkɑnfədəns", zh:"<b>信心</b>"},
-    {en:"rituals", kk:"ˈrɪtʃuəlz", zh:"<b>儀式</b>；日常習慣"},
-    {en:"linguistic", kk:"lɪŋˈɡwɪstɪk", zh:"<b>語言的</b>"},
-    {en:"slang", kk:"slæŋ", zh:"<b>俚語</b>"},
-    {en:"particles", kk:"ˈpɑrtɪkl̩z", zh:"<b>語助詞</b>（啊、耶、喔）"},
-    {en:"tempo", kk:"ˈtɛmpo", zh:"<b>節奏</b>；速度"},
-    {en:"scenarios", kk:"sɪˈnɛrioz", zh:"<b>情境</b>；場景"},
-    {en:"commute", kk:"kəˈmjut", zh:"<b>通勤</b>"},
-  ]},
-  {group:"4️⃣ 劇本 & 兩位角色 · Script Sample + Two Personas", words:[
-    {en:"intentionally", kk:"ɪnˈtɛnʃənəli", zh:"<b>刻意地</b>；有意地"},
-    {en:"flip", kk:"flɪp", zh:"<b>翻轉</b>；翻面"},
-    {en:"axis", kk:"ˈæksɪs", zh:"<b>軸線</b>（單數，念 ˈæk-sɪs）"},
-    {en:"principles", kk:"ˈprɪnsəpl̩z", zh:"<b>原則</b>"},
-    {en:"diversification", kk:"daɪˌvɝsəfəˈkeʃən", zh:"<b>分散化</b>；多元化"},
-    {en:"returns", kk:"rɪˈtɝnz", zh:"<b>報酬</b>（投資語境）"},
-    {en:"automated", kk:"ˈɔtəˌmetɪd", zh:"<b>自動化的</b>"},
-    {en:"recurring", kk:"rɪˈkɝɪŋ", zh:"<b>定期的</b>；反覆出現的"},
-    {en:"rebalancing", kk:"riˈbælənsɪŋ", zh:"<b>再平衡</b>；重新分配"},
-  ]},
-  {group:"5️⃣ 研究一 · Study 1 (Design + Results)", words:[
-    {en:"senior", kk:"ˈsinjɚ", zh:"<b>資深的</b>；年長的"},
-    {en:"objectively", kk:"əbˈdʒɛktɪvli", zh:"<b>客觀地</b>"},
-    {en:"stability", kk:"stəˈbɪləti", zh:"<b>穩定性</b>"},
-    {en:"rounds", kk:"raʊndz", zh:"<b>回合</b>；輪次"},
-    {en:"Likert", kk:"ˈlɪkɚt", zh:"<b>李克特</b>（量表發明人姓氏）"},
-    {en:"inconsistent", kk:"ˌɪnkənˈsɪstənt", zh:"<b>不一致的</b>"},
-    {en:"discriminability", kk:"dɪˌskrɪmɪnəˈbɪləti", zh:"<b>可區辨性</b>（8 音節注意分節）"},
-    {en:"identical", kk:"aɪˈdɛntɪkl̩", zh:"<b>完全相同的</b>"},
-    {en:"perception", kk:"pɚˈsɛpʃən", zh:"<b>感知</b>"},
-    {en:"constructs", kk:"ˈkɑnstrʌkts", zh:"<b>構面</b>（研究語境；名詞重音在前）"},
-    {en:"distinction", kk:"dɪˈstɪŋkʃən", zh:"<b>差異</b>；區別"},
-    {en:"credibility", kk:"ˌkrɛdəˈbɪləti", zh:"<b>可信度</b>"},
-    {en:"distinguish", kk:"dɪˈstɪŋɡwɪʃ", zh:"<b>區分</b>"},
-    {en:"aware", kk:"əˈwɛr", zh:"<b>意識到的</b>"},
-    {en:"nature", kk:"ˈnetʃɚ", zh:"<b>本質</b>；性質"},
-  ]},
-  {group:"6️⃣ 研究二 · Study 2 (Design + Results)", words:[
-    {en:"simulation", kk:"ˌsɪmjəˈleʃən", zh:"<b>模擬</b>"},
-    {en:"validation", kk:"ˌvæləˈdeʃən", zh:"<b>驗證</b>"},
-    {en:"screened", kk:"skrind", zh:"<b>篩選過的</b>"},
-    {en:"matching", kk:"ˈmætʃɪŋ", zh:"<b>符合的</b>"},
-    {en:"profile", kk:"ˈproˌfaɪl", zh:"<b>輪廓</b>；剪影"},
-    {en:"volatility", kk:"ˌvɑləˈtɪləti", zh:"<b>波動</b>；起伏"},
-    {en:"panic", kk:"ˈpænɪk", zh:"<b>恐慌</b>"},
-    {en:"stabilize", kk:"ˈstebəˌlaɪz", zh:"<b>穩定</b>（動詞）"},
-    {en:"deviate", kk:"ˈdiviˌet", zh:"<b>偏離</b>"},
-    {en:"coded", kk:"ˈkodɪd", zh:"<b>編碼</b>（過去式，質性研究常用）"},
-    {en:"capturing", kk:"ˈkæptʃɚɪŋ", zh:"<b>捕捉</b>；抓住"},
-    {en:"aspect", kk:"ˈæspɛkt", zh:"<b>面向</b>"},
-    {en:"variability", kk:"ˌvɛrɪəˈbɪləti", zh:"<b>變化性</b>"},
-    {en:"hesitation", kk:"ˌhɛzəˈteʃən", zh:"<b>遲疑</b>"},
-    {en:"markers", kk:"ˈmɑrkɚz", zh:"<b>標記</b>"},
-    {en:"fillers", kk:"ˈfɪlɚz", zh:"<b>口頭禪</b>；填空詞（uh, um）"},
-    {en:"polished", kk:"ˈpɑlɪʃt", zh:"<b>精緻的</b>；打磨過的"},
-    {en:"reflection", kk:"rɪˈflɛkʃən", zh:"<b>反思</b>"},
-    {en:"surface", kk:"ˈsɝfɪs", zh:"<b>浮現</b>（動詞用法）"},
-    {en:"constructed", kk:"kənˈstrʌktɪd", zh:"<b>被建構</b>"},
-    {en:"instantly", kk:"ˈɪnstəntli", zh:"<b>立即地</b>"},
-    {en:"authenticity", kk:"ˌɔθɛnˈtɪsəti", zh:"<b>真實性</b>（th 發音注意）"},
-    {en:"fluency", kk:"ˈfluənsi", zh:"<b>流暢度</b>"},
-  ]},
-  {group:"7️⃣ 兩種思考 · Findings · Two Modes", words:[
-    {en:"takeaway", kk:"ˈtekəˌwe", zh:"<b>主要重點</b>；結論"},
-    {en:"demonstrate", kk:"ˈdɛmənˌstret", zh:"<b>展現</b>；示範"},
-    {en:"organize", kk:"ˈɔrɡəˌnaɪz", zh:"<b>組織</b>"},
-    {en:"synthetic", kk:"sɪnˈθɛtɪk", zh:"<b>合成的</b>（th → θ）"},
-    {en:"experiential", kk:"ɪkˌspɪriˈɛnʃəl", zh:"<b>經歷的</b>；經驗性的"},
-    {en:"delay", kk:"dɪˈle", zh:"<b>延遲</b>"},
-  ]},
-  {group:"8️⃣ 討論 · Discussion / Baseline", words:[
-    {en:"simulating", kk:"ˈsɪmjəˌletɪŋ", zh:"<b>模擬</b>（進行式）"},
-    {en:"revealing", kk:"rɪˈvilɪŋ", zh:"<b>揭露</b>（進行式）"},
-    {en:"deserves", kk:"dɪˈzɝvz", zh:"<b>值得</b>"},
-    {en:"contradiction", kk:"ˌkɑntrəˈdɪkʃən", zh:"<b>矛盾</b>"},
-    {en:"fluent", kk:"ˈfluənt", zh:"<b>流暢的</b>"},
-    {en:"interaction", kk:"ˌɪntɚˈækʃən", zh:"<b>互動</b>"},
-    {en:"meaningful", kk:"ˈminɪŋfl̩", zh:"<b>有意義的</b>"},
-    {en:"cues", kk:"kjuz", zh:"<b>線索</b>；提示（老師建議取代 signals）"},
-    {en:"noise", kk:"nɔɪz", zh:"<b>雜訊</b>"},
-    {en:"inviting", kk:"ɪnˈvaɪtɪŋ", zh:"<b>邀請</b>；促使"},
-    {en:"probe", kk:"prob", zh:"<b>探究</b>；深入問"},
-    {en:"efficient", kk:"ɪˈfɪʃənt", zh:"<b>有效率的</b>"},
-    {en:"exploring", kk:"ɪkˈsplɔrɪŋ", zh:"<b>探索</b>"},
-    {en:"patterns", kk:"ˈpætɚnz", zh:"<b>模式</b>"},
-    {en:"complementary", kk:"ˌkɑmpləˈmɛntəri", zh:"<b>互補的</b>（≠ complimentary 讚美）"},
-    {en:"competing", kk:"kəmˈpitɪŋ", zh:"<b>競爭的</b>"},
-    {en:"breadth", kk:"brɛdθ", zh:"<b>廣度</b>（th 發音，短 e）"},
-    {en:"depth", kk:"dɛpθ", zh:"<b>深度</b>（th 發音）"},
-  ]},
-  {group:"9️⃣ 貢獻 & 活系統 · Contributions + Living System", words:[
-    {en:"wrap up", kk:"ræp ʌp", zh:"<b>收尾</b>；總結"},
-    {en:"contributions", kk:"ˌkɑntrəˈbjuʃənz", zh:"<b>貢獻</b>"},
-    {en:"methodologically", kk:"ˌmɛθədəˈlɑdʒɪkl̩i", zh:"<b>方法上</b>（7 音節）"},
-    {en:"validated", kk:"ˈvæləˌdetɪd", zh:"<b>經過驗證的</b>"},
-    {en:"framework", kk:"ˈfremˌwɝk", zh:"<b>框架</b>"},
-    {en:"conceptually", kk:"kənˈsɛptʃuəli", zh:"<b>概念上</b>"},
-    {en:"fidelity", kk:"fəˈdɛləti", zh:"<b>擬真度</b>；忠實度"},
-    {en:"practically", kk:"ˈpræktɪkl̩i", zh:"<b>實務上</b>"},
-    {en:"positioning", kk:"pəˈzɪʃənɪŋ", zh:"<b>定位</b>"},
-    {en:"evolves", kk:"ɪˈvɑlvz", zh:"<b>演化</b>（v 音要清楚）"},
-  ]},
-  {group:"🔟 結尾 · Conclusion", words:[
-    {en:"static", kk:"ˈstætɪk", zh:"<b>靜態的</b>"},
-    {en:"snapshot", kk:"ˈsnæpˌʃɑt", zh:"<b>快照</b>"},
-    {en:"complement", kk:"ˈkɑmpləmɛnt", zh:"<b>互補</b>（動詞）"},
-    {en:"continuous", kk:"kənˈtɪnjuəs", zh:"<b>持續的</b>"},
-  ]},
+// ===== VOCAB dictionary (single source of truth) =====
+const VOCAB = {
+  "persona": {kk:"pɚˈsonə", zh:"<b>人物誌</b>；虛擬人物模型"},
+  "personas": {kk:"pɚˈsonəz", zh:"<b>人物誌</b>（複數）"},
+  "interactive": {kk:"ˌɪntɚˈæktɪv", zh:"<b>互動的</b>"},
+  "agents": {kk:"ˈeʤənts", zh:"<b>代理人</b>；(AI) 代理"},
+  "participants": {kk:"pɑrˈtɪsəpənts", zh:"<b>參與者</b>；受訪者"},
+  "structural": {kk:"ˈstrʌktʃərəl", zh:"<b>結構性的</b>"},
+  "consistent": {kk:"kənˈsɪstənt", zh:"<b>一致的</b>；穩定的"},
+  "discriminable": {kk:"dɪˈskrɪmɪnəbl̩", zh:"<b>可區辨的</b>"},
+  "Design Science Research": {kk:"dɪˈzaɪn ˈsaɪəns rɪˈsɝtʃ", zh:"<b>設計科學研究</b> (DSR)"},
+  "artifact": {kk:"ˈɑrtəˌfækt", zh:"<b>人造物</b>；設計產出物"},
+  "evaluated": {kk:"ɪˈvæljuˌetɪd", zh:"<b>評估</b>（過去式）"},
+  "stable": {kk:"ˈstebl̩", zh:"<b>穩定的</b>"},
+  "opposing": {kk:"əˈpozɪŋ", zh:"<b>對立的</b>"},
+  "commercial": {kk:"kəˈmɝʃəl", zh:"<b>商業的</b>"},
+  "contrast": {kk:"ˈkɑntræst", zh:"<b>對比</b>"},
+  "grounded": {kk:"ˈɡraʊndɪd", zh:"<b>立基於</b>；有根據的"},
+  "labels": {kk:"ˈlebl̩z", zh:"<b>標籤</b>"},
+  "identify": {kk:"aɪˈdɛntəˌfaɪ", zh:"<b>辨認</b>；識別"},
+  "axes": {kk:"ˈæksiz", zh:"<b>軸線</b>（axis 複數，念 ˈæk-siz）"},
+  "axis": {kk:"ˈæksɪs", zh:"<b>軸線</b>（單數，念 ˈæk-sɪs）"},
+  "quadrant": {kk:"ˈkwɑdrənt", zh:"<b>象限</b>"},
+  "deploy": {kk:"dɪˈplɔɪ", zh:"<b>部署</b>"},
+  "constraints": {kk:"kənˈstrents", zh:"<b>限制</b>；約束條件"},
+  "role-internalization": {kk:"rol ɪnˌtɝnələˈzeʃən", zh:"<b>角色內化</b>"},
+  "character": {kk:"ˈkærɪktɚ", zh:"<b>角色</b>；人格特質"},
+  "worldview": {kk:"ˈwɝldˌvju", zh:"<b>世界觀</b>"},
+  "psychological": {kk:"ˌsaɪkəˈlɑdʒɪkl̩", zh:"<b>心理的</b>（p 不發音）"},
+  "anxious": {kk:"ˈæŋkʃəs", zh:"<b>焦慮的</b>"},
+  "confidence": {kk:"ˈkɑnfədəns", zh:"<b>信心</b>"},
+  "rituals": {kk:"ˈrɪtʃuəlz", zh:"<b>儀式</b>；日常習慣"},
+  "linguistic": {kk:"lɪŋˈɡwɪstɪk", zh:"<b>語言的</b>"},
+  "slang": {kk:"slæŋ", zh:"<b>俚語</b>"},
+  "particles": {kk:"ˈpɑrtɪkl̩z", zh:"<b>語助詞</b>（啊、耶、喔）"},
+  "tempo": {kk:"ˈtɛmpo", zh:"<b>節奏</b>；速度"},
+  "scenarios": {kk:"sɪˈnɛrioz", zh:"<b>情境</b>；場景"},
+  "commute": {kk:"kəˈmjut", zh:"<b>通勤</b>"},
+  "intentionally": {kk:"ɪnˈtɛnʃənəli", zh:"<b>刻意地</b>；有意地"},
+  "flip": {kk:"flɪp", zh:"<b>翻轉</b>"},
+  "principles": {kk:"ˈprɪnsəpl̩z", zh:"<b>原則</b>"},
+  "diversification": {kk:"daɪˌvɝsəfəˈkeʃən", zh:"<b>分散化</b>"},
+  "returns": {kk:"rɪˈtɝnz", zh:"<b>報酬</b>（投資語境）"},
+  "automated": {kk:"ˈɔtəˌmetɪd", zh:"<b>自動化的</b>"},
+  "recurring": {kk:"rɪˈkɝɪŋ", zh:"<b>定期的</b>；反覆的"},
+  "rebalancing": {kk:"riˈbælənsɪŋ", zh:"<b>再平衡</b>"},
+  "senior": {kk:"ˈsinjɚ", zh:"<b>資深的</b>"},
+  "objectively": {kk:"əbˈdʒɛktɪvli", zh:"<b>客觀地</b>"},
+  "stability": {kk:"stəˈbɪləti", zh:"<b>穩定性</b>"},
+  "rounds": {kk:"raʊndz", zh:"<b>回合</b>"},
+  "Likert": {kk:"ˈlɪkɚt", zh:"<b>李克特</b>（量表）"},
+  "inconsistent": {kk:"ˌɪnkənˈsɪstənt", zh:"<b>不一致的</b>"},
+  "discriminability": {kk:"dɪˌskrɪmɪnəˈbɪləti", zh:"<b>可區辨性</b>（8 音節）"},
+  "identical": {kk:"aɪˈdɛntɪkl̩", zh:"<b>完全相同的</b>"},
+  "perception": {kk:"pɚˈsɛpʃən", zh:"<b>感知</b>"},
+  "constructs": {kk:"ˈkɑnstrʌkts", zh:"<b>構面</b>（名詞重音在前）"},
+  "distinction": {kk:"dɪˈstɪŋkʃən", zh:"<b>差異</b>；區別"},
+  "credibility": {kk:"ˌkrɛdəˈbɪləti", zh:"<b>可信度</b>"},
+  "distinguish": {kk:"dɪˈstɪŋɡwɪʃ", zh:"<b>區分</b>"},
+  "aware": {kk:"əˈwɛr", zh:"<b>意識到的</b>"},
+  "nature": {kk:"ˈnetʃɚ", zh:"<b>本質</b>；性質"},
+  "simulation": {kk:"ˌsɪmjəˈleʃən", zh:"<b>模擬</b>"},
+  "validation": {kk:"ˌvæləˈdeʃən", zh:"<b>驗證</b>"},
+  "screened": {kk:"skrind", zh:"<b>篩選過的</b>"},
+  "matching": {kk:"ˈmætʃɪŋ", zh:"<b>符合的</b>"},
+  "profile": {kk:"ˈproˌfaɪl", zh:"<b>輪廓</b>；剪影"},
+  "volatility": {kk:"ˌvɑləˈtɪləti", zh:"<b>波動</b>"},
+  "panic": {kk:"ˈpænɪk", zh:"<b>恐慌</b>"},
+  "stabilize": {kk:"ˈstebəˌlaɪz", zh:"<b>穩定</b>（動詞）"},
+  "deviate": {kk:"ˈdiviˌet", zh:"<b>偏離</b>"},
+  "coded": {kk:"ˈkodɪd", zh:"<b>編碼</b>（過去式）"},
+  "capturing": {kk:"ˈkæptʃɚɪŋ", zh:"<b>捕捉</b>"},
+  "aspect": {kk:"ˈæspɛkt", zh:"<b>面向</b>"},
+  "variability": {kk:"ˌvɛrɪəˈbɪləti", zh:"<b>變化性</b>"},
+  "hesitation": {kk:"ˌhɛzəˈteʃən", zh:"<b>遲疑</b>"},
+  "markers": {kk:"ˈmɑrkɚz", zh:"<b>標記</b>"},
+  "fillers": {kk:"ˈfɪlɚz", zh:"<b>口頭禪</b>（uh, um）"},
+  "polished": {kk:"ˈpɑlɪʃt", zh:"<b>精緻的</b>；打磨過的"},
+  "reflection": {kk:"rɪˈflɛkʃən", zh:"<b>反思</b>"},
+  "surface": {kk:"ˈsɝfɪs", zh:"<b>浮現</b>（動詞用法）"},
+  "constructed": {kk:"kənˈstrʌktɪd", zh:"<b>被建構</b>"},
+  "instantly": {kk:"ˈɪnstəntli", zh:"<b>立即地</b>"},
+  "authenticity": {kk:"ˌɔθɛnˈtɪsəti", zh:"<b>真實性</b>（th → θ）"},
+  "fluency": {kk:"ˈfluənsi", zh:"<b>流暢度</b>"},
+  "takeaway": {kk:"ˈtekəˌwe", zh:"<b>主要重點</b>；結論"},
+  "demonstrate": {kk:"ˈdɛmənˌstret", zh:"<b>展現</b>；示範"},
+  "organize": {kk:"ˈɔrɡəˌnaɪz", zh:"<b>組織</b>"},
+  "synthetic": {kk:"sɪnˈθɛtɪk", zh:"<b>合成的</b>（th → θ）"},
+  "experiential": {kk:"ɪkˌspɪriˈɛnʃəl", zh:"<b>經歷的</b>"},
+  "delay": {kk:"dɪˈle", zh:"<b>延遲</b>"},
+  "simulating": {kk:"ˈsɪmjəˌletɪŋ", zh:"<b>模擬</b>（進行式）"},
+  "revealing": {kk:"rɪˈvilɪŋ", zh:"<b>揭露</b>（進行式）"},
+  "deserves": {kk:"dɪˈzɝvz", zh:"<b>值得</b>"},
+  "contradiction": {kk:"ˌkɑntrəˈdɪkʃən", zh:"<b>矛盾</b>"},
+  "fluent": {kk:"ˈfluənt", zh:"<b>流暢的</b>"},
+  "interaction": {kk:"ˌɪntɚˈækʃən", zh:"<b>互動</b>"},
+  "meaningful": {kk:"ˈminɪŋfl̩", zh:"<b>有意義的</b>"},
+  "cues": {kk:"kjuz", zh:"<b>線索</b>；提示（取代 signals）"},
+  "noise": {kk:"nɔɪz", zh:"<b>雜訊</b>"},
+  "inviting": {kk:"ɪnˈvaɪtɪŋ", zh:"<b>邀請</b>；促使"},
+  "probe": {kk:"prob", zh:"<b>探究</b>；深入問"},
+  "efficient": {kk:"ɪˈfɪʃənt", zh:"<b>有效率的</b>"},
+  "exploring": {kk:"ɪkˈsplɔrɪŋ", zh:"<b>探索</b>"},
+  "patterns": {kk:"ˈpætɚnz", zh:"<b>模式</b>"},
+  "complementary": {kk:"ˌkɑmpləˈmɛntəri", zh:"<b>互補的</b>（≠ compli-mentary 讚美）"},
+  "competing": {kk:"kəmˈpitɪŋ", zh:"<b>競爭的</b>"},
+  "breadth": {kk:"brɛdθ", zh:"<b>廣度</b>（th 發音）"},
+  "depth": {kk:"dɛpθ", zh:"<b>深度</b>（th 發音）"},
+  "contributions": {kk:"ˌkɑntrəˈbjuʃənz", zh:"<b>貢獻</b>"},
+  "methodologically": {kk:"ˌmɛθədəˈlɑdʒɪkl̩i", zh:"<b>方法上</b>（7 音節）"},
+  "validated": {kk:"ˈvæləˌdetɪd", zh:"<b>經過驗證的</b>"},
+  "framework": {kk:"ˈfremˌwɝk", zh:"<b>框架</b>"},
+  "conceptually": {kk:"kənˈsɛptʃuəli", zh:"<b>概念上</b>"},
+  "fidelity": {kk:"fəˈdɛləti", zh:"<b>擬真度</b>"},
+  "practically": {kk:"ˈpræktɪkl̩i", zh:"<b>實務上</b>"},
+  "positioning": {kk:"pəˈzɪʃənɪŋ", zh:"<b>定位</b>"},
+  "evolves": {kk:"ɪˈvɑlvz", zh:"<b>演化</b>（v 音要清楚）"},
+  "static": {kk:"ˈstætɪk", zh:"<b>靜態的</b>"},
+  "snapshot": {kk:"ˈsnæpˌʃɑt", zh:"<b>快照</b>"},
+  "complement": {kk:"ˈkɑmpləmɛnt", zh:"<b>互補</b>（動詞）"},
+  "continuous": {kk:"kənˈtɪnjuəs", zh:"<b>持續的</b>"},
+};
+
+// ===== SLIDES with script + vocab used =====
+const SLIDES = [
+  {n:1, t:"Title · 開場", time:"0:30",
+   en:"Good morning. I'm Chieh-An from National Taiwan University of Science and Technology. Today I'd like to share with you the work I did with Prof. Tang on AI personas.",
+   zh:"大家好。我是來自台灣科技大學的簡潔安。今天要跟大家分享我跟唐玄輝教授一起做的 AI 人物誌研究。",
+   words:["personas"]},
+  {n:2, t:"Background · 背景與缺口", time:"1:00",
+   en:"With Generative AI, personas have become interactive agents you can actually talk to. Most existing work has asked 'how human-like is the AI?' But how AI personas differ from real participants still remains unclear. We looked at this question from a different angle. We wanted to know what value this difference brings, and how it changes the way we do design research.",
+   zh:"有了生成式 AI，人物誌變成可以對話的代理人。過去多數研究都在問「AI 像不像真人」，但 AI 人物誌跟真人之間的差異到底是什麼，目前還不清楚。我們從另一個角度切入，想知道這個差異本身有什麼價值、會如何改變我們做設計研究的方式。",
+   words:["personas","interactive","agents","participants"]},
+  {n:3, t:"Research Questions · 研究問題", time:"0:45",
+   en:"So we asked two questions. First, how to build an AI persona that stays consistent and is clearly different from other personas? Second, what are the structural differences in language between AI personas and real people?",
+   zh:"我們問了兩個問題。第一，怎麼建構一個一致、可區辨的 AI 人物誌？第二，AI 人物誌跟真人在語言表現上有哪些結構性差異？",
+   words:["persona","personas","consistent","structural"]},
+  {n:4, t:"Method · Research Process · 研究流程", time:"0:30",
+   en:"We built our AI persona using Design Science Research. We treated the AI persona as an artifact: we build it, then we evaluated it across two studies that were designed to answer our two RQs.",
+   zh:"我們用設計科學研究方法建構 AI 人物誌。把它當成一個人造物：先建構出來，再用兩個對應我們兩個 RQ 的研究去評估它。",
+   words:["persona","Design Science Research","artifact","evaluated"]},
+  {n:5, t:"Method · Context · 研究情境", time:"1:00",
+   en:"To test whether a script can keep a persona stable, we needed two opposing personas that live inside the same real-world context. Taiwan's Gen Z ETF market gave us exactly that. It's a fast-growing market with real commercial weight, and inside it we can see two clearly opposing types — one who trusts the crowd, and one who trusts her own rules. That contrast lets us build two personas whose differences are grounded in real behavior, not just in labels.",
+   zh:"為了測試劇本能不能撐出一個穩定的 Persona，我們需要在同一個真實情境裡找到兩種對立的角色。台灣 Z 世代 ETF 這個市場剛好符合。這是一個規模夠大、還在快速成長的市場，具有實際的商業份量。而且在這裡我們可以看到兩種鮮明對立的類型——一種相信社群、一種相信自己的紀律。這樣的對比讓我們能建構出行為差異真實存在的兩位角色，而不只是貼標籤。",
+   words:["persona","stable","opposing","personas","commercial","contrast","grounded","labels"]},
+  {n:6, t:"Method · Construct · 建構流程", time:"1:00",
+   en:"We built the persona in four stages. In the first stage, we used Gemini Deep Research to identify two core axes and four user types, and then build a full profile for each quadrant. Second, to train our personas, we used ChatGPT Deep Research to pull thirty to fifty posts of a first-person voice from Taiwanese online forums. That is where the persona's voice comes from. Third, we wrote a six-dimension script for the personas. Finally, we shipped the script as a GPT with five behavior constraints and role-internalization instructions, so the persona stays in character through long conversations.",
+   zh:"我們分四階段建角色。第一階段，建立脈絡：用 Gemini Deep Research 找出兩條核心軸線跟四種用戶類型，再把十字象限四個類型完整刻劃出來。第二階段，語料蒐集：用 ChatGPT Deep Research 從台灣論壇 PTT、Dcard 抓 30 到 50 則第一人稱貼文，角色的聲音來自這裡。第三階段，劇本生成：寫出六維度劇本。第四階段，部署：把劇本上 GPT，加上 5 條行為限制跟角色內化指令，讓角色在長對話中不脫線。",
+   words:["persona","personas","identify","axes","quadrant","profile","constraints","role-internalization","character"]},
+  {n:7, t:"Six Dimensions · 六維度", time:"1:00",
+   en:"For the script, we considered six dimensions. Basic information anchors the identity of the persona, which is a she. Worldview shapes how she sees the market, money, and the future. Psychological state captures what makes her anxious and where her confidence comes from. Behavior covers her daily rituals, like checking the app or chatting with friends. Linguistic style locks in the things that make her sound like herself: slang, particles, tempo. And daily scenarios put her into real situations like commute, payday, or a market crash. Together, these six dimensions hold one stable character across hundreds of turns.",
+   zh:"劇本有六個維度。基本資料負責錨定角色身份，這個角色是一位女性。世界觀形塑她怎麼看市場、金錢、未來。心理狀態抓住她在焦慮什麼、信心從哪裡來。行為模式涵蓋她每天的習慣，像是刷盤、找朋友聊天。語言風格鎖住「一聽就知道是她」的東西，俚語、語助詞、節奏。日常情境把她放進真實場景，像通勤、發薪日、市場崩盤。六個維度一起撐住一個穩定的角色，撐過上百回合對話。",
+   words:["persona","worldview","psychological","anxious","confidence","rituals","linguistic","slang","particles","tempo","scenarios","commute","stable","character"]},
+  {n:8, t:"Script Sample · 劇本實例", time:"0:30",
+   en:"Here is what the script actually looks like — a live screen recording of the GPT system prompt for each persona. Same six dimensions, written in Traditional Chinese, but the content is intentionally opposite. Let's see how that plays out.",
+   zh:"這就是劇本真正的樣子 — 兩位角色各自的 GPT 後台螢幕錄影。同樣的六維度結構、繁體中文撰寫，但內容刻意對立。接下來看看這對立如何呈現。",
+   words:["persona","intentionally"]},
+  {n:9, t:"Two Personas · Anne & Emily", time:"0:45",
+   en:"Same six-dimension script, but we flip one axis, source of confidence, and we get two opposite personas. Take a look at how they answer the same question. Ann's decisions, quote unquote, get pulled along by social platforms. When PTT or her friends are talking about a stock, she follows. Her must-haves are price alerts and trending rankings, because she wants to react fast. On the other hand, Emily, quote unquote, doesn't watch news or YouTube. Her decisions rest on principles she set from the start, low cost, global diversification, long-term returns. Her must-haves are automated recurring investments and rebalancing, because she wants the app to help her stay the course. Same question, completely different answers.",
+   zh:"我們建了兩個對立的角色，只翻轉一條軸線——信心來源——其他都相同。大家可以看一下她們對同樣問題的回答。小安的決定，引用她原話，「被社群平台帶著走」。PTT 跟朋友在講什麼，她就想跟。她的必備功能是價格警示跟熱門排行，因為她想趕快反應。另一方面，艾蜜莉，引用她原話，「不看新聞跟 YouTube」。她的決定建立在自己一開始就設好的原則上：低成本、全球分散、長期報酬。她的必備功能是定期定額跟再平衡，因為她要 app 幫她守紀律。同樣的問題，完全不同的答案。",
+   words:["personas","flip","axis","confidence","principles","diversification","returns","automated","recurring","rebalancing"]},
+  {n:10, t:"Study 1 · Design · 研究一設計", time:"1:00",
+   en:"To answer RQ1, the consistency question, we ran Study 1. We invited six senior designers, each with three or more years of UX research experience. None of them were involved in building the persona, so they could evaluate it objectively. Every session had three parts. First, a stability test: three rounds with each persona using six interview questions, rated on a five-point scale from completely inconsistent to completely consistent. Second, a discriminability test: comparing Anne and Emily head-to-head on each question, rating whether their answers felt identical or very different. Third, separately, the Persona Perception Scale from Salminen and colleagues, which rates six perception constructs for both personas on a one-to-seven Likert scale.",
+   zh:"為了回答 RQ1 一致性的問題，我們做了研究一。我們邀請了六位資深設計師，都是有三年以上 UX 研究經驗的人。他們沒有參與人物誌的建構，所以可以客觀評估。流程分三個部分。第一，穩定性測試：跟兩位角色各進行三輪對話，用六道訪談題，1 到 5 分量表評分。第二，差異性測試：對每一題比對小安跟艾蜜莉的回答。第三，另外搭配人物誌感知量表，用 1 到 7 分量表評六個感知面向。",
+   words:["consistent","persona","personas","senior","objectively","stability","rounds","inconsistent","discriminability","identical","perception","constructs","Likert"]},
+  {n:11, t:"Study 1 · Results · 研究一結果", time:"1:15",
+   en:"Now for the results. Let us first look at the chart on the left, which shows the scores from the stability test and the discriminability test. Both personas held stable — Anne at 4.17 and Emily at 4.47 out of 5. And the two had a clear distinction, shown by 4.58 out of 5. On the right we have the Persona Perception Scale. The first five constructs all had a higher-than-random mean for both personas. This shows that they are indeed useful — Anne's overall is 4.76 and Emily's is 4.86. On the other hand, credibility had the lowest mean for both — Anne 3.67 and Emily 4.17. This reflects that the evaluators could clearly distinguish AI from real people, and were aware of the nature of the tool.",
+   zh:"結果這樣。小安一致性 4.17、艾蜜莉一致性 4.47，兩位都穩。兩角色差異性 4.58、清楚可辨。感知量表前五個構面兩位都高於中間值。可信度兩位都是最低 — 小安 3.67、艾蜜莉 4.17。這正反映了一個邊界：評估者能清楚辨識 AI 與真人的差異。",
+   words:["stability","discriminability","personas","stable","distinction","perception","constructs","credibility","distinguish","aware","nature"]},
+  {n:12, t:"Study 2 · Design · 研究二設計", time:"1:00",
+   en:"For RQ2, which is to investigate language differences between AI and humans, we ran a simulation-validation interview online. We interviewed Anne and two screened humans, aged 24 and 26, both matching Anne's Gen Z emotional profile. Each session was 60 minutes. The interview was built around three design concepts, all addressing the same brief: when market volatility triggers panic, how do we stabilize emotional investors so they don't deviate from their plan. For every concept, we asked these same four questions on the middle of the slide. We then coded each response on six linguistic dimensions on the right, each capturing one aspect of how the person talks and thinks, on a 1 to 5 Likert scale. I will walk through the most striking dimensions with examples in the next slide.",
+   zh:"為了回答 RQ2 的語言差異問題，我們做了「模擬驗證型訪談」，線上進行。受訪者是 AI 小安加上兩位篩選過的真人，24 跟 26 歲，都符合小安的輪廓。每場 60 分鐘。整場訪談圍繞三個設計方案進行。每個方案我們都問同樣的四道題。然後用右邊這六個語言維度去編碼每一段回應，每個維度抓的是「人是怎麼說、怎麼想」的一個面向。",
+   words:["simulation","validation","screened","matching","profile","volatility","panic","stabilize","deviate","coded","linguistic","capturing","aspect","Likert"]},
+  {n:13, t:"Study 2 · Results · 研究二結果", time:"1:30",
+   en:"Two dimensions tell the story. Variability reveals that real humans drop hundreds of hesitation markers per interview — fillers, restarts, broken sentences. The AI dropped zero but used emojis, showing that its language was more polished. Tempo reveals that real reflections takes about four minutes to surface; this is because it has to be constructed. The AI gives reflections instantly, at zero delay. Across all six dimensions, AI is plus-43% structural but minus-79% authenticity. The structural fluency actually reveals a lack in authenticity.",
+   zh:"兩個維度就把整個故事說清楚了。第一，C2 變化程度：真人每場訪談有幾百個語氣詞跟遲疑——口頭禪、自我修正、破碎句子。AI 是零，用 emoji 代替。太完美，正是破綻。第二，C6 思考節奏：真人的反思大約要四分鐘才浮現。AI 反思零延遲秒答。AI 結構性高真人 43%，真實性低真人 79%。",
+   words:["variability","hesitation","markers","fillers","polished","tempo","reflection","surface","constructed","instantly","delay","structural","authenticity","fluency"]},
+  {n:14, t:"Findings · Two Modes · 兩種思考", time:"1:10",
+   en:"The main takeaway from the two studies above is that AI and humans demonstrate different ways to organize thoughts. The AI shows what we call synthetic thinking. The answer is already there before the question finishes, with zero delay and only three interaction markers. The humans show experiential thinking. The answer forms while they are speaking, with 45 interaction markers, and the real reflection often surfaces only about four minutes later.",
+   zh:"這兩個研究的主要啟示是：AI 跟真人展現出兩種不同的思考組織方式。AI 是「合成式思考」。答案在問題講完之前就成形了，零延遲、只有三個互動標記。真人則是「經歷中的思考」。答案是邊講邊形成的，45 個互動標記，真正的反思常常是四分鐘後才浮現。",
+   words:["takeaway","demonstrate","organize","synthetic","delay","interaction","markers","experiential","reflection","surface"]},
+  {n:15, t:"Discussion · Baseline · 對照基準", time:"1:15",
+   en:"So the AI's real value is not in simulating humans but in revealing something that deserves more attention in human interviews. Human interviews bring out what AI cannot: hesitation, contradiction, and emotion. When compared to AI's fluent responses, these interaction markers become meaningful cues instead of noise, inviting us as interviewers to probe deeper (Smith, 2012). AI personas are efficient and always available, so they are perfect for exploring the problem space, finding patterns, and giving designers something solid to compare against in the early stage of research. AI and humans should be complementary, not competing. Different tools serve different jobs: AI for breadth early on, humans for depth later on.",
+   zh:"所以 AI 真正的價值不在於模擬真人，而在於讓真人訪談中值得被更多關注的東西被看見。真人訪談帶來 AI 給不了的：遲疑、矛盾、情緒。跟 AI 流暢的回應相比，這些互動痕跡就從雜訊變成有意義的線索，提示我們身為訪談者可以再往深處探（Smith, 2012）。AI 人物誌效率高、隨時可用，所以適合研究的前期：探索問題空間、找模式，讓設計師有個明確的東西可以對照。AI 跟真人應該是互補的，不是競爭。不同工具負責不同任務：AI 適合前期廣度，真人適合後期深度。",
+   words:["simulating","revealing","deserves","hesitation","contradiction","fluent","interaction","markers","meaningful","cues","noise","inviting","probe","personas","efficient","exploring","patterns","complementary","competing","breadth","depth"]},
+  {n:16, t:"Living System · 活系統 & 貢獻", time:"1:30",
+   en:"To wrap up, this study makes three contributions. Methodologically, we built a validated six-dimension framework for building AI personas. Conceptually, we revealed a distinction between synthetic and experiential thinking, and suggested we look beyond just measuring fidelity. And practically, we showed a clear positioning of how to use AI and humans together: AI for breadth, humans for depth. This points to what we call a living system. The persona evolves, based on real-world data — designer interview records and CRM data from real users.",
+   zh:"最後總結，這份研究做出三個貢獻。方法上，我們建構出一套經過驗證的六維度框架。概念上，我們揭示了合成式思考跟經歷中思考的區分，並主張這個領域可以看得比「擬真度」更遠。實務上，我們提出 AI 與真人協作的明確定位：AI 廣度、真人深度。這指向一個我們稱為「活系統」的方向。人物誌會不斷演化，基於真實世界的資料——設計師的訪談紀錄，以及來自真實使用者的 CRM 資料。",
+   words:["contributions","methodologically","validated","framework","personas","conceptually","distinction","synthetic","experiential","fidelity","practically","positioning","breadth","depth","persona","evolves"]},
+  {n:17, t:"Conclusion · 結論", time:"0:20",
+   en:"From static snapshot to a living system. AI personas do not replace humans. They complement them. And once consistent, they can keep growing with continuous data.",
+   zh:"從靜態快照到活系統。AI 人物誌不取代真人，而是與真人互補。一旦一致，就能透過持續的資料成長下去。",
+   words:["static","snapshot","personas","complement","consistent","continuous"]},
+  {n:18, t:"Thank You · 致謝", time:"0:15",
+   en:"Thank you. I would love to take your questions.",
+   zh:"謝謝聆聽，很歡迎提問。",
+   words:[]},
 ];
 
 let RATE = 0.85;
+let SCRIPT_ONLY = false;
+
+function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escapeAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+
+// Highlight vocab words in script (case-insensitive, handles common inflections)
+function highlight(script, words){
+  if(!words || words.length===0) return escapeHTML(script);
+  const matches = [];
+  words.forEach(base => {
+    if(!VOCAB[base]) return;
+    const esc = base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // multi-word vocab: exact match only. single-word: allow -s/-es/-ed/-ing suffix
+    const pattern = base.includes(' ')
+      ? new RegExp('\\b(' + esc + ')\\b', 'gi')
+      : new RegExp('\\b(' + esc + '(?:s|es|ed|ing)?)\\b', 'gi');
+    let m;
+    while((m = pattern.exec(script)) !== null){
+      matches.push({start:m.index, end:m.index+m[0].length, base, matched:m[0]});
+    }
+  });
+  // sort by start, then longer wins
+  matches.sort((a,b)=> a.start-b.start || (b.end-b.start)-(a.end-a.start));
+  // remove overlaps
+  const cleaned = [];
+  let lastEnd = -1;
+  matches.forEach(m => {
+    if(m.start >= lastEnd){ cleaned.push(m); lastEnd = m.end; }
+  });
+  // build HTML
+  let html = '', pos = 0;
+  cleaned.forEach(m => {
+    html += escapeHTML(script.substring(pos, m.start));
+    const v = VOCAB[m.base];
+    const zhPlain = v.zh.replace(/<[^>]+>/g,'');
+    html += `<mark class="hl" data-word="${escapeAttr(m.base)}" title="${escapeAttr(m.base+' /'+v.kk+'/ '+zhPlain)}">${escapeHTML(m.matched)}</mark>`;
+    pos = m.end;
+  });
+  html += escapeHTML(script.substring(pos));
+  return html;
+}
 
 function renderAll(){
   const container = document.getElementById('content');
   container.innerHTML = '';
-  let total = 0;
-  DATA.forEach(g=>{
-    const section = document.createElement('section');
-    section.className = 'group';
-    section.innerHTML = `<h2>${g.group}</h2><div class="list"></div>`;
-    const list = section.querySelector('.list');
-    g.words.forEach(w=>{
-      total++;
-      const row = document.createElement('div');
-      row.className = 'row';
-      row.dataset.search = (w.en + ' ' + w.kk + ' ' + w.zh.replace(/<[^>]+>/g,'')).toLowerCase();
-      row.innerHTML = `
+  let totalVocab = 0;
+  SLIDES.forEach(s => {
+    totalVocab += s.words.length;
+    const sec = document.createElement('section');
+    sec.className = 'slide';
+    sec.dataset.search = (s.t + ' ' + s.en + ' ' + s.zh + ' ' + s.words.join(' ')).toLowerCase();
+    const scriptHTML = highlight(s.en, s.words);
+    const vocabHTML = s.words.map(base => {
+      if(!VOCAB[base]) return '';
+      const v = VOCAB[base];
+      return `<div class="vrow">
         <div class="w">
-          <div class="en">${w.en}</div>
-          <div class="kk">/ ${w.kk} /</div>
-          <div class="zh">${w.zh}</div>
+          <div class="en">${escapeHTML(base)}</div>
+          <div class="kk">/ ${v.kk} /</div>
+          <div class="zh">${v.zh}</div>
         </div>
-        <button class="play" title="播放發音" data-word="${w.en}">▶</button>`;
-      list.appendChild(row);
-    });
-    container.appendChild(section);
+        <button class="play" data-word="${escapeAttr(base)}" title="播放">▶</button>
+      </div>`;
+    }).join('');
+    sec.innerHTML = `
+      <div class="slide-head">
+        <div>
+          <div class="slide-num">Slide ${s.n}</div>
+          <div class="slide-ttl">${escapeHTML(s.t)}</div>
+        </div>
+        <div class="slide-time">⏱ ${s.time}</div>
+      </div>
+      <div class="slide-body">
+        <div class="script">
+          <div class="lang">🇺🇸 English</div>
+          <div class="en">${scriptHTML}</div>
+          <div class="lang">🇹🇼 中文</div>
+          <div class="zh">${escapeHTML(s.zh)}</div>
+        </div>
+        <div class="vocab-col">
+          <div class="vlabel">Vocab in this slide <span class="cnt">${s.words.length}</span></div>
+          <div class="vlist">${vocabHTML || '<div style="color:var(--muted);font-size:13px;font-style:italic">— 這頁沒有特別的生字 —</div>'}</div>
+        </div>
+      </div>`;
+    container.appendChild(sec);
   });
-  document.getElementById('count').textContent = `共 ${total} 字`;
+  document.getElementById('count').textContent = `${SLIDES.length} 頁 · ${totalVocab} 個生字位置`;
 }
 
 renderAll();
 
-// Search filter
+// Search
 document.getElementById('q').addEventListener('input', e=>{
   const q = e.target.value.trim().toLowerCase();
   let visible = 0;
-  document.querySelectorAll('.row').forEach(r=>{
-    const match = !q || r.dataset.search.includes(q);
-    r.classList.toggle('hidden', !match);
+  document.querySelectorAll('.slide').forEach(s=>{
+    const match = !q || s.dataset.search.includes(q);
+    s.classList.toggle('hidden', !match);
     if(match) visible++;
   });
-  // hide empty groups
-  document.querySelectorAll('.group').forEach(g=>{
-    const has = g.querySelector('.row:not(.hidden)');
-    g.style.display = has ? '' : 'none';
-  });
-  document.getElementById('count').textContent = q ? `搜到 ${visible} 字` : `共 ${visible} 字`;
+  document.getElementById('count').textContent = q ? `符合 ${visible} 頁` : `${SLIDES.length} 頁`;
 });
 
 // Rate cycle
@@ -255,35 +381,37 @@ document.getElementById('rateBtn').addEventListener('click', e=>{
   e.target.textContent = RATE + '×';
 });
 
-// Pronunciation: try Web Speech API first, fall back to Google TTS
-let currentBtn = null;
-let currentAudio = null;
+// Toggle vocab column
+document.getElementById('modeBtn').addEventListener('click', e=>{
+  SCRIPT_ONLY = !SCRIPT_ONLY;
+  document.querySelectorAll('.slide-body').forEach(b=>{
+    b.style.gridTemplateColumns = SCRIPT_ONLY ? '1fr' : '';
+  });
+  document.querySelectorAll('.vocab-col').forEach(v=>{
+    v.style.display = SCRIPT_ONLY ? 'none' : '';
+  });
+  e.target.textContent = SCRIPT_ONLY ? '📚 顯示生字' : '📖 只看講稿';
+});
+
+// Pronunciation
+let currentBtn = null, currentAudio = null;
 function stopAll(){
   try{ speechSynthesis.cancel(); }catch(e){}
   if(currentAudio){ currentAudio.pause(); currentAudio = null; }
   if(currentBtn){ currentBtn.classList.remove('playing'); currentBtn = null; }
 }
-
 function speakGoogle(text, btn){
   const url = 'https://translate.google.com/translate_tts?ie=UTF-8&q=' + encodeURIComponent(text) + '&tl=en&client=tw-ob';
   const audio = new Audio(url);
   audio.playbackRate = RATE;
-  audio.onended = ()=>{ btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
-  audio.onerror = ()=>{ btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
+  audio.onended = ()=>{ if(btn) btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
+  audio.onerror = ()=>{ if(btn) btn.classList.remove('playing'); currentAudio = null; currentBtn = null; };
   currentAudio = audio;
-  audio.play().catch(err=>{
-    btn.classList.remove('playing'); currentAudio = null; currentBtn = null;
-  });
+  audio.play().catch(()=>{ if(btn) btn.classList.remove('playing'); currentAudio = null; currentBtn = null; });
 }
-
-document.addEventListener('click', e=>{
-  const btn = e.target.closest('.play');
-  if(!btn) return;
+function speak(word, btn){
   stopAll();
-  const word = btn.dataset.word;
-  btn.classList.add('playing');
-  currentBtn = btn;
-  // try Web Speech API
+  if(btn){ btn.classList.add('playing'); currentBtn = btn; }
   if('speechSynthesis' in window && speechSynthesis.getVoices().length > 0){
     const utter = new SpeechSynthesisUtterance(word);
     utter.lang = 'en-US';
@@ -293,12 +421,20 @@ document.addEventListener('click', e=>{
                  || voices.find(v => v.lang.startsWith('en-US'))
                  || voices.find(v => v.lang.startsWith('en'));
     if(enVoice) utter.voice = enVoice;
-    utter.onend = ()=>{ btn.classList.remove('playing'); currentBtn = null; };
+    utter.onend = ()=>{ if(btn) btn.classList.remove('playing'); currentBtn = null; };
     utter.onerror = ()=>{ speakGoogle(word, btn); };
     speechSynthesis.speak(utter);
   } else {
     speakGoogle(word, btn);
   }
+}
+
+// Click play button OR click highlighted vocab in script
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('.play');
+  if(btn){ speak(btn.dataset.word, btn); return; }
+  const hl = e.target.closest('mark.hl');
+  if(hl){ speak(hl.dataset.word, null); return; }
 });
 
 // Preload voices
