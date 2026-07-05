@@ -32,6 +32,8 @@
   .script .zh{color:var(--muted);font-size:14px;line-height:1.9}
   mark.hl{background:var(--hl);color:var(--ink);padding:1px 3px;border-radius:3px;font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--accent);transition:.1s}
   mark.hl:hover{background:var(--accent);color:#04121a}
+  mark.hl.focus{border-bottom:2.5px solid #fbbf24;background:rgba(251,191,36,.14);color:#fff8e0}
+  mark.hl.focus:hover{background:#fbbf24;color:#04121a}
   .vocab-col .vlabel{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
   .vocab-col .vlabel .cnt{background:rgba(15,199,123,.16);color:var(--accent);font-size:10px;padding:2px 6px;border-radius:4px}
   .vlist{display:flex;flex-direction:column;gap:6px}
@@ -320,6 +322,17 @@ STATE.starred = STATE.starred || {};
 function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escapeAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
 
+// ===== Focus words (unfamiliar 21) with syllable breakdowns =====
+const FOCUS_WORDS={
+  "authenticity":"au·then·tic·i·ty","methodologically":"meth·od·o·log·i·cal·ly",
+  "synthetic":"syn·thet·ic","breadth":"breadth","depth":"depth",
+  "fidelity":"fi·del·i·ty","structural":"struc·tur·al","variability":"var·i·a·bil·i·ty",
+  "evaluated":"e·val·u·at·ed","conceptually":"con·cep·tu·al·ly","practically":"prac·ti·cal·ly",
+  "experiential":"ex·pe·ri·en·tial","volatility":"vol·a·til·i·ty","stabilize":"sta·bi·lize",
+  "deviate":"de·vi·ate","fillers":"fill·ers","polished":"pol·ished",
+  "fluent":"flu·ent","fluency":"flu·en·cy","probe":"probe","rituals":"rit·u·als"
+};
+
 // Highlight vocab words in script (case-insensitive, handles common inflections)
 function highlight(script, words){
   if(!words || words.length===0) return escapeHTML(script);
@@ -350,7 +363,11 @@ function highlight(script, words){
     html += escapeHTML(script.substring(pos, m.start));
     const v = VOCAB[m.base];
     const zhPlain = v.zh.replace(/<[^>]+>/g,'');
-    html += `<mark class="hl" data-word="${escapeAttr(m.base)}" title="${escapeAttr(m.base+' /'+v.kk+'/ '+zhPlain)}">${escapeHTML(m.matched)}</mark>`;
+    // If base word is in FOCUS_WORDS, use syllable-broken display
+    const focusKey = FOCUS_WORDS[m.base.toLowerCase()] ? m.base.toLowerCase() : null;
+    const displayText = focusKey ? FOCUS_WORDS[focusKey] : escapeHTML(m.matched);
+    const cls = focusKey ? 'hl focus' : 'hl';
+    html += `<mark class="${cls}" data-word="${escapeAttr(m.base)}" title="${escapeAttr(m.base+' /'+v.kk+'/ '+zhPlain)}">${displayText}</mark>`;
     pos = m.end;
   });
   html += escapeHTML(script.substring(pos));

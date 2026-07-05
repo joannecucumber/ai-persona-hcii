@@ -267,6 +267,7 @@
   .notes .tm{display:inline-block;background:rgba(15,199,123,.16);color:var(--accent);font-weight:800;font-size:.85rem;padding:.25rem .75rem;border-radius:999px;margin-bottom:1rem}
   .notes .sn{color:var(--ink);font-size:1.2rem;font-weight:800;margin-bottom:1.3rem;padding-bottom:.9rem;border-bottom:1px solid var(--line)}
   .notes .en{font-size:1.05rem;line-height:1.6;color:var(--ink)}
+  .notes .syl{border-bottom:1.8px solid #fbbf24;padding:0 1px;color:#fff8e0;font-weight:600}
   .notes .zhs{font-size:1.02rem;line-height:1.8;color:var(--muted);margin-top:1.2rem}
   .notes .zhs::before{content:"中文";display:block;color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.16em;margin-bottom:.4rem}
   .notes .ctrl{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem}
@@ -506,6 +507,28 @@
   const toSec=s=>{if(!s||!s.includes(':'))return 0;const[m,c]=s.split(':').map(Number);return (m||0)*60+(c||0)};
   function runningTime(n){let t=0;for(let k=0;k<=n;k++)t+=toSec(TIMES[k]||"0:00");const m=Math.floor(t/60),c=t%60;return m+':'+String(c).padStart(2,'0')};
 
+  // ===== Focus words (unfamiliar 21) with syllable breakdowns =====
+  const FOCUS_WORDS={
+    "authenticity":"au·then·tic·i·ty","methodologically":"meth·od·o·log·i·cal·ly",
+    "synthetic":"syn·thet·ic","breadth":"breadth","depth":"depth",
+    "fidelity":"fi·del·i·ty","structural":"struc·tur·al","variability":"var·i·a·bil·i·ty",
+    "evaluated":"e·val·u·at·ed","conceptually":"con·cep·tu·al·ly","practically":"prac·ti·cal·ly",
+    "experiential":"ex·pe·ri·en·tial","volatility":"vol·a·til·i·ty","stabilize":"sta·bi·lize",
+    "deviate":"de·vi·ate","fillers":"fill·ers","polished":"pol·ished",
+    "fluent":"flu·ent","fluency":"flu·en·cy","probe":"probe","rituals":"rit·u·als"
+  };
+  function escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function injectSyllables(text){
+    if(!text) return '';
+    let html=escHTML(text);
+    Object.keys(FOCUS_WORDS).sort((a,b)=>b.length-a.length).forEach(word=>{
+      const esc=word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      const pattern=new RegExp('\\b('+esc+')\\b','gi');
+      html=html.replace(pattern,()=>'<span class="syl">'+FOCUS_WORDS[word]+'</span>');
+    });
+    return html;
+  }
+
   const NOTES=[
     {t:"開場｜Title",
      en:"Good morning. I'm Chieh-An from National Taiwan University of Science and Technology. Today I'd like to share with you the work I did with Prof. Tang on AI personas.",
@@ -632,7 +655,7 @@
     const nt=NOTES[i]||{t:'',en:'',zh:''};
     document.getElementById('tm').textContent='⏱ '+(TIMES[i]||'')+'　(running '+runningTime(i)+')';
     document.getElementById('sn').textContent=nt.t;
-    document.getElementById('nen').textContent=nt.en;
+    document.getElementById('nen').innerHTML=injectSyllables(nt.en);
     document.getElementById('nzh').textContent=nt.zh;
     const sr=SRC[i]||{en:'',zh:''};
     const srcEl=document.getElementById('src');
