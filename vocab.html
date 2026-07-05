@@ -46,6 +46,32 @@
   .play:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
   .play.playing{background:var(--accent);color:#04121a;border-color:var(--accent);animation:pulse 1s infinite}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  /* Mastery state on slide card */
+  section.slide.m-weak{border-left:5px solid #f66}
+  section.slide.m-medium{border-left:5px solid #fbbf24}
+  section.slide.m-good{border-left:5px solid var(--accent)}
+  .mastery-btns{display:flex;gap:5px;margin-left:8px}
+  .mbtn{background:transparent;border:1.5px solid rgba(255,255,255,.16);color:var(--muted);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;transition:.12s;white-space:nowrap;line-height:1}
+  .mbtn:hover{border-color:var(--accent);color:var(--ink)}
+  .mbtn[data-lvl="weak"].on{background:rgba(246,102,102,.16);border-color:#f66;color:#f66}
+  .mbtn[data-lvl="medium"].on{background:rgba(251,191,36,.16);border-color:#fbbf24;color:#fbbf24}
+  .mbtn[data-lvl="good"].on{background:rgba(15,199,123,.16);border-color:var(--accent);color:var(--accent)}
+  /* Star button on vocab row */
+  .star{width:26px;height:26px;background:transparent;border:none;font-size:16px;color:rgba(255,255,255,.28);cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+  .star:hover{transform:scale(1.15);color:#fbbf24}
+  .star.on{color:#fbbf24;text-shadow:0 0 8px rgba(251,191,36,.4)}
+  .vrow.starred{background:rgba(251,191,36,.06);border-color:rgba(251,191,36,.35)}
+  .vrow{grid-template-columns:1fr auto auto}
+  .vrow>.play{margin-left:4px}
+  /* Filter chips */
+  .filters{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-left:8px}
+  .filters .chip{background:var(--card);border:1.3px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:20px;cursor:pointer;transition:.12s;font-size:12px;font-weight:600;white-space:nowrap}
+  .filters .chip:hover{border-color:var(--accent)}
+  .filters .chip.on{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  .stats{color:var(--muted);font-size:12px;margin-left:auto;padding:6px 12px;background:var(--card);border:1px solid var(--line);border-radius:8px}
+  .stats b{color:var(--ink)}
+  /* Hidden when filter mismatches */
+  .vrow.hide-by-star{display:none}
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid var(--line)}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
@@ -62,7 +88,11 @@
   <input id="q" type="text" placeholder="搜尋英文 / 中文 / KK …">
   <button class="btn" id="rateBtn" data-rate="0.85">0.85×</button>
   <button class="btn" id="modeBtn">📖 只看講稿</button>
-  <span class="count" id="count"></span>
+  <div class="filters">
+    <button class="chip" id="fltStar">⭐ 只看標星</button>
+    <button class="chip" id="fltWeak">🔴 只看不熟</button>
+  </div>
+  <span class="stats" id="stats"></span>
 </div>
 
 <div id="content"></div>
@@ -272,6 +302,22 @@ const SLIDES = [
 
 let RATE = 0.85;
 let SCRIPT_ONLY = false;
+let FILTER_STAR = false;
+let FILTER_WEAK = false;
+
+// ===== Persistence =====
+const STATE_KEY = 'hcii-vocab-state-v1';
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(STATE_KEY) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveState(){
+  try{ localStorage.setItem(STATE_KEY, JSON.stringify(STATE)); }
+  catch(e){}
+}
+const STATE = Object.assign({mastery:{}, starred:{}}, loadState());
+STATE.mastery = STATE.mastery || {};
+STATE.starred = STATE.starred || {};
 
 function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escapeAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
@@ -321,27 +367,41 @@ function renderAll(){
     totalVocab += s.words.length;
     const sec = document.createElement('section');
     sec.className = 'slide';
+    // Restore mastery class
+    const lvl = STATE.mastery[s.n];
+    if(lvl) sec.classList.add('m-' + lvl);
+    sec.dataset.slideN = s.n;
     sec.dataset.search = (s.t + ' ' + s.en + ' ' + s.zh + ' ' + s.words.join(' ')).toLowerCase();
     const scriptHTML = highlight(s.en, s.words);
     const vocabHTML = s.words.map(base => {
       if(!VOCAB[base]) return '';
       const v = VOCAB[base];
-      return `<div class="vrow">
+      const starred = !!STATE.starred[base];
+      return `<div class="vrow${starred?' starred':''}" data-word-key="${escapeAttr(base)}">
         <div class="w">
           <div class="en">${escapeHTML(base)}</div>
           <div class="kk">/ ${v.kk} /</div>
           <div class="zh">${v.zh}</div>
         </div>
+        <button class="star${starred?' on':''}" data-word="${escapeAttr(base)}" title="標星 / 取消星號">${starred?'★':'☆'}</button>
         <button class="play" data-word="${escapeAttr(base)}" title="播放">▶</button>
       </div>`;
     }).join('');
+    const masteryBtns = `<div class="mastery-btns">
+        <button class="mbtn${lvl==='weak'?' on':''}" data-lvl="weak" data-slide="${s.n}">🔴 不熟</button>
+        <button class="mbtn${lvl==='medium'?' on':''}" data-lvl="medium" data-slide="${s.n}">🟡 普通</button>
+        <button class="mbtn${lvl==='good'?' on':''}" data-lvl="good" data-slide="${s.n}">🟢 熟悉</button>
+      </div>`;
     sec.innerHTML = `
       <div class="slide-head">
         <div>
           <div class="slide-num">Slide ${s.n}</div>
           <div class="slide-ttl">${escapeHTML(s.t)}</div>
         </div>
-        <div class="slide-time">⏱ ${s.time}</div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          ${masteryBtns}
+          <div class="slide-time">⏱ ${s.time}</div>
+        </div>
       </div>
       <div class="slide-body">
         <div class="script">
@@ -357,21 +417,64 @@ function renderAll(){
       </div>`;
     container.appendChild(sec);
   });
-  document.getElementById('count').textContent = `${SLIDES.length} 頁 · ${totalVocab} 個生字位置`;
+  updateStats(totalVocab);
+  applyFilters();
+}
+
+function updateStats(totalVocab){
+  totalVocab = totalVocab || SLIDES.reduce((s,x)=>s+x.words.length, 0);
+  const goodSlides = SLIDES.filter(s => STATE.mastery[s.n]==='good').length;
+  const weakSlides = SLIDES.filter(s => STATE.mastery[s.n]==='weak').length;
+  const starredCnt = Object.keys(STATE.starred).filter(k => STATE.starred[k]).length;
+  document.getElementById('stats').innerHTML =
+    `<b>${goodSlides}</b>/${SLIDES.length} 熟 · <b style="color:#f66">${weakSlides}</b> 不熟 · <b style="color:#fbbf24">${starredCnt}</b> ⭐`;
 }
 
 renderAll();
 
-// Search
-document.getElementById('q').addEventListener('input', e=>{
-  const q = e.target.value.trim().toLowerCase();
-  let visible = 0;
-  document.querySelectorAll('.slide').forEach(s=>{
-    const match = !q || s.dataset.search.includes(q);
-    s.classList.toggle('hidden', !match);
-    if(match) visible++;
+// ===== Filter logic (combines search + star + weak filters) =====
+function applyFilters(){
+  const q = (document.getElementById('q').value || '').trim().toLowerCase();
+  let visSlides = 0;
+  document.querySelectorAll('.slide').forEach(sec => {
+    const n = +sec.dataset.slideN;
+    const searchMatch = !q || sec.dataset.search.includes(q);
+    const weakMatch = !FILTER_WEAK || STATE.mastery[n] === 'weak';
+    // Star filter: if on, only show slides that have starred words AND hide non-starred rows
+    let starMatch = true;
+    if(FILTER_STAR){
+      const words = SLIDES.find(s=>s.n===n).words;
+      starMatch = words.some(w => STATE.starred[w]);
+      // Also hide non-starred vrows
+      sec.querySelectorAll('.vrow').forEach(vr => {
+        const k = vr.dataset.wordKey;
+        vr.classList.toggle('hide-by-star', !STATE.starred[k]);
+      });
+    } else {
+      sec.querySelectorAll('.vrow').forEach(vr => vr.classList.remove('hide-by-star'));
+    }
+    const show = searchMatch && weakMatch && starMatch;
+    sec.classList.toggle('hidden', !show);
+    if(show) visSlides++;
   });
-  document.getElementById('count').textContent = q ? `符合 ${visible} 頁` : `${SLIDES.length} 頁`;
+  updateStats();
+}
+
+// Search input
+document.getElementById('q').addEventListener('input', applyFilters);
+
+// Star filter chip
+document.getElementById('fltStar').addEventListener('click', e => {
+  FILTER_STAR = !FILTER_STAR;
+  e.currentTarget.classList.toggle('on', FILTER_STAR);
+  applyFilters();
+});
+
+// Weak filter chip
+document.getElementById('fltWeak').addEventListener('click', e => {
+  FILTER_WEAK = !FILTER_WEAK;
+  e.currentTarget.classList.toggle('on', FILTER_WEAK);
+  applyFilters();
 });
 
 // Rate cycle
@@ -430,12 +533,54 @@ function speak(word, btn){
   }
 }
 
-// Click play button OR click highlighted vocab in script
+// ===== Click delegator: play / mark highlight / mastery / star =====
 document.addEventListener('click', e=>{
   const btn = e.target.closest('.play');
   if(btn){ speak(btn.dataset.word, btn); return; }
   const hl = e.target.closest('mark.hl');
   if(hl){ speak(hl.dataset.word, null); return; }
+  // Mastery button
+  const mbtn = e.target.closest('.mbtn');
+  if(mbtn){
+    const n = +mbtn.dataset.slide;
+    const lvl = mbtn.dataset.lvl;
+    const prev = STATE.mastery[n];
+    if(prev === lvl){
+      // Toggle off
+      delete STATE.mastery[n];
+    } else {
+      STATE.mastery[n] = lvl;
+    }
+    saveState();
+    // Update UI
+    const sec = mbtn.closest('.slide');
+    sec.classList.remove('m-weak','m-medium','m-good');
+    if(STATE.mastery[n]) sec.classList.add('m-' + STATE.mastery[n]);
+    sec.querySelectorAll('.mbtn').forEach(b => {
+      b.classList.toggle('on', b.dataset.lvl === STATE.mastery[n]);
+    });
+    updateStats();
+    if(FILTER_WEAK) applyFilters();
+    return;
+  }
+  // Star button
+  const star = e.target.closest('.star');
+  if(star){
+    const word = star.dataset.word;
+    const on = !STATE.starred[word];
+    if(on) STATE.starred[word] = true;
+    else delete STATE.starred[word];
+    saveState();
+    // Update ALL rows for this word (word may appear on multiple slides)
+    document.querySelectorAll(`.vrow[data-word-key="${CSS.escape(word)}"]`).forEach(vr => {
+      vr.classList.toggle('starred', on);
+      const st = vr.querySelector('.star');
+      if(st){ st.classList.toggle('on', on); st.textContent = on ? '★' : '☆'; }
+    });
+    updateStats();
+    if(FILTER_STAR) applyFilters();
+    return;
+  }
 });
 
 // Preload voices
