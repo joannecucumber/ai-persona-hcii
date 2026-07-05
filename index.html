@@ -40,6 +40,15 @@
     background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat;
     overflow:hidden}
   .mk::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18px;background:#0FC77B;z-index:2}
+  /* Audience mode (spawned by presenter): hide UI chrome, show slide only */
+  body.audience-mode .notes,
+  body.audience-mode .nav,
+  body.audience-mode .pageno,
+  body.audience-mode .hint,
+  body.audience-mode .bar,
+  body.audience-mode .mdeck-close{display:none !important}
+  body.audience-mode{cursor:none}
+  body.audience-mode .deck{right:0 !important}
   /* QA slides: bump text size ~28% for readability on stage */
   .qa-slide .mk-kicker{font-size:28px}
   .qa-slide .mk-h1{font-size:54px !important}
@@ -631,7 +640,24 @@
     else{srcEl.style.display='none';}
     requestAnimationFrame(()=>{try{fitMockups();}catch(e){}});
   }
-  function next(){show(i+1)} function prev(){show(i-1)}
+  /* ===== Presenter Mode sync (BroadcastChannel) ===== */
+  const PARAMS=new URLSearchParams(location.search);
+  const IS_AUDIENCE=PARAMS.get('mode')==='audience';
+  if(IS_AUDIENCE) document.body.classList.add('audience-mode');
+  let syncChan=null;
+  try{syncChan=new BroadcastChannel('hcii-deck-sync');}catch(e){}
+  if(syncChan){
+    syncChan.onmessage=(ev)=>{
+      const d=ev.data;
+      if(d.type==='goto' && typeof d.index==='number'){ if(d.index!==i) show(d.index); }
+      else if(d.type==='ping' && !IS_AUDIENCE){ syncChan.postMessage({type:'goto',index:i}); }
+    };
+    // Audience announces its readiness so presenter can sync current state
+    if(IS_AUDIENCE) syncChan.postMessage({type:'ping'});
+  }
+
+  function next(){show(i+1); if(syncChan && !IS_AUDIENCE) syncChan.postMessage({type:'goto',index:i});}
+  function prev(){show(i-1); if(syncChan && !IS_AUDIENCE) syncChan.postMessage({type:'goto',index:i});}
   document.getElementById('next').onclick=next;
   document.getElementById('prev').onclick=prev;
   document.addEventListener('keydown',e=>{
