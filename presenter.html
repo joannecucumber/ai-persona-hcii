@@ -45,7 +45,6 @@
   .script-box .stitle .time{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.05em;font-family:'Consolas','SF Mono',monospace}
   .script-box .lbl{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:10px 0 6px}
   .script-box .en{color:var(--ink);font-size:17px;line-height:1.65;font-weight:500}
-  .script-box .syl{border-bottom:2px solid #fbbf24;padding:0 1px;color:#fff8e0;font-weight:700}
   .script-box .zh{color:var(--muted);font-size:14px;line-height:1.85;margin-top:12px;padding-top:12px;border-top:1px dashed rgba(15,199,123,.14)}
 
   .info-strip{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:10px 16px;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap}
@@ -116,27 +115,6 @@
 </footer>
 
 <script>
-// ===== Focus words (unfamiliar 21) =====
-const FOCUS_WORDS={
-  "authenticity":"au·then·tic·i·ty","methodologically":"meth·od·o·log·i·cal·ly",
-  "synthetic":"syn·thet·ic","breadth":"breadth","depth":"depth",
-  "fidelity":"fi·del·i·ty","structural":"struc·tur·al","variability":"var·i·a·bil·i·ty",
-  "evaluated":"e·val·u·at·ed","conceptually":"con·cep·tu·al·ly","practically":"prac·ti·cal·ly",
-  "experiential":"ex·pe·ri·en·tial","volatility":"vol·a·til·i·ty","stabilize":"sta·bi·lize",
-  "deviate":"de·vi·ate","fillers":"fill·ers","polished":"pol·ished",
-  "fluent":"flu·ent","fluency":"flu·en·cy","probe":"probe","rituals":"rit·u·als"
-};
-function _escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function injectSyllables(text){
-  if(!text) return '';
-  let html=_escHTML(text);
-  Object.keys(FOCUS_WORDS).sort((a,b)=>b.length-a.length).forEach(word=>{
-    const esc=word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-    html=html.replace(new RegExp('\\b('+esc+')\\b','gi'),()=>'<span class="syl">'+FOCUS_WORDS[word]+'</span>');
-  });
-  return html;
-}
-
 // ===== Slide data (title, script, time) =====
 const SLIDES = [
   {t:"Title · 開場", time:"0:30",
@@ -229,7 +207,7 @@ function render(broadcast=true){
   document.getElementById('nextImg').src = 'canva/s' + (nextI+1) + '.png';
   document.getElementById('stitle').textContent = s.t;
   document.getElementById('stime').textContent = '⏱ ' + s.time;
-  document.getElementById('sen').innerHTML = injectSyllables(s.en);
+  document.getElementById('sen').textContent = s.en || '';
   document.getElementById('szh').textContent = s.zh || '';
   document.querySelector('.script-box').scrollTop = 0;
   if(broadcast) chan.postMessage({type:'goto', index: idx});
