@@ -29,6 +29,7 @@
   @media (max-width:820px){.slide-body{grid-template-columns:1fr}}
   .script .lang{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
   .script .en{color:var(--ink);font-size:15.5px;line-height:1.7;margin-bottom:14px}
+  .script .en .p1,.script .en .p2{color:#5a6660;opacity:.55;font-weight:300;padding:0 1px}
   .script .zh{color:var(--muted);font-size:14px;line-height:1.9}
   mark.hl{background:var(--hl);color:var(--ink);padding:1px 3px;border-radius:3px;font-weight:600;cursor:pointer;border-bottom:1.5px solid var(--accent);transition:.1s}
   mark.hl:hover{background:var(--accent);color:#04121a}
@@ -321,6 +322,13 @@ function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 function escapeAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
 
 // Highlight vocab words in script (case-insensitive, handles common inflections)
+function markPauses(html){
+  // Wrap | and || in spans for grey styling. Operates on already-escaped HTML.
+  return html.replace(/\|\|?/g, m => m === '||'
+    ? '<span class="p2">||</span>'
+    : '<span class="p1">|</span>');
+}
+
 function highlight(script, words){
   if(!words || words.length===0) return escapeHTML(script);
   const matches = [];
@@ -370,7 +378,7 @@ function renderAll(){
     if(lvl) sec.classList.add('m-' + lvl);
     sec.dataset.slideN = s.n;
     sec.dataset.search = (s.t + ' ' + s.en + ' ' + s.zh + ' ' + s.words.join(' ')).toLowerCase();
-    const scriptHTML = highlight(s.en, s.words);
+    const scriptHTML = markPauses(highlight(s.en, s.words));
     const vocabHTML = s.words.map(base => {
       if(!VOCAB[base]) return '';
       const v = VOCAB[base];
