@@ -77,6 +77,33 @@
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   @media (max-width:600px){body{padding:20px 14px 60px}h1{font-size:20px}.script .en{font-size:14.5px}.slide-ttl{font-size:16px}}
+  /* ===== Q&A section ===== */
+  .qa-section-title{font-size:22px;font-weight:800;color:var(--ink);margin:60px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+  .qa-section-title .sub{color:var(--muted);font-size:14px;font-weight:500;margin-left:12px}
+  .qa-card,.tech-card{background:var(--card);border:1px solid var(--line);border-left:4px solid #fbbf24;border-radius:12px;padding:20px 22px;margin-top:20px}
+  .qa-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(251,191,36,.18)}
+  .qa-num{color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:.14em;background:rgba(251,191,36,.14);padding:4px 10px;border-radius:6px}
+  .qa-topic{color:var(--ink);font-size:16px;font-weight:700}
+  .qa-block{margin-top:12px}
+  .qa-block .lbl{color:var(--accent);font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  .qa-block .lbl.warn-lbl{color:#fbbf24}
+  .qa-en{color:var(--ink);font-size:15px;line-height:1.65;font-style:italic}
+  .qa-zh{color:var(--muted);font-size:13.5px;line-height:1.85;margin-top:6px}
+  .qa-block.lead{background:rgba(251,191,36,.08);border-left:3px solid #fbbf24;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:14px}
+  .qa-block.lead .lead-en{color:#fff8e0;font-size:16px;font-weight:700;line-height:1.4}
+  .qa-block.lead .lead-zh{color:#fbbf24;font-size:13.5px;margin-top:4px}
+  .qa-block.answer .qa-en{font-style:normal;font-weight:500}
+  /* Technique cards */
+  .tech-card{border-left-color:var(--accent)}
+  .tech-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(15,199,123,.18)}
+  .tech-num{color:var(--accent);font-size:18px;font-weight:800}
+  .tech-name{color:var(--ink);font-size:16px;font-weight:700}
+  .tech-use{color:var(--muted);font-size:13px;margin-bottom:12px}
+  .tech-use b{color:var(--ink)}
+  .tech-example{background:rgba(0,0,0,.24);border-radius:8px;padding:12px 14px;margin-top:6px;border-left:3px solid var(--accent)}
+  .tech-example .ex-en{color:var(--ink);font-size:14.5px;font-style:italic;line-height:1.6}
+  .tech-example .ex-zh{color:var(--muted);font-size:13px;line-height:1.7;margin-top:6px}
+  .tech-note{color:#fbbf24;font-size:12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -97,6 +124,8 @@
 </div>
 
 <div id="content"></div>
+
+<div id="qa-content"></div>
 
 <footer>KK 音標 · 中英對照 · Web Speech API + Google TTS · <a href="./">回主 deck</a></footer>
 
@@ -594,6 +623,119 @@ if('speechSynthesis' in window){
   speechSynthesis.onvoiceschanged = ()=>{};
   speechSynthesis.getVoices();
 }
+
+// ===== Q&A rehearsal data =====
+const QA_DATA = [
+  {n:1, topic:"樣本太小 · Sample Size (Methodological)",
+   en_q:"You had only six evaluators in Study 1 and two human participants in Study 2. Isn't your sample too small to draw conclusions?",
+   zh_q:"研究一只有 6 位評估者、研究二只有 2 位真人受訪者。樣本是不是太小，沒辦法下結論？",
+   lead_en:"You are right that the sample is small.",
+   lead_zh:"對，樣本確實小。",
+   en_a:"But this is an exploratory, methodology-development study, not a confirmatory one. Our goal was to validate that the six-dimension script can produce stable and discriminable AI personas, and to identify what kinds of structural differences exist between AI and human responses. The differences we found are very large — for example, a 79-percent gap on authenticity dimensions — which are robust enough to warrant attention even with a small sample. We see this study as the starting point of a research program, and future work will scale up the comparison.",
+   zh_a:"但這是一個方法論發展的探索性研究，不是驗證性研究。我們的目標是驗證六維度劇本能不能產生穩定且可區辨的 AI 人物誌，以及識別 AI 跟真人之間有哪些結構性差異。我們找到的差異非常大，例如真實性維度有 79% 的差距，即使樣本小，這個差距還是值得關注。我們把這份研究當作一個研究方向的起點，未來會擴大樣本跟情境。"},
+  {n:2, topic:"單一編碼者 · Single Coder (Validity)",
+   en_q:"You were the only coder for the six linguistic dimensions. Without inter-rater reliability, how do we know these scores aren't just your subjective interpretation?",
+   zh_q:"六個語言維度都是你一個人編碼。沒有跨編碼者信度檢驗，這些分數會不會其實是你個人主觀詮釋？",
+   lead_en:"That is a fair concern.",
+   lead_zh:"這是合理的質疑。",
+   en_a:"To reduce subjectivity, we defined quantifiable indicators for each dimension. For example, we counted hesitation markers for variability, and measured the time delay before reflection surfaces for tempo. So the scoring is grounded in observable signals, not personal feeling. That said, a second coder with inter-rater reliability checks would strengthen the validity, and we plan to do that in future work.",
+   zh_a:"為了降低主觀性，每個維度我們都定了可量化的指標。例如變化程度看語氣詞個數、思考節奏看反思浮現的延遲時間。所以評分有可觀察的依據，不是憑感覺。當然，未來要加上第二編碼者跟跨編碼信度檢驗，會讓信度更強。"},
+  {n:3, topic:"跨領域通用性 · Generalizability (Scope)",
+   en_q:"You used Taiwan Gen Z ETF investors as your context. How well does the method generalize to other user groups, such as healthcare or enterprise software users?",
+   zh_q:"你選台灣 Z 世代 ETF 投資者當情境，這個方法在其他領域，像醫療或企業軟體，通用嗎？",
+   lead_en:"We chose this context specifically because of its strong emotional-behavioral coupling.",
+   lead_zh:"我們選這個情境是因為它情緒行為連動最強。",
+   en_a:"The strong coupling makes the contrast between two opposing personas more visible. The method itself, the six-dimension script, is domain-agnostic. The framework can be applied to any user group, but the specific dimensions and example questions need to be re-grounded in the new context. We see Gen Z ETF investors as a test bed, not the limit of the method.",
+   zh_a:"這種強連動最能凸顯兩個對立角色的差異。方法本身，也就是六維度劇本，是不限領域的。架構可以套到任何使用者群體，只是各維度的具體內容跟訪談問題要根據新情境重新建構。Z 世代 ETF 投資者是測試場域，不是方法的上限。"},
+  {n:4, topic:"為什麼不讓 AI 更像真人 · Why Not Make AI More Human-Like (Conceptual)",
+   en_q:"If the AI is 'too perfect' and lacks authenticity markers, shouldn't future work focus on making AI better mimic those markers, rather than positioning it as a baseline?",
+   zh_q:"如果 AI 是「太完美」、缺乏真實性的標記，未來不是應該讓 AI 模仿這些標記更像真人，而不是把它定位成對照基準？",
+   lead_en:"That is exactly the question we deliberately moved away from.",
+   lead_zh:"這正是我們刻意不走的方向。",
+   en_a:"Most existing work tries to make the AI more human-like. But our argument is different. Even if the AI could be made to mimic hesitations or pauses, it would still not be experiencing the cognition behind those markers. It would only be reproducing the surface pattern. We think the more useful position is to treat the AI as a structural baseline, and use human interviews to capture what only humans can produce. This is not a competition; it is a division of labor.",
+   zh_a:"多數現有研究都在讓 AI 更像真人。但我們的論點不同。就算 AI 能模仿遲疑或停頓，它還是沒有經歷那些標記背後的認知歷程，只是複製表面模式。我們認為更有用的定位是把 AI 當作結構性對照基準，讓真人訪談去捕捉只有真人能產生的部分。這不是競爭，是分工。"},
+  {n:5, topic:"實務工作流如何整合 · Workflow Integration (Application)",
+   en_q:"In practice, what does it actually look like for a designer to use both AI persona and human interviews together? Where does the AI baseline get integrated into the workflow?",
+   zh_q:"實際上設計師要怎麼同時用 AI 人物誌跟真人訪談？AI 對照基準怎麼整合進工作流程？",
+   lead_en:"In our recommended workflow, the AI persona comes first.",
+   lead_zh:"我們建議的流程是 AI 人物誌先上。",
+   en_a:"A designer talks to the AI in the early stage, when they need to explore the problem space quickly and cheaply. The AI gives them a structured, articulate response, a baseline of what the 'designed answer' looks like. Then, when they conduct human interviews later, they can directly compare. The places where humans hesitate, contradict themselves, or get emotional become signals, not noise, because the AI baseline makes them visible. In short: AI for breadth early, humans for depth later.",
+   zh_a:"設計師在前期需要快速、低成本探索問題空間時，先跟 AI 對話。AI 給的是結構化、條理清楚的回應，是「設計過的答案」的基準。後來真人訪談時，可以直接對照。真人遲疑、自我矛盾、情緒激動的地方就變成訊號，不是雜訊，因為 AI 對照基準讓這些訊號被凸顯。簡單講：AI 前期廣度、真人後期深度。"},
+];
+
+const TECH_DATA = [
+  {n:"1️⃣", name:"Acknowledge & Pivot · 緩衝橋接",
+   use:"第一秒卡住、需要爭取 2-3 秒整理思路",
+   ex_en:"Thank you for that question. It's an important point. The way I see it is...",
+   ex_zh:"「謝謝這個問題，這個觀察很重要。我的看法是...」"},
+  {n:"2️⃣", name:"Restate to Clarify · 重述確認",
+   use:"問題太長/太抽象、想把問題引導到你會的方向",
+   ex_en:"If I understand correctly, you're asking whether X. Is that right?",
+   ex_zh:"「我理解一下，你的問題是不是 X？對嗎？」"},
+  {n:"3️⃣", name:"Honest Limit → Future · 誠實承認 + 拋未來",
+   use:"被問到沒做的事、樣本太小、方法侷限、超出研究範圍",
+   ex_en:"You're right, that's a real limitation. In future work, we plan to...",
+   ex_zh:"「你說得對，這確實是侷限。未來研究我們會...」"},
+  {n:"4️⃣", name:"Anchor to Concrete · 拉回具體案例",
+   use:"問題太抽象、想避免空洞回答",
+   ex_en:"Let me give a concrete example from our data...",
+   ex_zh:"「我用研究裡的具體例子來說明...」"},
+  {n:"5️⃣", name:"Yes-and, not Yes-but · 同意並延伸",
+   use:"被質疑或挑戰時，避免顯得防衛",
+   ex_en:"✅ Yes, and that's exactly why we...    ❌ Don't say 'Yes, but...'",
+   ex_zh:"✅「對，這正是為什麼我們...」    ❌ 不要說「對，但是...」"},
+  {n:"🎁", name:"Bonus · Pause Power · 沉默是金",
+   use:"被問到難題時，不要急著填補沉默",
+   ex_en:"Hmm, let me think for a moment.  → 停 2-3 秒 → 直接開講，不需道歉。",
+   ex_zh:"「嗯，讓我想一下。」 → 停 → 直接開講，不要道歉。"},
+];
+
+function renderQA(){
+  const qc = document.getElementById('qa-content');
+  if(!qc) return;
+  let html = `<div class="qa-section-title">Q&amp;A 5 個常見問題演練 <span class="sub">口試 / 現場都適用</span></div>`;
+  QA_DATA.forEach(q => {
+    html += `
+      <section class="qa-card">
+        <div class="qa-head">
+          <span class="qa-num">Q${q.n}</span>
+          <span class="qa-topic">${escapeHTML(q.topic)}</span>
+        </div>
+        <div class="qa-block">
+          <div class="lbl">🇺🇸 QUESTION</div>
+          <div class="qa-en">${escapeHTML(q.en_q)}</div>
+          <div class="qa-zh">🇹🇼 ${escapeHTML(q.zh_q)}</div>
+        </div>
+        <div class="qa-block lead">
+          <div class="lbl warn-lbl">🗣️ LEAD LINE · 開頭句</div>
+          <div class="lead-en">"${escapeHTML(q.lead_en)}"</div>
+          <div class="lead-zh">「${escapeHTML(q.lead_zh)}」</div>
+        </div>
+        <div class="qa-block answer">
+          <div class="lbl">✏️ ANSWER · 接下去講</div>
+          <div class="qa-en">${escapeHTML(q.en_a)}</div>
+          <div class="qa-zh">🇹🇼 ${escapeHTML(q.zh_a)}</div>
+        </div>
+      </section>`;
+  });
+  html += `<div class="qa-section-title">Q&amp;A 5 個萬用回答框架 <span class="sub">卡住時的救命句型</span></div>`;
+  TECH_DATA.forEach(t => {
+    html += `
+      <section class="tech-card">
+        <div class="tech-head">
+          <span class="tech-num">${t.n}</span>
+          <span class="tech-name">${escapeHTML(t.name)}</span>
+        </div>
+        <div class="tech-use"><b>用在</b>：${escapeHTML(t.use)}</div>
+        <div class="tech-example">
+          <div class="ex-en">🇺🇸 ${escapeHTML(t.ex_en)}</div>
+          <div class="ex-zh">🇹🇼 ${escapeHTML(t.ex_zh)}</div>
+        </div>
+      </section>`;
+  });
+  qc.innerHTML = html;
+}
+renderQA();
 </script>
 </body>
 </html>
