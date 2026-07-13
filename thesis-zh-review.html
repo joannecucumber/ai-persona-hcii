@@ -29,7 +29,6 @@
   .item-head .sec{font-family:'Consolas','SF Mono',monospace;color:var(--muted);font-size:13px}
   .item-head .sec b{color:var(--accent)}
 
-  /* Slide frame — scaled from 1280×720 */
   .frame{position:relative;width:100%;aspect-ratio:16/9;border:1.6px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
   .slide-inner{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:top left}
   .slide-inner .slide{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column;justify-content:center;opacity:1!important;padding:48px 72px;overflow:hidden;
@@ -40,7 +39,6 @@
     background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat}
   .slide-inner .slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:10px;background:var(--accent)}
 
-  /* Slide typography — fixed 1280×720 base */
   .slide-inner .kicker{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}
   .slide-inner h1.main{font-size:30px;font-weight:800;line-height:1.28;letter-spacing:-.01em;margin-bottom:16px;color:var(--ink)}
   .slide-inner h1.main .accent{color:var(--accent)}
@@ -95,7 +93,6 @@
   .slide-inner .thanks{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px}
   .slide-inner .thanks h1{font-size:72px;color:var(--accent);font-weight:800;letter-spacing:.05em}
   .slide-inner .thanks .p{color:var(--muted);font-size:22px}
-  /* Cover */
   .slide-inner .cover{padding:64px 96px}
   .slide-inner .cover .badge{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:16px;padding:5px 12px;border:1.5px solid var(--accent);border-radius:5px;display:inline-block;width:fit-content}
   .slide-inner .cover h1{font-size:52px;font-weight:800;line-height:1.15;margin-bottom:14px;letter-spacing:-.01em}
@@ -105,8 +102,14 @@
   .slide-inner .cover .abs b{color:var(--accent)}
   .slide-inner .cover .meta{color:var(--muted);font-size:15px;line-height:1.8}
   .slide-inner .cover .meta b{color:var(--ink)}
+  /* TOC in preview */
+  .slide-inner .toc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;margin-top:12px}
+  .slide-inner .toc-col h3.toc-chap{color:var(--accent);font-size:14px;font-weight:800;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(15,199,123,.25)}
+  .slide-inner .toc-secs{list-style:none;padding:0;margin:0}
+  .slide-inner .toc-secs > li{color:var(--muted);font-size:11px;line-height:1.6;padding:1px 0}
+  .slide-inner .toc-secs > li ul{list-style:none;padding-left:12px;margin-top:2px}
+  .slide-inner .toc-secs > li ul li{font-size:10px;color:var(--muted);opacity:.8}
 
-  /* Script side */
   .script-wrap{display:flex;flex-direction:column;gap:12px}
   .script-body{color:var(--ink);font-size:14px;line-height:1.8;letter-spacing:.02em;background:var(--card);border:1.6px solid var(--line);border-radius:10px;padding:16px 18px;flex:1}
   .script-body p{margin-bottom:10px}
@@ -139,7 +142,7 @@
   <div class="l">
     <div class="kicker">對照檢查頁 · Review</div>
     <h1><span class="accent">AI Persona</span> 論文口試 · 簡報 + 講稿</h1>
-    <div class="meta"><b>簡潔安</b>　20 頁 · 20 分鐘</div>
+    <div class="meta"><b>簡潔安</b>　20 頁 · 20 分鐘 · 對齊論文六章結構</div>
   </div>
   <div class="r">
     <a href="thesis-zh.html">▶ 開簡報</a>
@@ -159,7 +162,7 @@
   const S=window.THESIS_ZH_SCRIPTS;
 
   const SLIDES=[
-    // S1 · Cover
+    // S1 · 封面
     `<section class="slide cover">
       <div class="badge">碩士論文口試</div>
       <h1>AI Persona 能取代<br><span class="accent">真人訪談</span>嗎？</h1>
@@ -167,9 +170,32 @@
       <div class="abs">本研究不探討 AI Persona 與真人的<b>相似程度</b>，而探討兩者之間的<b>結構性差異</b>，以及此差異對設計研究的意涵。透過設計科學研究方法、六維度劇本方法論的建構，並與真人受訪者進行系統性比較，我們主張 AI Persona 的價值不在模擬真人，而在作為對照基準。</div>
       <div class="meta"><b>簡潔安</b>　指導教授：<b>唐玄輝 博士</b><br>國立臺灣科技大學　設計系碩士班　學號：M11110914</div>
     </section>`,
-    // S2
+    // S2 · 目錄
     `<section class="slide">
-      <div class="kicker">研究背景</div>
+      <div class="kicker">目錄</div>
+      <h1 class="main">論文架構 · <span class="accent">六章</span></h1>
+      <div class="toc-grid">
+        <div class="toc-col"><h3 class="toc-chap">第一章 緒論</h3><ul class="toc-secs"><li>1.1 研究背景</li><li>1.2 研究問題</li><li>1.3 研究目的</li><li>1.4 研究範圍與限制</li><li>1.5 研究流程與架構</li></ul></div>
+        <div class="toc-col"><h3 class="toc-chap">第二章 文獻探討</h3><ul class="toc-secs"><li>2.1 Persona 方法論的演進與 AI 時代的挑戰</li><li>2.2 生成式 AI 與動態人物誌：從敘事生成到行為展演</li></ul></div>
+        <div class="toc-col"><h3 class="toc-chap">第三章 研究方法</h3><ul class="toc-secs"><li>3.1 方法論基礎</li><li>3.2 研究設計</li><li>3.3 建構階段</li><li>3.4 驗證階段</li></ul></div>
+        <div class="toc-col"><h3 class="toc-chap">第四章 研究結果</h3><ul class="toc-secs"><li>4.1 建構階段結果<ul><li>4.1.1 兩位 AI Persona 的差異化表現</li><li>4.1.2 AI Persona 的穩定性驗證</li><li>4.1.3 六維度劇本方法論</li></ul></li><li>4.2 驗證階段結果<ul><li>4.2.1 AI Persona vs. 真人比較結果</li><li>4.2.2 核心發現：兩種思考模式</li></ul></li></ul></div>
+        <div class="toc-col"><h3 class="toc-chap">第五章 討論</h3><ul class="toc-secs"><li>5.1 真人訪談與 AI Persona 的優缺點比較</li><li>5.2 對設計研究流程的影響</li><li>5.3 對設計產業與設計師的影響</li></ul></div>
+        <div class="toc-col"><h3 class="toc-chap">第六章 結論與建議</h3><ul class="toc-secs"><li>6.1 研究結論</li><li>6.2 研究貢獻</li><li>6.3 研究限制</li><li>6.4 未來研究建議</li><li>6.5 總結</li></ul></div>
+      </div>
+    </section>`,
+    // S3 · 第一章 · 研究問題 · 研究目的
+    `<section class="slide">
+      <div class="kicker">第一章 · 1.2 研究問題 · 1.3 研究目的</div>
+      <h1 class="main">當 AI 進入研究流程，<span class="accent">兩個核心問題</span>浮現：</h1>
+      <div class="lead">本研究目的為探討 AI Persona 與真人受訪者在語言表現上的<b>結構性差異</b>，以及這些差異對設計研究的影響，並據此釐清 AI Persona 在設計研究流程中的定位。研究包含兩個階段性目標：<b>建構</b>與<b>驗證</b>。</div>
+      <div class="grid2">
+        <div class="card"><span class="rq-num">RQ1</span><h3 style="line-height:1.4">如何建構<b style="color:var(--accent)">穩定</b>、可用於研究的 AI Persona？</h3><p>建立一套<b>可操作、可重複</b>的 AI Persona 建構流程，使研究者能理解並掌握生成邏輯，系統性地設定角色的背景與語氣，而非被動接受模型的輸出。</p><p>→ 對應本研究的<b>建構階段</b>。</p></div>
+        <div class="card"><span class="rq-num">RQ2</span><h3 style="line-height:1.4">AI 與真人受訪者在語言表現上有哪些<b style="color:var(--accent)">結構性差異</b>？</h3><p>透過真人受訪者與 AI Persona 的訪談比較，分析兩者在<b>敘事方式、語言特徵、情緒呈現與反思節奏</b>上的差異。</p><p>→ 對應本研究的<b>驗證階段</b>。</p></div>
+      </div>
+    </section>`,
+    // S4 · 第二章 · 2.1
+    `<section class="slide">
+      <div class="kicker">第二章 · 2.1 Persona 方法論的演進與 AI 時代的挑戰</div>
       <h1 class="main">自 Cooper（1999）以來，人物誌已成為設計研究中代表使用者的核心方法，但長期面臨<span class="accent">兩項根本限制</span>。</h1>
       <div class="lead">Salminen 等（2018）系統性彙整了人物誌的既有批評，Chapman 與 Milham（2006）指出人物誌方法缺乏從資料到人物誌的可靠程序。綜合文獻，本研究歸納出與研究方向最相關的<b>兩項限制</b>：</div>
       <div class="grid2">
@@ -178,9 +204,9 @@
       </div>
       <div class="ref">Cooper (1999); Chapman & Milham (2006); Portigal (2008); Salminen et al. (2018)</div>
     </section>`,
-    // S3
+    // S5 · 第二章 · 2.2
     `<section class="slide">
-      <div class="kicker">研究缺口</div>
+      <div class="kicker">第二章 · 2.2 生成式 AI 與動態人物誌 · 從敘事生成到行為展演</div>
       <h1 class="main">生成式 AI 讓人物誌從「被閱讀的文件」變成「<span class="accent">可對話的主體</span>」— 但差異的本質尚未被探討。</h1>
       <div class="lead">大型語言模型的發展，為人物誌方法論帶來新的可能性。研究者可以透過提示詞設計，建構出<b>可對話的 AI Persona</b>：這些角色除了呈現基本背景，還能與研究者對話，使人物誌從靜態描述轉為可回應的對話對象。然而，當 AI Persona 進入設計研究流程，一個根本的問題隨之出現 — AI 與真人受訪者的差異，究竟是什麼？</div>
       <div class="grid2">
@@ -189,19 +215,9 @@
       </div>
       <blockquote>不應把 AI 視為不完美的人類模擬，而應理解為<b>兩種不同認知模式</b>的呈現。</blockquote>
     </section>`,
-    // S4
+    // S6 · 第三章 · 3.1 DSR
     `<section class="slide">
-      <div class="kicker">研究問題</div>
-      <h1 class="main">當 AI 進入研究流程，<span class="accent">兩個核心問題</span>浮現：</h1>
-      <div class="lead">本研究目的為探討 AI Persona 與真人受訪者在語言表現上的<b>結構性差異</b>，以及這些差異對設計研究的影響，並據此釐清 AI Persona 在設計研究流程中的定位。研究包含兩個階段性目標：<b>建構</b>與<b>驗證</b>。</div>
-      <div class="grid2">
-        <div class="card"><span class="rq-num">RQ1</span><h3 style="line-height:1.4">如何建構<b style="color:var(--accent)">穩定</b>、可用於研究的 AI Persona？</h3><p>建立一套<b>可操作、可重複</b>的 AI Persona 建構流程，使研究者能理解並掌握生成邏輯，系統性地設定角色的背景與語氣，而非被動接受模型的輸出。</p><p>→ 對應本研究的<b>建構階段</b>。</p></div>
-        <div class="card"><span class="rq-num">RQ2</span><h3 style="line-height:1.4">AI 與真人受訪者在語言表現上有哪些<b style="color:var(--accent)">結構性差異</b>？</h3><p>透過真人受訪者與 AI Persona 的訪談比較，分析兩者在<b>敘事方式、語言特徵、情緒呈現與反思節奏</b>上的差異。</p><p>→ 對應本研究的<b>驗證階段</b>。</p></div>
-      </div>
-    </section>`,
-    // S5
-    `<section class="slide">
-      <div class="kicker">研究方法</div>
+      <div class="kicker">第三章 · 3.1 方法論基礎</div>
       <h1 class="main">本研究採用<span class="accent">設計科學研究方法（DSR）</span>— 透過建構與評估人造物來累積設計知識。</h1>
       <div class="lead">設計科學研究方法源自資訊系統與工程設計領域，核心精神在於<b>透過建構與評估人造物來解決特定領域的實務問題</b>，並在此過程中累積可被推廣的設計知識。相較於傳統實證研究以描述既有現象為目的，DSR 強調建構新的解決方案並評估其有效性，特別適用於方法論發展、工具開發與系統建構等以實作為主的研究議題。</div>
       <div class="grid3">
@@ -211,9 +227,9 @@
       </div>
       <div class="ref">Hevner et al. (2004); Peffers et al. (2007)</div>
     </section>`,
-    // S6
+    // S7 · 第三章 · 3.2 Z 世代
     `<section class="slide">
-      <div class="kicker">研究情境</div>
+      <div class="kicker">第三章 · 3.2 研究設計</div>
       <h1 class="main">選擇 <span class="accent">Z 世代 ETF 投資者</span>作為建構情境 — 情緒與行為的連動最鮮明。</h1>
       <div class="lead">本研究選擇 Z 世代 ETF 投資情境作為具體場域，選擇源於此情境具有<b>高度明顯的情緒與行為連動特性</b>。相較其他投資族群，Z 世代更容易受到短期市場波動與社群媒體影響，決策語言常呈現猶豫、焦慮和自我質疑的特徵。這種充滿不確定性與自我談判的語言特質，使其成為觀察反思機制運作的理想素材。</div>
       <div class="grid2">
@@ -221,9 +237,9 @@
         <div class="card"><div class="lbl">情境代表性</div><blockquote style="margin:0;font-size:14px">「我知道該長期持有，卻忍不住每個小時都在看盤。」</blockquote><p style="margin-top:10px">當投資者展現出<b>想買又怕跌、知道要長期持有但還是忍不住看盤</b>的矛盾狀態時，其語言表現便會自然呈現出豐富的<b>情緒層次與認知張力</b>。</p><p>在這種矛盾狀態下，<b>反思不再是附加行為，而成為必然發生的心理過程</b>，為觀察差異提供理想素材。</p></div>
       </div>
     </section>`,
-    // S7
+    // S8 · 第三章 · 3.3 四階段
     `<section class="slide">
-      <div class="kicker">建構流程 · 3.3 節</div>
+      <div class="kicker">第三章 · 3.3 建構階段 · 四階段流程</div>
       <h1 class="main">四階段五步驟流程 — 從<span class="accent">脈絡研究到 GPT 部署</span>。</h1>
       <div class="lead">建構階段的目標是<b>透過人機共構</b>，建立敘事穩定且適合訪談的 AI Persona。整體流程分為四階段：次級資料蒐集、社群語料蒐集、劇本生成、AI 角色部署。前兩階段蒐集素材、第三階段整合為六維度劇本、第四階段部署為可互動的 AI Persona。</div>
       <div class="grid4">
@@ -234,9 +250,9 @@
       </div>
       <blockquote>GPTs 平台讓系統指令<b>固定於後台、不被對話覆寫</b>，設定可完整保存與複製，是研究可重複驗證的關鍵。</blockquote>
     </section>`,
-    // S8
+    // S9 · 第三章 · 3.3 六維度
     `<section class="slide">
-      <div class="kicker">六維度劇本方法論</div>
+      <div class="kicker">第三章 · 3.3 建構階段 · 六維度劇本方法論</div>
       <h1 class="main">六個維度共同<span class="accent">鎖住敘事一致性</span>與<span class="accent">情境反應力</span>。</h1>
       <div class="lead">受 Park 等（2023）關於具體生活情境能建構可信 AI 角色的啟發，本研究將每個 AI Persona 結構化為六個維度。相較於傳統人物誌的靜態屬性條列，六維度劇本具備三項功能：<b>抑制角色漂移、賦予行動力、強化反思深度</b>。</div>
       <div class="grid3">
@@ -249,9 +265,19 @@
       </div>
       <blockquote>三項功能：<b>①</b> 基本資料+世界觀鎖定敘事邊界，抑制漂移 · <b>②</b> 行為+日常情境賦予行動力 · <b>③</b> 心理狀態+語言風格強化反思深度</blockquote>
     </section>`,
-    // S9
+    // S10 · 第三章 · 3.4 驗證階段（併頁）
     `<section class="slide">
-      <div class="kicker">兩位對比角色</div>
+      <div class="kicker">第三章 · 3.4 驗證階段 · 兩項評估研究</div>
+      <h1 class="main">從<span class="accent">建構品質</span>到<span class="accent">擬真差異</span> — 兩階段驗證。</h1>
+      <div class="lead">驗證階段包含兩項研究。研究一評估六維度劇本方法論所建構出的 AI Persona 品質，聚焦於<b>穩定性、差異性、感知品質</b>；研究二進一步將 AI Persona 帶入真實研究情境，與真人受訪者並置比較，觀察<b>語言表現上的結構性差異</b>。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">研究一 · 3.4.1 節 · 建構品質評估</div><h3>6 位資深設計師 · 三部分測試 · 同場完成</h3><ul class="list"><li><b>Part 1 穩定性</b>：Anne / Emily 各三輪對話 · 六題李克特 1-5 分</li><li><b>Part 2 差異性</b>：兩位對比 · 每題差異度 1-5 分</li><li><b>Part 3 PPS 量表</b>：Salminen 2020 感知量表 · 六構面 1-7 分</li></ul><p style="margin-top:6px">測試者皆為<b>三年以上 UX 研究經驗</b>、且未參與人物誌建構的非研究參與者，以確保客觀性。</p></div>
+        <div class="card"><div class="lbl">研究二 · 3.4.2 節 · 擬真性評估</div><h3>3 位受訪者 × 60 分鐘 × 3 個設計方案</h3><p style="margin-bottom:4px"><b>對象：</b>AI Anne + 真人 A（26 歲）+ 真人 B（24 歲），問卷篩選符合 Anne 輪廓。</p><p style="margin-bottom:4px"><b>方案：</b>信心回測工具（過去）／情緒緩衝區（現在）／投資願景板（未來）。</p><p><b>編碼：</b>每方案 4 題 · 六項語言維度 <b>C1-C6</b> · 1-5 分。參考 Braun & Clarke (2006) 與 Heritage & Clayman (2010)。</p></div>
+      </div>
+    </section>`,
+    // S11 · 第四章 · 4.1.1 Anne/Emily
+    `<section class="slide">
+      <div class="kicker">第四章 · 4.1.1 兩位 AI Persona 的差異化表現</div>
       <h1 class="main">翻轉一條軸線（<span class="accent">信心來源</span>），建構兩位對比 AI Persona。</h1>
       <div class="lead">兩位人物誌依<b>相同的六維度框架</b>建構，但在心理狀態、行為模式、語言風格上形成明顯對比。這使我們能觀察 — 當劇本內容不同，AI 是否真的會產出不同角色？</div>
       <div class="contrast">
@@ -260,29 +286,18 @@
         <div class="side ai"><div class="lbl">理性型 · 內在信念</div><h4>艾蜜莉 Emily</h4><p><b>25 歲，數據分析師。</b>信奉 John Bogle 所倡導的低成本指數化投資，重視長期、分散與紀律。</p><p>排斥追逐熱點的短線操作，認為最大的挑戰是<b>隔絕外部市場噪音</b>的干擾。</p><p>信心建立在<b>自身的投資紀律</b>之上。冷靜、內在驅動、對策略自信不受他人影響。</p></div>
       </div>
     </section>`,
-    // S10
+    // S12 · 第四章 · 4.1.2 穩定性
     `<section class="slide">
-      <div class="kicker">研究一 · 設計（3.4.1 節）</div>
-      <h1 class="main">6 位資深設計師 · 三部分測試 · <span class="accent">同一場完成</span>。</h1>
-      <div class="lead">研究一的目的是檢驗六維度劇本方法論能否<b>有效抑制生成式 AI 的角色漂移</b>，並產生具差異性的 AI Persona。本研究邀請 6 位資深設計師作為測試者，皆為<b>三年以上 UX 研究經驗</b>、且未參與人物誌建構的非研究參與者，以確保客觀性。</div>
-      <div class="grid3">
-        <div class="card"><div class="lbl">Part 1 · 穩定性測試</div><h3 style="font-size:16px">同一劇本的一致性</h3><p>測試者分別與 Anne、Emily 各進行<b>三輪對話</b>，每輪皆用六道對應維度的問題，以 <b>1-5 分李克特量表</b>評估回應的一致程度。</p></div>
-        <div class="card"><div class="lbl">Part 2 · 差異性測試</div><h3 style="font-size:16px">不同劇本的可區辨性</h3><p>測試者對<b>每一題</b>比較 Anne 與 Emily 的回應，以 1-5 分評估兩者的差異程度（1=完全一樣，5=非常不同）。</p></div>
-        <div class="card"><div class="lbl">Part 3 · PPS 感知量表</div><h3 style="font-size:16px">量化整體品質</h3><p>兩位分別填 · <b>Salminen et al. (2020)</b> 發展的人物誌感知量表 · 六構面 1-7 分 · 補充質化回饋。</p></div>
-      </div>
-    </section>`,
-    // S11
-    `<section class="slide">
-      <div class="kicker">研究一 · 結果 · 穩定性 + 差異性</div>
+      <div class="kicker">第四章 · 4.1.2 AI Persona 的穩定性驗證</div>
       <h1 class="main">兩位角色<span class="accent">高度穩定</span>，彼此<span class="accent">清楚可辨</span>。</h1>
       <div class="grid2">
         <div class="card"><div class="lbl">穩定性 · 三輪對話一致程度</div><div class="stat-row"><div class="stat"><div class="v">4.17</div><div class="k"><b>小安</b> M（SD 0.85）</div></div><div class="stat"><div class="v">4.47</div><div class="k"><b>艾蜜莉</b> M（SD 0.67）</div></div></div><p style="margin-top:10px">Emily 略高的穩定性與其<b>理性、內在驅動的人格設計</b>相符 — 這類角色因穩定的邏輯框架而傾向產出更穩定的回應。</p><div class="quote-box"><b>受測者 C</b>「每一題都滿穩定的，都能感覺到他不知道自己的投資策略到底該怎麼辦」</div></div>
         <div class="card"><div class="lbl">差異性 · 兩位對比</div><div class="stat"><div class="v">4.58</div><div class="k">整體 M（滿分 5）</div></div><p style="margin-top:10px"><b>95.8%</b> 的評分落在 4-5 分區間 · Q6「印象深刻經驗」達到 <b>M=5.00, SD=0.00</b>（所有測試者一致認為完全不同）。</p><div class="quote-box"><b>受測者 A</b>「兩者的冷靜程度差很多。Emily 專注在自己的原則，Anne 想靠看別人怎麼做，因此比較焦慮。」</div></div>
       </div>
     </section>`,
-    // S12
+    // S13 · 第四章 · 4.1.3 PPS
     `<section class="slide">
-      <div class="kicker">研究一 · PPS 感知量表（4.1.3 節）</div>
+      <div class="kicker">第四章 · 4.1.3 六維度劇本方法論 · PPS 感知量表</div>
       <h1 class="main">兩位角色<span class="accent">感知品質相當</span>，各有優勢。</h1>
       <div class="lead">採用 Salminen 等（2020）發展的人物誌感知量表 · 六構面 · 1-7 分 · 兩位分別填。結果揭示了<b>與設計人格差異相符的模式</b>。</div>
       <table><thead><tr><th>構面</th><th>小安</th><th>艾蜜莉</th><th>解讀</th></tr></thead><tbody>
@@ -296,20 +311,9 @@
       </tbody></table>
       <blockquote class="warn">可信度低<b>不必然是負面訊號</b> — 反映測試者能辨識 AI 與真實使用者的差異，是將 AI Persona 用於設計研究的<b>健康批判前提</b>。</blockquote>
     </section>`,
-    // S13
+    // S14 · 第四章 · 4.2.1
     `<section class="slide">
-      <div class="kicker">研究二 · 設計（3.4.2 節）</div>
-      <h1 class="main">模擬驗證訪談 · <span class="accent">3 位受訪者</span> × 60 分鐘 × 三個設計方案。</h1>
-      <div class="lead">擬真性評估的目的，是比較 AI Persona 與真人受訪者在<b>語言表現上的結構性差異</b>。研究者分別與 AI Anne 及兩位相同輪廓的真人受訪者進行<b>模擬驗證訪談</b> — 一種結合設計題目與設計解決方案的驗證型訪談。</div>
-      <div class="grid2">
-        <div class="card"><div class="lbl">受訪對象</div><ul class="list"><li><b>AI Anne 小安</b>（依六維度劇本部署）</li><li><b>真人 A</b> · 26 歲社會新鮮人</li><li><b>真人 B</b> · 24 歲社會新鮮人</li></ul><p style="margin-top:8px">真人透過問卷篩選 · 符合<b>小安 Anne 的 Z 世代情緒型輪廓</b> · 每位訪談 60 分鐘 · 線上進行。</p></div>
-        <div class="card"><div class="lbl">設計題目與方案</div><p style="margin-bottom:6px"><b>題目：</b>市場波動引發恐慌時，如何穩定情緒型投資者？</p><ul class="list"><li><b>信心回測工具</b>（過去）· 歷史數據建立信心</li><li><b>情緒緩衝區</b>（現在）· 屏蔽社群+深呼吸</li><li><b>投資願景板</b>（未來）· 提示長期目標</li></ul><p style="margin-top:6px">每方案問 4 題 · 用<b>六項語言維度 C1-C6</b> 編碼 · 1-5 分。</p></div>
-      </div>
-      <div class="ref">參考 Braun & Clarke (2006) 主題分析 + Heritage & Clayman (2010) 會話分析</div>
-    </section>`,
-    // S14
-    `<section class="slide">
-      <div class="kicker">研究二 · 結果 · 4.2.1 節</div>
+      <div class="kicker">第四章 · 4.2.1 AI Persona vs. 真人比較結果</div>
       <h1 class="main">AI 結構性高真人 <span class="accent">+43%</span>，但真實性低 <span style="color:var(--warn)">−79%</span>。</h1>
       <div class="lead">將六項維度歸類為<b>結構性維度</b>（C1 推理方式、C5 敘事連貫性）與<b>真實性維度</b>（C2 變化程度、C3 情境真實性、C4 情緒流動性、C6 思考節奏），計算 AI 與真人的差異。</div>
       <div class="grid2">
@@ -318,9 +322,9 @@
       </div>
       <blockquote>AI 是<b>結構優異但缺乏真實性</b>的受訪者 — 完整、清晰、有條理，但缺乏真人對話中不完美的痕跡。</blockquote>
     </section>`,
-    // S15
+    // S15 · 第四章 · 4.2.2 兩種思考
     `<section class="slide">
-      <div class="kicker">Findings · 兩種思考模式（4.2.2 節）</div>
+      <div class="kicker">第四章 · 4.2.2 核心發現：兩種思考模式</div>
       <h1 class="main big">這不只是程度差異，而是<span class="accent">兩種思考方式</span>的差別。</h1>
       <div class="lead">為概念化此一差異，本研究提出<b>兩種思考模式的區分</b>。這區分為理解 AI 與人類認知差異提供了新的概念框架，是本研究的<b>核心概念貢獻</b>。</div>
       <div class="contrast">
@@ -329,9 +333,9 @@
         <div class="side hu"><div class="lbl">真人 · 經歷中的思考</div><h4>Experiential Thinking</h4><p>本質是透過<b>感知、回憶、情緒與認知的相互作用</b>，逐步形塑出帶有個人特色的理解與表達。真人需要啟動一個充滿不確定性的認知過程 — 需要時間回想、提取整理記憶、處理語言限制、讓情緒進入表達中。</p><p>特徵：<b>時間性、片段性、情緒滲透性、不可預測性</b>。同一個人在不同時刻可能給出不同的回答。</p></div>
       </div>
     </section>`,
-    // S16
+    // S16 · 第五章 · 5.1
     `<section class="slide">
-      <div class="kicker">討論 · 對照基準（4.2.3 節）</div>
+      <div class="kicker">第五章 · 5.1 真人訪談與 AI Persona 的優缺點比較</div>
       <h1 class="main">AI 的價值不在<span style="color:var(--warn)">模擬真人</span>，而在<span class="accent">讓真人訪談中的認知訊號被看見</span>。</h1>
       <div class="lead">本研究的重要發現是 AI Persona 的價值<b>不在於模擬真人，而在於作為對照基準</b>。正是因為 AI 的回答如此流暢、完整、有條理，真人回答中的遲疑、矛盾、片段才得以被凸顯出來。將真人訪談與 AI 訪談並置比較後，這些過去被視為雜訊的元素，其實是<b>真人認知歷程的真實痕跡</b>。</div>
       <div class="grid2">
@@ -339,21 +343,9 @@
         <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">對照後的新視角</div><ul class="list"><li><b>停頓</b> = 正在思考的證據（真實認知加工）</li><li><b>矛盾</b> = 內在張力的呈現（理性 vs 情感的拉扯）</li><li><b>情緒</b> = 真實涉入的指標（值得研究者關注）</li><li>這些不完美是<b>人類認知的本質特徵</b>，不是需要被消除的缺陷</li></ul><p style="margin-top:10px;color:var(--muted)">→ 認知歷程的<b style="color:var(--accent)">訊號</b></p></div>
       </div>
     </section>`,
-    // S17
+    // S17 · 第五章 · 5.2
     `<section class="slide">
-      <div class="kicker">討論 · 5.2 節 · 論文獨有貢獻</div>
-      <h1 class="main">如何評估 AI Persona 的好壞？本研究提出<span class="accent">三層次評估架構</span>。</h1>
-      <div class="lead">人物誌品質的評估文獻現有七條取徑（量表 / 過程 / 實務 / 看分數 / 看任務 / 看擬真 / 看透明），但共同存在缺口 — <b>較少直接評估 AI Persona 進入研究流程後是否適用於實際研究</b>。本研究組合三層次的評估架構，可被其他研究者直接沿用。</div>
-      <div class="grid3">
-        <div class="card"><div class="num">Layer 1</div><h3>資料基礎</h3><p>沿用<b>實務取徑</b>，以六維度劇本的<b>次級資料</b>與<b>社群語料</b>來源作為建構正當性的依據。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.3 節建構過程；附錄三原始資料</p></div>
-        <div class="card"><div class="num">Layer 2</div><h3>讀者感知</h3><p>沿用 <b>Salminen et al. (2020) PPS 量表</b>六構面，使結果可與其他研究比較。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 4.1.3 節結果</p></div>
-        <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="num">Layer 3</div><h3>互動品質</h3><p><b>本研究新增的維度</b> · 檢驗<b>穩定性</b>（同一劇本多輪對話的一致）與<b>差異性</b>（不同劇本是否可區辨）。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.4 節 + 4.1 節</p></div>
-      </div>
-      <blockquote>三層由<b>建構 → 感知 → 互動</b>，恰好補上既有取徑缺漏的「<b>使用情境</b>」面向。任何研究者建立一個 AI Persona 後，都能依序檢視：資料基礎是否充分、PPS 感知是否合格、多輪對話是否穩定且可與對照角色區辨。</blockquote>
-    </section>`,
-    // S18
-    `<section class="slide">
-      <div class="kicker">討論 · 對設計流程（5.3 節）</div>
+      <div class="kicker">第五章 · 5.2 對設計研究流程的影響</div>
       <h1 class="main"><span class="accent">AI 前期廣度</span>，<span class="accent">真人後期深度</span>：研究階段的重新配置。</h1>
       <div class="lead">傳統的設計研究流程中，使用者訪談通常從前期探索一路延伸到後期驗證，研究者需要在每個階段投入大量時間與資源進行真人訪談。AI Persona 的導入使研究階段得以<b>重新配置</b>，提供在效率與深度之間取得平衡的可能。</div>
       <div class="grid2">
@@ -362,9 +354,21 @@
       </div>
       <blockquote>兩者的優缺點恰好<b>互補</b>，應被視為設計研究工具箱中的不同工具，而非競爭關係。AI Persona 作為對照基準，亦讓設計研究者更珍視真人訪談中那些不完美的時刻。</blockquote>
     </section>`,
-    // S19
+    // S18 · 第五章 · 5.3
     `<section class="slide">
-      <div class="kicker">未來方向 · 貢獻（6.1 + 6.2 節）</div>
+      <div class="kicker">第五章 · 5.3 對設計產業與設計師的影響</div>
+      <h1 class="main">為設計師提供<span class="accent">可依序檢視</span>的評估工具 — 三層次評估架構。</h1>
+      <div class="lead">人物誌品質的評估文獻現有七條取徑（量表 / 過程 / 實務 / 看分數 / 看任務 / 看擬真 / 看透明），但共同存在缺口 — <b>較少直接評估 AI Persona 進入研究流程後是否適用於實際研究</b>。本研究組合三層次的評估架構，可被其他設計師與研究者直接沿用。</div>
+      <div class="grid3">
+        <div class="card"><div class="num">Layer 1</div><h3>資料基礎</h3><p>沿用<b>實務取徑</b>，以六維度劇本的<b>次級資料</b>與<b>社群語料</b>來源作為建構正當性的依據。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.3 節建構過程；附錄三原始資料</p></div>
+        <div class="card"><div class="num">Layer 2</div><h3>讀者感知</h3><p>沿用 <b>Salminen et al. (2020) PPS 量表</b>六構面，使結果可與其他研究比較。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 4.1.3 節結果</p></div>
+        <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="num">Layer 3</div><h3>互動品質</h3><p><b>本研究新增的維度</b> · 檢驗<b>穩定性</b>（同一劇本多輪對話的一致）與<b>差異性</b>（不同劇本是否可區辨）。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.4 節 + 4.1 節</p></div>
+      </div>
+      <blockquote>三層由<b>建構 → 感知 → 互動</b>，恰好補上既有取徑缺漏的「<b>使用情境</b>」面向。任何設計師建立一個 AI Persona 後，都能依序檢視：資料基礎是否充分、PPS 感知是否合格、多輪對話是否穩定且可與對照角色區辨。</blockquote>
+    </section>`,
+    // S19 · 第六章 · 結論貢獻
+    `<section class="slide">
+      <div class="kicker">第六章 · 6.1 研究結論 · 6.2 研究貢獻 · 6.4 未來研究建議</div>
       <h1 class="main">從靜態快照到<span class="accent">活系統</span> — 三項貢獻。</h1>
       <div class="lead">本研究的核心貢獻可分為理論與實務兩個層面。理論上，我們建立了新的方法論框架、揭示兩種思考模式的區分、並重新定義真人訪談中「不完美」的價值。實務上，我們為設計研究提供了具體工具與人機協作模式。</div>
       <div class="grid3">
@@ -372,20 +376,18 @@
         <div class="card"><div class="lbl">概念貢獻</div><h3>兩種思考模式</h3><p>合成式思考 vs 經歷中的思考。透過六項語言維度的比較分析，為理解 AI 與人類認知差異提供了<b>新的概念框架</b>，讓領域不再只比擬真度。</p></div>
         <div class="card"><div class="lbl">實務貢獻</div><h3>對照基準協作模式</h3><p>AI 支持廣度、真人支持深度的協作模式。為設計研究流程優化提供<b>具體方向</b>，並重新定義真人訪談中不完美的價值。</p></div>
       </div>
-      <blockquote>這指向未來方向 — <b>活系統</b>。AI Persona 可透過持續累積<b>設計師訪談紀錄 + CRM 資料</b>演化，成為貫穿設計流程的<b>研究基礎設施</b>，其品質隨專案推進而不斷提升。</blockquote>
+      <blockquote>未來研究建議 — <b>活系統</b>。AI Persona 可透過持續累積<b>設計師訪談紀錄 + CRM 資料</b>演化，成為貫穿設計流程的<b>研究基礎設施</b>，其品質隨專案推進而不斷提升。</blockquote>
     </section>`,
-    // S20
+    // S20 · 謝謝
     `<section class="slide"><div class="thanks"><h1>謝謝聆聽</h1><div class="p">歡迎提問</div></div></section>`
   ];
 
-  // Format script text
   function fmtScript(str){
     return str.split('\n\n').map(p=>
       '<p>'+p.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')+'</p>'
     ).join('');
   }
 
-  // Build items
   const itemsEl=document.getElementById('items');
   const tocBar=document.getElementById('toc-bar');
   S.forEach((s,idx)=>{
@@ -414,7 +416,6 @@
     tocBar.appendChild(link);
   });
 
-  // Scale each frame based on its parent width
   const frames=document.querySelectorAll('.frame');
   function scaleAll(){
     frames.forEach(f=>{
