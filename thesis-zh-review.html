@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>對照檢查 · 中文簡報 + 講稿</title>
+<style>
+  :root{
+    --bg:#0a0e0b;--card:#141a15;--line:rgba(15,199,123,.22);--accent:#0FC77B;
+    --ink:#f1f3f2;--muted:#aab3ac;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.1)
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',-apple-system,sans-serif;line-height:1.65}
+  .wrap{max-width:1520px;margin:0 auto;padding:44px 32px 120px}
+  header{border-bottom:2px solid var(--accent);padding-bottom:20px;margin-bottom:36px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+  header .l .kicker{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+  header .l h1{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px}
+  header .l h1 .accent{color:var(--accent)}
+  header .l .meta{color:var(--muted);font-size:13px;line-height:1.6}
+  header .l .meta b{color:var(--ink)}
+  header .r{display:flex;gap:14px;flex-wrap:wrap}
+  header .r a{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:8px 14px;font-size:13px;text-decoration:none;border-radius:6px;transition:.2s}
+  header .r a:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
+
+  .item{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid rgba(15,199,123,.1)}
+  .item-head{grid-column:1/-1;display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .item-head .no{background:var(--accent);color:#04121a;font-weight:800;font-size:12px;letter-spacing:.1em;padding:4px 10px;border-radius:5px;font-family:'Consolas','SF Mono',monospace}
+  .item-head h2{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+  .item-head .sec{font-family:'Consolas','SF Mono',monospace;color:var(--muted);font-size:13px}
+  .item-head .sec b{color:var(--accent)}
+
+  /* Slide frame — scaled from 1280×720 */
+  .frame{position:relative;width:100%;aspect-ratio:16/9;border:1.6px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+  .slide-inner{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:top left}
+  .slide-inner .slide{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column;justify-content:center;opacity:1!important;padding:48px 72px;overflow:hidden;
+    background-image:
+      linear-gradient(rgba(15,199,123,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(15,199,123,.025) 1px,transparent 1px),
+      radial-gradient(1000px 700px at 15% 0%,rgba(15,199,123,.06),transparent 60%);
+    background-size:64px 64px,64px 64px,100% 100%;background-repeat:repeat,repeat,no-repeat}
+  .slide-inner .slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:10px;background:var(--accent)}
+
+  /* Slide typography — fixed 1280×720 base */
+  .slide-inner .kicker{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}
+  .slide-inner h1.main{font-size:30px;font-weight:800;line-height:1.28;letter-spacing:-.01em;margin-bottom:16px;color:var(--ink)}
+  .slide-inner h1.main .accent{color:var(--accent)}
+  .slide-inner h1.main.big{font-size:38px}
+  .slide-inner .lead{color:var(--muted);font-size:15px;line-height:1.65;margin-bottom:16px;max-width:88ch}
+  .slide-inner .lead b{color:var(--ink);font-weight:600}
+  .slide-inner .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .slide-inner .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
+  .slide-inner .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:12px}
+  .slide-inner .card{background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:14px 18px}
+  .slide-inner .card .lbl{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .slide-inner .card h3{color:var(--ink);font-size:16px;font-weight:700;line-height:1.35;margin-bottom:8px}
+  .slide-inner .card p{color:var(--muted);font-size:13px;line-height:1.6}
+  .slide-inner .card p b{color:var(--ink);font-weight:600}
+  .slide-inner .card p + p{margin-top:6px}
+  .slide-inner .card .num{color:var(--accent);font-size:24px;font-weight:800;line-height:1;margin-bottom:4px}
+  .slide-inner .card .num small{color:var(--muted);font-size:12px;font-weight:500;display:block;margin-top:4px}
+  .slide-inner .list{margin:8px 0 0;padding:0;list-style:none}
+  .slide-inner .list li{position:relative;padding:4px 0 4px 16px;color:var(--muted);font-size:13px;line-height:1.5}
+  .slide-inner .list li::before{content:'';position:absolute;left:0;top:12px;width:5px;height:5px;background:var(--accent);border-radius:50%}
+  .slide-inner .list li b{color:var(--ink);font-weight:600}
+  .slide-inner blockquote{background:rgba(15,199,123,.06);border-left:4px solid var(--accent);padding:10px 16px;border-radius:0 10px 10px 0;color:var(--ink);font-size:14px;line-height:1.55;margin:12px 0;font-style:italic}
+  .slide-inner blockquote.warn{background:var(--warn-bg);border-left-color:var(--warn)}
+  .slide-inner blockquote b{color:var(--accent);font-style:normal}
+  .slide-inner blockquote.warn b{color:var(--warn)}
+  .slide-inner .ref{color:var(--muted);font-size:11px;opacity:.7;margin-top:12px;font-style:italic}
+  .slide-inner .rq-num{display:inline-block;background:var(--accent);color:#04121a;font-weight:800;padding:4px 10px;border-radius:5px;font-size:12px;letter-spacing:.05em;margin-bottom:6px}
+  .slide-inner .stat-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px}
+  .slide-inner .stat{flex:1;min-width:80px}
+  .slide-inner .stat .v{color:var(--accent);font-size:30px;font-weight:800;line-height:1}
+  .slide-inner .stat .v.warn{color:var(--warn)}
+  .slide-inner .stat .k{color:var(--muted);font-size:12px;margin-top:4px}
+  .slide-inner .stat .k b{color:var(--ink)}
+  .slide-inner table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+  .slide-inner th,.slide-inner td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line);color:var(--ink)}
+  .slide-inner th{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(15,199,123,.08)}
+  .slide-inner td.muted{color:var(--muted);font-size:12px}
+  .slide-inner .contrast{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin-top:12px}
+  .slide-inner .contrast .side{background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:16px}
+  .slide-inner .contrast .side.ai{border-color:rgba(15,199,123,.4)}
+  .slide-inner .contrast .side.hu{border-color:rgba(251,191,36,.4)}
+  .slide-inner .contrast .side .lbl{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+  .slide-inner .contrast .side.ai .lbl{color:var(--accent)}
+  .slide-inner .contrast .side.hu .lbl{color:var(--warn)}
+  .slide-inner .contrast .side h4{color:var(--ink);font-size:18px;font-weight:700;margin-bottom:8px;line-height:1.3}
+  .slide-inner .contrast .side p{color:var(--muted);font-size:13px;line-height:1.55}
+  .slide-inner .contrast .side p + p{margin-top:6px}
+  .slide-inner .contrast .side p b{color:var(--ink)}
+  .slide-inner .contrast .vs{color:var(--muted);font-weight:800;font-size:14px;display:flex;align-items:center}
+  .slide-inner .quote-box{background:rgba(255,255,255,.03);border:1px dashed rgba(15,199,123,.2);border-radius:8px;padding:10px 14px;margin-top:8px;color:var(--ink);font-size:12px;font-style:italic;line-height:1.5}
+  .slide-inner .quote-box b{color:var(--accent);font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+  .slide-inner .thanks{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px}
+  .slide-inner .thanks h1{font-size:72px;color:var(--accent);font-weight:800;letter-spacing:.05em}
+  .slide-inner .thanks .p{color:var(--muted);font-size:22px}
+  /* Cover */
+  .slide-inner .cover{padding:64px 96px}
+  .slide-inner .cover .badge{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:16px;padding:5px 12px;border:1.5px solid var(--accent);border-radius:5px;display:inline-block;width:fit-content}
+  .slide-inner .cover h1{font-size:52px;font-weight:800;line-height:1.15;margin-bottom:14px;letter-spacing:-.01em}
+  .slide-inner .cover h1 .accent{color:var(--accent)}
+  .slide-inner .cover .subtitle{color:var(--muted);font-size:20px;line-height:1.4;margin-bottom:22px;max-width:60ch}
+  .slide-inner .cover .abs{color:var(--ink);font-size:15px;line-height:1.65;max-width:75ch;margin-bottom:28px}
+  .slide-inner .cover .abs b{color:var(--accent)}
+  .slide-inner .cover .meta{color:var(--muted);font-size:15px;line-height:1.8}
+  .slide-inner .cover .meta b{color:var(--ink)}
+
+  /* Script side */
+  .script-wrap{display:flex;flex-direction:column;gap:12px}
+  .script-body{color:var(--ink);font-size:16px;line-height:1.95;letter-spacing:.02em;background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:20px 24px;flex:1}
+  .script-body p{margin-bottom:10px}
+  .script-body p:last-child{margin-bottom:0}
+  .script-body b{color:var(--accent);font-weight:600}
+  .cue{background:rgba(251,191,36,.08);border-left:3px solid var(--warn);padding:10px 14px;border-radius:0 8px 8px 0;color:var(--warn);font-size:13px;line-height:1.55}
+  .cue b{color:var(--warn);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:3px}
+
+  .toc-bar{position:sticky;top:0;background:rgba(10,14,11,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 32px;margin:0 -32px 24px;z-index:10;display:flex;gap:4px;overflow-x:auto}
+  .toc-bar a{color:var(--muted);text-decoration:none;font-size:11px;padding:4px 8px;border-radius:4px;white-space:nowrap;font-family:'Consolas','SF Mono',monospace;transition:.15s}
+  .toc-bar a:hover{background:var(--accent);color:#04121a}
+
+  @media (max-width:1000px){
+    .item{grid-template-columns:1fr}
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    .toc-bar,header .r{display:none}
+    .item{break-inside:avoid;grid-template-columns:1fr 1fr}
+    .script-body{background:#fff;color:#000;border-color:#ccc}
+    .script-body b{color:#0a7548}
+    .cue{background:#fff8e0;color:#875f00}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="l">
+    <div class="kicker">對照檢查頁 · Review</div>
+    <h1><span class="accent">AI Persona</span> 論文口試 · 簡報 + 講稿</h1>
+    <div class="meta"><b>簡潔安</b>　20 頁 · 20 分鐘</div>
+  </div>
+  <div class="r">
+    <a href="thesis-zh.html">▶ 開簡報</a>
+    <a href="thesis-zh-presenter.html">📖 Presenter</a>
+    <a href="thesis-zh-script.html">📄 純講稿</a>
+  </div>
+</header>
+
+<div class="toc-bar" id="toc-bar"></div>
+
+<div id="items"></div>
+
+</div>
+
+<script src="thesis-zh-scripts.js"></script>
+<script>
+  const S=window.THESIS_ZH_SCRIPTS;
+
+  const SLIDES=[
+    // S1 · Cover
+    `<section class="slide cover">
+      <div class="badge">碩士論文口試</div>
+      <h1>AI Persona 能取代<br><span class="accent">真人訪談</span>嗎？</h1>
+      <div class="subtitle">探討 AI Persona 與真人受訪者的差異對設計研究的影響</div>
+      <div class="abs">本研究不探討 AI Persona 與真人的<b>相似程度</b>，而探討兩者之間的<b>結構性差異</b>，以及此差異對設計研究的意涵。透過設計科學研究方法、六維度劇本方法論的建構，並與真人受訪者進行系統性比較，我們主張 AI Persona 的價值不在模擬真人，而在作為對照基準。</div>
+      <div class="meta"><b>簡潔安</b>　指導教授：<b>唐玄輝 博士</b><br>國立臺灣科技大學　設計系碩士班　學號：M11110914</div>
+    </section>`,
+    // S2
+    `<section class="slide">
+      <div class="kicker">研究背景</div>
+      <h1 class="main">自 Cooper（1999）以來，人物誌已成為設計研究中代表使用者的核心方法，但長期面臨<span class="accent">兩項根本限制</span>。</h1>
+      <div class="lead">Salminen 等（2018）系統性彙整了人物誌的既有批評，Chapman 與 Milham（2006）指出人物誌方法缺乏從資料到人物誌的可靠程序。綜合文獻，本研究歸納出與研究方向最相關的<b>兩項限制</b>：</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">限制一 · 靜態特質</div><h3>建構完成便固定下來</h3><p>真實使用者的行為與態度會隨情境變化、社群互動、資訊更新、情緒波動<b>持續改變</b>。人物誌卻難以跟上這種隨時間推移的變化，靜態的描述無法捕捉這種時間性。</p><p>Portigal（2008）批評：人物誌的吸引力正來自對現實的簡化，使用者資料被持續縮減與抽象化，最終可能<b>淪為刻板印象</b>。</p></div>
+        <div class="card"><div class="lbl">限制二 · 詮釋依賴</div><h3>研究者的主觀決策充斥其中</h3><p>人物誌的內容並非直接來自使用者，而是研究者選取資料、保留語氣、強調特徵之後的<b>產物</b>。從資料的選取、語氣的保留、到特徵的強調，皆涉及研究者的主觀決策。</p><p>此外，人物誌經常消除真實使用者語言中常見的<b>矛盾、猶豫、跳躍與中斷</b>等非線性特質 — 而這些不完美的語言特徵可能正是理解使用者認知歷程的重要線索。</p></div>
+      </div>
+      <div class="ref">Cooper (1999); Chapman & Milham (2006); Portigal (2008); Salminen et al. (2018)</div>
+    </section>`,
+    // S3
+    `<section class="slide">
+      <div class="kicker">研究缺口</div>
+      <h1 class="main">生成式 AI 讓人物誌從「被閱讀的文件」變成「<span class="accent">可對話的主體</span>」— 但差異的本質尚未被探討。</h1>
+      <div class="lead">大型語言模型的發展，為人物誌方法論帶來新的可能性。研究者可以透過提示詞設計，建構出<b>可對話的 AI Persona</b>：這些角色除了呈現基本背景，還能與研究者對話，使人物誌從靜態描述轉為可回應的對話對象。然而，當 AI Persona 進入設計研究流程，一個根本的問題隨之出現 — AI 與真人受訪者的差異，究竟是什麼？</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">過去 AI Persona 研究</div><h3>聚焦擬真度評估</h3><p>Salminen 等（2024）發現大型語言模型生成的人物誌傾向產出偏斜特徵。<b>Jung 等（2025）的 PersonaCraft</b> 系統，運用大型語言模型從調查數據生成人物誌，評估結果聚焦在清晰度、完整度、一致性。</p><p>共同預設：<b>「越像真人越好」</b>。相似度取向將真人視為 AI 應模仿的標準。</p></div>
+        <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">本研究取徑 · 差異分析</div><h3>改從結構性差異切入</h3><p>追問「不同 AI Persona 之間差異的本質為何？AI 與真人在結構上有何差異，這些差異揭示了什麼？」</p><p>此重新框架將 AI Persona <b>從不完美的人類模擬</b>，轉變為<b>其差異本身具有分析產出性</b>的實體，定位為設計研究的輔助工具，而非人類替代品。</p></div>
+      </div>
+      <blockquote>不應把 AI 視為不完美的人類模擬，而應理解為<b>兩種不同認知模式</b>的呈現。</blockquote>
+    </section>`,
+    // S4
+    `<section class="slide">
+      <div class="kicker">研究問題</div>
+      <h1 class="main">當 AI 進入研究流程，<span class="accent">兩個核心問題</span>浮現：</h1>
+      <div class="lead">本研究目的為探討 AI Persona 與真人受訪者在語言表現上的<b>結構性差異</b>，以及這些差異對設計研究的影響，並據此釐清 AI Persona 在設計研究流程中的定位。研究包含兩個階段性目標：<b>建構</b>與<b>驗證</b>。</div>
+      <div class="grid2">
+        <div class="card"><span class="rq-num">RQ1</span><h3 style="line-height:1.4">如何建構<b style="color:var(--accent)">穩定</b>、可用於研究的 AI Persona？</h3><p>建立一套<b>可操作、可重複</b>的 AI Persona 建構流程，使研究者能理解並掌握生成邏輯，系統性地設定角色的背景與語氣，而非被動接受模型的輸出。</p><p>→ 對應本研究的<b>建構階段</b>。</p></div>
+        <div class="card"><span class="rq-num">RQ2</span><h3 style="line-height:1.4">AI 與真人受訪者在語言表現上有哪些<b style="color:var(--accent)">結構性差異</b>？</h3><p>透過真人受訪者與 AI Persona 的訪談比較，分析兩者在<b>敘事方式、語言特徵、情緒呈現與反思節奏</b>上的差異。</p><p>→ 對應本研究的<b>驗證階段</b>。</p></div>
+      </div>
+    </section>`,
+    // S5
+    `<section class="slide">
+      <div class="kicker">研究方法</div>
+      <h1 class="main">本研究採用<span class="accent">設計科學研究方法（DSR）</span>— 透過建構與評估人造物來累積設計知識。</h1>
+      <div class="lead">設計科學研究方法源自資訊系統與工程設計領域，核心精神在於<b>透過建構與評估人造物來解決特定領域的實務問題</b>，並在此過程中累積可被推廣的設計知識。相較於傳統實證研究以描述既有現象為目的，DSR 強調建構新的解決方案並評估其有效性，特別適用於方法論發展、工具開發與系統建構等以實作為主的研究議題。</div>
+      <div class="grid3">
+        <div class="card"><div class="num">①</div><h3>建構可驗證產出物</h3><p>本研究核心產出是<b>兩項可驗證的人造物</b>：六維度劇本方法論此一可重複操作的建構流程，以及依據此方法論建構的兩位 AI Persona。</p></div>
+        <div class="card"><div class="num">②</div><h3>兩階段架構</h3><p>與 Peffers 等（2007）的 DSR 過程模型相互對應：<b>建構階段</b>對應設計與開發階段，<b>驗證階段</b>對應展示與評估階段。</p></div>
+        <div class="card"><div class="num">③</div><h3>迭代設計循環</h3><p>透過多輪對話觀察 AI 的回應、調整提示結構、修正劇本內容。此種<b>迭代式改良</b>符合 DSR 強調的設計循環。</p></div>
+      </div>
+      <div class="ref">Hevner et al. (2004); Peffers et al. (2007)</div>
+    </section>`,
+    // S6
+    `<section class="slide">
+      <div class="kicker">研究情境</div>
+      <h1 class="main">選擇 <span class="accent">Z 世代 ETF 投資者</span>作為建構情境 — 情緒與行為的連動最鮮明。</h1>
+      <div class="lead">本研究選擇 Z 世代 ETF 投資情境作為具體場域，選擇源於此情境具有<b>高度明顯的情緒與行為連動特性</b>。相較其他投資族群，Z 世代更容易受到短期市場波動與社群媒體影響，決策語言常呈現猶豫、焦慮和自我質疑的特徵。這種充滿不確定性與自我談判的語言特質，使其成為觀察反思機制運作的理想素材。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">情境特徵</div><ul class="list"><li>短期市場波動 + 社群輿論影響<b>特別大</b></li><li>決策語言充滿<b>猶豫、焦慮、自我質疑</b></li><li>ETF 本質為長期理性策略，Z 世代卻同時暴露於即時資訊、價格波動、情緒刺激</li><li>形成<b>理性長線目標</b>與<b>感性短線反應</b>之間的張力</li></ul></div>
+        <div class="card"><div class="lbl">情境代表性</div><blockquote style="margin:0;font-size:14px">「我知道該長期持有，卻忍不住每個小時都在看盤。」</blockquote><p style="margin-top:10px">當投資者展現出<b>想買又怕跌、知道要長期持有但還是忍不住看盤</b>的矛盾狀態時，其語言表現便會自然呈現出豐富的<b>情緒層次與認知張力</b>。</p><p>在這種矛盾狀態下，<b>反思不再是附加行為，而成為必然發生的心理過程</b>，為觀察差異提供理想素材。</p></div>
+      </div>
+    </section>`,
+    // S7
+    `<section class="slide">
+      <div class="kicker">建構流程 · 3.3 節</div>
+      <h1 class="main">四階段五步驟流程 — 從<span class="accent">脈絡研究到 GPT 部署</span>。</h1>
+      <div class="lead">建構階段的目標是<b>透過人機共構</b>，建立敘事穩定且適合訪談的 AI Persona。整體流程分為四階段：次級資料蒐集、社群語料蒐集、劇本生成、AI 角色部署。前兩階段蒐集素材、第三階段整合為六維度劇本、第四階段部署為可互動的 AI Persona。</div>
+      <div class="grid4">
+        <div class="card"><div class="num" style="font-size:18px">①</div><h3 style="font-size:14px">次級資料蒐集</h3><p style="font-size:12px">Gemini 深度研究 · 建立族群理解，識別核心軸線<b>「信心來源」</b> — 外部確認 vs 內在信念</p></div>
+        <div class="card"><div class="num" style="font-size:18px">②</div><h3 style="font-size:14px">社群語料蒐集</h3><p style="font-size:12px">ChatGPT 從 PTT / Dcard 擷取真實第一人稱貼文 · <b>30-50 則</b>，只擷取不改寫、保留原始語氣詞與錯字</p></div>
+        <div class="card"><div class="num" style="font-size:18px">③</div><h3 style="font-size:14px">劇本生成</h3><p style="font-size:12px">Gemini 依六維度框架撰寫<b>約 7,500 字</b>角色劇本，作為 AI Persona 的<b>系統指令</b></p></div>
+        <div class="card"><div class="num" style="font-size:18px">④</div><h3 style="font-size:14px">角色部署</h3><p style="font-size:12px">OpenAI GPTs 平台 + <b>五條行為限制指令</b> + 角色內化指令，規範互動行為</p></div>
+      </div>
+      <blockquote>GPTs 平台讓系統指令<b>固定於後台、不被對話覆寫</b>，設定可完整保存與複製，是研究可重複驗證的關鍵。</blockquote>
+    </section>`,
+    // S8
+    `<section class="slide">
+      <div class="kicker">六維度劇本方法論</div>
+      <h1 class="main">六個維度共同<span class="accent">鎖住敘事一致性</span>與<span class="accent">情境反應力</span>。</h1>
+      <div class="lead">受 Park 等（2023）關於具體生活情境能建構可信 AI 角色的啟發，本研究將每個 AI Persona 結構化為六個維度。相較於傳統人物誌的靜態屬性條列，六維度劇本具備三項功能：<b>抑制角色漂移、賦予行動力、強化反思深度</b>。</div>
+      <div class="grid3">
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">基本資料</h3><p style="font-size:13px">錨定角色身份參數，確保敘事一致性。</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">世界觀</h3><p style="font-size:13px">形塑詮釋傾向與決策邏輯的信念系統。</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">心理狀態</h3><p style="font-size:13px">情感輪廓，使角色具備情緒深度與變化。</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">行為模式</h3><p style="font-size:13px">日常應對策略，使回應方式可被觀察。</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">語言風格</h3><p style="font-size:13px">可辨識的語言標記，使角色聲音穩定。</p></div>
+        <div class="card" style="padding:14px 16px"><h3 style="color:var(--accent);font-size:16px">日常情境</h3><p style="font-size:13px">將角色置於具體場景，促進具身互動。</p></div>
+      </div>
+      <blockquote>三項功能：<b>①</b> 基本資料+世界觀鎖定敘事邊界，抑制漂移 · <b>②</b> 行為+日常情境賦予行動力 · <b>③</b> 心理狀態+語言風格強化反思深度</blockquote>
+    </section>`,
+    // S9
+    `<section class="slide">
+      <div class="kicker">兩位對比角色</div>
+      <h1 class="main">翻轉一條軸線（<span class="accent">信心來源</span>），建構兩位對比 AI Persona。</h1>
+      <div class="lead">兩位人物誌依<b>相同的六維度框架</b>建構，但在心理狀態、行為模式、語言風格上形成明顯對比。這使我們能觀察 — 當劇本內容不同，AI 是否真的會產出不同角色？</div>
+      <div class="contrast">
+        <div class="side hu"><div class="lbl">情緒型 · 外部確認</div><h4>小安 Anne</h4><p><b>23 歲，科技公司行銷實習生。</b>白天上班、通勤時查看行情、晚上瀏覽社群學習投資。</p><p>當市場波動帶來失控感時，她需要透過<b>社群連結確認自己並非孤單</b>，常於 PTT、Dcard 尋求討論並策略性地自稱新手或股市小白。</p><p>信心建立在<b>他人的認同</b>之上。焦慮、依賴外部確認、缺乏自信。</p></div>
+        <div class="vs">VS</div>
+        <div class="side ai"><div class="lbl">理性型 · 內在信念</div><h4>艾蜜莉 Emily</h4><p><b>25 歲，數據分析師。</b>信奉 John Bogle 所倡導的低成本指數化投資，重視長期、分散與紀律。</p><p>排斥追逐熱點的短線操作，認為最大的挑戰是<b>隔絕外部市場噪音</b>的干擾。</p><p>信心建立在<b>自身的投資紀律</b>之上。冷靜、內在驅動、對策略自信不受他人影響。</p></div>
+      </div>
+    </section>`,
+    // S10
+    `<section class="slide">
+      <div class="kicker">研究一 · 設計（3.4.1 節）</div>
+      <h1 class="main">6 位資深設計師 · 三部分測試 · <span class="accent">同一場完成</span>。</h1>
+      <div class="lead">研究一的目的是檢驗六維度劇本方法論能否<b>有效抑制生成式 AI 的角色漂移</b>，並產生具差異性的 AI Persona。本研究邀請 6 位資深設計師作為測試者，皆為<b>三年以上 UX 研究經驗</b>、且未參與人物誌建構的非研究參與者，以確保客觀性。</div>
+      <div class="grid3">
+        <div class="card"><div class="lbl">Part 1 · 穩定性測試</div><h3 style="font-size:16px">同一劇本的一致性</h3><p>測試者分別與 Anne、Emily 各進行<b>三輪對話</b>，每輪皆用六道對應維度的問題，以 <b>1-5 分李克特量表</b>評估回應的一致程度。</p></div>
+        <div class="card"><div class="lbl">Part 2 · 差異性測試</div><h3 style="font-size:16px">不同劇本的可區辨性</h3><p>測試者對<b>每一題</b>比較 Anne 與 Emily 的回應，以 1-5 分評估兩者的差異程度（1=完全一樣，5=非常不同）。</p></div>
+        <div class="card"><div class="lbl">Part 3 · PPS 感知量表</div><h3 style="font-size:16px">量化整體品質</h3><p>兩位分別填 · <b>Salminen et al. (2020)</b> 發展的人物誌感知量表 · 六構面 1-7 分 · 補充質化回饋。</p></div>
+      </div>
+    </section>`,
+    // S11
+    `<section class="slide">
+      <div class="kicker">研究一 · 結果 · 穩定性 + 差異性</div>
+      <h1 class="main">兩位角色<span class="accent">高度穩定</span>，彼此<span class="accent">清楚可辨</span>。</h1>
+      <div class="grid2">
+        <div class="card"><div class="lbl">穩定性 · 三輪對話一致程度</div><div class="stat-row"><div class="stat"><div class="v">4.17</div><div class="k"><b>小安</b> M（SD 0.85）</div></div><div class="stat"><div class="v">4.47</div><div class="k"><b>艾蜜莉</b> M（SD 0.67）</div></div></div><p style="margin-top:10px">Emily 略高的穩定性與其<b>理性、內在驅動的人格設計</b>相符 — 這類角色因穩定的邏輯框架而傾向產出更穩定的回應。</p><div class="quote-box"><b>受測者 C</b>「每一題都滿穩定的，都能感覺到他不知道自己的投資策略到底該怎麼辦」</div></div>
+        <div class="card"><div class="lbl">差異性 · 兩位對比</div><div class="stat"><div class="v">4.58</div><div class="k">整體 M（滿分 5）</div></div><p style="margin-top:10px"><b>95.8%</b> 的評分落在 4-5 分區間 · Q6「印象深刻經驗」達到 <b>M=5.00, SD=0.00</b>（所有測試者一致認為完全不同）。</p><div class="quote-box"><b>受測者 A</b>「兩者的冷靜程度差很多。Emily 專注在自己的原則，Anne 想靠看別人怎麼做，因此比較焦慮。」</div></div>
+      </div>
+    </section>`,
+    // S12
+    `<section class="slide">
+      <div class="kicker">研究一 · PPS 感知量表（4.1.3 節）</div>
+      <h1 class="main">兩位角色<span class="accent">感知品質相當</span>，各有優勢。</h1>
+      <div class="lead">採用 Salminen 等（2020）發展的人物誌感知量表 · 六構面 · 1-7 分 · 兩位分別填。結果揭示了<b>與設計人格差異相符的模式</b>。</div>
+      <table><thead><tr><th>構面</th><th>小安</th><th>艾蜜莉</th><th>解讀</th></tr></thead><tbody>
+        <tr><td>清晰度 Clarity</td><td>6.22</td><td>6.50</td><td class="muted">兩位最高 · 角色特質清楚可辨</td></tr>
+        <tr><td>一致性 Consistency</td><td>5.33</td><td>5.67</td><td class="muted">Emily 略高 · 對應理性人格</td></tr>
+        <tr><td>同理心 Empathy</td><td>4.78</td><td>4.00</td><td class="muted">Anne 較高 · 情緒表達創造對話空間</td></tr>
+        <tr><td>完整性 Completeness</td><td>4.33</td><td>4.50</td><td class="muted">相當</td></tr>
+        <tr><td>使用意願 Willingness</td><td>4.22</td><td>4.33</td><td class="muted">中等偏上 · 謹慎正面態度</td></tr>
+        <tr><td>可信度 Credibility</td><td>3.67</td><td>4.17</td><td class="muted">兩位最低 · 反映對「非真人」的批判意識</td></tr>
+        <tr><td><b>整體平均</b></td><td><b>4.76</b></td><td><b>4.86</b></td><td class="muted">兩位皆堪用</td></tr>
+      </tbody></table>
+      <blockquote class="warn">可信度低<b>不必然是負面訊號</b> — 反映測試者能辨識 AI 與真實使用者的差異，是將 AI Persona 用於設計研究的<b>健康批判前提</b>。</blockquote>
+    </section>`,
+    // S13
+    `<section class="slide">
+      <div class="kicker">研究二 · 設計（3.4.2 節）</div>
+      <h1 class="main">模擬驗證訪談 · <span class="accent">3 位受訪者</span> × 60 分鐘 × 三個設計方案。</h1>
+      <div class="lead">擬真性評估的目的，是比較 AI Persona 與真人受訪者在<b>語言表現上的結構性差異</b>。研究者分別與 AI Anne 及兩位相同輪廓的真人受訪者進行<b>模擬驗證訪談</b> — 一種結合設計題目與設計解決方案的驗證型訪談。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">受訪對象</div><ul class="list"><li><b>AI Anne 小安</b>（依六維度劇本部署）</li><li><b>真人 A</b> · 26 歲社會新鮮人</li><li><b>真人 B</b> · 24 歲社會新鮮人</li></ul><p style="margin-top:8px">真人透過問卷篩選 · 符合<b>小安 Anne 的 Z 世代情緒型輪廓</b> · 每位訪談 60 分鐘 · 線上進行。</p></div>
+        <div class="card"><div class="lbl">設計題目與方案</div><p style="margin-bottom:6px"><b>題目：</b>市場波動引發恐慌時，如何穩定情緒型投資者？</p><ul class="list"><li><b>信心回測工具</b>（過去）· 歷史數據建立信心</li><li><b>情緒緩衝區</b>（現在）· 屏蔽社群+深呼吸</li><li><b>投資願景板</b>（未來）· 提示長期目標</li></ul><p style="margin-top:6px">每方案問 4 題 · 用<b>六項語言維度 C1-C6</b> 編碼 · 1-5 分。</p></div>
+      </div>
+      <div class="ref">參考 Braun & Clarke (2006) 主題分析 + Heritage & Clayman (2010) 會話分析</div>
+    </section>`,
+    // S14
+    `<section class="slide">
+      <div class="kicker">研究二 · 結果 · 4.2.1 節</div>
+      <h1 class="main">AI 結構性高真人 <span class="accent">+43%</span>，但真實性低 <span style="color:var(--warn)">−79%</span>。</h1>
+      <div class="lead">將六項維度歸類為<b>結構性維度</b>（C1 推理方式、C5 敘事連貫性）與<b>真實性維度</b>（C2 變化程度、C3 情境真實性、C4 情緒流動性、C6 思考節奏），計算 AI 與真人的差異。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">結構性維度 · AI 展現優勢</div><div class="stat-row"><div class="stat"><div class="v">5.0</div><div class="k">AI</div></div><div class="stat"><div class="v" style="color:var(--warn)">3.5</div><div class="k">真人</div></div></div><p style="margin-top:8px">AI <b>邏輯清晰、敘事完整</b> · 多層因果、時序精確、故事 100% 完整。真人則呈現<b>經驗敘事</b> · 單層因果、口語連接、跳躍、記憶重建、平均 3 處中斷。</p></div>
+        <div class="card"><div class="lbl">真實性維度 · 真人展現優勢</div><div class="stat-row"><div class="stat"><div class="v" style="color:var(--warn)">4.88</div><div class="k">真人</div></div><div class="stat"><div class="v">1.05</div><div class="k">AI</div></div></div><p style="margin-top:8px">真人有<b>每百字 10+ 語氣詞、平均 45 個互動標記、情緒被觸動時語言破碎、反思延遲 4 分鐘</b>。AI 零語氣詞、以 emoji 代替、零延遲秒答。</p></div>
+      </div>
+      <blockquote>AI 是<b>結構優異但缺乏真實性</b>的受訪者 — 完整、清晰、有條理，但缺乏真人對話中不完美的痕跡。</blockquote>
+    </section>`,
+    // S15
+    `<section class="slide">
+      <div class="kicker">Findings · 兩種思考模式（4.2.2 節）</div>
+      <h1 class="main big">這不只是程度差異，而是<span class="accent">兩種思考方式</span>的差別。</h1>
+      <div class="lead">為概念化此一差異，本研究提出<b>兩種思考模式的區分</b>。這區分為理解 AI 與人類認知差異提供了新的概念框架，是本研究的<b>核心概念貢獻</b>。</div>
+      <div class="contrast">
+        <div class="side ai"><div class="lbl">AI · 合成式思考</div><h4>Synthetic Thinking</h4><p>本質是<b>即時組裝並輸出訓練數據中的模式</b>。AI 並非如真人般經歷接收刺激、認知處理、記憶提取、情緒波動、逐步建構答案的線性時間過程，而是在<b>零延遲</b>的狀態下同步完成多層次的語意計算、邏輯推演與敘事組織。</p><p>特徵：<b>即時性、完整性、穩定性、可預測性</b>。相同問題會產生相似回答模式。</p></div>
+        <div class="vs">VS</div>
+        <div class="side hu"><div class="lbl">真人 · 經歷中的思考</div><h4>Experiential Thinking</h4><p>本質是透過<b>感知、回憶、情緒與認知的相互作用</b>，逐步形塑出帶有個人特色的理解與表達。真人需要啟動一個充滿不確定性的認知過程 — 需要時間回想、提取整理記憶、處理語言限制、讓情緒進入表達中。</p><p>特徵：<b>時間性、片段性、情緒滲透性、不可預測性</b>。同一個人在不同時刻可能給出不同的回答。</p></div>
+      </div>
+    </section>`,
+    // S16
+    `<section class="slide">
+      <div class="kicker">討論 · 對照基準（4.2.3 節）</div>
+      <h1 class="main">AI 的價值不在<span style="color:var(--warn)">模擬真人</span>，而在<span class="accent">讓真人訪談中的認知訊號被看見</span>。</h1>
+      <div class="lead">本研究的重要發現是 AI Persona 的價值<b>不在於模擬真人，而在於作為對照基準</b>。正是因為 AI 的回答如此流暢、完整、有條理，真人回答中的遲疑、矛盾、片段才得以被凸顯出來。將真人訪談與 AI 訪談並置比較後，這些過去被視為雜訊的元素，其實是<b>真人認知歷程的真實痕跡</b>。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">傳統分析視角</div><ul class="list"><li><b>停頓</b> = 表達能力問題</li><li><b>矛盾</b> = 邏輯混亂</li><li><b>情緒</b> = 干擾資料</li><li>訪談逐字稿處理時傾向<b>清理資料</b>：刪除語氣詞、修飾破碎句子、讓敘事流暢</li></ul><p style="margin-top:10px;color:var(--muted)">→ 需要被清理的<b style="color:var(--warn)">雜訊</b></p></div>
+        <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">對照後的新視角</div><ul class="list"><li><b>停頓</b> = 正在思考的證據（真實認知加工）</li><li><b>矛盾</b> = 內在張力的呈現（理性 vs 情感的拉扯）</li><li><b>情緒</b> = 真實涉入的指標（值得研究者關注）</li><li>這些不完美是<b>人類認知的本質特徵</b>，不是需要被消除的缺陷</li></ul><p style="margin-top:10px;color:var(--muted)">→ 認知歷程的<b style="color:var(--accent)">訊號</b></p></div>
+      </div>
+    </section>`,
+    // S17
+    `<section class="slide">
+      <div class="kicker">討論 · 5.2 節 · 論文獨有貢獻</div>
+      <h1 class="main">如何評估 AI Persona 的好壞？本研究提出<span class="accent">三層次評估架構</span>。</h1>
+      <div class="lead">人物誌品質的評估文獻現有七條取徑（量表 / 過程 / 實務 / 看分數 / 看任務 / 看擬真 / 看透明），但共同存在缺口 — <b>較少直接評估 AI Persona 進入研究流程後是否適用於實際研究</b>。本研究組合三層次的評估架構，可被其他研究者直接沿用。</div>
+      <div class="grid3">
+        <div class="card"><div class="num">Layer 1</div><h3>資料基礎</h3><p>沿用<b>實務取徑</b>，以六維度劇本的<b>次級資料</b>與<b>社群語料</b>來源作為建構正當性的依據。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.3 節建構過程；附錄三原始資料</p></div>
+        <div class="card"><div class="num">Layer 2</div><h3>讀者感知</h3><p>沿用 <b>Salminen et al. (2020) PPS 量表</b>六構面，使結果可與其他研究比較。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 4.1.3 節結果</p></div>
+        <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="num">Layer 3</div><h3>互動品質</h3><p><b>本研究新增的維度</b> · 檢驗<b>穩定性</b>（同一劇本多輪對話的一致）與<b>差異性</b>（不同劇本是否可區辨）。</p><p style="margin-top:4px;font-size:12px;font-style:italic">→ 3.4 節 + 4.1 節</p></div>
+      </div>
+      <blockquote>三層由<b>建構 → 感知 → 互動</b>，恰好補上既有取徑缺漏的「<b>使用情境</b>」面向。任何研究者建立一個 AI Persona 後，都能依序檢視：資料基礎是否充分、PPS 感知是否合格、多輪對話是否穩定且可與對照角色區辨。</blockquote>
+    </section>`,
+    // S18
+    `<section class="slide">
+      <div class="kicker">討論 · 對設計流程（5.3 節）</div>
+      <h1 class="main"><span class="accent">AI 前期廣度</span>，<span class="accent">真人後期深度</span>：研究階段的重新配置。</h1>
+      <div class="lead">傳統的設計研究流程中，使用者訪談通常從前期探索一路延伸到後期驗證，研究者需要在每個階段投入大量時間與資源進行真人訪談。AI Persona 的導入使研究階段得以<b>重新配置</b>，提供在效率與深度之間取得平衡的可能。</div>
+      <div class="grid2">
+        <div class="card"><div class="lbl">前期 · AI Persona 為主</div><h3>發揮效率優勢</h3><ul class="list"><li>概念探索、假設生成、初步測試</li><li>快速與多個 AI Persona 對話，廣泛蒐集不同類型使用者觀點</li><li>初步檢驗設計假設可行性</li><li>目標：建立研究方向、識別值得深入的議題</li></ul></div>
+        <div class="card"><div class="lbl">中後期 · 真人訪談為主</div><h3>真實性優勢無可取代</h3><ul class="list"><li>深度挖掘、概念驗證、細節確認</li><li>捕捉真實使用者的<b>細微反應、意外洞察、情緒波動</b></li><li>經 AI 探索後可<b>更精準地設計訪談問題</b></li><li>將有限資源聚焦於最關鍵議題</li></ul></div>
+      </div>
+      <blockquote>兩者的優缺點恰好<b>互補</b>，應被視為設計研究工具箱中的不同工具，而非競爭關係。AI Persona 作為對照基準，亦讓設計研究者更珍視真人訪談中那些不完美的時刻。</blockquote>
+    </section>`,
+    // S19
+    `<section class="slide">
+      <div class="kicker">未來方向 · 貢獻（6.1 + 6.2 節）</div>
+      <h1 class="main">從靜態快照到<span class="accent">活系統</span> — 三項貢獻。</h1>
+      <div class="lead">本研究的核心貢獻可分為理論與實務兩個層面。理論上，我們建立了新的方法論框架、揭示兩種思考模式的區分、並重新定義真人訪談中「不完美」的價值。實務上，我們為設計研究提供了具體工具與人機協作模式。</div>
+      <div class="grid3">
+        <div class="card"><div class="lbl">方法貢獻</div><h3>六維度劇本方法論</h3><p>將 Park 等（2023）生成式代理概念系統化為<b>六個可操作的維度</b>，並透過實證驗證有效性。為後續研究者提供建構 AI Persona 的<b>具體框架</b>。</p></div>
+        <div class="card"><div class="lbl">概念貢獻</div><h3>兩種思考模式</h3><p>合成式思考 vs 經歷中的思考。透過六項語言維度的比較分析，為理解 AI 與人類認知差異提供了<b>新的概念框架</b>，讓領域不再只比擬真度。</p></div>
+        <div class="card"><div class="lbl">實務貢獻</div><h3>對照基準協作模式</h3><p>AI 支持廣度、真人支持深度的協作模式。為設計研究流程優化提供<b>具體方向</b>，並重新定義真人訪談中不完美的價值。</p></div>
+      </div>
+      <blockquote>這指向未來方向 — <b>活系統</b>。AI Persona 可透過持續累積<b>設計師訪談紀錄 + CRM 資料</b>演化，成為貫穿設計流程的<b>研究基礎設施</b>，其品質隨專案推進而不斷提升。</blockquote>
+    </section>`,
+    // S20
+    `<section class="slide"><div class="thanks"><h1>謝謝聆聽</h1><div class="p">歡迎提問</div></div></section>`
+  ];
+
+  // Format script text
+  function fmtScript(str){
+    return str.split('\n\n').map(p=>
+      '<p>'+p.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')+'</p>'
+    ).join('');
+  }
+
+  // Build items
+  const itemsEl=document.getElementById('items');
+  const tocBar=document.getElementById('toc-bar');
+  S.forEach((s,idx)=>{
+    const anchor='s'+s.no;
+    const item=document.createElement('div');
+    item.className='item';item.id=anchor;
+    item.innerHTML=`
+      <div class="item-head">
+        <span class="no">S${s.no}</span>
+        <h2>${s.title}</h2>
+        <span class="sec">建議 <b>${s.sec}″</b></span>
+      </div>
+      <div class="slide-wrap">
+        <div class="frame">
+          <div class="slide-inner">${SLIDES[idx]||''}</div>
+        </div>
+      </div>
+      <div class="script-wrap">
+        <div class="script-body">${fmtScript(s.body)}</div>
+        ${s.cue?`<div class="cue"><b>控場</b>${s.cue}</div>`:''}
+      </div>
+    `;
+    itemsEl.appendChild(item);
+    const link=document.createElement('a');
+    link.href='#'+anchor;link.textContent='S'+s.no;
+    tocBar.appendChild(link);
+  });
+
+  // Scale each frame based on its parent width
+  const frames=document.querySelectorAll('.frame');
+  function scaleAll(){
+    frames.forEach(f=>{
+      const inner=f.querySelector('.slide-inner');
+      const w=f.getBoundingClientRect().width;
+      inner.style.transform=`scale(${w/1280})`;
+    });
+  }
+  scaleAll();
+  window.addEventListener('resize',scaleAll);
+  new ResizeObserver(scaleAll).observe(document.body);
+</script>
+</body>
+</html>
