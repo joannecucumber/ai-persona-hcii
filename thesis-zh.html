@@ -633,20 +633,29 @@
   const tot=slides.length;
   document.getElementById('tot').textContent=tot;
   let i=0;
-  function show(n){
+  const bc=new BroadcastChannel('thesis-zh-deck');
+  function show(n,broadcast){
     i=Math.max(0,Math.min(tot-1,n));
     slides.forEach((s,k)=>s.classList.toggle('active',k===i));
     document.getElementById('cur').textContent=i+1;
     document.getElementById('bar').style.width=((i+1)/tot*100)+'%';
+    if(broadcast!==false)bc.postMessage({type:'goto',i});
   }
-  function next(){show(i+1)} function prev(){show(i-1)}
+  function next(){show(i+1,true)} function prev(){show(i-1,true)}
   document.getElementById('next').onclick=next;
   document.getElementById('prev').onclick=prev;
   document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}
     else if(e.key==='ArrowLeft'){prev()}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+    else if(e.key.toLowerCase()==='p'){window.open('thesis-zh-presenter.html','presenter','width=1400,height=900')}
   });
-  show(0);
+  bc.onmessage=e=>{
+    if(e.data.type==='goto'&&e.data.i!==i)show(e.data.i,false);
+    else if(e.data.type==='ping')bc.postMessage({type:'pong'});
+  };
+  bc.postMessage({type:'hello'});
+  show(0,true);
 </script>
 </body>
 </html>
