@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDF · 講稿對照 · AI Persona 論文口試</title>
+<style>
+  :root{
+    --bg:#0a0e0b;--card:#141a15;--line:rgba(15,199,123,.22);--accent:#0FC77B;
+    --ink:#f1f3f2;--muted:#aab3ac;--warn:#fbbf24
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',-apple-system,sans-serif;overflow:hidden}
+  .app{display:grid;grid-template-columns:1.7fr 1fr;grid-template-rows:auto 1fr auto;height:100vh}
+  header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;border-bottom:1.6px solid var(--line);background:rgba(15,199,123,.04);gap:16px;flex-wrap:wrap}
+  header .l{display:flex;align-items:center;gap:14px}
+  header .badge{background:var(--accent);color:#04121a;font-weight:800;font-size:11px;letter-spacing:.14em;padding:5px 10px;border-radius:5px}
+  header .title{font-size:14px;color:var(--muted)}
+  header .title b{color:var(--ink)}
+  header .r{display:flex;align-items:center;gap:14px}
+  header .pgno{font-family:'Consolas','SF Mono',monospace;color:var(--ink);font-size:14px}
+  header .pgno b{color:var(--accent);font-weight:800}
+  header button{background:var(--card);border:1px solid var(--line);color:var(--ink);width:36px;height:36px;border-radius:8px;font-size:16px;cursor:pointer;transition:.15s;font-family:inherit}
+  header button:hover{background:var(--accent);color:#04121a;border-color:var(--accent)}
+  header button:disabled{opacity:.3;cursor:not-allowed}
+
+  .pdf-pane{background:var(--bg);overflow:auto;display:flex;align-items:center;justify-content:center;padding:24px;border-right:1.6px solid var(--line)}
+  .pdf-pane img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.6);display:block}
+
+  .script-pane{background:var(--card);overflow-y:auto;padding:24px 28px;border-left:1.6px solid var(--line)}
+  .script-head{padding-bottom:14px;border-bottom:1.6px solid var(--line);margin-bottom:16px}
+  .script-head .kicker{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  .script-head h2{font-size:18px;font-weight:700;line-height:1.35;color:var(--ink)}
+  .script-head .time{color:var(--muted);font-size:12px;font-family:'Consolas','SF Mono',monospace;margin-top:6px}
+  .script-head .time b{color:var(--accent);font-weight:600}
+  .script-body{color:var(--ink);font-size:15px;line-height:1.9;letter-spacing:.02em}
+  .script-body p{margin-bottom:12px}
+  .script-body p:last-child{margin-bottom:0}
+  .script-body b{color:var(--accent);font-weight:600}
+  .cue{background:rgba(251,191,36,.08);border-left:3px solid var(--warn);padding:10px 14px;border-radius:0 8px 8px 0;color:var(--warn);font-size:13px;line-height:1.55;margin-top:14px}
+  .cue b{color:var(--warn);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:3px}
+  .placeholder{text-align:center;color:var(--muted);padding:60px 20px}
+  .placeholder .icon{font-size:48px;margin-bottom:20px;opacity:.4}
+  .placeholder h3{color:var(--accent);font-size:18px;margin-bottom:12px;font-weight:800;letter-spacing:.04em}
+  .placeholder p{color:var(--muted);font-size:14px;line-height:1.7;max-width:32ch;margin:0 auto}
+
+  footer{grid-column:1/-1;padding:8px 24px;border-top:1.6px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:rgba(15,199,123,.03);font-size:12px;color:var(--muted);gap:16px}
+  footer .k{font-family:'Consolas','SF Mono',monospace}
+  footer .thumbs{display:flex;gap:4px;overflow-x:auto;flex:1;justify-content:center;padding:0 20px;max-width:70vw}
+  footer .thumb{width:12px;height:12px;background:var(--card);border:1px solid var(--line);border-radius:2px;cursor:pointer;transition:.15s;flex-shrink:0}
+  footer .thumb.active{background:var(--accent);border-color:var(--accent);transform:scaleY(1.4)}
+  footer .thumb:hover{border-color:var(--accent)}
+  footer .thumb.divider{background:transparent;border-color:rgba(251,191,36,.4)}
+
+  @media (max-width:900px){
+    .app{grid-template-columns:1fr;grid-template-rows:auto 45vh 45vh auto}
+    .pdf-pane{border-right:none;border-bottom:1.6px solid var(--line)}
+    .script-pane{border-left:none}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="l">
+      <span class="badge">PDF · 講稿對照</span>
+      <span class="title"><b>AI Persona 能取代真人訪談嗎？</b>　簡潔安 · 論文口試</span>
+    </div>
+    <div class="r">
+      <button id="prev">‹</button>
+      <span class="pgno"><b id="cur">1</b> / <span id="tot">39</span></span>
+      <button id="next">›</button>
+    </div>
+  </header>
+  <div class="pdf-pane">
+    <img id="pdfImg" src="pdf-pages/page-01.jpg" alt="PDF page">
+  </div>
+  <div class="script-pane" id="scriptPane">
+    <!-- content injected -->
+  </div>
+  <footer>
+    <div class="k">← → 換頁 · Home/End 跳首末</div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="k"><span id="metaInfo"></span></div>
+  </footer>
+</div>
+
+<script src="thesis-zh-scripts.js"></script>
+<script>
+  const S = window.THESIS_ZH_SCRIPTS;
+  const TOTAL_PAGES = 39;
+
+  // PDF page → script index (0-based), or 'chapter-N' for chapter dividers
+  // null = no script mapping (e.g., cover repeats or extras)
+  const MAP = {
+    1: 0,          // 封面 → S1
+    2: 1,          // 目錄 → S2
+    3: 'ch-1',     // 第一章 分頁
+    4: 2,          // 1.1 研究背景 → S3
+    5: 3,          // 1.2 研究問題 → S4
+    6: 4,          // 1.3 研究範圍 → S5
+    7: 'ch-2',     // 第二章 分頁
+    8: 5,          // 2.1 演進 → S6
+    9: 6,          // 2.2 生成式 AI → S7
+    10: 7,         // 2.3 AI 設計流程 → S8
+    11: 8,         // 2.4 小結 → S9
+    12: 'ch-3',    // 第三章 分頁
+    13: 9,         // 3.1 行動研究引言 → S10 (DSR)
+    14: 9,         // 3.1 DSR → S10
+    15: 10,        // 3.2 研究設計 → S11
+    16: 11,        // 3.3 建構階段 · 四階段 → S12
+    17: 12,        // 3.3 六維度劇本 → S13
+    18: 13,        // 3.3 兩位 AI Persona → S14
+    19: 14,        // 3.4.1 劇本方法論驗證 → S15
+    20: 15,        // 3.4.2 AI 與真人比較 → S16
+    21: 'ch-4',    // 第四章 分頁
+    22: 15,        // 重複 3.4.2
+    23: 16,        // 4.1 建構階段結果 → S17
+    24: 17,        // 4.2 驗證結果 part 1 → S18
+    25: 17,        // 4.2 驗證結果 part 2
+    26: 17,        // 4.2 兩種思考 → S18
+    27: 17,        // 4.2 核心發現 → S18
+    28: 'ch-5',    // 第五章 分頁
+    29: 18,        // 5.1 優缺點比較 → S19
+    30: 19,        // 5.2 如何評估 → S20
+    31: 20,        // 5.3 對流程 → S21
+    32: 21,        // 5.4 對設計師 → S22
+    33: 22,        // 5.5 研究者反思 → S23
+    34: 'ch-6',    // 第六章 分頁
+    35: 23,        // 6.1 結論 → S24
+    36: 24,        // 6.2 貢獻 → S25
+    37: 25,        // 6.3 限制 → S26
+    38: 26,        // 6.4 未來研究 → S27
+    39: 27,        // 6.5 總結 → S28
+  };
+
+  const CHAPTERS = {
+    'ch-1': { title: '第一章 · 緒論', desc: '研究背景、問題、目的與範圍。' },
+    'ch-2': { title: '第二章 · 文獻探討', desc: '人物誌方法論、生成式 AI、AI 在設計流程的角色。' },
+    'ch-3': { title: '第三章 · 研究方法', desc: 'DSR 方法論、研究設計、建構階段與驗證階段。' },
+    'ch-4': { title: '第四章 · 研究結果', desc: '建構階段結果與驗證階段結果的完整呈現。' },
+    'ch-5': { title: '第五章 · 討論', desc: '優缺點比較、評估架構、對流程與產業的影響。' },
+    'ch-6': { title: '第六章 · 結論與建議', desc: '研究結論、貢獻、限制與未來研究方向。' },
+  };
+
+  let curPage = 1;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function fmt(str) {
+    return str.split('\n\n').map(p =>
+      '<p>' + p.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>') + '</p>'
+    ).join('');
+  }
+
+  function renderScript(pageNum) {
+    const pane = document.getElementById('scriptPane');
+    const mapping = MAP[pageNum];
+    if (typeof mapping === 'number') {
+      const s = S[mapping];
+      pane.innerHTML = `
+        <div class="script-head">
+          <div class="kicker">S${s.no} · 對應 PDF 第 ${pageNum} 頁</div>
+          <h2>${s.title}</h2>
+          <div class="time">建議時長 <b>${s.sec}″</b></div>
+        </div>
+        <div class="script-body">${fmt(s.body)}</div>
+        ${s.cue ? `<div class="cue"><b>控場</b>${s.cue}</div>` : ''}
+      `;
+    } else if (typeof mapping === 'string' && CHAPTERS[mapping]) {
+      const ch = CHAPTERS[mapping];
+      pane.innerHTML = `
+        <div class="placeholder">
+          <div class="icon">§</div>
+          <h3>${ch.title}</h3>
+          <p>${ch.desc}</p>
+          <p style="margin-top:20px;font-size:12px;color:var(--muted);opacity:.6">章節導引頁 · 無需講稿</p>
+        </div>
+      `;
+    } else {
+      pane.innerHTML = `<div class="placeholder"><div class="icon">·</div><p>此頁無對應講稿</p></div>`;
+    }
+    pane.scrollTop = 0;
+  }
+
+  function show(n) {
+    curPage = Math.max(1, Math.min(TOTAL_PAGES, n));
+    document.getElementById('pdfImg').src = `pdf-pages/page-${pad(curPage)}.jpg`;
+    document.getElementById('cur').textContent = curPage;
+    renderScript(curPage);
+    updateThumbs();
+    document.getElementById('prev').disabled = curPage === 1;
+    document.getElementById('next').disabled = curPage === TOTAL_PAGES;
+    // Info
+    const m = MAP[curPage];
+    let info = '';
+    if (typeof m === 'number') info = `講稿 S${S[m].no}`;
+    else if (typeof m === 'string') info = '章節分頁';
+    document.getElementById('metaInfo').textContent = info;
+  }
+
+  function buildThumbs() {
+    const t = document.getElementById('thumbs');
+    for (let i = 1; i <= TOTAL_PAGES; i++) {
+      const el = document.createElement('div');
+      el.className = 'thumb';
+      if (typeof MAP[i] === 'string') el.classList.add('divider');
+      el.dataset.page = i;
+      el.title = `頁 ${i}`;
+      el.onclick = () => show(i);
+      t.appendChild(el);
+    }
+  }
+
+  function updateThumbs() {
+    document.querySelectorAll('.thumb').forEach(el => {
+      el.classList.toggle('active', +el.dataset.page === curPage);
+    });
+  }
+
+  document.getElementById('prev').onclick = () => show(curPage - 1);
+  document.getElementById('next').onclick = () => show(curPage + 1);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(curPage + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(curPage - 1); }
+    else if (e.key === 'Home') { show(1); }
+    else if (e.key === 'End') { show(TOTAL_PAGES); }
+  });
+
+  buildThumbs();
+  show(1);
+</script>
+</body>
+</html>
