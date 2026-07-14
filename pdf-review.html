@@ -68,7 +68,7 @@
     </div>
     <div class="r">
       <button id="prev">‹</button>
-      <span class="pgno"><b id="cur">1</b> / <span id="tot">36</span></span>
+<span class="pgno"><b id="cur">1</b> / <span id="tot">37</span></span>
       <button id="next">›</button>
     </div>
   </header>
@@ -88,7 +88,7 @@
 <script src="thesis-zh-scripts.js"></script>
 <script>
   const S = window.THESIS_ZH_SCRIPTS;
-  const TOTAL_PAGES = 36;
+  const TOTAL_PAGES = 37;
 
   // PDF page → script index (0-based), or 'ch-N' for chapter dividers
   const MAP = {
@@ -110,24 +110,25 @@
     16: 12,        // 3.3 六維度劇本 → S13
     17: 13,        // 3.3 兩位 AI Persona → S14
     18: 14,        // 3.4.1 劇本方法論驗證 → S15
-    19: 15,        // 3.4.2 AI 與真人比較 → S16
+    19: 15,        // 3.4.2 AI 與真人比較（part 1）→ S16
     20: 'ch-4',    // 第四章 分頁
-    21: 16,        // 4.1 建構階段結果 → S17
-    22: 17,        // 4.2 驗證結果 part 1 → S18
-    23: 17,        // 4.2 驗證結果 part 2 → S18
-    24: 17,        // 4.2 驗證結果 part 3 → S18
-    25: 'ch-5',    // 第五章 分頁
-    26: 18,        // 5.1 優缺點比較 → S19
-    27: 19,        // 5.2 如何評估 → S20
-    28: 20,        // 5.3 對流程 → S21
-    29: 21,        // 5.4 對設計師 → S22
-    30: 22,        // 5.5 研究者反思 → S23
-    31: 'ch-6',    // 第六章 分頁
-    32: 23,        // 6.1 結論 → S24
-    33: 24,        // 6.2 貢獻 → S25
-    34: 25,        // 6.3 限制 → S26
-    35: 26,        // 6.4 未來研究 → S27
-    36: 27,        // 6.5 總結 → S28
+    21: 15,        // 3.4.2（duplicate/continuation）→ S16
+    22: 16,        // 4.1 建構階段結果 → S17
+    23: 17,        // 4.2 驗證結果 part 1 → S18
+    24: 17,        // 4.2 驗證結果 part 2 → S18
+    25: 17,        // 4.2 兩種思考模式 → S18
+    26: 'ch-5',    // 第五章 分頁
+    27: 18,        // 5.1 優缺點比較 → S19
+    28: 19,        // 5.2 如何評估 → S20
+    29: 20,        // 5.3 對流程 → S21
+    30: 21,        // 5.4 對設計師 → S22
+    31: 22,        // 5.5 研究者反思 → S23
+    32: 'ch-6',    // 第六章 分頁
+    33: 23,        // 6.1 結論 → S24
+    34: 24,        // 6.2 貢獻 → S25
+    35: 25,        // 6.3 限制 → S26
+    36: 26,        // 6.4 未來研究 → S27
+    37: 27,        // 6.5 總結 → S28
   };
 
   const CHAPTERS = {
