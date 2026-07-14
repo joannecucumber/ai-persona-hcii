@@ -90,7 +90,16 @@
   .slide-inner .thanks{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px}
   .slide-inner .thanks h1{font-size:66px;color:var(--accent);font-weight:800;letter-spacing:.05em}
   .slide-inner .thanks .p{color:var(--muted);font-size:20px}
-  .slide-inner .cover{padding:56px 88px}
+  .slide-inner .cover{padding:56px 88px;position:relative}
+  .slide-inner .cover-photo{position:absolute;top:0;right:0;width:42%;height:100%;overflow:hidden;z-index:0}
+  .slide-inner .cover-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%) brightness(.7) saturate(1.05)}
+  .slide-inner .cover-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,rgba(10,14,11,.7) 25%,transparent 70%)}
+  .slide-inner .cover .badge,.slide-inner .cover h1,.slide-inner .cover .subtitle,.slide-inner .cover .abs,.slide-inner .cover .meta{position:relative;z-index:1;max-width:60%}
+  .slide-inner .cover .badge{max-width:none}
+  .slide-inner .thanks-bg{position:absolute;inset:0;overflow:hidden;z-index:0}
+  .slide-inner .thanks-bg img{width:100%;height:100%;object-fit:cover;opacity:.28;filter:saturate(1.3) hue-rotate(-10deg)}
+  .slide-inner .thanks-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 20%,var(--bg) 75%)}
+  .slide-inner .thanks h1,.slide-inner .thanks .p{position:relative;z-index:2}
   .slide-inner .cover .badge{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px;padding:5px 12px;border:1.5px solid var(--accent);border-radius:5px;display:inline-block;width:fit-content}
   .slide-inner .cover h1{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:12px;letter-spacing:-.01em}
   .slide-inner .cover h1 .accent{color:var(--accent)}
@@ -165,7 +174,7 @@
 
   const SLIDES=[
     // S1 封面
-    `<section class="slide cover"><div class="badge">碩士論文口試</div><h1>AI Persona 能取代<br><span class="accent">真人訪談</span>嗎？</h1><div class="subtitle">探討 AI Persona 與真人受訪者的差異對設計研究的影響</div><div class="abs">本研究不探討 AI Persona 與真人的<b>相似程度</b>，而探討兩者之間的<b>結構性差異</b>，以及此差異對設計研究的意涵。透過設計科學研究方法、六維度劇本方法論的建構，並與真人受訪者進行系統性比較，我們主張 AI Persona 的價值不在模擬真人，而在作為對照基準。</div><div class="meta"><b>簡潔安</b>　指導教授：<b>唐玄輝 博士</b><br>國立臺灣科技大學　設計系碩士班　學號：M11110914</div></section>`,
+    `<section class="slide cover"><div class="cover-photo"><img src="https://images.unsplash.com/photo-1774016591258-f86e81cb1474?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400" alt="Silhouette portrait" loading="lazy"></div><div class="badge">碩士論文口試</div><h1>AI Persona 能取代<br><span class="accent">真人訪談</span>嗎？</h1><div class="subtitle">探討 AI Persona 與真人受訪者的差異對設計研究的影響</div><div class="abs">本研究不探討 AI Persona 與真人的<b>相似程度</b>，而探討兩者之間的<b>結構性差異</b>，以及此差異對設計研究的意涵。透過設計科學研究方法、六維度劇本方法論的建構，並與真人受訪者進行系統性比較，我們主張 AI Persona 的價值不在模擬真人，而在作為對照基準。</div><div class="meta"><b>簡潔安</b>　指導教授：<b>唐玄輝 博士</b><br>國立臺灣科技大學　設計系碩士班　學號：M11110914</div></section>`,
     // S2 目錄
     `<section class="slide"><div class="kicker">目錄</div><h1 class="main">論文架構 · <span class="accent">六章</span></h1><div class="toc-grid">
       <div class="toc-col"><h3 class="toc-chap">第一章 緒論</h3><ul class="toc-secs"><li>1.1 研究背景</li><li>1.2 研究問題與目的</li><li>1.3 研究範圍與限制</li><li>1.4 論文架構</li></ul></div>
@@ -311,7 +320,7 @@
       <div class="card"><div class="num">① 判斷力</div><p>決定何時使用 AI、何時使用真人 — 需要<b>專業經驗</b>。</p></div>
       <div class="card"><div class="num">② 同理心</div><p>與真實使用者建立情感連結 — 這是 <b>AI 無法複製</b>的能力。</p></div>
       <div class="card"><div class="num">③ 整合力</div><p>將 AI 的類型化觀點與真人的個體經驗整合，<b>轉化為設計決策</b>。</p></div>
-    </div><blockquote><b>人機協作新模式</b>：AI 負責<b>規模與效率</b> · 真人負責<b>深度與洞察</b> · 設計師負責<b>整合與判斷</b>。三者<b>互補定位</b>，非替代關係。</blockquote></section>`,
+    </div><div class="photo" style="aspect-ratio:20/6;margin-top:10px"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400" alt="Design team collaborating" loading="lazy"></div><blockquote><b>人機協作新模式</b>：AI 負責<b>規模與效率</b> · 真人負責<b>深度與洞察</b> · 設計師負責<b>整合與判斷</b>。三者<b>互補定位</b>，非替代關係。</blockquote></section>`,
     // S21 5.5
     `<section class="slide"><div class="kicker">5.5 研究者反思</div><h1 class="main">兩個關鍵轉折 — <span class="accent">從報告到對話</span>、<span class="accent">從模擬到建構</span>。</h1><div class="grid2">
       <div class="card"><div class="lbl">轉折一 · 從制式提示到六維度劇本</div><p>初期用「你是 26 歲的投資者」這類制式提示，AI 產出像<b>報告</b>而不是對話——次級資料給了「說什麼」，卻沒有給「怎麼說」。</p><p style="margin-top:6px">於是轉向 PTT/Dcard 第一人稱貼文捕捉語言風格，發展出<b>把語言風格放在核心的六維度劇本</b>。</p></div>
@@ -346,8 +355,8 @@
       <div class="card"><div class="lbl">為什麼不能取代</div><p>兩者本質上是<b>不同的思考模式</b>——AI 的合成式思考缺乏真人思考的<b>時間性、不確定性、情緒滲透</b>，也無法提供真人訪談中的<b>意外洞察與情感連結</b>。</p></div>
       <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">為什麼不必取代</div><p>正是因為 AI 的差異，真人訪談中容易被忽略的<b>認知訊號</b>才得以被看見——AI 的完整凸顯真人的片段、AI 的即時凸顯真人的反思延遲、AI 的描述凸顯真人的情緒滲透。</p></div>
     </div><blockquote>未來方向是<b>人機協作模式</b> — AI 支持前期廣度、真人完成中後期深度。六維度劇本方法論為這種協作提供了可操作的建構框架。</blockquote></section>`,
-    // S27 謝謝
-    `<section class="slide"><div class="thanks"><h1>謝謝聆聽</h1><div class="p">歡迎提問</div></div></section>`
+    // S29 謝謝
+    `<section class="slide"><div class="thanks"><div class="thanks-bg"><img src="https://images.unsplash.com/photo-1614853316695-60bb46998d6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600" alt="Abstract glow" loading="lazy"></div><h1>謝謝聆聽</h1><div class="p">歡迎提問</div></div></section>`
   ];
 
   function fmtScript(str){
