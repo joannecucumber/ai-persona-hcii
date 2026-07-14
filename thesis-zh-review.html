@@ -141,7 +141,7 @@
   <div class="l">
     <div class="kicker">對照檢查頁 · Review</div>
     <h1><span class="accent">AI Persona</span> 論文口試 · 簡報 + 講稿</h1>
-    <div class="meta"><b>簡潔安</b>　26 頁 · 20 分鐘 · 每頁對應論文一節</div>
+    <div class="meta"><b>簡潔安</b>　28 頁 · 21 分鐘 · 每頁對應論文一節</div>
   </div>
   <div class="r">
     <a href="thesis-zh.html">▶ 開簡報</a>
@@ -235,7 +235,21 @@
       <div class="vs">VS</div>
       <div class="side ai"><div class="lbl">理性型 · 內在信念</div><h4>艾蜜莉 Emily · 25 歲</h4><p>數據分析師 · 信奉 Bogle 低成本指數投資 · <b>冷靜、內在驅動</b></p></div>
     </div></section>`,
-    // S13 3.4
+    // S13 3.3.4 六維度劇本生成
+    `<section class="slide"><div class="kicker">3.3.4 六維度劇本生成</div><h1 class="main">六維度框架把角色從<span class="accent">靜態條列</span>變成<span class="accent">可回應的敘事系統</span>。</h1><div class="lead">劇本生成是建構流程的第三階段——把前兩階段的探索報告、用戶輪廓、社群語料三份素材整合，用 <b>Gemini</b> 撰寫一份約 <b>7,500 字</b>的角色劇本作為系統指令。框架參考 <b>Park 等（2023）</b>關於具體生活脈絡能讓 AI 代理更人性化的發現。</div><table><thead><tr><th>維度</th><th>目的</th></tr></thead><tbody>
+      <tr><td><b>基本資料</b></td><td class="muted">確立角色身份參數，確保敘事一致性</td></tr>
+      <tr><td><b>世界觀</b></td><td class="muted">闡述信念系統，形塑詮釋傾向與決策邏輯</td></tr>
+      <tr><td><b>心理狀態</b></td><td class="muted">提供情感輪廓，使角色具備情緒深度與變化</td></tr>
+      <tr><td><b>行為模式</b></td><td class="muted">捕捉日常應對策略，使回應方式可被觀察</td></tr>
+      <tr><td><b>語言風格</b></td><td class="muted">建立可辨識的語言標記，使角色聲音穩定</td></tr>
+      <tr><td><b>日常情境</b></td><td class="muted">將角色置於具體場景，避免抽象並促進具身互動</td></tr>
+    </tbody></table><blockquote>六維度共同發揮三項功能——基本資料+世界觀<b>抑制漂移</b>、行為模式+日常情境<b>賦予行動力</b>、心理狀態+語言風格<b>強化反思</b>。</blockquote></section>`,
+    // S14 3.3.5 AI Persona 部署與建構成果
+    `<section class="slide"><div class="kicker">3.3.5 AI Persona 部署與建構成果</div><h1 class="main">劇本 + 行為限制 + 角色內化，三者一起才構成<span class="accent">完整的 AI Persona</span>。</h1><div class="lead">把完成的六維度劇本作為系統指令輸入 <b>OpenAI GPTs</b> 平台後，還要再加上兩組指令規範互動行為——三者共同才是 AI Persona 的完整設定。</div><div class="grid2">
+      <div class="card"><div class="lbl">行為限制指令 · 五項規則</div><p>這五項規則規範 AI 的互動節奏與立場：<b>十次回應中至少三次要在 100 字內</b>模擬自然對話節奏；<b>禁止提及「知識檔案」「被給予的資訊」</b>這類暴露 AI 身份的字眼；把所有背景資料<b>視為自身記憶</b>以第一人稱表達；不能連續反問；並嚴格遵守<b>心理狀態與語言風格</b>的設定。</p></div>
+      <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">角色內化指令</div><p>要求 AI 把劇本裡的背景視為<b>自身經歷</b>——不是「扮演」這個角色，而是「就是」這個角色，讓互動對象感覺是在跟真實的人對話。</p></div>
+    </div><blockquote>經由四階段流程，本研究產出<b>兩位信心來源相反的對比人物誌</b>——情緒型 / 外部確認的 <b>Anne</b>（23 歲行銷實習生）與理性型 / 內在信念的 <b>Emily</b>（25 歲數據分析師，信奉 John Bogle 低成本指數化投資）。</blockquote></section>`,
+    // S15 3.4 驗證階段
     `<section class="slide"><div class="kicker">3.4 驗證階段</div><h1 class="main">先請 6 位設計師從三個角度驗證 AI Persona 的建構品質，再拿 3 位<span class="accent">真人受訪者</span>跟它比擬真差異。</h1><div class="grid2">
       <div class="card"><div class="lbl">3.4.1 劇本方法論驗證</div><h3>6 位資深設計師 · 三部分同場完成</h3><p><b>Part 1 穩定性</b> — 與 Anne / Emily 各三輪對話，1-5 分評估一致程度；<b>Part 2 差異性</b> — 每題比較兩位差異度；<b>Part 3 PPS</b> — 填 Salminen 2020 感知量表六構面 1-7 分。</p><p style="margin-top:4px;font-size:11px">3 年以上 UX 經驗、未參與人物誌建構。</p></div>
       <div class="card"><div class="lbl">3.4.2 AI 與真人比較</div><h3>3 位受訪者 × 60 分鐘 × 3 個設計方案</h3><p style="margin-bottom:4px"><b>對象：</b>AI Anne + 真人 A（26 歲）+ 真人 B（24 歲）</p><p style="margin-bottom:4px"><b>方案：</b>信心回測（過去）／情緒緩衝區（現在）／投資願景板（未來）</p><p><b>編碼：</b>六項語言維度 <b>C1-C6</b> · 每方案 4 題 · 1-5 分</p></div>
