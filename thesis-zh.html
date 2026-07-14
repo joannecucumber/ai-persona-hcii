@@ -78,6 +78,9 @@
   .toc-col h3.toc-chap{color:var(--accent);font-size:clamp(15px,1.35vw,18px);font-weight:800;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(15,199,123,.25)}
   .toc-secs{list-style:none;padding:0;margin:0}
   .toc-secs > li{color:var(--muted);font-size:clamp(12px,1vw,14px);line-height:1.75;padding:1px 0}
+  .photo{position:relative;border-radius:10px;overflow:hidden;margin-top:12px;aspect-ratio:16/10}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(1.05)}
+  .photo::after{content:'unsplash';position:absolute;bottom:6px;right:10px;color:rgba(255,255,255,.55);font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.5)}
   .timeline{display:flex;gap:12px;margin-top:14px;align-items:stretch}
   .timeline .tl-item{flex:1;background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:14px 16px;position:relative}
   .timeline .tl-item .year{color:var(--accent);font-weight:800;font-size:14px;letter-spacing:.06em;margin-bottom:6px}
@@ -401,6 +404,7 @@
       <div class="lbl">受訪者</div>
       <h3 style="font-size:18px">6 位資深設計師</h3>
       <p style="margin-top:8px">3 年以上 UX 研究經驗，<b>皆為未參與本研究</b>的第三方，以確保客觀性。</p>
+      <div class="photo"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Designer testing at laptop" loading="lazy"></div>
     </div>
     <div class="card">
       <div class="lbl">測試流程 · 三部分同場完成</div>
@@ -434,6 +438,7 @@
       <p><b>AI Persona Anne</b></p>
       <p style="margin-top:6px"><b>真人受訪者</b>：24 / 26 歲</p>
       <p style="margin-top:10px;font-size:13px;color:var(--muted)">真人透過問卷篩選，符合 Anne 的 Z 世代情緒型輪廓。</p>
+      <div class="photo"><img src="https://images.unsplash.com/photo-1653762379480-f647e6228dc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Two people talking at cafe" loading="lazy"></div>
     </div>
     <div class="card">
       <div class="lbl">驗證訪談問題</div>

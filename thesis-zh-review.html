@@ -103,6 +103,9 @@
   .slide-inner .toc-col h3.toc-chap{color:var(--accent);font-size:13px;font-weight:800;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid rgba(15,199,123,.25)}
   .slide-inner .toc-secs{list-style:none;padding:0;margin:0}
   .slide-inner .toc-secs > li{color:var(--muted);font-size:10.5px;line-height:1.55;padding:1px 0}
+  .slide-inner .photo{position:relative;border-radius:8px;overflow:hidden;margin-top:10px;aspect-ratio:16/10}
+  .slide-inner .photo img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) saturate(1.05)}
+  .slide-inner .photo::after{content:'unsplash';position:absolute;bottom:4px;right:8px;color:rgba(255,255,255,.55);font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.5)}
   .slide-inner .timeline{display:flex;gap:10px;margin-top:10px}
   .slide-inner .timeline .tl-item{flex:1;background:var(--card);border:1.6px solid var(--line);border-radius:10px;padding:10px 12px}
   .slide-inner .timeline .tl-item .year{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.06em;margin-bottom:4px}
@@ -251,7 +254,7 @@
     </div><blockquote>經由四階段流程，本研究產出<b>兩位信心來源相反的對比人物誌</b>——情緒型 / 外部確認的 <b>Anne</b>（23 歲行銷實習生）與理性型 / 內在信念的 <b>Emily</b>（25 歲數據分析師，信奉 John Bogle 低成本指數化投資）。</blockquote></section>`,
     // S15 3.4.1 劇本方法論驗證
     `<section class="slide"><div class="kicker">3.4.1 劇本方法論驗證</div><h1 class="main">同六道問題、每位角色三輪，再填<span class="accent">人物誌感知量表</span>。</h1><div class="grid3" style="margin-top:12px">
-      <div class="card"><div class="lbl">受訪者</div><h3 style="font-size:15px">6 位資深設計師</h3><p style="margin-top:6px">3 年以上 UX 研究經驗，<b>皆為未參與本研究</b>的第三方，以確保客觀性。</p></div>
+      <div class="card"><div class="lbl">受訪者</div><h3 style="font-size:15px">6 位資深設計師</h3><p style="margin-top:6px">3 年以上 UX 研究經驗，<b>皆為未參與本研究</b>的第三方，以確保客觀性。</p><div class="photo"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Designer testing" loading="lazy"></div></div>
       <div class="card"><div class="lbl">測試流程 · 三部分同場完成</div><p style="margin-top:4px"><b>① 穩定性</b><br>與 Anne 三輪、Emily 三輪對話。每題以 <b>1-5 分</b>評分（1=完全不一致，5=完全一致）。</p><p style="margin-top:8px"><b>② 差異性</b><br>Anne 與 Emily 每題正面對比，<b>1-5 分</b>評估差異程度（1=完全一樣，5=非常不同）。</p><p style="margin-top:8px"><b>③ PPS 量表 + 開放回饋</b><br>兩位分別評 <b>6 個感知構面</b>，1-7 分李克特（Salminen 2020）。</p></div>
       <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">測試題目 · 對應六維度</div><table style="margin-top:4px;font-size:11px"><tbody>
         <tr><td style="color:var(--accent);font-weight:800">Q1</td><td>可以先簡單介紹一下自己嗎？</td><td class="muted">基本資料</td></tr>
@@ -264,7 +267,7 @@
     </div></section>`,
     // S16 3.4.2 AI 與真人比較
     `<section class="slide"><div class="kicker">3.4.2 AI 與真人比較</div><h1 class="main">跟 Anne 和兩位真人各做一場 <span class="accent">60 分鐘的設計驗證訪談</span>，同流程、同材料。</h1><div class="grid3" style="margin-top:12px">
-      <div class="card"><div class="lbl">受訪對象</div><p><b>AI Persona Anne</b></p><p style="margin-top:4px"><b>真人受訪者</b>：24 / 26 歲</p><p style="margin-top:8px;font-size:11px;color:var(--muted)">真人透過問卷篩選，符合 Anne 的 Z 世代情緒型輪廓。</p></div>
+      <div class="card"><div class="lbl">受訪對象</div><p><b>AI Persona Anne</b></p><p style="margin-top:4px"><b>真人受訪者</b>：24 / 26 歲</p><p style="margin-top:8px;font-size:11px;color:var(--muted)">真人透過問卷篩選，符合 Anne 的 Z 世代情緒型輪廓。</p><div class="photo"><img src="https://images.unsplash.com/photo-1653762379480-f647e6228dc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Cafe interview" loading="lazy"></div></div>
       <div class="card"><div class="lbl">驗證訪談問題</div><p style="margin-top:4px"><b>Q1</b>　對這個概念的第一反應？</p><p style="margin-top:6px"><b>Q2</b>　它會如何影響你的行為或情緒？</p><p style="margin-top:6px"><b>Q3</b>　它會改變你對投資情境的理解嗎？</p><p style="margin-top:6px"><b>Q4</b>　什麼有效？什麼沒效？為什麼？</p><p style="margin-top:8px;font-size:11px;color:var(--muted)">三個設計方案：信心回測（過去）／情緒緩衝區（現在）／投資願景板（未來）。</p></div>
       <div class="card" style="border-color:rgba(15,199,123,.5)"><div class="lbl">六項語言維度</div><p style="font-size:11px;color:var(--muted);font-style:italic;margin-top:4px">改編自 Braun & Clarke (2006) 主題分析與 Heritage & Clayman (2010) 會話分析。1-5 分編碼。</p><p style="margin-top:6px"><b>C1 推理方式</b> <span style="color:var(--muted);font-size:11px">話語有邏輯嗎？</span></p><p style="margin-top:4px"><b>C2 變化程度</b> <span style="color:var(--muted);font-size:11px">口語標記多嗎？</span></p><p style="margin-top:4px"><b>C3 情境真實性</b> <span style="color:var(--muted);font-size:11px">有暫停思考嗎？</span></p><p style="margin-top:4px"><b>C4 情緒流動</b> <span style="color:var(--muted);font-size:11px">情緒影響語言嗎？</span></p><p style="margin-top:4px"><b>C5 敘事連貫性</b> <span style="color:var(--muted);font-size:11px">故事聚不聚起來？</span></p><p style="margin-top:4px"><b>C6 反思節奏</b> <span style="color:var(--muted);font-size:11px">即時還是停頓後才回？</span></p></div>
     </div></section>`,
