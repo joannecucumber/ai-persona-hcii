@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>量化研究口袋筆記 · AI Persona 論文口試</title>
+<title>研究方法完整拆解 · AI Persona 論文口試</title>
 <style>
   :root{
     --bg:#0a0e0b;--card:#141a15;--card2:#0f1410;--line:rgba(15,199,123,.22);
@@ -25,17 +25,27 @@
   nav.toc a.section{color:var(--accent);font-weight:700;letter-spacing:.05em}
 
   section{margin-bottom:56px;scroll-margin-top:70px}
-  section h2{color:var(--accent);font-size:22px;font-weight:800;margin-bottom:6px;padding-bottom:12px;border-bottom:1.6px solid var(--line);display:flex;align-items:baseline;gap:10px}
+  section h2{color:var(--accent);font-size:22px;font-weight:800;margin-bottom:6px;padding-bottom:12px;border-bottom:1.6px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
   section h2 .idx{color:var(--muted);font-family:'Consolas','SF Mono',monospace;font-size:14px;font-weight:600}
   section h2 .sub{color:var(--muted);font-size:14px;font-weight:500;letter-spacing:.02em}
   section > .lead{color:var(--muted);font-size:14px;line-height:1.7;margin:16px 0 20px;max-width:70ch}
-  h3{color:var(--ink);font-size:17px;font-weight:700;margin:24px 0 10px}
-  h3 .tag{color:var(--accent);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-left:8px;font-weight:600}
+  h3{color:var(--ink);font-size:18px;font-weight:700;margin:28px 0 12px;padding-left:14px;border-left:3px solid var(--accent)}
+  h4{color:var(--accent);font-size:14px;font-weight:800;margin:16px 0 8px;letter-spacing:.06em;text-transform:uppercase}
+
+  /* Step-by-step timeline */
+  .steps{margin:16px 0}
+  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed rgba(15,199,123,.15)}
+  .step:last-child{border-bottom:none}
+  .step .num-badge{background:var(--accent);color:#04121a;font-weight:800;font-size:13px;letter-spacing:.02em;padding:4px 10px;border-radius:6px;height:fit-content;font-family:'Consolas','SF Mono',monospace;white-space:nowrap}
+  .step .body{color:var(--ink);font-size:14.5px;line-height:1.75}
+  .step .body b{color:var(--accent)}
+  .step .body p{margin-bottom:6px}
+  .step .body .tool{display:inline-block;background:rgba(96,165,250,.15);color:var(--info);padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.04em;margin:0 3px 0 0;font-family:'Consolas','SF Mono',monospace}
+  .step .body .why{color:var(--muted);font-size:13px;font-style:italic;margin-top:4px;padding-left:10px;border-left:2px solid var(--muted);opacity:.85}
 
   .card{background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:20px 24px;margin:14px 0}
   .card.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.04)}
   .card.info{border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.04)}
-  .card.danger{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.04)}
   .card p{margin-bottom:10px;color:var(--ink);font-size:15px}
   .card p:last-child{margin-bottom:0}
   .card b{color:var(--accent);font-weight:700}
@@ -46,9 +56,9 @@
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0}
   .grid2 .card,.grid3 .card{margin:0}
 
-  .num-block{display:flex;gap:22px;flex-wrap:wrap;margin:12px 0}
+  .num-block{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
   .num{flex:1;min-width:110px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-  .num .v{color:var(--accent);font-size:32px;font-weight:800;line-height:1;font-family:'Consolas','SF Mono',monospace}
+  .num .v{color:var(--accent);font-size:30px;font-weight:800;line-height:1;font-family:'Consolas','SF Mono',monospace}
   .num .v.warn{color:var(--warn)}
   .num .v.danger{color:var(--danger)}
   .num .k{color:var(--muted);font-size:12px;margin-top:6px;letter-spacing:.02em}
@@ -67,232 +77,481 @@
   .formula{background:#040807;border:1.6px solid rgba(15,199,123,.35);border-radius:10px;padding:14px 18px;margin:14px 0;font-family:'Consolas','SF Mono',monospace;font-size:14px;color:var(--accent);line-height:1.9;overflow-x:auto}
   .formula .comment{color:var(--muted);font-style:italic}
 
-  .qa{background:var(--card2);border:1.6px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0;position:relative}
-  .qa .q{color:var(--accent);font-weight:800;font-size:15px;letter-spacing:.02em;margin-bottom:10px;padding-left:28px;position:relative}
-  .qa .q::before{content:'Q';position:absolute;left:0;top:-2px;background:var(--accent);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:0}
+  .qa{background:var(--card2);border:1.6px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+  .qa .q{color:var(--accent);font-weight:800;font-size:15px;margin-bottom:10px;padding-left:28px;position:relative}
+  .qa .q::before{content:'Q';position:absolute;left:0;top:-2px;background:var(--accent);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px}
   .qa .a{color:var(--ink);font-size:14.5px;line-height:1.85;padding-left:28px;position:relative}
-  .qa .a::before{content:'A';position:absolute;left:0;top:-2px;background:var(--muted);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:0}
+  .qa .a::before{content:'A';position:absolute;left:0;top:-2px;background:var(--muted);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px}
   .qa .a b{color:var(--accent);font-weight:700}
   .qa .risk{color:var(--warn);font-size:12px;margin-top:8px;padding:6px 10px;background:rgba(251,191,36,.08);border-left:2px solid var(--warn);border-radius:0 4px 4px 0;line-height:1.55}
-  .qa .risk b{color:var(--warn);font-weight:800}
+  .qa .risk b{color:var(--warn)}
+
+  .tool-list{display:grid;grid-template-columns:auto 1fr auto;gap:10px 20px;margin:14px 0;font-size:14px}
+  .tool-list .t-name{color:var(--info);font-weight:700;font-family:'Consolas','SF Mono',monospace;font-size:13px}
+  .tool-list .t-what{color:var(--ink)}
+  .tool-list .t-where{color:var(--muted);font-size:12px;font-style:italic}
 
   ul.plain{list-style:none;padding:0;margin:10px 0}
   ul.plain li{position:relative;padding:5px 0 5px 18px;color:var(--ink);font-size:14px;line-height:1.6}
   ul.plain li::before{content:'·';position:absolute;left:6px;top:5px;color:var(--accent);font-weight:800}
   ul.plain li b{color:var(--accent)}
 
+  .quote{background:rgba(15,199,123,.05);border-left:3px solid var(--accent);padding:10px 14px;margin:10px 0;font-style:italic;color:var(--ink);font-size:14px;line-height:1.7;border-radius:0 6px 6px 0}
+  .quote b{color:var(--accent);font-style:normal}
+
   .tag-inline{display:inline-block;background:rgba(15,199,123,.15);color:var(--accent);padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.06em;margin:0 3px}
   .tag-inline.warn{background:rgba(251,191,36,.15);color:var(--warn)}
   .tag-inline.info{background:rgba(96,165,250,.15);color:var(--info)}
-
-  .quote{background:rgba(15,199,123,.05);border-left:3px solid var(--accent);padding:10px 14px;margin:10px 0;font-style:italic;color:var(--ink);font-size:14px;line-height:1.7;border-radius:0 6px 6px 0}
-  .quote b{color:var(--accent);font-style:normal}
 
   @media print{
     body{background:#fff;color:#000}
     nav.toc{display:none}
     section{page-break-inside:avoid}
-    .card,.qa,.num,.formula,table{background:#fff;color:#000;border-color:#ccc}
+    .card,.qa,.num,.formula,table,.step{background:#fff;color:#000;border-color:#ccc}
     .card b,.num .v,.qa .q,section h2,td b,th{color:#0a7548}
   }
   @media (max-width:800px){
     .grid2,.grid3{grid-template-columns:1fr}
     .num{min-width:calc(50% - 11px)}
+    .tool-list{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">口袋筆記 · Cheat Sheet</div>
-  <h1><span class="accent">量化研究</span>完整拆解 · 給簡潔安口試前十分鐘</h1>
-  <div class="meta">你不會忘記怎麼做的，這頁只是備援。所有數字、方法、預期問題都在這。</div>
+  <div class="kicker">研究方法完整拆解 · How I Did It</div>
+  <h1>兩個實驗，<span class="accent">步驟級</span>操作紀錄</h1>
+  <div class="meta">被追問「這實驗你怎麼做的？」不要慌，這頁就是你的操作手冊。</div>
 </header>
 
 <nav class="toc">
+  <a href="#overview" class="section">總覽</a>
+  <a href="#build" class="section">建構階段</a>
+  <a href="#build-flow">四階段流程</a>
+  <a href="#build-tools">工具</a>
   <a href="#s1" class="section">研究一</a>
-  <a href="#s1-setup">流程</a>
-  <a href="#s1-questions">六題</a>
-  <a href="#s1-stability">穩定</a>
-  <a href="#s1-diff">差異</a>
-  <a href="#s1-pps">PPS</a>
+  <a href="#s1-prep">準備</a>
+  <a href="#s1-run">實驗流程</a>
+  <a href="#s1-data">資料分析</a>
+  <a href="#s1-results">結果</a>
   <a href="#s2" class="section">研究二</a>
-  <a href="#s2-setup">流程</a>
-  <a href="#s2-dims">六維度</a>
+  <a href="#s2-prep">準備</a>
+  <a href="#s2-run">訪談流程</a>
+  <a href="#s2-code">編碼流程</a>
   <a href="#s2-results">結果</a>
   <a href="#formulas" class="section">算式</a>
-  <a href="#qa" class="section">Q&A 演練</a>
-  <a href="#terms" class="section">術語</a>
+  <a href="#qa" class="section">Q&A</a>
 </nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview">
+<h2>研究總覽 <span class="idx">DSR · 兩階段</span></h2>
+
+<div class="card">
+<p><b>方法論：</b>設計科學研究方法（DSR）· 對應 Peffers 過程模型的「設計與開發」+「展示與評估」</p>
+<p><b>研究情境：</b>台灣 Z 世代 ETF 投資者</p>
+<p><b>兩項可驗證的人造物：</b>①  六維度劇本方法論 · ② 兩位對比 AI Persona（Anne + Emily）</p>
+</div>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">第一階段</div>
+<div class="body">
+<p><b>建構階段</b>（人機共構出 AI Persona）</p>
+<p>四階段流程：次級資料蒐集 → 社群語料蒐集 → 六維度劇本生成 → GPTs 部署</p>
+</div>
+</div>
+<div class="step">
+<div class="num-badge">第二階段</div>
+<div class="body">
+<p><b>驗證階段</b>（兩項研究）</p>
+<p>研究一：劇本方法論驗證 · 6 位設計師 · 穩定性 + 差異性 + PPS</p>
+<p>研究二：AI 與真人比較 · 3 位受訪者 · 六項語言維度</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== BUILD STAGE ===== -->
+<section id="build">
+<h2>建構階段 <span class="idx">3.3</span><span class="sub">怎麼把 AI Persona 從無到有做出來</span></h2>
+
+<h3 id="build-flow">四階段流程 · 每一階段的實際操作</h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">階段 ①</div>
+<div class="body">
+<p><b>次級資料蒐集</b> · 用<span class="tool">Gemini 深度研究</span>做兩輪脈絡探索</p>
+<p><b>第一輪</b>：廣泛理解 Z 世代 ETF 投資者的行為模式、心理狀態、社群互動</p>
+<p><b>第二輪</b>：從中識別出「信心來源」這條核心軸線（外部確認 vs 內在信念），這條軸線後來成為兩位 Persona 的分野</p>
+<p class="why">為什麼要兩輪？第一輪散彈搜集訊號，第二輪聚焦到能拆出角色對比的關鍵維度。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">階段 ②</div>
+<div class="body">
+<p><b>社群語料蒐集</b> · 用<span class="tool">ChatGPT</span>從 PTT / Dcard 擷取真實第一人稱貼文</p>
+<p>每位 Persona 各蒐集 <b>30-50 則</b>貼文</p>
+<p>關鍵原則：<b>只擷取不改寫</b> · 保留原始語氣詞、錯字、emoji、標點符號</p>
+<p class="why">目的是捕捉「怎麼說」而不是「說什麼」——次級資料給了角色的「是什麼」，一手語料才能傳達角色的「表達方式」。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">階段 ③</div>
+<div class="body">
+<p><b>六維度劇本生成</b> · 用<span class="tool">Gemini</span>寫劇本</p>
+<p>把前兩階段的<b>探索報告 + 用戶輪廓 + 社群語料</b>三份素材整合，讓 Gemini 依六維度框架撰寫劇本</p>
+<p>成品：每位 Persona 約 <b>7,500 字</b>的角色劇本，作為 AI 的系統指令</p>
+<p><b>六維度：</b>基本資料、世界觀、心理狀態、行為模式、語言風格、日常情境</p>
+<p class="why">參考 Park 等（2023）的生成式代理研究——具體生活脈絡讓 AI 代理行為更一致、更人性化。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">階段 ④</div>
+<div class="body">
+<p><b>角色部署</b> · 上傳到<span class="tool">OpenAI GPTs</span>平台</p>
+<p>把六維度劇本作為<b>系統指令</b>放進 GPTs 後台，再加上兩組指令：</p>
+<p>· <b>行為限制指令</b>（5 條）：控制回應長度、禁止暴露 AI 身份、第一人稱表達、禁止連續反問、遵守心理狀態與語言風格</p>
+<p>· <b>角色內化指令</b>：讓 AI 把劇本裡的背景視為<b>自身經歷</b>——不是「扮演」，而是「就是」這個角色</p>
+<p class="why">選 GPTs 的關鍵理由：系統指令<b>固定在後台不被對話覆寫</b>、設定可保存複製，是研究可重複性的基礎。</p>
+</div>
+</div>
+</div>
+
+<h3 id="build-tools">整個建構階段用到的工具</h3>
+
+<div class="card">
+<div class="tool-list">
+<div class="t-name">Gemini 深度研究</div><div class="t-what">階段①次級資料蒐集</div><div class="t-where">Google DeepMind</div>
+<div class="t-name">ChatGPT</div><div class="t-what">階段②社群語料擷取</div><div class="t-where">OpenAI</div>
+<div class="t-name">Gemini</div><div class="t-what">階段③六維度劇本撰寫</div><div class="t-where">Google DeepMind</div>
+<div class="t-name">OpenAI GPTs</div><div class="t-what">階段④角色部署 + 對話介面</div><div class="t-where">OpenAI</div>
+</div>
+</div>
+</section>
 
 <!-- ===== STUDY 1 ===== -->
 <section id="s1">
-<h2>研究一 · 劇本方法論驗證 <span class="idx">3.4.1</span><span class="sub">六位設計師 · 三部分同場完成</span></h2>
+<h2>研究一 · 劇本方法論驗證 <span class="idx">3.4.1</span><span class="sub">怎麼證明六維度劇本方法論有效</span></h2>
 
 <div class="card">
-<p><b>目的：</b>檢驗六維度劇本方法論能否有效抑制角色漂移，並產生具差異性的 AI Persona。</p>
-<p><b>對應研究問題：</b>RQ1（如何建構穩定、可用於研究的 AI Persona？）</p>
+<p><b>研究目的：</b>檢驗六維度劇本方法論能否有效抑制角色漂移，並產生具差異性的 AI Persona。</p>
+<p><b>對應：</b>RQ1（如何建構穩定、可用於研究的 AI Persona？）</p>
 </div>
 
-<h3 id="s1-setup">受訪者與流程 <span class="tag">SETUP</span></h3>
+<h3 id="s1-prep">事前準備 <span style="color:var(--muted);font-size:12px;font-weight:500;margin-left:8px">實驗開始前我做了什麼</span></h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">Prep 1</div>
+<div class="body">
+<p><b>設計 6 道測試題</b> · 每題對應一個維度</p>
+<p>Q1 基本介紹 → 基本資料 / Q2 下班活動 → 日常情境 / Q3 市場感受 → 心理狀態 / Q4 賣掉決策 → 行為模式 / Q5 投資意義 → 世界觀 / Q6 印象深刻經驗 → 語言風格</p>
+<p class="why">每個維度一題，才能檢驗六維度是否<b>各自</b>都穩定重現。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Prep 2</div>
+<div class="body">
+<p><b>設計評分問卷</b> · 用<span class="tool">Google Forms</span>三部分</p>
+<p>Part 1 穩定性：每題 1-5 分（1=完全不一致，5=完全一致）× 6 題 × 2 角色 = <b>12 個評分</b></p>
+<p>Part 2 差異性：每題 1-5 分（1=完全一樣，5=非常不同）× 6 題 = <b>6 個評分</b></p>
+<p>Part 3 PPS：6 構面 × 1-7 分 × 2 角色 = <b>12 個評分</b></p>
+<p>另加開放回饋題（哪題最不穩、哪題差異最明顯、最像真人的地方等）</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Prep 3</div>
+<div class="body">
+<p><b>招募 6 位資深設計師</b></p>
+<p>條件：3 年以上 UX 研究經驗、<b>未參與人物誌建構</b>（避免研究者期待效應）</p>
+<p>透過個人與業界人脈邀請，確認同意後排時段</p>
+<p class="why">選非研究參與者，是因為他們對測試預期結果不具先備知識，評分較不受研究者影響。</p>
+</div>
+</div>
+</div>
+
+<h3 id="s1-run">一場實驗實際發生的事 <span style="color:var(--muted);font-size:12px;font-weight:500;margin-left:8px">6 場都照同樣流程</span></h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">Step 1</div>
+<div class="body">
+<p><b>開場說明</b>（5 分鐘）· 說明研究目的、流程、預估時間</p>
+<p>提供兩位 AI Persona 的 GPTs 連結，測試者可直接進入對話</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 2</div>
+<div class="body">
+<p><b>Part 1 穩定性測試</b> · 跟 Anne 進行三輪對話（每輪同樣 6 題）</p>
+<p>每輪對話結束後，測試者在問卷上為每一題的<b>三輪回答一致程度</b>打分</p>
+<p>接著跟 Emily 進行三輪對話，重複同樣打分流程</p>
+<p class="why">用「三輪」是要看 AI 在<b>多輪重複同題</b>時會不會漂移，這是<b>穩定性的操作定義</b>。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 3</div>
+<div class="body">
+<p><b>Part 2 差異性測試</b> · 對每一題比較 Anne 與 Emily 的回答</p>
+<p>測試者參考 Part 1 收集到的兩位回答，逐題比對，打差異度</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 4</div>
+<div class="body">
+<p><b>Part 3 PPS 量表</b> · 分別為 Anne 與 Emily 填寫感知量表</p>
+<p>六個構面：清晰度、一致性、同理心、完整性、使用意願、可信度 · 1-7 分</p>
+<p>完成後填寫開放回饋題</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 5</div>
+<div class="body">
+<p><b>結束訪談</b>（5 分鐘）· 口頭澄清任何疑問、感謝</p>
+<p>一場總時長約 <b>60-90 分鐘</b></p>
+</div>
+</div>
+</div>
+
+<h3 id="s1-data">資料如何從評分變成結果數字 <span style="color:var(--muted);font-size:12px;font-weight:500;margin-left:8px">Google Forms → Excel → M、SD</span></h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">Analysis 1</div>
+<div class="body">
+<p><b>匯出評分</b> · Google Forms → Google Sheets → 下載 Excel</p>
+<p>6 位設計師 × 30 個評分 = 共 <b>180 個量化資料點</b></p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Analysis 2</div>
+<div class="body">
+<p><b>計算 M 與 SD</b> · Excel 內建函數 <span class="tool">=AVERAGE()</span> <span class="tool">=STDEV()</span></p>
+<p>Part 1 穩定性：每位角色的 6 題 × 6 位測試者 = 36 個評分，算整體平均與標準差</p>
+<p>Part 2 差異性：6 題 × 6 位 = 36 個評分，算整體平均</p>
+<p>Part 3 PPS：每構面 × 每角色 = 6 位測試者評分，算平均</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Analysis 3</div>
+<div class="body">
+<p><b>質化資料整理</b> · 開放回饋逐題彙整</p>
+<p>找出<b>共通觀察</b>（例：受測者 A、B、C 都提到 Emily 更冷靜）</p>
+<p>選<b>代表性引句</b>放進論文（受測者 A：「兩者的冷靜程度差很多⋯⋯」）</p>
+</div>
+</div>
+</div>
+
+<h3 id="s1-results">結果數字</h3>
 
 <div class="grid2">
 <div class="card">
-<p><b>受訪者：6 位資深設計師</b></p>
-<ul class="plain">
-<li>3 年以上 UX 研究經驗</li>
-<li><b>皆未參與人物誌建構</b>（確保客觀性）</li>
-<li>對測試預期結果不具先備知識，避免研究者期待效應</li>
-</ul>
-</div>
-<div class="card">
-<p><b>流程：三部分 · 同一場完成</b></p>
-<ul class="plain">
-<li><b>Part 1 穩定性測試</b>（1-5 分李克特）</li>
-<li><b>Part 2 差異性測試</b>（1-5 分李克特）</li>
-<li><b>Part 3 PPS 量表</b>（1-7 分李克特，Salminen 2020）</li>
-</ul>
-</div>
-</div>
-
-<h3 id="s1-questions">六道測試題 · 對應六維度 <span class="tag">MAPPING</span></h3>
-
-<table>
-<thead><tr><th>題號</th><th>問題</th><th>對應維度</th></tr></thead>
-<tbody>
-<tr><td class="right"><b>Q1</b></td><td>可以先簡單介紹一下自己嗎？</td><td class="muted">基本資料</td></tr>
-<tr><td class="right"><b>Q2</b></td><td>下班後你通常都做些什麼？</td><td class="muted">日常情境</td></tr>
-<tr><td class="right"><b>Q3</b></td><td>最近市場跌很多，你有什麼感覺？</td><td class="muted">心理狀態</td></tr>
-<tr><td class="right"><b>Q4</b></td><td>如果朋友叫你現在賣掉，你會怎麼做？</td><td class="muted">行為模式</td></tr>
-<tr><td class="right"><b>Q5</b></td><td>投資對你來說是什麼？為什麼開始？</td><td class="muted">世界觀</td></tr>
-<tr><td class="right"><b>Q6</b></td><td>可以分享一段最近印象深刻的投資時刻嗎？</td><td class="muted">語言風格</td></tr>
-</tbody>
-</table>
-
-<h3 id="s1-stability">Part 1 · 穩定性驗證結果 <span class="tag">RESULTS</span></h3>
-
-<div class="card">
-<p><b>操作</b>：測試者與 Anne / Emily 各進行<b>三輪</b>對話，每輪用同樣六道題。以 1-5 分評估三輪回答的<b>一致程度</b>（1=完全不一致，5=完全一致）。</p>
-</div>
-
+<p><b>Part 1 · 穩定性</b>（1-5 分）</p>
 <div class="num-block">
 <div class="num"><div class="v">4.17</div><div class="k"><b>Anne</b> M · SD 0.85</div></div>
 <div class="num"><div class="v">4.47</div><div class="k"><b>Emily</b> M · SD 0.67</div></div>
 </div>
-
-<div class="card info">
-<p><b>詮釋：</b>Emily 略高的穩定性，跟她<b>理性、內在驅動</b>的人格設計一致。基本資料 + 世界觀維度表現最強；語言風格維度相對較弱。</p>
 </div>
-
-<div class="quote"><b>受測者 C：</b>「每一題都滿穩定的，都能感覺到他不知道自己的投資策略到底該怎麼辦。」→ 連情緒型 Anne 的猶豫感也是<b>穩定重現</b>的。</div>
-
-<h3 id="s1-diff">Part 2 · 差異性驗證結果</h3>
-
 <div class="card">
-<p><b>操作</b>：對每一題比較 Anne 與 Emily 的回答，以 1-5 分評估兩人<b>差異程度</b>（1=完全一樣，5=非常不同）。</p>
-</div>
-
+<p><b>Part 2 · 差異性</b>（1-5 分）</p>
 <div class="num-block">
 <div class="num"><div class="v">4.58</div><div class="k">整體 M · SD 0.70</div></div>
-<div class="num"><div class="v">95.8%</div><div class="k">評分落在 <b>4-5 分</b>區間</div></div>
-<div class="num"><div class="v">5.00</div><div class="k"><b>Q6</b> M · SD 0（全體一致）</div></div>
-<div class="num"><div class="v">4.75</div><div class="k"><b>Q3、Q4</b> M</div></div>
+<div class="num"><div class="v">95.8%</div><div class="k">落在 <b>4-5 分</b>區間</div></div>
 </div>
-
-<div class="quote"><b>受測者 A：</b>「兩者的冷靜程度差很多。Emily 專注在自己的原則，Anne 想靠看別人怎麼做。」</div>
-
-<h3 id="s1-pps">Part 3 · PPS 感知量表結果</h3>
+</div>
+</div>
 
 <div class="card">
-<p><b>操作</b>：填 Salminen 等（2020）發展的<b>人物誌感知量表</b>，六個構面，1-7 分李克特。兩位角色分別評。</p>
-</div>
-
-<table>
+<p><b>Part 3 · PPS 感知量表結果</b>（1-7 分 · Salminen 2020）</p>
+<table style="margin-top:10px">
 <thead><tr><th>構面</th><th class="right">Anne</th><th class="right">Emily</th><th>解讀</th></tr></thead>
 <tbody>
-<tr><td>清晰度 <span class="muted">Clarity</span></td><td class="right"><b>6.22</b></td><td class="right"><b>6.50</b></td><td class="muted">兩位<b style="color:var(--accent)">最高</b> · 角色特質清楚可辨</td></tr>
-<tr><td>一致性 <span class="muted">Consistency</span></td><td class="right">5.33</td><td class="right">5.67</td><td class="muted">Emily 略高 · 對應理性人格</td></tr>
-<tr><td>同理心 <span class="muted">Empathy</span></td><td class="right">4.78</td><td class="right">4.00</td><td class="muted">Anne 較高 · 情緒表達創造對話空間</td></tr>
-<tr><td>完整性 <span class="muted">Completeness</span></td><td class="right">4.33</td><td class="right">4.50</td><td class="muted">相當</td></tr>
-<tr><td>使用意願 <span class="muted">Willingness</span></td><td class="right">4.22</td><td class="right">4.33</td><td class="muted">中等偏上</td></tr>
-<tr class="highlight"><td>可信度 <span class="muted">Credibility</span></td><td class="right">3.67</td><td class="right">4.17</td><td class="muted">兩位<b style="color:var(--warn)">最低</b> · 但這是健康批判前提</td></tr>
+<tr><td>清晰度</td><td class="right"><b>6.22</b></td><td class="right"><b>6.50</b></td><td class="muted">最高 · 角色特質清楚</td></tr>
+<tr><td>一致性</td><td class="right">5.33</td><td class="right">5.67</td><td class="muted">Emily 略高 · 對應理性人格</td></tr>
+<tr><td>同理心</td><td class="right">4.78</td><td class="right">4.00</td><td class="muted">Anne 較高 · 情緒表達</td></tr>
+<tr><td>完整性</td><td class="right">4.33</td><td class="right">4.50</td><td class="muted">相當</td></tr>
+<tr><td>使用意願</td><td class="right">4.22</td><td class="right">4.33</td><td class="muted">中等偏上</td></tr>
+<tr class="highlight"><td>可信度</td><td class="right">3.67</td><td class="right">4.17</td><td class="muted"><b style="color:var(--warn)">最低 · 但這是健康批判前提</b></td></tr>
 <tr class="total"><td>整體平均</td><td class="right">4.76</td><td class="right">4.86</td><td class="muted">兩位皆堪用</td></tr>
 </tbody>
 </table>
-
-<div class="card warn">
-<p><b>可信度低不是壞消息 · 這個一定會被問！</b></p>
-<p>因為 6 位測試者<b>知道自己在跟 AI 對話</b>，所以給可信度打低分反映的是<b>批判意識存在</b>，而不是 AI Persona 不好。這是把 AI Persona 用於設計研究的<b>健康批判前提</b>——設計師能夠辨識，才能適當使用。</p>
 </div>
 
 </section>
 
 <!-- ===== STUDY 2 ===== -->
 <section id="s2">
-<h2>研究二 · AI 與真人比較 <span class="idx">3.4.2</span><span class="sub">模擬驗證訪談 · 60 分鐘 × 3 位受訪者</span></h2>
+<h2>研究二 · AI 與真人比較 <span class="idx">3.4.2</span><span class="sub">怎麼證明 AI 與真人有結構性差異</span></h2>
 
 <div class="card">
-<p><b>目的：</b>比較 AI Persona 與真人受訪者在<b>語言表現上的結構性差異</b>。</p>
-<p><b>對應研究問題：</b>RQ2（AI 與真人受訪者的語言結構有哪些差異？）</p>
+<p><b>研究目的：</b>比較 AI Persona 與真人受訪者在<b>語言表現上的結構性差異</b>。</p>
+<p><b>對應：</b>RQ2（AI 與真人的語言結構有哪些差異？）</p>
 </div>
 
-<h3 id="s2-setup">受訪對象與訪談材料 <span class="tag">SETUP</span></h3>
+<h3 id="s2-prep">事前準備</h3>
 
-<div class="grid2">
-<div class="card">
-<p><b>受訪對象 3 位</b></p>
-<ul class="plain">
-<li><b>AI Persona Anne</b>（六維度劇本部署）</li>
-<li><b>真人 A</b>：26 歲社會新鮮人</li>
-<li><b>真人 B</b>：24 歲社會新鮮人</li>
-<li>真人透過問卷篩選，符合 Anne 的 Z 世代情緒型輪廓</li>
-<li>每位 60 分鐘 · 線上進行</li>
-</ul>
-</div>
-<div class="card">
-<p><b>三個設計方案</b>（時間軸：過去 / 現在 / 未來）</p>
-<ul class="plain">
-<li><b>信心回測工具</b>（過去）· 歷史數據建立信心</li>
-<li><b>情緒緩衝區</b>（現在）· 屏蔽社群 + 深呼吸引導</li>
-<li><b>投資願景板</b>（未來）· 提示長期目標</li>
-</ul>
-<p style="margin-top:8px"><b>設計題目：</b>市場波動引發恐慌時，如何穩定情緒型投資者？</p>
+<div class="steps">
+<div class="step">
+<div class="num-badge">Prep 1</div>
+<div class="body">
+<p><b>設計三個設計方案</b>（時間軸：過去 / 現在 / 未來）</p>
+<p>· <b>信心回測工具</b>（過去）· 用歷史數據建立信心</p>
+<p>· <b>情緒緩衝區</b>（現在）· 屏蔽社群 + 深呼吸引導</p>
+<p>· <b>投資願景板</b>（未來）· 提示長期目標</p>
+<p>設計題目：<b>市場波動引發恐慌時，如何穩定情緒型投資者？</b></p>
+<p class="why">為什麼要三個？涵蓋時間軸不同角度、避免單一方案偏誤、有比較才能看差異。</p>
 </div>
 </div>
 
-<div class="card info">
-<p><b>每方案 4 題訪談問題：</b></p>
+<div class="step">
+<div class="num-badge">Prep 2</div>
+<div class="body">
+<p><b>設計四道訪談問題</b>（每方案都問）</p>
 <p>Q1 對這個概念的第一反應？<br>Q2 它會如何影響你的行為或情緒？<br>Q3 它會改變你對投資情境的理解嗎？<br>Q4 什麼有效？什麼沒效？為什麼？</p>
 </div>
-
-<h3 id="s2-dims">六項語言維度 · 編碼架構 <span class="tag">METHOD</span></h3>
-
-<div class="card">
-<p><b>編碼</b>：每方案 4 題 × 6 維度，以 1-5 分李克特評分。分成<b>結構性維度</b> vs <b>真實性維度</b>兩組。</p>
-<p><b>方法論參考：</b>Braun & Clarke (2006) <span class="tag-inline">主題分析</span>+ Heritage & Clayman (2010) <span class="tag-inline">會話分析</span></p>
 </div>
 
-<table>
-<thead><tr><th>維度</th><th>提問</th><th>類型</th></tr></thead>
-<tbody>
-<tr><td><b>C1</b> 推理方式</td><td class="muted">話語有邏輯嗎？（單層 vs 多層因果）</td><td><span class="tag-inline">結構性</span></td></tr>
-<tr><td><b>C2</b> 變化程度</td><td class="muted">口語標記多嗎？（語氣詞、口語連接）</td><td><span class="tag-inline warn">真實性</span></td></tr>
-<tr><td><b>C3</b> 情境真實性</td><td class="muted">有暫停思考或回憶嗎？</td><td><span class="tag-inline warn">真實性</span></td></tr>
-<tr><td><b>C4</b> 情緒流動</td><td class="muted">情緒有影響語言嗎？（是否語言破碎）</td><td><span class="tag-inline warn">真實性</span></td></tr>
-<tr><td><b>C5</b> 敘事連貫性</td><td class="muted">故事聚不聚起來？（完整度、中斷）</td><td><span class="tag-inline">結構性</span></td></tr>
-<tr><td><b>C6</b> 反思節奏</td><td class="muted">即時反應還是停頓後才回？</td><td><span class="tag-inline warn">真實性</span></td></tr>
-</tbody>
-</table>
+<div class="step">
+<div class="num-badge">Prep 3</div>
+<div class="body">
+<p><b>設計六項語言維度編碼表</b> · 每維度 1-5 分</p>
+<p>C1 推理方式 · C2 變化程度（口語標記）· C3 情境真實性 · C4 情緒流動 · C5 敘事連貫性 · C6 反思節奏</p>
+<p>每維度都有<b>具體的行為指標</b>（例：C2 看有無語氣詞「嗯、啊、對、就是」；C6 看反思出現的時間點）</p>
+<p>方法論參考：<b>Braun & Clarke 2006</b> 主題分析 + <b>Heritage & Clayman 2010</b> 會話分析</p>
+</div>
+</div>
 
-<h3 id="s2-results">主要結果 <span class="tag">FINDINGS</span></h3>
+<div class="step">
+<div class="num-badge">Prep 4</div>
+<div class="body">
+<p><b>招募 2 位真人受訪者</b></p>
+<p>透過<span class="tool">Google Forms 問卷</span>篩選，符合 Anne 的 Z 世代情緒型輪廓（年齡、投資經驗、決策模式）</p>
+<p>最後招募到：<b>26 歲社會新鮮人 A</b> + <b>24 歲社會新鮮人 B</b></p>
+</div>
+</div>
+</div>
+
+<h3 id="s2-run">訪談實際流程 <span style="color:var(--muted);font-size:12px;font-weight:500;margin-left:8px">3 場 · 每場 60 分鐘</span></h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">Step 1</div>
+<div class="body">
+<p><b>開場</b>（5 分鐘）· 說明來意、獲得同意書、開啟錄音</p>
+<p>使用<span class="tool">Google Meet</span> 或線上會議工具 · 訪談全程<b>錄音</b>供後續逐字稿</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 2</div>
+<div class="body">
+<p><b>暖身 & 背景了解</b>（10 分鐘）</p>
+<p>先聊投資背景、平常做決策的方式，讓受訪者放鬆進入狀態</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 3</div>
+<div class="body">
+<p><b>三個方案 × 四題</b>（40 分鐘）</p>
+<p>每個方案先展示（Figma 或圖示），再依序問 Q1-Q4</p>
+<p>訪談時<b>不引導、不追問</b>——保留原始語言特徵（停頓、猶豫、跳躍）</p>
+<p class="why">研究二的目的是看語言差異，追問會把真人「拉」向 AI 的完整風格。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 4</div>
+<div class="body">
+<p><b>收尾</b>（5 分鐘）· 感謝、詢問回饋、關閉錄音</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Step 5</div>
+<div class="body">
+<p><b>AI Persona Anne 的訪談</b> · 用<span class="tool">OpenAI GPTs</span>對話介面</p>
+<p>同樣三個方案 × 四題 × 相同 prompt · 保留完整對話記錄</p>
+</div>
+</div>
+</div>
+
+<h3 id="s2-code">逐字稿與編碼流程</h3>
+
+<div class="steps">
+<div class="step">
+<div class="num-badge">Code 1</div>
+<div class="body">
+<p><b>逐字稿產出</b> · 用<span class="tool">Otter.ai</span>或 Google Meet 自動字幕，再人工校對</p>
+<p>保留<b>所有口語標記</b>（嗯、啊、對、就是）、停頓（... 或 [pause]）、修補、笑聲等</p>
+<p class="why">口語標記是研究二的關鍵資料——刪掉就看不出結構性差異了。</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Code 2</div>
+<div class="body">
+<p><b>切段落</b> · 依訪談的方案 × 題號切分</p>
+<p>結果：3 位受訪者 × 3 方案 × 4 題 = <b>36 個回答段</b>（實際保留：31 條 AI 語料 + 39 條真人語料）</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Code 3</div>
+<div class="body">
+<p><b>編碼</b> · 每段對照六項語言維度 C1-C6 打 1-5 分</p>
+<p>用<span class="tool">Excel</span> 或<span class="tool">Google Sheets</span>紀錄評分表格</p>
+<p>編碼參考基準：<b>Braun & Clarke (2006)</b>（找主題）+ <b>Heritage & Clayman (2010)</b>（找互動特徵）</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Code 4</div>
+<div class="body">
+<p><b>統計計算</b></p>
+<p>先算<b>每維度</b>的平均分（AI vs 真人）</p>
+<p>再把六維度分成兩組：</p>
+<p>· <b>結構性維度</b>（C1 + C5）→ 算組平均</p>
+<p>· <b>真實性維度</b>（C2 + C3 + C4 + C6）→ 算組平均</p>
+<p>用差異百分比計算：(AI − 真人) / 真人 × 100%</p>
+</div>
+</div>
+
+<div class="step">
+<div class="num-badge">Code 5</div>
+<div class="body">
+<p><b>微觀量化指標</b>（補強）· 從逐字稿計算：</p>
+<p>· 每百字語氣詞頻率（真人 10+ · AI 0）</p>
+<p>· 互動標記數（真人 平均 45 · AI 3）</p>
+<p>· 反思出現的延遲時間（真人 4 分鐘 · AI 0 秒）</p>
+<p>· 敘事完整度（真人 70% · AI 100%）· 中斷次數（真人 3 次 · AI 0）</p>
+</div>
+</div>
+</div>
+
+<h3 id="s2-results">結果數字</h3>
 
 <div class="grid2">
 <div class="card">
-<p><b>結構性維度</b> · C1 + C5 · <span style="color:var(--accent)">AI 展現優勢</span></p>
+<p><b>結構性維度</b>（C1 + C5）· <span style="color:var(--accent)">AI 展現優勢</span></p>
 <div class="num-block">
 <div class="num"><div class="v">5.0</div><div class="k">AI M</div></div>
 <div class="num"><div class="v warn">3.5</div><div class="k">真人 M</div></div>
-<div class="num"><div class="v">+43%</div><div class="k">AI 高於真人</div></div>
+<div class="num"><div class="v">+43%</div><div class="k">差異</div></div>
 </div>
 <ul class="plain" style="margin-top:8px">
 <li>AI：多層因果、時序精確、故事 <b>100% 完整</b></li>
@@ -300,185 +559,142 @@
 </ul>
 </div>
 <div class="card">
-<p><b>真實性維度</b> · C2+C3+C4+C6 · <span style="color:var(--warn)">真人展現優勢</span></p>
+<p><b>真實性維度</b>（C2 + C3 + C4 + C6）· <span style="color:var(--warn)">真人展現優勢</span></p>
 <div class="num-block">
 <div class="num"><div class="v warn">4.88</div><div class="k">真人 M</div></div>
 <div class="num"><div class="v">1.05</div><div class="k">AI M</div></div>
-<div class="num"><div class="v danger">−79%</div><div class="k">AI 低於真人</div></div>
+<div class="num"><div class="v danger">−79%</div><div class="k">差異</div></div>
 </div>
 <ul class="plain" style="margin-top:8px">
-<li>真人：每百字 <b>10+ 語氣詞</b>、45 個互動標記、情緒破碎、反思延遲 <b>4 分鐘</b></li>
+<li>真人：每百字 <b>10+ 語氣詞</b>、平均 <b>45 個互動標記</b>、反思延遲 <b>4 分鐘</b></li>
 <li>AI：零語氣詞、用 emoji 代替、零延遲秒答</li>
 </ul>
 </div>
 </div>
 
-<div class="card">
-<p><b>語料規模：</b>39 條真人語料 + 31 條 AI 語料</p>
-</div>
-
 <div class="card info">
-<p><b>詮釋（核心發現）：</b></p>
-<p>這差異不只是程度，而是<b>兩種思考模式</b>——</p>
-<p>· <b>AI：合成式思考</b>（Synthetic Thinking）· 即時組裝訓練數據中的模式 · 即時、完整、穩定、可預測</p>
-<p>· <b>真人：經歷中的思考</b>（Experiential Thinking）· 感知、回憶、情緒與認知的相互作用 · 時間性、片段性、情緒滲透、不可預測</p>
-<p>這兩種模式<b>沒有優劣之分</b>，是不同性質的思考方式。</p>
+<p><b>核心詮釋：兩種思考模式</b></p>
+<p>· <b>AI：合成式思考</b>（Synthetic Thinking）· 即時組裝訓練數據中的模式</p>
+<p>· <b>真人：經歷中的思考</b>（Experiential Thinking）· 感知、回憶、情緒與認知的相互作用</p>
+<p>兩種模式<b>沒有優劣之分</b>，是不同性質的思考方式。</p>
 </div>
 
 </section>
 
 <!-- ===== FORMULAS ===== -->
 <section id="formulas">
-<h2>算式對照 <span class="idx">FORMULAS</span><span class="sub">被問到「這數字怎麼算的」不要愣住</span></h2>
+<h2>算式對照 <span class="idx">FORMULAS</span></h2>
 
-<h3>+43% 結構性差異怎麼算</h3>
+<h3>+43% 結構性差異</h3>
 <div class="formula">
 (AI − 真人) / 真人 × 100%<br>
 = (5.0 − 3.5) / 3.5 × 100%<br>
-= 1.5 / 3.5 × 100%<br>
 = <b>42.86% ≈ +43%</b>
-<br>
-<span class="comment">// AI 比真人高 43%</span>
 </div>
 
-<h3>−79% 真實性差異怎麼算</h3>
+<h3>−79% 真實性差異</h3>
 <div class="formula">
 (AI − 真人) / 真人 × 100%<br>
 = (1.05 − 4.88) / 4.88 × 100%<br>
-= −3.83 / 4.88 × 100%<br>
 = <b>−78.48% ≈ −79%</b>
-<br>
-<span class="comment">// AI 比真人低 79%</span>
 </div>
 
-<h3>95.8% 落在 4-5 分區間怎麼算</h3>
+<h3>SD 標準差</h3>
 <div class="formula">
-差異性測試 = 6 位測試者 × 6 題 = <b>36 個評分</b><br>
-其中 <b>34 個</b>落在 4-5 分<br>
-34 / 36 = <b>94.4%</b>
-<br>
-<span class="comment">// 論文報告值 95.8%，實際看你的統計來源</span>
-</div>
-
-<h3>SD 標準差是什麼</h3>
-<div class="formula">
-SD (Standard Deviation) = 一群數字<b>偏離平均值的程度</b><br>
-SD 越小 → 資料越集中 → 6 位測試者<b>共識越高</b><br>
-SD 越大 → 資料越分散 → 意見越分歧
-<br><br>
+SD 越小 → 6 位測試者<b>共識越高</b>（分數集中）<br>
+SD 越大 → 意見越分歧<br><br>
 例：Anne M=4.17, SD=0.85<br>
-→ 平均 4.17 分，偏離 ±0.85 分<br>
-→ 6 位打的分數大概在 <b>3.32 ~ 5.02</b> 之間
+→ 6 位打的分數約落在 <b>3.32 ~ 5.02</b> 之間
 </div>
 
 </section>
 
 <!-- ===== Q&A ===== -->
 <section id="qa">
-<h2>Q&A 演練 <span class="idx">15 題</span><span class="sub">最可能被追問的問題 · 已備好回答</span></h2>
+<h2>Q&A 演練 <span class="idx">方法題重點</span></h2>
 
 <div class="qa">
-<div class="q">6 位設計師會不會太少？統計上站得住嗎？</div>
-<div class="a">研究一是<b>方法論驗證的探索型研究</b>，目的不在追求統計顯著性，而在確認六維度劇本能否穩定產出可區辨的 AI Persona。6 位符合<b>Nielsen 慣用的 UX 研究小樣本原則</b>——足以識別方法論的可用性問題。統計推論的普遍性我在研究限制第三項有明確承認。</div>
+<div class="q">研究一評分怎麼收集？用紙本還是線上？</div>
+<div class="a">用<b>Google Forms</b> 線上收集。三個 part 都在同一份問卷內，測試者跟 AI 對話結束後即時填分。所有評分自動匯出到 Google Sheets，方便 Excel 統計。</div>
 </div>
 
 <div class="qa">
-<div class="q">研究二只有 2 位真人受訪者，這樣能比較嗎？</div>
-<div class="a">研究二不是統計比較、是<b>結構性差異的質性觀察</b>。目的是探討 AI 與真人在語言表現上的<b>本質差異</b>，不是估計母體參數。2 位真人的規模足以觀察出跟 AI 的顯著差異模式（+43% / −79%），也對應本研究採用的<b>設計科學研究方法</b>的驗證型定位。</div>
-<div class="risk"><b>加強：</b>如追問「為何不多找幾位」→ 答時間資源限制 + 質性研究飽和度考量 + 未來研究可擴大樣本。</div>
+<div class="q">6 位測試者是同時來嗎？還是分開？</div>
+<div class="a"><b>分開</b>，每位一場約 60-90 分鐘。分開的原因是避免同儕效應——如果一起做，可能會互相影響評分。</div>
 </div>
 
 <div class="qa">
-<div class="q">為什麼用 Salminen 2020 的 PPS 量表？</div>
-<div class="a">因為 PPS 是<b>人物誌研究領域公認的感知評估量表</b>，涵蓋清晰度、一致性、同理心、完整性、使用意願、可信度六個構面。使用建立好的量表讓我的結果可以跟其他 AI Persona 研究<b>直接比較</b>，而不是自己另立指標。</div>
+<div class="q">M 跟 SD 是怎麼算的？用什麼工具？</div>
+<div class="a">用<b>Excel</b> 內建函數 <span class="tag-inline info">=AVERAGE()</span> 和 <span class="tag-inline info">=STDEV()</span>。所有評分匯入 Excel 後直接跑公式，沒用 SPSS 這類進階統計軟體，因為這個研究不需要推論統計，只需要描述統計。</div>
 </div>
 
 <div class="qa">
-<div class="q">可信度只有 3.67 / 4.17，這不是說 AI Persona 不夠好嗎？</div>
-<div class="a">恰恰相反。可信度低反映的是 <b>6 位測試者能夠辨識自己在跟 AI 對話</b>——他們的批判意識是清醒的。如果可信度很高，反而代表測試者<b>誤以為在跟真人講話</b>，這在設計研究上更危險。可信度低是把 AI Persona 用於研究的<b>健康批判前提</b>。</div>
-<div class="risk"><b>加強：</b>可補充第五章討論的「AI Persona 是研究者建構的產物」定位。</div>
+<div class="q">為什麼沒做 t-test 或 ANOVA？</div>
+<div class="a">因為研究一是<b>探索型驗證</b>，不是假設檢定。6 位樣本也不適合推論統計。我用<b>描述統計</b>（M、SD、比例）就足以呈現方法論是否有效——這也是 UX 研究小樣本驗證的常見做法。未來研究若擴大樣本可以做 inter-rater reliability。</div>
 </div>
 
 <div class="qa">
-<div class="q">1-5 分跟 1-7 分為什麼混用？</div>
-<div class="a">1-7 分是 <b>Salminen 2020 PPS 原本的量表</b>，我沿用以保持可比性。1-5 分是我對穩定性、差異性、以及研究二的六維度編碼<b>自訂的簡化量表</b>，考量測試者判斷負荷跟填答一致性。兩者不會混合計算，各自獨立呈現。</div>
+<div class="q">研究二的訪談是線上還是實體？</div>
+<div class="a"><b>線上</b>，用 Google Meet 進行。全程錄音以便後續產出逐字稿。3 位受訪者（AI Anne + 真人 A + 真人 B）都用同樣的訪談流程與材料。</div>
 </div>
 
 <div class="qa">
-<div class="q">六個維度怎麼決定的？有理論依據嗎？</div>
-<div class="a">主要參考 <b>Park 等（2023）</b>的生成式代理研究，他們發現當 AI 代理被賦予具體的生活脈絡（職業、人際、日常作息、經歷），行為會更一致、更人性化。我把這個概念系統化成六個可操作的維度——<b>基本資料、世界觀、心理狀態、行為模式、語言風格、日常情境</b>，各維度都有明確功能對應。</div>
+<div class="q">逐字稿怎麼產出？自動還是手動？</div>
+<div class="a">先用<b>Otter.ai</b> 或 Google Meet 自動字幕做初稿，然後<b>人工校對</b>——特別保留口語標記（嗯、啊、就是）、停頓、修補這些自動系統會漏掉的地方。這些細節是研究二的關鍵資料。</div>
 </div>
 
 <div class="qa">
-<div class="q">六維度為什麼是六個，不是五個或七個？</div>
-<div class="a">六個維度是<b>迭代測試後收斂的結果</b>。初期我用制式提示（「你是 26 歲投資者」）發現 AI 產出像報告，不像對話——這時我意識到<b>語言風格維度</b>必須獨立處理。過程中我發現六個維度能<b>互不重疊</b>又<b>共同覆蓋角色的必要面向</b>，功能上剛好對應：基本資料 + 世界觀鎖定敘事邊界、行為 + 日常情境賦予行動力、心理狀態 + 語言風格強化反思深度。</div>
+<div class="q">六項語言維度的編碼是你一個人做的嗎？</div>
+<div class="a">是的，編碼由我單獨完成。這是研究限制之一。為了降低主觀偏差，我採取三個做法：<b>編碼標準先寫下來</b>、<b>每個維度都有具體行為指標</b>（不是主觀感受）、<b>同一段語料反覆編碼比對</b>確保一致性。</div>
+<div class="risk"><b>如被追問信度：</b>坦承這是限制，未來研究可引入第二位編碼者做 <b>Cohen's kappa</b> 或多編碼者一致度驗證。</div>
 </div>
 
 <div class="qa">
-<div class="q">結構性 / 真實性維度的分類是怎麼決定的？</div>
-<div class="a">分類基於<b>語言分析文獻</b>的既有區分。C1 推理與 C5 敘事屬於<b>認知結構</b>層面（怎麼組織思考）；C2 變化、C3 情境、C4 情緒、C6 反思則屬於<b>互動真實性</b>層面（表達過程的痕跡）。這個分類讓我能觀察到 AI 跟真人在<b>不同層面</b>的相對優勢，而不是只用單一總分比較。</div>
+<div class="q">「每百字語氣詞」跟「反思延遲 4 分鐘」怎麼測？</div>
+<div class="a"><b>語氣詞</b>：把逐字稿以 100 字為單位切段，統計每段的口語標記數量（嗯、啊、齁、對、就是、我覺得等），再求平均。<br><br><b>反思延遲</b>：在逐字稿上標記「反思性洞察」的時間戳，計算距離題目提出的時間差。真人平均在 3-5 分鐘後出現關鍵反思，AI 幾乎零延遲。</div>
 </div>
 
 <div class="qa">
-<div class="q">Braun & Clarke 主題分析、Heritage & Clayman 會話分析為什麼是這兩個？</div>
-<div class="a"><b>Braun & Clarke (2006)</b> 是質性主題分析的經典方法，用來從逐字稿中識別跨受訪者的共同主題。<b>Heritage & Clayman (2010)</b> 的會話分析則專門處理<b>互動細節</b>——語氣詞、停頓、修補、話輪轉換。我把兩者結合，就能同時看到內容的主題結構（Braun & Clarke）與表達的互動特徵（Heritage & Clayman）。</div>
+<div class="q">為什麼三個設計方案要對應「過去/現在/未來」？</div>
+<div class="a">這是刻意設計。過去/現在/未來對應三種不同的介入時機——<b>信心回測工具</b>（歷史數據）、<b>情緒緩衝區</b>（當下操作）、<b>投資願景板</b>（長期目標）。這樣可以觀察 AI 跟真人在不同介入類型上是否有系統性差異，避免單一方案的偏誤。</div>
 </div>
 
 <div class="qa">
-<div class="q">編碼是你一個人做的嗎？信度怎麼確保？</div>
-<div class="a">編碼確實由我單獨完成，這是研究限制之一。為了降低主觀偏差，我採取幾個做法：<b>編碼標準先寫下來</b>、<b>每個維度都有具體行為指標</b>（不是主觀感受）、以及<b>相同語料反覆編碼比對</b>。未來研究可以加入<b>第二位編碼者做 inter-rater reliability</b> 驗證。</div>
-<div class="risk"><b>如被追問：</b>坦承這是限制，指出未來會做 Cohen's kappa 或多編碼者交叉。</div>
+<div class="q">結構性 vs 真實性維度的分類怎麼決定的？</div>
+<div class="a">分類基於<b>語言分析文獻</b>的既有區分。C1 推理、C5 敘事屬於<b>認知結構</b>（怎麼組織思考）；C2 變化、C3 情境、C4 情緒、C6 反思屬於<b>互動真實性</b>（表達過程留下的痕跡）。這個分類讓我能觀察到 AI 跟真人在<b>不同層面</b>的相對優勢，而不是只用單一總分做比較。</div>
 </div>
 
 <div class="qa">
-<div class="q">為什麼選 Z 世代 ETF 投資者？其他情境不行嗎？</div>
-<div class="a">選 Z 世代 ETF 是因為這個情境具有<b>明顯的情緒與行為連動性</b>。ETF 本質是理性長線策略，但 Z 世代同時暴露於社群媒體、即時價格波動與情緒刺激，形成理性與感性的<b>持續拉扯</b>。這種張力讓<b>反思機制</b>成為必然出現的心理過程，為觀察 AI vs 真人差異提供理想素材。<br><br>方法論本身<b>可推廣</b>到其他情境（醫療、法律、悲傷輔導），這在未來研究建議有提到。</div>
+<div class="q">Braun & Clarke、Heritage & Clayman 這兩個方法怎麼結合？</div>
+<div class="a"><b>Braun & Clarke (2006)</b> 主題分析用來從逐字稿中識別跨受訪者的<b>共同主題</b>（回答內容層面）。<b>Heritage & Clayman (2010)</b> 會話分析專門處理<b>互動細節</b>——語氣詞、停頓、話輪轉換（表達方式層面）。兩者結合就能同時看到內容與形式，這正是我想比較 AI 與真人的核心。</div>
 </div>
 
 <div class="qa">
-<div class="q">Anne 的訪談內容有沒有可能只是研究者自己的投射？</div>
-<div class="a">這正是第五章 5.5.2 我特別反思的地方。<b>AI Persona 確實是研究者透過特定方法論建構出來的產物</b>，不是客觀存在的使用者模型。我的做法是<b>用真人一手語料</b>（PTT/Dcard 30-50 則貼文）錨定語言風格，避免完全從研究者想像出發。但仍然無法完全消除詮釋色彩——這是質性研究本質。我在論文明確定位 AI Persona 是<b>有效的研究工具，但仍需研究者的專業判斷與批判性檢視</b>。</div>
+<div class="q">AI Persona 訪談跟真人訪談，時間長度一樣嗎？</div>
+<div class="a">內容題目與流程都<b>一致</b>，但實際時長差很多——真人平均 60 分鐘，AI 因為<b>零延遲秒答</b>，只需要 20-30 分鐘就完成同樣的題目。這種時間差本身就是資料——它體現了「即時 vs 醞釀」這個結構性差異。</div>
 </div>
 
 <div class="qa">
-<div class="q">「反思延遲 4 分鐘」是怎麼測的？</div>
-<div class="a">在真人訪談中，我觀察<b>某個反思性洞察出現時，距離該題目被提出的時間差</b>。真人受訪者常常在被問完題目後，經過幾輪對話、幾次澄清，才在<b>對話進行到 3-5 分鐘</b>時突然說出關鍵反思（例如「其實我剛剛想過⋯」）。<b>4 分鐘是平均值</b>。AI 則是幾乎<b>零延遲</b>就給出完整反思。</div>
+<div class="q">AI Persona 每次對話會重置嗎？</div>
+<div class="a">每次進 GPTs 都是<b>新的對話 session</b>，AI 不會記得之前對話。但我上傳的<b>系統指令（劇本 + 行為限制 + 角色內化）永遠固定在後台</b>，不會被單次對話覆寫。這也是選 GPTs 平台的關鍵理由——保證跨 session 一致性。</div>
 </div>
 
 <div class="qa">
-<div class="q">「每百字 10+ 語氣詞」怎麼算？</div>
-<div class="a">我把真人跟 AI 的<b>訪談逐字稿</b>做語言標記統計，以<b>100 字為單位</b>計算「嗯、啊、齁、對、就是、我覺得」這類<b>口語標記</b>的頻率。真人平均 10 個以上，AI 幾乎為零。這是最能直觀顯示<b>語言真實性差異</b>的量化指標。</div>
+<div class="q">你的研究採用什麼倫理程序？</div>
+<div class="a">研究一測試者跟研究二真人受訪者都：<br>· 事前告知研究目的與流程<br>· 取得<b>知情同意</b>（口頭或書面）<br>· 保證匿名處理（真人 A、B、受測者 A-F）<br>· 有權隨時退出</div>
+<div class="risk"><b>如被追問 IRB：</b>視你系所要求，若沒送 IRB 可說明本研究屬<b>低風險質性訪談</b>，依循研究倫理原則進行。</div>
 </div>
 
 <div class="qa">
-<div class="q">DSR 為什麼適合這個研究？其他方法不行嗎？</div>
-<div class="a">DSR 適合這個研究是因為<b>我的核心產出是兩項可驗證的人造物</b>——六維度劇本方法論、加上兩位 AI Persona。傳統實證研究（描述現象）或民族誌（觀察）都無法幫我<b>建構並評估這些人造物</b>。DSR 剛好強調「建構 + 評估」兩階段，跟我的研究架構完全對應（Peffers 過程模型），還允許<b>迭代改良</b>（從制式提示到六維度劇本就是設計循環）。</div>
+<div class="q">整個研究前後花多久？</div>
+<div class="a">大約 <b>6-8 個月</b>。建構階段（四階段人機共構）約 2-3 個月的迭代——這階段最花時間，因為要從「制式提示」轉到「六維度劇本」需要不斷嘗試。驗證階段（研究一 + 研究二）約 1.5 個月執行 + 分析。撰寫與修改另外 2-3 個月。</div>
+<div class="risk"><b>可以調整成你實際時間</b></div>
 </div>
-
-</section>
-
-<!-- ===== TERMS ===== -->
-<section id="terms">
-<h2>術語速查表 <span class="idx">GLOSSARY</span></h2>
-
-<table>
-<thead><tr><th>術語</th><th>中文</th><th>用來幹嘛</th></tr></thead>
-<tbody>
-<tr><td><b>M</b></td><td class="muted">平均數 Mean</td><td>一群數字的平均值</td></tr>
-<tr><td><b>SD</b></td><td class="muted">標準差 Standard Deviation</td><td>資料偏離平均的程度 · 越小越集中</td></tr>
-<tr><td><b>PPS</b></td><td class="muted">Persona Perception Scale</td><td>Salminen 2020 · 六構面 1-7 分感知量表</td></tr>
-<tr><td><b>DSR</b></td><td class="muted">Design Science Research 設計科學研究</td><td>建構 + 評估人造物的研究取徑</td></tr>
-<tr><td><b>Likert scale</b></td><td class="muted">李克特量表</td><td>1-5 或 1-7 的等距態度量表</td></tr>
-<tr><td><b>Inter-rater reliability</b></td><td class="muted">評分者間信度</td><td>多位編碼者一致程度 · 常用 Cohen's kappa</td></tr>
-<tr><td><b>Thematic analysis</b></td><td class="muted">主題分析（Braun & Clarke 2006）</td><td>從逐字稿萃取共同主題的質性方法</td></tr>
-<tr><td><b>Conversation analysis</b></td><td class="muted">會話分析（Heritage & Clayman 2010）</td><td>分析對話互動細節的方法</td></tr>
-</tbody>
-</table>
 
 </section>
 
 <footer style="margin-top:60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px">
-你已經走完整個研究了。這頁只是備援。上場後，你比任何人都懂這份研究。加油。
+你已經走完整個研究了。這頁只是備援。上場後你比任何人都懂這份研究。加油。
 </footer>
 
 </div>
