@@ -6,76 +6,76 @@
 <title>講稿脈絡圖 · AI Persona 論文口試</title>
 <style>
   :root{
-    --bg:#0a0e0b;--card:#141a15;--card2:#0f1410;--line:rgba(15,199,123,.22);
-    --accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac;--warn:#fbbf24;
-    /* Chapter colors */
-    --ch1:#7dd3fc; --ch2:#a78bfa; --ch3:#f472b6; --ch4:#fbbf24; --ch5:#34d399; --ch6:#f87171;
+    /* Claude palette · warm cream + terra cotta */
+    --bg:#f4efe4;--card:#faf6ec;--card2:#efe8d8;--line:rgba(40,30,20,.12);
+    --accent:#c8613b;      /* terra cotta */
+    --accent-soft:#e0a688; /* muted terra */
+    --ink:#282420;         /* charcoal ink */
+    --ink-2:#4a4139;
+    --muted:#7a6f62;       /* warm gray */
+    --paper:#fff9ed;       /* highlight paper */
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',-apple-system,sans-serif;line-height:1.55;font-size:14px}
-  .wrap{max-width:1500px;margin:0 auto;padding:40px 28px 100px}
-  header{margin-bottom:30px}
-  header .kicker{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:8px}
-  header h1{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px}
-  header h1 .accent{color:var(--accent)}
-  header .meta{color:var(--muted);font-size:13px}
+  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',ui-serif,'Times New Roman',-apple-system,sans-serif;line-height:1.6;font-size:14px}
+  .wrap{max-width:1500px;margin:0 auto;padding:44px 28px 100px}
+  header{margin-bottom:32px;border-bottom:1.5px solid var(--ink);padding-bottom:20px}
+  header .kicker{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+  header h1{font-size:28px;font-weight:800;line-height:1.3;margin-bottom:8px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
+  header h1 .accent{color:var(--accent);font-style:italic}
+  header .meta{color:var(--muted);font-size:13.5px}
 
-  nav.toc{position:sticky;top:0;background:rgba(10,14,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 24px;z-index:10;display:flex;gap:8px;overflow-x:auto;align-items:center}
-  nav.toc a{color:var(--muted);text-decoration:none;font-size:12px;padding:5px 12px;border-radius:5px;white-space:nowrap;transition:.15s;border:1px solid transparent;font-weight:600}
-  nav.toc a:hover{color:var(--ink)}
-  nav.toc .time-bar{margin-left:auto;color:var(--muted);font-family:'Consolas','SF Mono',monospace;font-size:12px}
-  nav.toc .time-bar b{color:var(--accent);font-size:14px}
+  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 28px;z-index:10;display:flex;gap:4px;overflow-x:auto;align-items:center}
+  nav.toc a{color:var(--muted);text-decoration:none;font-size:12.5px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:.15s;border:1px solid transparent;font-weight:500}
+  nav.toc a:hover{color:var(--accent);background:var(--paper)}
+  nav.toc .time-bar{margin-left:auto;color:var(--muted);font-size:12px}
+  nav.toc .time-bar b{color:var(--ink);font-size:13px;font-weight:700}
 
   .chapter{margin-bottom:36px;scroll-margin-top:64px}
-  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:12px;padding:10px 14px;background:var(--card2);border-radius:8px;border-left:4px solid var(--ch1)}
-  .chapter-head h2{font-size:18px;font-weight:800;color:var(--ink)}
-  .chapter-head .num{color:var(--accent);font-family:'Consolas','SF Mono',monospace;font-size:14px;font-weight:600}
-  .chapter-head .sub{color:var(--muted);font-size:13px;margin-left:auto;font-family:'Consolas','SF Mono',monospace}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .chapter-head h2{font-size:20px;font-weight:700;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
+  .chapter-head .num{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--accent);border-radius:3px}
+  .chapter-head .sub{color:var(--muted);font-size:12.5px;margin-left:auto}
+  .chapter-head .sub b{color:var(--accent);font-weight:600}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 
-  .card{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;transition:.15s;position:relative;overflow:hidden}
-  .card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--ch1);opacity:.5}
-  .card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 20px rgba(15,199,123,.08)}
-  .card .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-  .card .pg{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.05em;font-family:'Consolas','SF Mono',monospace}
-  .card .sec-tag{color:var(--muted);font-size:10px;font-family:'Consolas','SF Mono',monospace}
-  .card .sec-tag b{color:var(--warn)}
-  .card h3{color:var(--ink);font-size:14px;font-weight:700;line-height:1.35;margin-bottom:8px}
-  .card .opening{color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:10px;padding:6px 10px;background:var(--card2);border-radius:5px;border-left:2px solid var(--muted);font-style:italic}
-  .card .opening b{color:var(--accent);font-style:normal;font-weight:600}
-  .card .anchors{font-size:11px;color:var(--ink);line-height:1.7;margin-bottom:6px}
-  .card .anchors span{display:inline-block;background:rgba(15,199,123,.1);color:var(--accent);padding:1px 7px;border-radius:3px;margin:2px 3px 2px 0;font-weight:600;font-size:11px}
-  .card .anchors span.num{background:rgba(251,191,36,.12);color:var(--warn)}
-  .card .anchors span.name{background:rgba(96,165,250,.12);color:#60a5fa}
-  .card .anchors span.key{background:rgba(15,199,123,.2);color:var(--accent);font-weight:800}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;transition:.15s;position:relative}
+  .card:hover{background:var(--paper);border-color:var(--accent-soft);box-shadow:0 4px 12px rgba(40,30,20,.06)}
+  .card .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+  .card .pg{color:var(--accent);font-weight:700;font-size:11.5px;letter-spacing:.02em}
+  .card .sec-tag{color:var(--muted);font-size:11px;font-weight:600}
+  .card h3{color:var(--ink);font-size:15px;font-weight:700;line-height:1.35;margin-bottom:10px;font-family:ui-serif,serif;letter-spacing:-.005em}
+  .card .opening{color:var(--ink-2);font-size:12.5px;line-height:1.55;margin-bottom:12px;padding:8px 12px;background:var(--paper);border-radius:4px;font-style:italic;border-left:2px solid var(--accent-soft)}
+  .card .opening b{color:var(--accent);font-style:normal;font-weight:700}
+  .card .anchors{font-size:12px;color:var(--ink);line-height:1.9}
+  .card .anchors span{display:inline-block;color:var(--ink-2);padding:1px 2px;margin:1px 6px 1px 0;font-weight:500}
+  .card .anchors span:not(:last-child)::after{content:'·';margin-left:8px;color:var(--muted);opacity:.5}
+  .card .anchors span.num{color:var(--accent);font-weight:700}
+  .card .anchors span.name{color:var(--ink);font-weight:600;font-style:italic}
+  .card .anchors span.key{color:var(--accent);font-weight:800;background:rgba(200,97,59,.08);padding:1px 6px;border-radius:3px}
 
-  /* Chapter color themes */
-  .ch-1 .chapter-head{border-left-color:var(--ch1)}
-  .ch-1 .card::before{background:var(--ch1)}
-  .ch-2 .chapter-head{border-left-color:var(--ch2)}
-  .ch-2 .card::before{background:var(--ch2)}
-  .ch-3 .chapter-head{border-left-color:var(--ch3)}
-  .ch-3 .card::before{background:var(--ch3)}
-  .ch-4 .chapter-head{border-left-color:var(--ch4)}
-  .ch-4 .card::before{background:var(--ch4)}
-  .ch-5 .chapter-head{border-left-color:var(--ch5)}
-  .ch-5 .card::before{background:var(--ch5)}
-  .ch-6 .chapter-head{border-left-color:var(--ch6)}
-  .ch-6 .card::before{background:var(--ch6)}
-
-  .card.critical{background:linear-gradient(135deg,var(--card) 0%,rgba(15,199,123,.08) 100%);border-color:var(--accent)}
+  .card.critical{background:var(--paper);border-color:var(--accent);border-width:1.5px}
   .card.critical h3{color:var(--accent)}
+  .card.critical::after{content:'★';position:absolute;top:12px;right:14px;color:var(--accent);font-size:14px;font-weight:800}
+  .card.critical .top{padding-right:20px}
+
+  footer{border-top:1px solid var(--line)}
+  footer span{color:var(--ink-2)!important;font-weight:500!important;background:transparent!important;padding:0 4px!important;font-size:12px!important}
 
   @media print{
-    body{background:#fff;color:#000;font-size:11px}
-    .wrap{padding:20px}
+    body{background:#fff;color:#000;font-size:10.5px}
+    .wrap{padding:16px;max-width:100%}
     nav.toc{display:none}
-    .card{background:#fff;color:#000;border-color:#ccc;break-inside:avoid}
-    .card h3,.card .pg,.card .opening b{color:#0a7548}
+    header{margin-bottom:16px;padding-bottom:12px}
+    header h1{font-size:18px}
+    header .meta{font-size:11px}
+    .chapter{margin-bottom:14px}
+    .chapter-head h2{font-size:14px}
+    .card{background:#fff;color:#000;border-color:#ccc;break-inside:avoid;padding:10px 12px}
+    .card h3{font-size:12px;color:#000}
+    .card.critical{background:#fff8f0}
     .grid{grid-template-columns:repeat(3,1fr);gap:8px}
-    .chapter{margin-bottom:20px}
-    .chapter-head{background:#f5f5f5}
+    footer{page-break-inside:avoid}
   }
   @media (max-width:700px){
     .grid{grid-template-columns:1fr}
@@ -506,10 +506,10 @@
 </div>
 </section>
 
-<footer style="margin-top:40px;padding-top:20px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px">
-關鍵詞顏色標記　<span style="background:rgba(15,199,123,.2);color:var(--accent);padding:1px 8px;border-radius:3px;font-weight:800">關鍵金句 / 主張</span>　<span style="background:rgba(251,191,36,.12);color:var(--warn);padding:1px 8px;border-radius:3px;font-weight:600">數字要準</span>　<span style="background:rgba(96,165,250,.12);color:#60a5fa;padding:1px 8px;border-radius:3px;font-weight:600">學者名字</span>
+<footer style="margin-top:44px;padding-top:20px;text-align:center;color:var(--muted);font-size:12px">
+關鍵詞標記：<span class="key" style="color:var(--accent);font-weight:800;background:rgba(200,97,59,.08);padding:1px 6px;border-radius:3px">關鍵金句</span> ／ <span class="num" style="color:var(--accent);font-weight:700">數字</span> ／ <span class="name" style="font-weight:600;font-style:italic">學者名</span>
 <br><br>
-Cmd+P 可列印成 A4，貼在講稿旁邊當備援。
+★ 標記 = 全場必守重點 · Cmd+P 可列印成 A4，貼在講稿旁邊當備援。
 </footer>
 
 </div>
