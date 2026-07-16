@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>講稿脈絡圖 · AI Persona 論文口試</title>
+<style>
+  :root{
+    --bg:#0a0e0b;--card:#141a15;--card2:#0f1410;--line:rgba(15,199,123,.22);
+    --accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac;--warn:#fbbf24;
+    /* Chapter colors */
+    --ch1:#7dd3fc; --ch2:#a78bfa; --ch3:#f472b6; --ch4:#fbbf24; --ch5:#34d399; --ch6:#f87171;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',-apple-system,sans-serif;line-height:1.55;font-size:14px}
+  .wrap{max-width:1500px;margin:0 auto;padding:40px 28px 100px}
+  header{margin-bottom:30px}
+  header .kicker{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:8px}
+  header h1{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px}
+  header h1 .accent{color:var(--accent)}
+  header .meta{color:var(--muted);font-size:13px}
+
+  nav.toc{position:sticky;top:0;background:rgba(10,14,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 24px;z-index:10;display:flex;gap:8px;overflow-x:auto;align-items:center}
+  nav.toc a{color:var(--muted);text-decoration:none;font-size:12px;padding:5px 12px;border-radius:5px;white-space:nowrap;transition:.15s;border:1px solid transparent;font-weight:600}
+  nav.toc a:hover{color:var(--ink)}
+  nav.toc .time-bar{margin-left:auto;color:var(--muted);font-family:'Consolas','SF Mono',monospace;font-size:12px}
+  nav.toc .time-bar b{color:var(--accent);font-size:14px}
+
+  .chapter{margin-bottom:36px;scroll-margin-top:64px}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:12px;padding:10px 14px;background:var(--card2);border-radius:8px;border-left:4px solid var(--ch1)}
+  .chapter-head h2{font-size:18px;font-weight:800;color:var(--ink)}
+  .chapter-head .num{color:var(--accent);font-family:'Consolas','SF Mono',monospace;font-size:14px;font-weight:600}
+  .chapter-head .sub{color:var(--muted);font-size:13px;margin-left:auto;font-family:'Consolas','SF Mono',monospace}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;transition:.15s;position:relative;overflow:hidden}
+  .card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--ch1);opacity:.5}
+  .card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 20px rgba(15,199,123,.08)}
+  .card .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .card .pg{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.05em;font-family:'Consolas','SF Mono',monospace}
+  .card .sec-tag{color:var(--muted);font-size:10px;font-family:'Consolas','SF Mono',monospace}
+  .card .sec-tag b{color:var(--warn)}
+  .card h3{color:var(--ink);font-size:14px;font-weight:700;line-height:1.35;margin-bottom:8px}
+  .card .opening{color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:10px;padding:6px 10px;background:var(--card2);border-radius:5px;border-left:2px solid var(--muted);font-style:italic}
+  .card .opening b{color:var(--accent);font-style:normal;font-weight:600}
+  .card .anchors{font-size:11px;color:var(--ink);line-height:1.7;margin-bottom:6px}
+  .card .anchors span{display:inline-block;background:rgba(15,199,123,.1);color:var(--accent);padding:1px 7px;border-radius:3px;margin:2px 3px 2px 0;font-weight:600;font-size:11px}
+  .card .anchors span.num{background:rgba(251,191,36,.12);color:var(--warn)}
+  .card .anchors span.name{background:rgba(96,165,250,.12);color:#60a5fa}
+  .card .anchors span.key{background:rgba(15,199,123,.2);color:var(--accent);font-weight:800}
+
+  /* Chapter color themes */
+  .ch-1 .chapter-head{border-left-color:var(--ch1)}
+  .ch-1 .card::before{background:var(--ch1)}
+  .ch-2 .chapter-head{border-left-color:var(--ch2)}
+  .ch-2 .card::before{background:var(--ch2)}
+  .ch-3 .chapter-head{border-left-color:var(--ch3)}
+  .ch-3 .card::before{background:var(--ch3)}
+  .ch-4 .chapter-head{border-left-color:var(--ch4)}
+  .ch-4 .card::before{background:var(--ch4)}
+  .ch-5 .chapter-head{border-left-color:var(--ch5)}
+  .ch-5 .card::before{background:var(--ch5)}
+  .ch-6 .chapter-head{border-left-color:var(--ch6)}
+  .ch-6 .card::before{background:var(--ch6)}
+
+  .card.critical{background:linear-gradient(135deg,var(--card) 0%,rgba(15,199,123,.08) 100%);border-color:var(--accent)}
+  .card.critical h3{color:var(--accent)}
+
+  @media print{
+    body{background:#fff;color:#000;font-size:11px}
+    .wrap{padding:20px}
+    nav.toc{display:none}
+    .card{background:#fff;color:#000;border-color:#ccc;break-inside:avoid}
+    .card h3,.card .pg,.card .opening b{color:#0a7548}
+    .grid{grid-template-columns:repeat(3,1fr);gap:8px}
+    .chapter{margin-bottom:20px}
+    .chapter-head{background:#f5f5f5}
+  }
+  @media (max-width:700px){
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">講稿脈絡圖 · SCRIPT FLOW MAP</div>
+  <h1>整場報告的<span class="accent">故事線</span> · 一頁看完</h1>
+  <div class="meta">28 頁講稿的起手詞 + 錨點詞 + 時長，讓你 30 秒掃完就記得順序。</div>
+</header>
+
+<nav class="toc">
+  <a href="#ch-1">緒論</a>
+  <a href="#ch-2">文獻</a>
+  <a href="#ch-3">方法</a>
+  <a href="#ch-4">結果</a>
+  <a href="#ch-5">討論</a>
+  <a href="#ch-6">結論</a>
+  <div class="time-bar">總長 ≈ <b>20 分鐘</b></div>
+</nav>
+
+<!-- ========== CHAPTER 1 ========== -->
+<section class="chapter ch-1" id="ch-1">
+<div class="chapter-head">
+  <span class="num">Ch 1</span>
+  <h2>緒論 · 為什麼要做這個研究</h2>
+  <span class="sub">≈ 2 分鐘 · P1-5</span>
+</div>
+<div class="grid">
+
+<div class="card critical">
+  <div class="top"><span class="pg">P1 · 封面</span><span class="sec-tag">30″</span></div>
+  <h3>自我介紹 · 拋出核心問題</h3>
+  <div class="opening"><b>🎬 各位委員好</b>，我是設計系碩士班的簡潔安...</div>
+  <div class="anchors">
+    <span class="key">開場穩慢</span>
+    <span class="name">唐玄輝</span>
+    <span>題目</span>
+    <span class="key">不是簡單能或不能</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P3 · 1.1 研究背景</span><span class="sec-tag">40″</span></div>
+  <h3>人物誌兩大限制 · AI 帶來新可能</h3>
+  <div class="opening"><b>🎬 先從背景開始講起</b>，人物誌是設計研究裡最常用的方法...</div>
+  <div class="anchors">
+    <span class="name">Cooper 1999</span>
+    <span>靜態特質</span>
+    <span>詮釋依賴</span>
+    <span>生成式 AI</span>
+    <span class="key">結構性差異</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P4 · 1.2 研究問題</span><span class="sec-tag">40″</span></div>
+  <h3>兩個 RQ · 兩階段目標</h3>
+  <div class="opening"><b>🎬 基於這個背景</b>，我提出了核心研究問題...</div>
+  <div class="anchors">
+    <span class="key">RQ1 建構</span>
+    <span class="key">RQ2 差異</span>
+    <span>對應建構 + 驗證兩階段</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P5 · 1.3 範圍限制</span><span class="sec-tag">20″</span></div>
+  <h3>Z 世代 ETF · 語言模型限制</h3>
+  <div class="opening"><b>🎬 研究範圍聚焦在</b>台灣 Z 世代的 ETF 投資者...</div>
+  <div class="anchors">
+    <span>台灣 Z 世代 ETF</span>
+    <span>PTT / Dcard</span>
+    <span class="key">語言模型技術條件</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== CHAPTER 2 ========== -->
+<section class="chapter ch-2" id="ch-2">
+<div class="chapter-head">
+  <span class="num">Ch 2</span>
+  <h2>文獻探討 · 現有研究有哪些缺口</h2>
+  <span class="sub">≈ 3 分鐘 · P6-9</span>
+</div>
+<div class="grid">
+
+<div class="card">
+  <div class="top"><span class="pg">P6 · 2.1 演進</span><span class="sec-tag">45″</span></div>
+  <h3>人物誌方法論演進 · 三項限制</h3>
+  <div class="opening"><b>🎬 先從人物誌方法論的發展</b>講起...</div>
+  <div class="anchors">
+    <span class="name">Cooper 1999</span>
+    <span>三個價值</span>
+    <span>靜態 / 詮釋 / 語言消除</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P7 · 2.2 生成式 AI</span><span class="sec-tag">45″</span></div>
+  <h3>LLM 角色扮演 · 三項穩定性挑戰</h3>
+  <div class="opening"><b>🎬 生成式 AI</b> 讓大型語言模型能夠扮演特定角色...</div>
+  <div class="anchors">
+    <span>角色漂移</span>
+    <span>前後矛盾</span>
+    <span>脫離設定</span>
+    <span class="key">三種應對策略</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P8 · 2.3 AI 設計流程</span><span class="sec-tag">45″</span></div>
+  <h3>視覺 → NLP → 協作 · Vaccaro 警訊</h3>
+  <div class="opening"><b>🎬 AI 在設計領域</b>的應用走過幾個階段...</div>
+  <div class="anchors">
+    <span>視覺 → NLP → 主動協作</span>
+    <span class="name">Vaccaro 2024</span>
+    <span class="key">人機不必然更好</span>
+  </div>
+</div>
+
+<div class="card critical">
+  <div class="top"><span class="pg">P9 · 2.4 小結</span><span class="sec-tag">40″</span></div>
+  <h3>三個缺口 → 差異取徑</h3>
+  <div class="opening"><b>🎬 綜合這些文獻回顧</b>，我發現三個沒被填滿的缺口...</div>
+  <div class="anchors">
+    <span>方法論缺口</span>
+    <span>探討深度缺口</span>
+    <span>定位缺口</span>
+    <span class="key">不談像不像，談結構性差異</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== CHAPTER 3 ========== -->
+<section class="chapter ch-3" id="ch-3">
+<div class="chapter-head">
+  <span class="num">Ch 3</span>
+  <h2>研究方法 · 這個實驗怎麼做</h2>
+  <span class="sub">≈ 6 分鐘 · P10-16</span>
+</div>
+<div class="grid">
+
+<div class="card">
+  <div class="top"><span class="pg">P10 · 3.1 DSR</span><span class="sec-tag">25″</span></div>
+  <h3>建 + 測試 · 兩個極端</h3>
+  <div class="opening"><b>🎬 方法論上</b> 我採用 DSR，把 AI Persona 當人造物...</div>
+  <div class="anchors">
+    <span class="key">建構 + 評估</span>
+    <span>Z 世代 ETF</span>
+    <span>兩個極端（理性 vs 感性）</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P11 · 3.2 研究設計</span><span class="sec-tag">40″</span></div>
+  <h3>兩階段 · 建構 + 驗證</h3>
+  <div class="opening"><b>🎬 研究設計</b> 採兩階段進行...</div>
+  <div class="anchors">
+    <span>建構階段（人機共構）</span>
+    <span>驗證階段兩部分</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P12 · 3.3 建構 · 四階段</span><span class="sec-tag">55″</span></div>
+  <h3>Gemini → ChatGPT → Gemini → GPTs</h3>
+  <div class="opening"><b>🎬 建構階段分成</b> 四個階段...</div>
+  <div class="anchors">
+    <span class="name">① Gemini 次級</span>
+    <span class="name">② ChatGPT PTT/Dcard</span>
+    <span class="name">③ Gemini 劇本 7500 字</span>
+    <span class="name">④ GPTs 部署</span>
+    <span class="key">信心來源軸線</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P13 · 3.3 六維度</span><span class="sec-tag">60″</span></div>
+  <h3>照著頁面唸六維度就好</h3>
+  <div class="opening"><b>🎬 六維度劇本方法論</b> 的靈感來自 Park 2023...</div>
+  <div class="anchors">
+    <span class="name">Park 2023</span>
+    <span>基本 / 世界 / 心理 / 行為 / 語言 / 情境</span>
+    <span class="key">照頁面唸即可</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P14 · 3.3 Anne + Emily</span><span class="sec-tag">60″</span></div>
+  <h3>翻轉信心來源 · 同題不同答</h3>
+  <div class="opening"><b>🎬 經過四階段</b> 的人機共構，最後產出兩位對立的 AI Persona...</div>
+  <div class="anchors">
+    <span class="name">小安</span>
+    <span>社群帶著走</span>
+    <span class="name">Emily</span>
+    <span>自己的原則</span>
+    <span class="key">同題不同答</span>
+  </div>
+</div>
+
+<div class="card critical">
+  <div class="top"><span class="pg">P15 · 3.4.1 劇本方法論驗證</span><span class="sec-tag">50″</span></div>
+  <h3>進入驗證階段 · RQ1 · 6 位設計師</h3>
+  <div class="opening"><b>🎬 AI Persona 建構完成之後</b>，接下來就要進入驗證階段...</div>
+  <div class="anchors">
+    <span class="key">RQ1</span>
+    <span class="num">6 位設計師</span>
+    <span>三部分（穩 / 差 / PPS）</span>
+    <span>六題對應六維度</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P16 · 3.4.2 AI vs 真人</span><span class="sec-tag">45″</span></div>
+  <h3>60 分鐘訪談 · 六維度編碼</h3>
+  <div class="opening"><b>🎬 第二項研究</b> 是 AI 與真人比較...</div>
+  <div class="anchors">
+    <span class="num">60 分鐘</span>
+    <span class="num">24 / 26 歲</span>
+    <span>三方案</span>
+    <span>四題</span>
+    <span class="key">C1-C6 六維度 1-5 分</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== CHAPTER 4 ========== -->
+<section class="chapter ch-4" id="ch-4">
+<div class="chapter-head">
+  <span class="num">Ch 4</span>
+  <h2>研究結果 · 你發現了什麼</h2>
+  <span class="sub">≈ 5 分鐘 · P17-20 <b style="color:var(--warn)">全場重點</b></span>
+</div>
+<div class="grid">
+
+<div class="card critical">
+  <div class="top"><span class="pg">P17 · 4.1 建構結果</span><span class="sec-tag">75″</span></div>
+  <h3>三項驗證都通過</h3>
+  <div class="opening"><b>🎬 建構階段的結果</b> 我用了三個面向來檢驗...</div>
+  <div class="anchors">
+    <span class="num">穩定 4.17 / 4.47</span>
+    <span class="num">差異 4.58</span>
+    <span class="num">95.8%</span>
+    <span class="num">PPS 4.76 / 4.86</span>
+    <span class="key">可信度最低 = 健康批判前提</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P18 · 4.2 前言</span><span class="sec-tag">30″</span></div>
+  <h3>介紹 4.2 · 為什麼看 C2 / C6</h3>
+  <div class="opening"><b>🎬 接下來看驗證結果</b>...</div>
+  <div class="anchors">
+    <span class="num">結構性 +43%</span>
+    <span class="num">真實性 −79%</span>
+    <span class="key">最值得看 C2 + C6</span>
+  </div>
+</div>
+
+<div class="card critical">
+  <div class="top"><span class="pg">P19 · 4.2 C2 + C6</span><span class="sec-tag">55″</span></div>
+  <h3>兩個維度細看</h3>
+  <div class="opening"><b>🎬 C2 變化程度</b>，看的是口語標記多不多...</div>
+  <div class="anchors">
+    <span>C2 每百字</span>
+    <span class="num">10+ 語氣詞</span>
+    <span>C6 反思</span>
+    <span class="num">3-5 分鐘</span>
+    <span>AI 零延遲 emoji</span>
+  </div>
+</div>
+
+<div class="card critical">
+  <div class="top"><span class="pg">P20 · 兩種思考模式</span><span class="sec-tag">55″</span></div>
+  <h3>全場核心概念貢獻</h3>
+  <div class="opening"><b>🎬 綜合上述的驗證研究</b>，我發現 AI 跟真人是兩種不同的思考模式...</div>
+  <div class="anchors">
+    <span class="key">合成式思考</span>
+    <span class="key">經歷中的思考</span>
+    <span class="key">沒有優劣之分</span>
+    <span>語速再慢一階</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== CHAPTER 5 ========== -->
+<section class="chapter ch-5" id="ch-5">
+<div class="chapter-head">
+  <span class="num">Ch 5</span>
+  <h2>討論 · 這些發現有什麼意義</h2>
+  <span class="sub">≈ 4 分鐘 · P21-24</span>
+</div>
+<div class="grid">
+
+<div class="card">
+  <div class="top"><span class="pg">P21 · 5.1 優缺點</span><span class="sec-tag">45″</span></div>
+  <h3>五個面向 · 互補</h3>
+  <div class="opening"><b>🎬 進到討論部分</b>，先總結真人跟 AI 的優缺點...</div>
+  <div class="anchors">
+    <span>效率 · 內容 · 互動</span>
+    <span>情感 · 適用階段</span>
+    <span class="key">互補而非競爭</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P22 · 5.2 對流程</span><span class="sec-tag">50″</span></div>
+  <h3>三個層面重新調整</h3>
+  <div class="opening"><b>🎬 AI Persona 進來之後</b>，設計研究的流程可以從三個層面重新調整...</div>
+  <div class="anchors">
+    <span>階段配置</span>
+    <span>視角轉變（雜訊→訊號）</span>
+    <span class="key">AI 廣度 + 真人深度</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P23 · 5.3 對設計師</span><span class="sec-tag">45″</span></div>
+  <h3>三項核心能力 · 新協作模式</h3>
+  <div class="opening"><b>🎬 AI Persona 對設計產業</b> 跟設計師...</div>
+  <div class="anchors">
+    <span>判斷 / 同理 / 整合</span>
+    <span>規模 + 深度 + 整合</span>
+    <span class="key">三者互補</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P24 · 5.4 反思</span><span class="sec-tag">45″</span></div>
+  <h3>兩個關鍵轉折</h3>
+  <div class="opening"><b>🎬 報告的最後</b>，我想分享兩個關鍵的轉折...</div>
+  <div class="anchors">
+    <span>制式提示 → 六維度</span>
+    <span>說什麼 → 怎麼說</span>
+    <span class="key">Anne 是研究者建構的產物</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ========== CHAPTER 6 ========== -->
+<section class="chapter ch-6" id="ch-6">
+<div class="chapter-head">
+  <span class="num">Ch 6</span>
+  <h2>結論與建議 · 收尾</h2>
+  <span class="sub">≈ 4 分鐘 · P25-30</span>
+</div>
+<div class="grid">
+
+<div class="card">
+  <div class="top"><span class="pg">P25 · 6.1 結論</span><span class="sec-tag">55″</span></div>
+  <h3>三項結論</h3>
+  <div class="opening"><b>🎬 這份研究</b> 透過行動研究，得出三項結論...</div>
+  <div class="anchors">
+    <span>方法案例</span>
+    <span>差異結構性</span>
+    <span class="key">不能取代但能互補</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P26 · 6.2 貢獻</span><span class="sec-tag">45″</span></div>
+  <h3>理論 + 實務 · 各三項</h3>
+  <div class="opening"><b>🎬 AI 讓研究者走得更快</b>，真人讓研究者走得更深...</div>
+  <div class="anchors">
+    <span>理論：方法論 / 思考模式 / 不完美價值</span>
+    <span>實務：工具 / 協作模式 / 指引</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P27 · 6.3 限制</span><span class="sec-tag">35″</span></div>
+  <h3>三項限制</h3>
+  <div class="opening"><b>🎬 這份研究</b> 有三個需要說明的限制...</div>
+  <div class="anchors">
+    <span>模型版本</span>
+    <span>未納入長期演化</span>
+    <span class="num">語料 39 + 31 條</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P28 · 6.4 未來研究</span><span class="sec-tag">35″</span></div>
+  <h3>三個方向</h3>
+  <div class="opening"><b>🎬 根據限制</b> 跟發現，我提出三個未來的方向...</div>
+  <div class="anchors">
+    <span>擴大應用（醫療/法律）</span>
+    <span>協作流程</span>
+    <span>訪談以外</span>
+  </div>
+</div>
+
+<div class="card critical">
+  <div class="top"><span class="pg">P29 · 6.5 總結</span><span class="sec-tag">50″</span></div>
+  <h3>不能取代 · 不必取代 · 互補協作</h3>
+  <div class="opening"><b>🎬 最後我想用一句話總結</b>：不能取代，不必取代，走向互補協作...</div>
+  <div class="anchors">
+    <span class="key">共同創作者</span>
+    <span>AI 廣度 · 真人深度</span>
+    <span>AI 快 · 真人深</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="pg">P30 · 結語</span><span class="sec-tag">30″</span></div>
+  <h3>收尾 · 準備 Q&A</h3>
+  <div class="opening"><b>🎬 以上是我這份研究</b> 的完整報告...</div>
+  <div class="anchors">
+    <span class="key">不同性質的認知呈現</span>
+    <span>各司其職</span>
+    <span class="key">歡迎提問（抬眼看主席）</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer style="margin-top:40px;padding-top:20px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px">
+關鍵詞顏色標記　<span style="background:rgba(15,199,123,.2);color:var(--accent);padding:1px 8px;border-radius:3px;font-weight:800">關鍵金句 / 主張</span>　<span style="background:rgba(251,191,36,.12);color:var(--warn);padding:1px 8px;border-radius:3px;font-weight:600">數字要準</span>　<span style="background:rgba(96,165,250,.12);color:#60a5fa;padding:1px 8px;border-radius:3px;font-weight:600">學者名字</span>
+<br><br>
+Cmd+P 可列印成 A4，貼在講稿旁邊當備援。
+</footer>
+
+</div>
+</body>
+</html>
