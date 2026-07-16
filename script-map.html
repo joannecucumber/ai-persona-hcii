@@ -37,22 +37,26 @@
   .chapter-head .sub{color:var(--muted);font-size:12.5px;margin-left:auto}
   .chapter-head .sub b{color:var(--accent);font-weight:600}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;transition:.15s;position:relative}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 20px;transition:.15s;position:relative;break-inside:avoid}
   .card:hover{background:var(--paper);border-color:var(--accent-soft);box-shadow:0 4px 12px rgba(40,30,20,.06)}
   .card .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
   .card .pg{color:var(--accent);font-weight:700;font-size:11.5px;letter-spacing:.02em}
   .card .sec-tag{color:var(--muted);font-size:11px;font-weight:600}
   .card h3{color:var(--ink);font-size:15px;font-weight:700;line-height:1.35;margin-bottom:10px;font-family:ui-serif,serif;letter-spacing:-.005em}
-  .card .opening{color:var(--ink-2);font-size:12.5px;line-height:1.55;margin-bottom:12px;padding:8px 12px;background:var(--paper);border-radius:4px;font-style:italic;border-left:2px solid var(--accent-soft)}
-  .card .opening b{color:var(--accent);font-style:normal;font-weight:700}
-  .card .anchors{font-size:12px;color:var(--ink);line-height:1.9}
+  .card .anchors{font-size:12px;color:var(--ink);line-height:1.9;margin-bottom:12px}
   .card .anchors span{display:inline-block;color:var(--ink-2);padding:1px 2px;margin:1px 6px 1px 0;font-weight:500}
   .card .anchors span:not(:last-child)::after{content:'·';margin-left:8px;color:var(--muted);opacity:.5}
   .card .anchors span.num{color:var(--accent);font-weight:700}
   .card .anchors span.name{color:var(--ink);font-weight:600;font-style:italic}
   .card .anchors span.key{color:var(--accent);font-weight:800;background:rgba(200,97,59,.08);padding:1px 6px;border-radius:3px}
+  .card .anchors-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .card .script{background:var(--paper);border-left:2.5px solid var(--accent-soft);border-radius:0 6px 6px 0;padding:12px 16px;color:var(--ink);font-size:13px;line-height:1.75;letter-spacing:.01em}
+  .card .script-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .card .script p{margin-bottom:8px}
+  .card .script p:last-child{margin-bottom:0}
+  .card .script b{color:var(--accent);font-weight:700}
 
   .card.critical{background:var(--paper);border-color:var(--accent);border-width:1.5px}
   .card.critical h3{color:var(--accent)}
@@ -62,45 +66,45 @@
   footer{border-top:1px solid var(--line)}
   footer span{color:var(--ink-2)!important;font-weight:500!important;background:transparent!important;padding:0 4px!important;font-size:12px!important}
 
-  /* ===== A4 landscape print optimized ===== */
-  @page{size:A4 landscape;margin:8mm 10mm}
+  /* ===== A4 portrait print optimized · natural page break ===== */
+  @page{size:A4 portrait;margin:12mm 12mm}
   @media print{
-    html,body{background:#fff;color:#000;font-size:8.5px;line-height:1.35;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    html,body{background:#fff;color:#000;font-size:10pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .wrap{padding:0;max-width:100%}
     nav.toc,.print-hint{display:none}
     header{margin-bottom:6mm;padding-bottom:3mm;border-bottom:1px solid #333}
-    header .kicker{font-size:7px;margin-bottom:3px;color:#666;letter-spacing:.2em}
-    header h1{font-size:14pt;margin-bottom:2px;color:#000}
+    header .kicker{font-size:8pt;margin-bottom:3px;color:#666;letter-spacing:.2em}
+    header h1{font-size:16pt;margin-bottom:2px;color:#000}
     header h1 .accent{color:#c8613b;font-style:italic}
-    header .meta{font-size:8pt;color:#555}
-    .chapter{margin-bottom:5mm;break-inside:avoid}
-    .chapter-head{margin-bottom:3mm;padding-bottom:2mm;border-bottom:1px solid #999}
-    .chapter-head h2{font-size:11pt;color:#000}
-    .chapter-head .num{color:#c8613b;font-size:7pt;padding:1px 5px;border:1px solid #c8613b}
-    .chapter-head .sub{font-size:8pt;color:#666}
+    header .meta{font-size:9pt;color:#555}
+    .chapter{margin-bottom:5mm;break-inside:avoid-page}
+    .chapter-head{margin-bottom:3mm;padding-bottom:2mm;border-bottom:1px solid #999;break-after:avoid}
+    .chapter-head h2{font-size:12pt;color:#000}
+    .chapter-head .num{color:#c8613b;font-size:8pt;padding:1px 6px;border:1px solid #c8613b}
+    .chapter-head .sub{font-size:9pt;color:#666}
     .chapter-head .sub b{color:#c8613b}
-    .grid{grid-template-columns:repeat(4,1fr);gap:2.5mm}
-    .card{background:#fff;color:#000;border:1px solid #bbb;break-inside:avoid;padding:2mm 3mm;border-radius:2mm;box-shadow:none}
+    .grid{grid-template-columns:repeat(2,1fr);gap:4mm}
+    .card{background:#fff;color:#000;border:1px solid #bbb;break-inside:avoid;padding:3mm 4mm;border-radius:2mm;box-shadow:none;margin-bottom:0}
     .card:hover{background:#fff;box-shadow:none}
-    .card .top{margin-bottom:1.5mm;padding-bottom:1mm;border-bottom:1px dashed #ccc}
-    .card .pg{color:#c8613b;font-size:7.5pt;font-weight:700}
-    .card .sec-tag{color:#666;font-size:7pt}
-    .card h3{font-size:9pt;color:#000;margin-bottom:1.5mm;line-height:1.25}
-    .card .opening{color:#333;font-size:7.5pt;line-height:1.35;padding:1.5mm 2mm;background:#fbf6ec;border-left:1.5pt solid #d99a7a;margin-bottom:1.5mm;font-style:italic;border-radius:1mm}
-    .card .opening b{color:#c8613b;font-weight:700}
-    .card .anchors{font-size:7.5pt;line-height:1.55;color:#222}
+    .card .top{margin-bottom:2mm;padding-bottom:1.5mm;border-bottom:1px dashed #ccc}
+    .card .pg{color:#c8613b;font-size:8.5pt;font-weight:700}
+    .card .sec-tag{color:#666;font-size:8pt}
+    .card h3{font-size:10pt;color:#000;margin-bottom:2mm;line-height:1.3}
+    .card .anchors{font-size:8pt;line-height:1.6;color:#333;margin-bottom:2.5mm}
     .card .anchors span{color:#333;font-weight:500;padding:0}
     .card .anchors span:not(:last-child)::after{content:'·';margin-left:5px;color:#999}
     .card .anchors span.num{color:#c8613b;font-weight:700}
     .card .anchors span.name{color:#000;font-weight:600;font-style:italic}
     .card .anchors span.key{color:#c8613b;font-weight:800;background:#fdf1e8;padding:0 3px;border-radius:2px}
+    .card .anchors-label,.card .script-label{font-size:6.5pt;color:#888;margin-bottom:1mm}
+    .card .script{background:#fbf6ec;border-left:1.5pt solid #d99a7a;padding:2.5mm 3mm;font-size:9pt;line-height:1.55;border-radius:0 1mm 1mm 0}
+    .card .script p{margin-bottom:1.5mm}
+    .card .script b{color:#c8613b;font-weight:700}
     .card.critical{background:#fdf5eb;border:1.2pt solid #c8613b}
-    .card.critical::after{color:#c8613b;font-size:9pt;top:2mm;right:3mm}
+    .card.critical::after{color:#c8613b;font-size:10pt;top:2mm;right:3mm}
     .card.critical h3{color:#c8613b}
-    footer{margin-top:4mm;padding-top:2mm;border-top:1px solid #ccc;font-size:7pt;color:#666}
-    footer span{font-size:7pt!important}
-    /* Force page breaks between ch3 and ch4 for clean 2-page split */
-    #ch-4{page-break-before:always}
+    footer{margin-top:5mm;padding-top:2mm;border-top:1px solid #ccc;font-size:8pt;color:#666}
+    footer span{font-size:8pt!important}
   }
   .print-hint{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(200,97,59,.3);cursor:pointer;z-index:100;border:none;font-family:inherit;transition:.15s}
   .print-hint:hover{background:#a94f2c;transform:translateY(-1px)}
@@ -539,7 +543,50 @@
 ★ 標記 = 全場必守重點 · A4 橫向 2 頁 · Cmd+P 列印即可帶上場當備援
 </footer>
 
-<button class="print-hint" onclick="window.print()">🖨 列印 A4 橫向</button>
+<button class="print-hint" onclick="window.print()">🖨 列印 A4</button>
+
+<script src="thesis-zh-scripts.js"></script>
+<script>
+  const S = window.THESIS_ZH_SCRIPTS;
+  // PDF page → script index (0-based)
+  const pageMap = {
+    1:0, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8,
+    10:9, 11:10, 12:11, 13:12, 14:13, 15:14, 16:15,
+    17:16, 18:17, 19:18, 20:19,
+    21:20, 22:22, 23:23, 24:24,
+    25:25, 26:26, 27:27, 28:28, 29:29, 30:30
+  };
+  function fmt(str){
+    return str.split('\n\n').map(p =>
+      '<p>' + p.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>') + '</p>'
+    ).join('');
+  }
+  document.querySelectorAll('.card').forEach(card => {
+    const pgSpan = card.querySelector('.pg');
+    if (!pgSpan) return;
+    const m = pgSpan.textContent.match(/P(\d+)/);
+    if (!m) return;
+    const page = +m[1];
+    const idx = pageMap[page];
+    if (idx === undefined || !S[idx]) return;
+    // remove .opening
+    const opening = card.querySelector('.opening');
+    if (opening) opening.remove();
+    // add "錨點" label to anchors
+    const anchors = card.querySelector('.anchors');
+    if (anchors && !anchors.querySelector('.anchors-label')){
+      const label = document.createElement('div');
+      label.className = 'anchors-label';
+      label.textContent = '錨點';
+      anchors.prepend(label);
+    }
+    // append full script
+    const scriptDiv = document.createElement('div');
+    scriptDiv.className = 'script';
+    scriptDiv.innerHTML = '<div class="script-label">講稿全文</div>' + fmt(S[idx].body);
+    card.appendChild(scriptDiv);
+  });
+</script>
 
 </div>
 </body>
