@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>編碼流程圖 · 分數怎麼打的</title>
+<style>
+  :root{
+    --cream:#f4efe4;--paper:#faf6ee;--ink:#2b2620;--muted:#6b6259;
+    --terra:#c8613b;--terra-soft:#e8b39a;--gold:#c89b3b;--line:#d6ccb8
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Georgia',serif;line-height:1.6;letter-spacing:.02em}
+  body{padding:36px 40px 60px;max-width:1180px;margin:0 auto}
+
+  header{border-bottom:1.6px solid var(--terra);padding-bottom:16px;margin-bottom:32px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+  header .kicker{color:var(--terra);font-size:11px;letter-spacing:.22em;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+  header h1{font-size:26px;font-weight:800;color:var(--ink);font-family:'Georgia',serif;letter-spacing:.01em}
+  header .meta{color:var(--muted);font-size:12px;font-family:'Consolas','SF Mono',monospace}
+  header .meta b{color:var(--terra);font-weight:700}
+
+  /* Pipeline row */
+  .pipeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:14px;align-items:stretch;margin-bottom:44px}
+  .step{background:var(--paper);border:1.6px solid var(--line);border-radius:10px;padding:18px 16px;position:relative;display:flex;flex-direction:column;min-height:150px}
+  .step .n{position:absolute;top:-10px;left:14px;background:var(--terra);color:var(--paper);font-size:10px;font-weight:800;letter-spacing:.14em;padding:3px 8px;border-radius:3px}
+  .step h3{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:6px}
+  .step .sub{color:var(--muted);font-size:11px;letter-spacing:.06em;margin-bottom:10px;font-family:'Consolas','SF Mono',monospace}
+  .step ul{list-style:none;padding:0;margin:0;font-size:12.5px;color:var(--ink);line-height:1.7}
+  .step ul li{padding-left:12px;position:relative;margin-bottom:2px}
+  .step ul li:before{content:"·";color:var(--terra);position:absolute;left:0;font-weight:800}
+  .arrow{align-self:center;color:var(--terra);font-size:22px;font-weight:400;line-height:1}
+
+  /* Section headings */
+  h2.section{font-size:16px;font-weight:800;color:var(--terra);letter-spacing:.06em;margin:16px 0 14px;padding-left:10px;border-left:3px solid var(--terra)}
+
+  /* Coding table (six dimensions) */
+  .code-table{background:var(--paper);border:1.6px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:36px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{background:rgba(200,97,59,.08);color:var(--terra);text-align:left;padding:11px 12px;font-weight:800;letter-spacing:.06em;font-size:11px;text-transform:uppercase;border-bottom:1.6px solid var(--line)}
+  td{padding:11px 12px;border-bottom:1px dashed var(--line);vertical-align:top;color:var(--ink);line-height:1.55}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:800;color:var(--terra);white-space:nowrap;font-family:'Consolas','SF Mono',monospace}
+  td.dim small{display:block;color:var(--muted);font-family:'PingFang TC',serif;font-weight:600;font-size:11px;letter-spacing:.06em;margin-top:2px}
+  td.indicator{color:var(--ink);font-size:12px}
+  td.indicator code{background:rgba(200,155,59,.15);padding:1px 6px;border-radius:3px;color:var(--ink);font-family:'Consolas','SF Mono',monospace;font-size:11.5px}
+  td.example{color:var(--muted);font-style:italic;font-size:11.5px}
+
+  /* Scale bar */
+  .scale{display:flex;gap:2px;margin-top:36px;align-items:center;background:var(--paper);border:1.6px solid var(--line);border-radius:10px;padding:22px 24px}
+  .scale h3{font-size:13px;color:var(--terra);letter-spacing:.14em;font-weight:800;text-transform:uppercase;margin-right:22px;white-space:nowrap}
+  .scale .dots{display:flex;gap:0;flex:1;align-items:center;position:relative}
+  .scale .dot{flex:1;height:36px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;color:var(--muted);font-size:10.5px;font-family:'Consolas','SF Mono',monospace;letter-spacing:.06em;text-align:center;line-height:1.3}
+  .scale .dot .num{font-size:20px;font-weight:800;color:var(--ink);font-family:'Georgia',serif;margin-bottom:2px}
+  .scale .dot.d1 .num{color:#a04c2c}
+  .scale .dot.d3 .num{color:var(--gold)}
+  .scale .dot.d5 .num{color:#4a7c3a}
+  .scale .track{position:absolute;top:6px;left:20px;right:20px;height:2px;background:linear-gradient(to right,#a04c2c,var(--gold),#4a7c3a);z-index:0}
+
+  /* Note */
+  .note{margin-top:36px;background:rgba(200,155,59,.08);border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 8px 8px 0;color:var(--ink);font-size:12.5px;line-height:1.8}
+  .note b{color:var(--terra);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:6px;letter-spacing:.14em}
+
+  @media (max-width:900px){
+    .pipeline{grid-template-columns:1fr;gap:16px}
+    .arrow{transform:rotate(90deg);align-self:center}
+  }
+  @media print{
+    body{padding:20mm;max-width:none}
+    header,.pipeline,.code-table,.scale,.note{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="kicker">4.2 前言 · 編碼流程</div>
+    <h1>分數是怎麼打出來的</h1>
+  </div>
+  <div class="meta">S18a 附圖 · 建議 <b>55″</b> · 對應 PDF p.18</div>
+</header>
+
+<!-- ===== Pipeline ===== -->
+<h2 class="section">整體流程</h2>
+<div class="pipeline">
+
+  <div class="step">
+    <span class="n">STEP 1</span>
+    <h3>原始資料</h3>
+    <div class="sub">RAW · 3 位訪談錄音</div>
+    <ul>
+      <li>AI Persona × 2（Anne / Emily）</li>
+      <li>真人受訪者 × 2</li>
+      <li>同一份訪談大綱、同一位訪談者</li>
+    </ul>
+  </div>
+  <div class="arrow">›</div>
+
+  <div class="step">
+    <span class="n">STEP 2</span>
+    <h3>逐字稿</h3>
+    <div class="sub">TRANSCRIBE · verbatim</div>
+    <ul>
+      <li>保留語氣詞（嗯、欸、對啊…）</li>
+      <li>保留停頓（&#40;…&#41;、&#40;3s&#41;）</li>
+      <li>保留修補（我覺得&mdash;不是&mdash;）</li>
+    </ul>
+  </div>
+  <div class="arrow">›</div>
+
+  <div class="step">
+    <span class="n">STEP 3</span>
+    <h3>切段</h3>
+    <div class="sub">SEGMENT · unit of analysis</div>
+    <ul>
+      <li>依方案（Wondaround × 3）切</li>
+      <li>再依題目切為 segments</li>
+      <li>每 segment 為打分單位</li>
+    </ul>
+  </div>
+  <div class="arrow">›</div>
+
+  <div class="step">
+    <span class="n">STEP 4</span>
+    <h3>六維度打分</h3>
+    <div class="sub">CODE · Likert 1–5</div>
+    <ul>
+      <li>每 segment × 6 維度</li>
+      <li>依行為指標打 1–5 分</li>
+      <li>加總平均 → 最終雷達圖</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== Six dimensions ===== -->
+<h2 class="section">六維度行為指標</h2>
+<div class="code-table">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:15%">維度</th>
+        <th style="width:42%">行為指標（怎麼打）</th>
+        <th style="width:43%">高分 / 低分示例</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dim">C1<small>推理密度</small></td>
+        <td class="indicator">每 segment 出現 <code>因為</code> <code>所以</code> <code>如果</code> 等推理連接詞的頻率</td>
+        <td class="example">高：多層條件與因果推導 / 低：只做描述</td>
+      </tr>
+      <tr>
+        <td class="dim">C2<small>變化程度</small></td>
+        <td class="indicator">每 <code>100 字</code> 出現的語氣詞、修補、停頓次數</td>
+        <td class="example">高：頻繁修正與遲疑 / 低：字句平順一氣呵成</td>
+      </tr>
+      <tr>
+        <td class="dim">C3<small>情境依附</small></td>
+        <td class="indicator">回答中指涉具體時間、地點、他人的比例</td>
+        <td class="example">高：「上禮拜跟我室友…」 / 低：「一般來說…」</td>
+      </tr>
+      <tr>
+        <td class="dim">C4<small>敘事結構</small></td>
+        <td class="indicator">句子連貫度、話題轉折是否具備起承轉合</td>
+        <td class="example">高：完整故事線 / 低：跳躍、破碎</td>
+      </tr>
+      <tr>
+        <td class="dim">C5<small>情緒表達</small></td>
+        <td class="indicator">情緒詞、身體感受描述、語調起伏標記的密度</td>
+        <td class="example">高：「超煩」「有點慌」 / 低：中性描述</td>
+      </tr>
+      <tr>
+        <td class="dim">C6<small>反思節奏</small></td>
+        <td class="indicator">關鍵反思語出現距離提問的 <code>時間差</code>（秒）</td>
+        <td class="example">短：立刻整理好答案 / 長：先講再邊講邊想</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Scale ===== -->
+<div class="scale">
+  <h3>Likert Scale</h3>
+  <div class="dots">
+    <div class="track"></div>
+    <div class="dot d1"><div class="num">1</div>幾乎沒有</div>
+    <div class="dot"><div class="num">2</div>偶爾出現</div>
+    <div class="dot d3"><div class="num">3</div>中等</div>
+    <div class="dot"><div class="num">4</div>常見</div>
+    <div class="dot d5"><div class="num">5</div>非常密集</div>
+  </div>
+</div>
+
+<div class="note">
+  <b>Committee 提問 · 對照守則</b>
+  「編碼者是誰？」→ 研究者本人 + 一位獨立編碼者做信度檢核。<br>
+  「編碼標準怎麼定？」→ 每維度都有具體行為指標（見上表 C2 / C6 為代表），不靠主觀感受。<br>
+  「1 分跟 5 分怎麼區分？」→ 事先建立 anchor examples，遇到邊界個案回看 anchor 校準。
+</div>
+
+</body>
+</html>
