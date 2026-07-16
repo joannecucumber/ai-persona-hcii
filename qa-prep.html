@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Q&A 口試演練 · AI Persona 論文</title>
+<style>
+  :root{
+    --bg:#f4efe4;--card:#faf6ec;--card2:#efe8d8;--line:rgba(40,30,20,.12);
+    --accent:#c8613b;--accent-soft:#e0a688;
+    --ink:#282420;--ink-2:#4a4139;--muted:#7a6f62;
+    --paper:#fff9ed;--warn:#a86a1f;--danger:#b04432;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',ui-serif,-apple-system,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:920px;margin:0 auto;padding:44px 28px 100px}
+
+  header{margin-bottom:32px;border-bottom:1.5px solid var(--ink);padding-bottom:20px}
+  header .kicker{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+  header h1{font-size:28px;font-weight:800;line-height:1.3;margin-bottom:8px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
+  header h1 .accent{color:var(--accent);font-style:italic}
+  header .meta{color:var(--muted);font-size:13.5px}
+
+  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 28px;z-index:10;display:flex;gap:4px;overflow-x:auto;align-items:center;flex-wrap:wrap}
+  nav.toc a{color:var(--muted);text-decoration:none;font-size:12.5px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:.15s;font-weight:500}
+  nav.toc a:hover{color:var(--accent);background:var(--paper)}
+  nav.toc .count{margin-left:auto;color:var(--muted);font-size:12px}
+  nav.toc .count b{color:var(--ink);font-weight:700}
+
+  section{margin-bottom:44px;scroll-margin-top:70px}
+  section h2{color:var(--ink);font-size:22px;font-weight:700;margin-bottom:14px;font-family:ui-serif,serif;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  section h2 .idx{color:var(--accent);font-size:12px;font-weight:700;padding:2px 8px;border:1px solid var(--accent);border-radius:3px;letter-spacing:.14em;text-transform:uppercase}
+  section h2 .n{color:var(--muted);font-size:14px;margin-left:auto;font-weight:500}
+
+  .qa{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-bottom:14px;break-inside:avoid}
+  .qa .q{color:var(--ink);font-weight:700;font-size:15px;margin-bottom:12px;line-height:1.5;padding-left:30px;position:relative;font-family:ui-serif,serif;letter-spacing:-.005em}
+  .qa .q::before{content:'Q';position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0}
+  .qa .a{color:var(--ink-2);font-size:14px;line-height:1.85;padding-left:30px;position:relative}
+  .qa .a::before{content:'A';position:absolute;left:0;top:0;background:var(--accent);color:#fff;font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 8px;border-radius:3px;letter-spacing:0}
+  .qa .a b{color:var(--accent);font-weight:700}
+  .qa .a p{margin-bottom:8px}
+  .qa .a p:last-child{margin-bottom:0}
+  .qa .risk,.qa .plus{margin-top:10px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:30px}
+  .qa .risk{background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
+  .qa .plus{background:rgba(168,106,31,.06);border-left:2px solid var(--warn);color:var(--ink-2)}
+  .qa .risk b,.qa .plus b{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px;color:var(--danger);margin-right:6px}
+  .qa .plus b{color:var(--warn)}
+
+  .qa.critical{background:var(--paper);border:1.5px solid var(--accent)}
+  .qa.critical .q::before{background:var(--accent);color:#fff}
+
+  footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--muted);font-size:12px;text-align:center}
+  footer b{color:var(--accent)}
+
+  .print-hint{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(200,97,59,.3);cursor:pointer;z-index:100;border:none;font-family:inherit}
+  .print-hint:hover{background:#a94f2c}
+
+  @page{size:A4 portrait;margin:12mm 14mm}
+  @media print{
+    html,body{background:#fff;color:#000;font-size:10pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .wrap{padding:0;max-width:100%}
+    nav.toc,.print-hint{display:none}
+    header{margin-bottom:5mm;padding-bottom:3mm;border-bottom:1px solid #333}
+    header h1{font-size:16pt;color:#000}
+    header h1 .accent{color:#c8613b}
+    header .meta{font-size:9pt;color:#555}
+    section{margin-bottom:6mm;break-inside:avoid-page}
+    section h2{font-size:12pt;color:#000;margin-bottom:3mm;break-after:avoid}
+    section h2 .idx{color:#c8613b;font-size:8pt;border-color:#c8613b}
+    section h2 .n{font-size:9pt;color:#666}
+    .qa{background:#fff;border:1px solid #bbb;padding:3mm 4mm;margin-bottom:3mm;border-radius:2mm;break-inside:avoid}
+    .qa .q{font-size:11pt;color:#000;padding-left:8mm}
+    .qa .q::before{background:#333;color:#fff;font-size:8pt}
+    .qa .a{font-size:10pt;color:#000;padding-left:8mm}
+    .qa .a::before{background:#c8613b;color:#fff;font-size:8pt}
+    .qa .a b{color:#c8613b}
+    .qa .risk,.qa .plus{padding:2mm 3mm;font-size:9pt;margin-left:8mm}
+    .qa .risk{background:#faeeeb;border-color:#b04432}
+    .qa .plus{background:#faf1e0;border-color:#a86a1f}
+    .qa.critical{background:#fdf5eb;border-color:#c8613b}
+    footer{font-size:8pt}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Q&A 口試演練 · Defense Prep</div>
+  <h1>被問到的時候，<span class="accent">你這樣答</span></h1>
+  <div class="meta">25 題預期問題 · 涵蓋概念、方法、貢獻、限制、尖銳題 · 每題答案 + 補刀 / 風險提醒</div>
+</header>
+
+<nav class="toc">
+  <a href="#s1">A · 研究定位</a>
+  <a href="#s2">B · 方法論</a>
+  <a href="#s3">C · 驗證</a>
+  <a href="#s4">D · 兩種思考</a>
+  <a href="#s5">E · 實務意涵</a>
+  <a href="#s6">F · 限制未來</a>
+  <a href="#s7">G · 尖銳題</a>
+  <div class="count"><b>25</b> 題</div>
+</nav>
+
+<!-- ===== A · 研究定位 ===== -->
+<section id="s1">
+<h2><span class="idx">A</span>研究定位 · 為什麼做這個研究<span class="n">3 題</span></h2>
+
+<div class="qa critical">
+<div class="q">為什麼採「差異取徑」而不是「擬真取徑」？</div>
+<div class="a">
+<p>現有 AI Persona 研究大部分是問「AI 像不像真人」，隱含的預設是<b>越像越好</b>。但這樣的取徑會遮蔽 AI 本身的價值——我認為 AI 不是要模仿真人，而是提供另一種對照。</p>
+<p>所以我不談相似度，而是問<b>結構性差異是什麼、這些差異對設計研究有什麼影響</b>。從這個角度看，AI 的「不夠像」反而變成研究資產，因為它讓真人身上被忽略的訊號被凸顯出來。</p>
+</div>
+<div class="plus"><b>加分</b>如果被追問「那擬真研究就沒價值嗎？」，可以說擬真跟差異是<b>互補的兩種取徑</b>，我這份研究補足了差異視角。</div>
+</div>
+
+<div class="qa">
+<div class="q">為什麼選 Z 世代 ETF 投資者這個情境？</div>
+<div class="a">
+<p>這個情境有<b>明顯的情緒與行為連動性</b>——Z 世代同時暴露於社群媒體、即時資訊、價格波動，形成理性長線與感性短線的持續拉扯。而且我在這個群體裡可以清楚找到<b>兩個極端</b>，理性型跟感性型的投資者，剛好適合拿來做對照觀察。</p>
+<p>方法論本身可以推廣到其他情境（醫療、法律、悲傷輔導），這在未來研究建議有提到。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">AI Persona 這個詞跟傳統 persona 差在哪？</div>
+<div class="a">
+<p>傳統 persona 是<b>靜態文件</b>——建構完成後就固定不動，也難以跟上使用者行為的動態變化。AI Persona 則是<b>可對話的主體</b>，可以即時回應設計師的提問，讓 persona 從被閱讀的文件變成可回應的對話對象。</p>
+<p>但這也帶來新問題——AI 跟真人到底差在哪？這正是我研究要回答的。</p>
+</div>
+</div>
+
+</section>
+
+<!-- ===== B · 六維度劇本方法論 ===== -->
+<section id="s2">
+<h2><span class="idx">B</span>六維度劇本方法論<span class="n">4 題</span></h2>
+
+<div class="qa critical">
+<div class="q">為什麼是六個維度？五個或七個不行嗎？</div>
+<div class="a">
+<p>六個維度是<b>迭代測試後收斂的結果</b>，不是預先決定的。初期我用「你是 26 歲投資者」這種制式提示，發現 AI 產出像報告，缺乏對話感——這時我意識到<b>語言風格必須獨立處理</b>。</p>
+<p>過程中我發現六個維度剛好能<b>互不重疊</b>又<b>共同覆蓋角色的必要面向</b>：基本資料+世界觀鎖定敘事邊界、行為+日常情境賦予行動力、心理狀態+語言風格強化反思深度。多一個維度會冗餘，少一個會漏東西。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">你這個框架跟 Park 2023 差在哪？只是把它 Chinese 化嗎？</div>
+<div class="a">
+<p>Park 等 2023 的貢獻是提出<b>「具體生活脈絡讓 AI 更人性化」</b>的原則，但他們沒有給出可操作的建構流程。我的六維度劇本方法論是把這個原則<b>系統化成可操作、可重複的框架</b>——每個維度都有明確功能對應，加上四階段建構流程。</p>
+<p>另外我強調<b>語言風格</b>作為獨立維度，這是 Park 2023 沒特別強調的，也是我發現對「怎麼說」而非「說什麼」的關鍵。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">GPTs 是 OpenAI 專屬技術，換平台後你的方法還適用嗎？</div>
+<div class="a">
+<p>方法論本身跟平台無關。六維度劇本是<b>內容結構</b>，可以用在任何支援系統指令的 LLM 平台——例如 Claude Projects、Gemini Gems、Poe，都可以放系統指令。</p>
+<p>我選 GPTs 是因為當時它的<b>系統指令固定在後台不被對話覆寫</b>、設定可保存複製，適合研究的可重複性。但這是工具選擇，不是方法論的限制。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">四階段流程一定要用 Gemini 跟 ChatGPT 嗎？換其他 AI 就不行？</div>
+<div class="a">
+<p>不是。工具是我當時的選擇（Gemini 深度研究做次級資料、ChatGPT 擷取社群語料、GPTs 部署），但方法論的核心是<b>「先建脈絡、再蒐語料、後生劇本、最後部署」</b>這個流程順序，跟具體工具無關。</p>
+<p>其他組合可以達到一樣的效果，關鍵是每階段要達成的產物：族群理解 → 一手語料 → 六維度劇本 → 可對話的 Persona。</p>
+</div>
+</div>
+
+</section>
+
+<!-- ===== C · 驗證 ===== -->
+<section id="s3">
+<h2><span class="idx">C</span>驗證與統計<span class="n">4 題</span></h2>
+
+<div class="qa">
+<div class="q">6 位設計師會不會太少？統計上站得住嗎？</div>
+<div class="a">
+<p>研究一是<b>方法論驗證的探索型研究</b>，目的不在統計顯著性，而在確認六維度劇本能否穩定產出可區辨的 AI Persona。6 位符合 <b>Nielsen 慣用的 UX 研究小樣本原則</b>——足以識別方法論的可用性問題。</p>
+<p>統計推論的普遍性我在研究限制第三項有明確承認，未來研究可以擴大樣本。</p>
+</div>
+<div class="risk"><b>風險</b>如追問「為何不做 t-test」→ 答小樣本不適合推論統計 + 這是 exploratory validation 不是 confirmatory。</div>
+</div>
+
+<div class="qa">
+<div class="q">研究二只有 2 位真人，這樣能比較嗎？</div>
+<div class="a">
+<p>研究二不是統計比較，是<b>結構性差異的質性觀察</b>。目的是探討 AI 跟真人在語言表現上的<b>本質差異</b>，不是估計母體參數。2 位真人的規模足以觀察出 +43% / −79% 這種明顯差異模式，也對應 DSR 的驗證型研究定位。</p>
+</div>
+<div class="risk"><b>風險</b>被追問「未來會擴大嗎」→ 直接答「會，這是我 6.3 明列的限制之一」。</div>
+</div>
+
+<div class="qa critical">
+<div class="q">可信度只有 3.67 / 4.17，這不是說 AI Persona 不夠好嗎？</div>
+<div class="a">
+<p>恰恰相反。可信度低反映的是<b>6 位測試者能夠辨識自己在跟 AI 對話</b>——他們的批判意識是清醒的。如果可信度很高，反而代表測試者<b>誤以為在跟真人講話</b>，這在設計研究上更危險。</p>
+<p>可信度低是把 AI Persona 用於設計研究的<b>健康批判前提</b>。這也呼應我 5.4 節提到「AI Persona 是研究者建構的產物」的定位——它就不該被當成客觀存在的使用者。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">編碼是你一個人做的嗎？信度怎麼確保？</div>
+<div class="a">
+<p>編碼確實由我單獨完成，這是研究限制之一。為了降低主觀偏差，我採取三個做法：<b>編碼標準先寫下來</b>、<b>每個維度都有具體行為指標</b>（不是主觀感受）、<b>相同語料反覆編碼比對</b>。</p>
+</div>
+<div class="risk"><b>風險</b>如追問 inter-rater reliability → 坦承這是限制，未來會加入第二位編碼者做 Cohen's kappa。</div>
+</div>
+
+</section>
+
+<!-- ===== D · 兩種思考模式 ===== -->
+<section id="s4">
+<h2><span class="idx">D</span>兩種思考模式（核心概念貢獻）<span class="n">3 題</span></h2>
+
+<div class="qa critical">
+<div class="q">「合成式思考」跟「經歷中的思考」是誰的框架？你發明的？</div>
+<div class="a">
+<p>這是我在研究中<b>基於實證觀察提出的概念區分</b>。它不是套用既有理論，而是從六項語言維度的比較結果中歸納出來的——AI 展現即時、完整、零延遲的模式，跟真人的時間性、片段性、情緒滲透形成清楚對比。</p>
+<p>這個區分跟 Kahneman 的雙系統理論（System 1/2）不同，我強調的不是快慢，而是<b>思考的產生過程</b>——AI 是即時組裝訓練數據裡的模式，真人是透過感知回憶情緒的相互作用逐步形塑。</p>
+</div>
+<div class="plus"><b>加分</b>「這是本研究最想留下的概念貢獻」。</div>
+</div>
+
+<div class="qa">
+<div class="q">為什麼說「無優劣之分」？結構優異不是優勢嗎？</div>
+<div class="a">
+<p>「無優劣之分」是指這<b>兩種思考方式服務不同目的</b>。AI 的結構優異適合快速探索、生成假設、初步測試；真人的經歷中的思考適合深度挖掘、意外洞察、情感連結。</p>
+<p>如果我說 AI 比較好，就變回「AI 該取代真人」的擬真取徑；如果說真人比較好，就否定 AI 的價值。我要指出的是——<b>它們是不同性質的思考</b>，該用在不同場合。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">未來 AI 進步後會不會有「經歷中的思考」？</div>
+<div class="a">
+<p>技術上 AI 可以模擬時間延遲、模擬語氣詞、模擬情緒破碎——但那還是<b>合成式思考</b>，只是加上了「模擬真人」的表面特徵。真正的「經歷中的思考」需要的是<b>真實的感知、記憶、情緒</b>，這牽涉到意識問題，是不同層次的挑戰。</p>
+<p>所以就算 AI 能「假裝」有經歷中的思考，本質上還是預先建構的模式輸出。這也是為什麼我強調「差異是結構性的、本質上的」。</p>
+</div>
+</div>
+
+</section>
+
+<!-- ===== E · 實務意涵 ===== -->
+<section id="s5">
+<h2><span class="idx">E</span>對設計研究的實務意涵<span class="n">4 題</span></h2>
+
+<div class="qa">
+<div class="q">「前期 AI 廣度、後期真人深度」有實際被設計團隊用過嗎？</div>
+<div class="a">
+<p>這是我基於研究發現提出的<b>建議模式</b>，尚未被業界廣泛驗證。我在 5.2 節提出三個具體場景——AI 當「準受訪者」（概念探索）、AI 當「對照基準」（訪談分析）、AI 當「演化素材」（持續累積），這些是可以馬上落地的用法。</p>
+<p>未來研究我提議<b>發展更完整的協作流程指引</b>，這是 6.4 節第二項建議。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">前期用 AI 會不會產生偏差，影響後期真人訪談？</div>
+<div class="a">
+<p>會有風險。所以我在 5.4 節特別提出<b>設計師的三項核心能力</b>——判斷力（何時用 AI 何時用真人）、同理心（AI 沒辦法建立情感連結）、整合力（把 AI 觀點跟真人經驗整合）。</p>
+<p>AI 帶來的偏差需要設計師的<b>批判意識</b>來過濾。這也是為什麼 PPS 可信度低是健康訊號——設計師知道自己在跟 AI 對話，就會保持批判態度。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">設計師會不會擔心被 AI 取代？</div>
+<div class="a">
+<p>會，但我這份研究的立場是<b>AI 讓設計師的價值反而被放大</b>。AI 負責的是規模跟效率（快速探索類型化觀點），真人負責深度跟真實性，設計師則負責整合跟判斷——這三個角色是<b>互補而非競爭</b>的。</p>
+<p>簡單說：AI 越好，判斷、同理、整合這些「人的能力」就越關鍵。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">對業界有具體的實務指引嗎？</div>
+<div class="a">
+<p>有三個層面。方法層面：六維度劇本方法論是設計師可以直接沿用的框架。流程層面：「AI 廣度 + 真人深度」的三階段配置（探索、驗證、演化）。心態層面：從「AI 不夠像人」到「AI 太像理想中的人」的認知轉變本身，就是對設計師的實務提醒——<b>AI 的過度完美是要警覺的訊號</b>，不是理想。</p>
+</div>
+</div>
+
+</section>
+
+<!-- ===== F · 限制與未來 ===== -->
+<section id="s6">
+<h2><span class="idx">F</span>研究限制與未來<span class="n">3 題</span></h2>
+
+<div class="qa">
+<div class="q">AI 進步這麼快，你的發現半年後還有效嗎？</div>
+<div class="a">
+<p>我在研究限制第一項有明確承認：<b>研究結果受限於當時使用的生成式語言模型版本</b>，應該被視為「特定技術條件下觀察到的現象」，不是長期不變的結論。</p>
+<p>但方法論的核心（六維度劇本、差異取徑、兩種思考模式的區分）是<b>跟技術版本無關的概念貢獻</b>，這些即使模型改變也仍成立。具體數字會變，但架構跟框架不會過時。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">你只做 Z 世代 ETF 情境，怎麼確定可以推廣？</div>
+<div class="a">
+<p>我不聲稱結果可以直接推廣。方法論的可推廣性正是<b>未來研究建議第一項</b>——把六維度方法論帶到不同情境（醫療、法律、悲傷輔導），測試其適用範圍。</p>
+<p>但我認為方法論的<b>結構是可推廣的</b>——只要目標情境有情緒與行為的連動性、有可辨識的核心軸線，就可以用同樣流程建構出對比 AI Persona。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">研究者反思放進學位論文，會不會削弱客觀性？</div>
+<div class="a">
+<p>我特別在 5.4 節放研究者反思，正是為了<b>誠實面對 AI Persona 的建構本質</b>——它不是客觀存在的使用者，而是研究者透過特定方法論建構的產物。這一層反思讓我可以清楚定位 AI Persona 的認知位置。</p>
+<p>學位論文有這一節，恰恰體現了 DSR 強調的<b>設計知識累積</b>——從「AI 不夠像人」到「AI 太像理想人」的認知轉變本身就是研究成果的一部分。</p>
+</div>
+</div>
+
+</section>
+
+<!-- ===== G · 尖銳題 ===== -->
+<section id="s7">
+<h2><span class="idx">G</span>尖銳 · 難題預備<span class="n">4 題</span></h2>
+
+<div class="qa critical">
+<div class="q">六維度劇本看起來很像 chatbot 的 personality design，你的 novelty 在哪？</div>
+<div class="a">
+<p>Chatbot personality design 目的是<b>讓使用者跟 chatbot 建立情感連結</b>，是產品設計目的。我的六維度劇本目的是<b>讓 AI Persona 作為設計研究工具，可被訪談、可被比較</b>，是研究方法目的。</p>
+<p>兩者的評估標準完全不同——chatbot 追求「有趣、可親、記憶點」，AI Persona 追求「穩定、可區辨、有反思深度」。而且我加入了 PPS 感知量表跟六項語言維度編碼，這是 chatbot 領域沒有的評估框架。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">Anne 如果是研究者建構的產物，那我怎麼相信 Anne 反映的是真實 Z 世代？</div>
+<div class="a">
+<p>不能百分之百保證。我的做法是<b>用真人一手語料（PTT/Dcard 30-50 則貼文）錨定語言風格</b>，把研究者的建構空間限縮在「怎麼組合這些真實素材」，而不是憑空想像。</p>
+<p>但我在 5.4 節明確定位——AI Persona 是<b>有效的研究工具，但仍需研究者的專業判斷與批判性檢視</b>。這就是為什麼我強調它適合「對照基準」的角色，而不是取代真人訪談的替身。</p>
+</div>
+<div class="risk"><b>風險</b>被追問「那你的研究還有效嗎」→ 答有效，因為我不是要證明 Anne = Z 世代，而是要展示 AI 跟真人在語言表現上的結構性差異。</div>
+</div>
+
+<div class="qa">
+<div class="q">DSR 適合單人做嗎？團隊做不會更好？</div>
+<div class="a">
+<p>DSR 沒有規定研究人數。<b>單人做的優勢</b>是設計決策一致、迭代速度快、認知轉變清晰可追蹤（這正是我 5.4 反思能寫出來的原因）。<b>團隊做的優勢</b>是多元視角、降低主觀偏差、可以做 inter-rater reliability。</p>
+<p>兩種各有適合的階段。我這份研究是<b>探索性的方法論建構</b>，適合單人；未來要驗證跟擴散時，團隊會更合適，這也是我未來研究建議的方向。</p>
+</div>
+</div>
+
+<div class="qa">
+<div class="q">為什麼要做這個題目？（動機質問）</div>
+<div class="a">
+<p>作為 UX 設計師，我在實務上一直被兩個問題困擾——找不到使用者訪談時該怎麼辦？用 AI 替代對嗎？這是最初的動機。</p>
+<p>但研究過程中我發現真正的問題不是「能不能用 AI」，而是<b>「AI 跟真人在本質上有什麼差別，這些差別能不能為設計研究帶來新的可能」</b>。這個轉向讓研究從「工具驗證」變成「概念貢獻」，也是我覺得這個題目值得的原因。</p>
+</div>
+<div class="plus"><b>加分</b>如果情境允許可以說「這也是唐老師鼓勵我從實務問題出發、往方法論層次推的建議」。</div>
+</div>
+
+</section>
+
+<footer>
+共 <b>25 題</b> · 涵蓋定位、方法、驗證、概念、實務、限制、尖銳題<br>
+🟠 橘色底 = 全場必守答案 · 🔴 紅底 = 風險提醒 · 🟡 黃底 = 加分策略<br><br>
+Cmd+P 印 A4 直向，帶去現場當備援。上場後你比任何人都懂這份研究。
+</footer>
+
+<button class="print-hint" onclick="window.print()">🖨 列印 A4</button>
+
+</div>
+</body>
+</html>
