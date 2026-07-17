@@ -1,128 +1,314 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>研究方法完整拆解 · AI Persona 論文口試</title>
+<title>研究方法完整拆解｜AI Persona 能取代真人訪談嗎</title>
+<meta name="description" content="碩士論文《AI Persona 能取代真人訪談嗎》研究方法完整操作拆解——建構階段四階段流程、研究一劇本方法論驗證、研究二 AI 與真人比較、逐字稿編碼流程、統計算式對照。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0e0b;--card:#141a15;--card2:#0f1410;--line:rgba(15,199,123,.22);
-    --accent:#0FC77B;--ink:#f1f3f2;--muted:#aab3ac;--warn:#fbbf24;
-    --danger:#f87171;--info:#60a5fa
+    --bg:#fbfcfb; --surface:#ffffff; --ink:#1c2420; --muted:#5e6b63;
+    --faint:#8a958d; --line:#e4e9e5; --line2:#eef2ef;
+    --accent:#0a9d63; --accent-bright:#0FC77B; --accent-soft:#e7f7ef;
+    --warn:#b47a08; --warn-soft:#fdf3d8;
+    --info:#1f6feb; --info-soft:#e6f0ff;
+    --danger:#b6362f;
+    --code-bg:#1d2622; --code-ink:#e9f0ec; --code-line:#33403a;
+    --radius:14px; --maxw:900px;
+    --shadow:0 1px 2px rgba(28,36,32,.04), 0 8px 28px rgba(28,36,32,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--ink);font-family:'PingFang TC','Noto Sans TC','Microsoft JhengHei','Inter',-apple-system,sans-serif;line-height:1.7;font-size:15px}
-  .wrap{max-width:1100px;margin:0 auto;padding:48px 28px 120px}
-  header{border-bottom:2px solid var(--accent);padding-bottom:20px;margin-bottom:32px}
-  header .kicker{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:12px}
-  header h1{font-size:28px;font-weight:800;line-height:1.3;margin-bottom:8px}
-  header h1 .accent{color:var(--accent)}
-  header .meta{color:var(--muted);font-size:14px}
+  html{scroll-behavior:smooth; scroll-padding-top:76px;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-size:16.5px; line-height:1.85; letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
 
-  nav.toc{position:sticky;top:0;background:rgba(10,14,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 32px;z-index:10;display:flex;gap:6px;overflow-x:auto}
-  nav.toc a{color:var(--muted);text-decoration:none;font-size:12px;padding:6px 12px;border-radius:5px;white-space:nowrap;transition:.15s;border:1px solid transparent}
-  nav.toc a:hover{background:var(--card);border-color:var(--line);color:var(--ink)}
-  nav.toc a.section{color:var(--accent);font-weight:700;letter-spacing:.05em}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:56px 32px 120px;}
 
-  section{margin-bottom:56px;scroll-margin-top:70px}
-  section h2{color:var(--accent);font-size:22px;font-weight:800;margin-bottom:6px;padding-bottom:12px;border-bottom:1.6px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  section h2 .idx{color:var(--muted);font-family:'Consolas','SF Mono',monospace;font-size:14px;font-weight:600}
-  section h2 .sub{color:var(--muted);font-size:14px;font-weight:500;letter-spacing:.02em}
-  section > .lead{color:var(--muted);font-size:14px;line-height:1.7;margin:16px 0 20px;max-width:70ch}
-  h3{color:var(--ink);font-size:18px;font-weight:700;margin:28px 0 12px;padding-left:14px;border-left:3px solid var(--accent)}
-  h4{color:var(--accent);font-size:14px;font-weight:800;margin:16px 0 8px;letter-spacing:.06em;text-transform:uppercase}
+  /* ===== header / hero ===== */
+  header{margin-bottom:32px; padding-bottom:0; border:none;}
+  header .kicker{
+    display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.14em;
+    color:var(--accent); background:var(--accent-soft); padding:5px 12px; border-radius:999px;
+    margin-bottom:18px; text-transform:none;
+  }
+  header h1{
+    font-family:"Noto Serif TC", "Songti TC", serif; font-weight:700; font-size:32px;
+    line-height:1.35; letter-spacing:.01em; margin-bottom:14px;
+  }
+  header h1 .accent{color:var(--accent); font-style:italic;}
+  header .meta{
+    color:var(--muted); font-size:15px; line-height:1.75;
+    padding-top:18px; border-top:1px solid var(--line);
+  }
 
-  /* Step-by-step timeline */
-  .steps{margin:16px 0}
-  .step{display:grid;grid-template-columns:auto 1fr;gap:16px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed rgba(15,199,123,.15)}
-  .step:last-child{border-bottom:none}
-  .step .num-badge{background:var(--accent);color:#04121a;font-weight:800;font-size:13px;letter-spacing:.02em;padding:4px 10px;border-radius:6px;height:fit-content;font-family:'Consolas','SF Mono',monospace;white-space:nowrap}
-  .step .body{color:var(--ink);font-size:14.5px;line-height:1.75}
-  .step .body b{color:var(--accent)}
-  .step .body p{margin-bottom:6px}
-  .step .body .tool{display:inline-block;background:rgba(96,165,250,.15);color:var(--info);padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.04em;margin:0 3px 0 0;font-family:'Consolas','SF Mono',monospace}
-  .step .body .why{color:var(--muted);font-size:13px;font-style:italic;margin-top:4px;padding-left:10px;border-left:2px solid var(--muted);opacity:.85}
+  /* ===== TOC (sticky top bar) ===== */
+  nav.toc{
+    position:sticky; top:0; z-index:20;
+    background:rgba(251,252,251,.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:14px 28px; margin:0 -32px 40px;
+    display:flex; gap:4px; overflow-x:auto; scrollbar-width:thin;
+  }
+  nav.toc a{
+    color:var(--muted); text-decoration:none; font-size:13px;
+    padding:6px 12px; border-radius:8px; white-space:nowrap;
+    transition:.15s; border:1px solid transparent; font-weight:500;
+  }
+  nav.toc a:hover{color:var(--accent); background:var(--accent-soft);}
+  nav.toc a.section{color:var(--ink); font-weight:700; letter-spacing:.02em;}
+  nav.toc a.section:hover{background:var(--accent-soft); color:var(--accent);}
 
-  .card{background:var(--card);border:1.6px solid var(--line);border-radius:12px;padding:20px 24px;margin:14px 0}
-  .card.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.04)}
-  .card.info{border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.04)}
-  .card p{margin-bottom:10px;color:var(--ink);font-size:15px}
-  .card p:last-child{margin-bottom:0}
-  .card b{color:var(--accent);font-weight:700}
-  .card.warn b{color:var(--warn)}
-  .card.info b{color:var(--info)}
+  /* ===== sections ===== */
+  section{margin-bottom:72px; scroll-margin-top:80px;}
+  section h2{
+    font-family:"Noto Serif TC", serif; font-size:26px; font-weight:700;
+    color:var(--ink); margin:0 0 8px; padding-bottom:14px;
+    border-bottom:2px solid var(--ink);
+    display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  }
+  section h2 .idx{
+    color:var(--accent); font-family:"JetBrains Mono", monospace;
+    font-size:14px; font-weight:500; letter-spacing:.02em; text-transform:none;
+  }
+  section h2 .sub{
+    color:var(--muted); font-size:15px; font-weight:400;
+    font-family:"Noto Sans TC", sans-serif;
+  }
+  section > .lead{color:var(--muted); font-size:16px; line-height:1.8; margin:20px 0 24px; max-width:70ch;}
 
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
-  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0}
-  .grid2 .card,.grid3 .card{margin:0}
+  h3{
+    font-size:20px; font-weight:700; color:var(--ink);
+    margin:44px 0 14px; padding-left:0; border-left:none;
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h4{
+    font-size:14px; font-weight:700; color:var(--accent);
+    margin:24px 0 8px; letter-spacing:.14em; text-transform:uppercase;
+    font-family:"JetBrains Mono", monospace;
+  }
 
-  .num-block{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
-  .num{flex:1;min-width:110px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-  .num .v{color:var(--accent);font-size:30px;font-weight:800;line-height:1;font-family:'Consolas','SF Mono',monospace}
-  .num .v.warn{color:var(--warn)}
-  .num .v.danger{color:var(--danger)}
-  .num .k{color:var(--muted);font-size:12px;margin-top:6px;letter-spacing:.02em}
-  .num .k b{color:var(--ink)}
+  p{margin:14px 0;}
+  b, strong{color:var(--ink); font-weight:700;}
 
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--card);border-radius:10px;overflow:hidden}
-  th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line);color:var(--ink)}
-  th{color:var(--accent);font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(15,199,123,.08)}
-  td.right{text-align:right;font-family:'Consolas','SF Mono',monospace}
-  td.muted{color:var(--muted);font-size:13px}
-  tr.highlight{background:rgba(251,191,36,.08)}
-  tr.highlight td{color:var(--warn)}
-  tr.total{background:rgba(15,199,123,.06);border-top:2px solid var(--accent)}
-  tr.total td{font-weight:700}
+  /* ===== step-by-step ===== */
+  .steps{margin:18px 0;}
+  .step{
+    display:grid; grid-template-columns:auto 1fr; gap:18px;
+    margin-bottom:20px; padding-bottom:20px;
+    border-bottom:1px solid var(--line2);
+  }
+  .step:last-child{border-bottom:none; padding-bottom:0;}
+  .step .num-badge{
+    background:var(--accent); color:#fff; font-weight:700;
+    font-size:12.5px; letter-spacing:.06em;
+    padding:5px 12px; border-radius:8px; height:fit-content;
+    font-family:"JetBrains Mono", monospace; white-space:nowrap;
+  }
+  .step .body{color:var(--ink); font-size:15.5px; line-height:1.85;}
+  .step .body b{color:var(--ink); font-weight:700;}
+  .step .body p{margin-bottom:8px;}
+  .step .body p:last-child{margin-bottom:0;}
+  .step .body .tool{
+    display:inline-block;
+    background:var(--info-soft); color:var(--info);
+    padding:2px 9px; border-radius:6px; font-size:12px; font-weight:600;
+    margin:0 3px 0 0; font-family:"JetBrains Mono", monospace;
+  }
+  .step .body .why{
+    color:var(--muted); font-size:14px; font-style:normal;
+    margin-top:8px; padding:8px 14px;
+    background:var(--line2); border-left:2px solid var(--accent);
+    border-radius:0 8px 8px 0; opacity:1;
+  }
 
-  .formula{background:#040807;border:1.6px solid rgba(15,199,123,.35);border-radius:10px;padding:14px 18px;margin:14px 0;font-family:'Consolas','SF Mono',monospace;font-size:14px;color:var(--accent);line-height:1.9;overflow-x:auto}
-  .formula .comment{color:var(--muted);font-style:italic}
+  /* ===== cards / callouts ===== */
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:10px; padding:18px 22px; margin:16px 0;
+    box-shadow:var(--shadow);
+  }
+  .card p{margin-bottom:10px; color:var(--ink); font-size:15.5px; line-height:1.8;}
+  .card p:last-child{margin-bottom:0;}
+  .card b{color:var(--ink); font-weight:700;}
+  .card.warn{border-left-color:var(--warn); background:var(--warn-soft);}
+  .card.warn b{color:var(--warn);}
+  .card.info{border-left-color:var(--info); background:var(--info-soft);}
+  .card.info b{color:var(--info);}
 
-  .qa{background:var(--card2);border:1.6px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
-  .qa .q{color:var(--accent);font-weight:800;font-size:15px;margin-bottom:10px;padding-left:28px;position:relative}
-  .qa .q::before{content:'Q';position:absolute;left:0;top:-2px;background:var(--accent);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px}
-  .qa .a{color:var(--ink);font-size:14.5px;line-height:1.85;padding-left:28px;position:relative}
-  .qa .a::before{content:'A';position:absolute;left:0;top:-2px;background:var(--muted);color:#04121a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px}
-  .qa .a b{color:var(--accent);font-weight:700}
-  .qa .risk{color:var(--warn);font-size:12px;margin-top:8px;padding:6px 10px;background:rgba(251,191,36,.08);border-left:2px solid var(--warn);border-radius:0 4px 4px 0;line-height:1.55}
-  .qa .risk b{color:var(--warn)}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0;}
+  .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:18px 0;}
+  .grid2 .card, .grid3 .card{margin:0;}
 
-  .tool-list{display:grid;grid-template-columns:auto 1fr auto;gap:10px 20px;margin:14px 0;font-size:14px}
-  .tool-list .t-name{color:var(--info);font-weight:700;font-family:'Consolas','SF Mono',monospace;font-size:13px}
-  .tool-list .t-what{color:var(--ink)}
-  .tool-list .t-where{color:var(--muted);font-size:12px;font-style:italic}
+  /* ===== number stat blocks ===== */
+  .num-block{display:flex; gap:14px; flex-wrap:wrap; margin:16px 0;}
+  .num{
+    flex:1; min-width:130px;
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .num .v{
+    color:var(--accent); font-size:30px; font-weight:700; line-height:1;
+    font-family:"JetBrains Mono", monospace;
+  }
+  .num .v.warn{color:var(--warn);}
+  .num .v.danger{color:var(--danger);}
+  .num .k{color:var(--muted); font-size:13px; margin-top:8px; line-height:1.5;}
+  .num .k b{color:var(--ink);}
 
-  ul.plain{list-style:none;padding:0;margin:10px 0}
-  ul.plain li{position:relative;padding:5px 0 5px 18px;color:var(--ink);font-size:14px;line-height:1.6}
-  ul.plain li::before{content:'·';position:absolute;left:6px;top:5px;color:var(--accent);font-weight:800}
-  ul.plain li b{color:var(--accent)}
+  /* ===== tables ===== */
+  table{
+    width:100%; border-collapse:collapse; margin:18px 0; font-size:14.5px;
+    background:var(--surface); border-radius:var(--radius); overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  th, td{
+    padding:12px 16px; text-align:left; border-bottom:1px solid var(--line2);
+    color:var(--ink); vertical-align:top; line-height:1.65;
+  }
+  th{
+    background:#f4f7f5; font-weight:700; color:var(--ink);
+    font-size:13px; letter-spacing:.04em;
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover td{background:#fafcfb;}
+  td.right{text-align:right; font-family:"JetBrains Mono", monospace; color:var(--muted);}
+  td.muted{color:var(--muted); font-size:13.5px;}
+  tr.highlight{background:var(--warn-soft);}
+  tr.highlight td{color:var(--warn);}
+  tr.total{background:var(--accent-soft); border-top:2px solid var(--accent);}
+  tr.total td{font-weight:700;}
 
-  .quote{background:rgba(15,199,123,.05);border-left:3px solid var(--accent);padding:10px 14px;margin:10px 0;font-style:italic;color:var(--ink);font-size:14px;line-height:1.7;border-radius:0 6px 6px 0}
-  .quote b{color:var(--accent);font-style:normal}
+  /* ===== formula (dark code block) ===== */
+  .formula{
+    background:var(--code-bg); color:var(--accent-bright);
+    border-radius:var(--radius); border:1px solid var(--code-line);
+    padding:16px 20px; margin:18px 0;
+    font-family:"JetBrains Mono", monospace; font-size:13.5px;
+    line-height:1.85; overflow-x:auto; box-shadow:var(--shadow);
+  }
+  .formula .comment{color:#7c9088; font-style:normal;}
 
-  .tag-inline{display:inline-block;background:rgba(15,199,123,.15);color:var(--accent);padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.06em;margin:0 3px}
-  .tag-inline.warn{background:rgba(251,191,36,.15);color:var(--warn)}
-  .tag-inline.info{background:rgba(96,165,250,.15);color:var(--info)}
+  /* ===== Q&A ===== */
+  .qa{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 24px; margin:18px 0; box-shadow:var(--shadow);
+  }
+  .qa .q{
+    color:var(--ink); font-weight:700; font-size:16px; margin-bottom:12px;
+    padding-left:34px; position:relative; font-family:"Noto Serif TC", serif;
+  }
+  .qa .q::before{
+    content:'Q'; position:absolute; left:0; top:-1px;
+    background:var(--accent); color:#fff; font-size:11.5px; font-weight:700;
+    padding:2px 9px; border-radius:6px; font-family:"JetBrains Mono", monospace;
+  }
+  .qa .a{
+    color:var(--ink); font-size:15px; line-height:1.85;
+    padding-left:34px; position:relative;
+  }
+  .qa .a::before{
+    content:'A'; position:absolute; left:0; top:-1px;
+    background:var(--line2); color:var(--muted); font-size:11.5px; font-weight:700;
+    padding:2px 9px; border-radius:6px; font-family:"JetBrains Mono", monospace;
+  }
+  .qa .a b{color:var(--ink); font-weight:700;}
+  .qa .risk{
+    color:var(--warn); font-size:13.5px; margin-top:12px;
+    padding:8px 14px; background:var(--warn-soft);
+    border-left:2px solid var(--warn); border-radius:0 6px 6px 0; line-height:1.65;
+  }
+  .qa .risk b{color:var(--warn);}
 
+  /* ===== tool list ===== */
+  .tool-list{
+    display:grid; grid-template-columns:auto 1fr auto;
+    gap:12px 22px; margin:18px 0; font-size:14.5px;
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; box-shadow:var(--shadow);
+    align-items:baseline;
+  }
+  .tool-list .t-name{
+    color:var(--info); font-weight:700; font-size:13.5px;
+    font-family:"JetBrains Mono", monospace;
+    background:var(--info-soft); padding:2px 9px; border-radius:6px;
+  }
+  .tool-list .t-what{color:var(--ink);}
+  .tool-list .t-where{color:var(--faint); font-size:13px;}
+
+  /* ===== plain list ===== */
+  ul.plain{list-style:none; padding:0; margin:12px 0;}
+  ul.plain li{
+    position:relative; padding:6px 0 6px 20px;
+    color:var(--ink); font-size:15px; line-height:1.75;
+  }
+  ul.plain li::before{
+    content:'·'; position:absolute; left:6px; top:6px;
+    color:var(--accent); font-weight:800; font-size:16px;
+  }
+  ul.plain li b{color:var(--ink); font-weight:700;}
+
+  ol, ul:not(.plain){padding-left:24px;}
+  ol li, ul:not(.plain) li{margin:6px 0; color:var(--ink);}
+
+  /* ===== quote / inline tag ===== */
+  .quote{
+    background:var(--accent-soft); border-left:3px solid var(--accent);
+    padding:12px 18px; margin:14px 0; color:var(--ink);
+    font-size:15px; line-height:1.75; border-radius:0 8px 8px 0;
+    font-style:normal;
+  }
+  .quote b{color:var(--ink); font-weight:700;}
+
+  .tag-inline{
+    display:inline-block; background:var(--accent-soft); color:var(--accent);
+    padding:2px 8px; border-radius:6px; font-size:12.5px; font-weight:600;
+    margin:0 3px; font-family:"JetBrains Mono", monospace;
+  }
+  .tag-inline.warn{background:var(--warn-soft); color:var(--warn);}
+  .tag-inline.info{background:var(--info-soft); color:var(--info);}
+
+  /* ===== footer ===== */
+  footer{
+    border-top:1px solid var(--line); padding-top:32px; margin-top:80px;
+    font-size:13.5px; color:var(--faint); line-height:1.8;
+  }
+
+  /* ===== print ===== */
   @media print{
-    body{background:#fff;color:#000}
-    nav.toc{display:none}
-    section{page-break-inside:avoid}
-    .card,.qa,.num,.formula,table,.step{background:#fff;color:#000;border-color:#ccc}
-    .card b,.num .v,.qa .q,section h2,td b,th{color:#0a7548}
+    body{background:#fff; color:#000; font-size:11pt;}
+    nav.toc{display:none;}
+    section{page-break-inside:avoid;}
+    .card, .qa, .num, .tool-list, table{box-shadow:none; background:#fff; border-color:#ccc;}
+    .formula{background:#f4f7f5; color:#0a3628; border-color:#ccc;}
+    .card b, .num .v, .qa .q, section h2{color:#0a7548;}
   }
   @media (max-width:800px){
-    .grid2,.grid3{grid-template-columns:1fr}
-    .num{min-width:calc(50% - 11px)}
-    .tool-list{grid-template-columns:1fr}
+    .wrap{padding:36px 20px 100px;}
+    header h1{font-size:26px;}
+    section h2{font-size:22px;}
+    .grid2, .grid3{grid-template-columns:1fr;}
+    .num{min-width:calc(50% - 8px);}
+    .tool-list{grid-template-columns:1fr;}
+    nav.toc{margin:0 -20px 32px; padding:12px 20px;}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">研究方法完整拆解 · How I Did It</div>
-  <h1>兩個實驗，<span class="accent">步驟級</span>操作紀錄</h1>
-  <div class="meta">被追問「這實驗你怎麼做的？」不要慌，這頁就是你的操作手冊。</div>
+  <div class="kicker">研究方法完整拆解</div>
+  <h1>兩個實驗的<span class="accent">步驟級</span>操作紀錄</h1>
+  <div class="meta">建構階段的四階段流程、研究一劇本方法論驗證、研究二 AI 與真人比較的訪談與編碼流程，以及所有結果數字的計算方式。<br>簡潔安｜國立臺灣科技大學設計系｜指導教授：唐玄輝</div>
 </header>
 
 <nav class="toc">
@@ -693,8 +879,10 @@ SD 越大 → 意見越分歧<br><br>
 
 </section>
 
-<footer style="margin-top:60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px">
-你已經走完整個研究了。這頁只是備援。上場後你比任何人都懂這份研究。加油。
+<footer>
+<p><b style="color:var(--ink)">碩士論文 · AI Persona 能取代真人訪談嗎？探討 AI Persona 與真人受訪者的差異對設計研究的影響</b></p>
+<p>簡潔安｜國立臺灣科技大學設計系碩士班｜指導教授：唐玄輝　　二〇二六年七月</p>
+<p style="margin-top:14px">相關文件：<a href="https://joannecucumber.github.io/ai-persona-appendix/" target="_blank">研究方法附錄</a>　·　<a href="https://github.com/joannecucumber/ai-persona-hcii" target="_blank">GitHub 倉庫</a></p>
 </footer>
 
 </div>
