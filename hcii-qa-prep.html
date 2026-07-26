@@ -10,24 +10,40 @@
     --accent:#c8613b;--accent-soft:#e0a688;
     --ink:#282420;--ink-2:#4a4139;--muted:#7a6f62;
     --paper:#fff9ed;--warn:#a86a1f;--danger:#b04432;
-    --emerald:#3a7a5f;
+    --emerald:#3a7a5f;--emerald-soft:#eaf4ee;
+    --deflect:#6b4a8c;--deflect-soft:#efe8f5;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Helvetica Neue',ui-serif,'PingFang TC','Noto Sans TC',-apple-system,sans-serif;line-height:1.65;font-size:15px}
   .wrap{max-width:960px;margin:0 auto;padding:44px 28px 100px}
 
-  header{margin-bottom:28px;border-bottom:1.5px solid var(--ink);padding-bottom:20px}
+  header{margin-bottom:24px;border-bottom:1.5px solid var(--ink);padding-bottom:18px}
   header .kicker{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
   header h1{font-size:30px;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
   header h1 .accent{color:var(--accent);font-style:italic}
   header .meta{color:var(--muted);font-size:13.5px;margin-top:6px}
 
-  /* Alert box for stall phrases */
-  .cheatsheet{background:var(--paper);border:2px solid var(--accent);border-radius:10px;padding:20px 24px;margin-bottom:32px}
-  .cheatsheet h2{color:var(--accent);font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;font-family:'Inter',sans-serif}
-  .cheatsheet .stall{background:#fff;border-left:3px solid var(--accent);padding:10px 14px;margin-bottom:8px;font-size:14px;line-height:1.6;border-radius:0 4px 4px 0;font-style:italic}
-  .cheatsheet .stall b{color:var(--accent);font-style:normal;font-weight:700;margin-right:8px}
-  .cheatsheet .setup{background:#fff;border:1px dashed var(--accent-soft);padding:12px 16px;border-radius:6px;margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.7}
+  /* ===== Two-strategy top bar ===== */
+  .strategies{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+  .strategy{border-radius:10px;padding:18px 20px;font-size:14px;line-height:1.6}
+  .strategy.can{background:var(--emerald-soft);border:2px solid var(--emerald)}
+  .strategy.cant{background:var(--deflect-soft);border:2px solid var(--deflect)}
+  .strategy h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
+  .strategy.can h3{color:var(--emerald)}
+  .strategy.cant h3{color:var(--deflect)}
+  .strategy .en{color:var(--ink);font-style:italic;padding:10px 12px;background:#fff;border-radius:6px;margin-bottom:8px;line-height:1.55}
+  .strategy .zh{color:var(--muted);font-size:12.5px;padding-left:12px;border-left:2px solid rgba(0,0,0,.08);line-height:1.7;font-family:'PingFang TC','Noto Sans TC',sans-serif}
+  .strategy .hint{margin-top:10px;font-size:12px;color:var(--ink-2);font-family:'PingFang TC','Noto Sans TC',sans-serif}
+  .strategy.can .hint{color:var(--emerald)}
+  .strategy.cant .hint{color:var(--deflect)}
+
+  /* ===== Cheatsheet for short stalls ===== */
+  .cheatsheet{background:var(--paper);border:1.5px solid var(--accent);border-radius:10px;padding:16px 22px;margin-bottom:26px}
+  .cheatsheet h2{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-family:'Inter',sans-serif}
+  .cheatsheet .short-stall{background:#fff;border-left:2px solid var(--accent);padding:7px 12px;margin-bottom:5px;font-size:13px;line-height:1.5;border-radius:0 4px 4px 0;font-style:italic;color:var(--ink)}
+  .cheatsheet .short-stall b{color:var(--accent);font-style:normal;font-weight:700;margin-right:6px;font-size:11px}
+  .cheatsheet .zh{color:var(--muted);font-size:12px;font-style:normal;font-family:'PingFang TC','Noto Sans TC',sans-serif;margin-top:2px;display:block}
+  .cheatsheet .setup{background:#fff;border:1px dashed var(--accent-soft);padding:10px 14px;border-radius:6px;margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.7;font-family:'PingFang TC','Noto Sans TC',sans-serif}
   .cheatsheet .setup b{color:var(--emerald);font-weight:700}
 
   nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 28px;z-index:10;display:flex;gap:4px;overflow-x:auto;align-items:center;flex-wrap:wrap}
@@ -41,81 +57,84 @@
   section h2 .idx{color:var(--accent);font-size:12px;font-weight:700;padding:2px 8px;border:1px solid var(--accent);border-radius:3px;letter-spacing:.14em;text-transform:uppercase}
   section h2 .n{color:var(--muted);font-size:14px;margin-left:auto;font-weight:500}
 
-  .qa{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-bottom:14px;break-inside:avoid}
-  .qa .q{color:var(--ink);font-weight:700;font-size:15.5px;margin-bottom:12px;line-height:1.5;padding-left:32px;position:relative;font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.005em}
+  .qa{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:16px}
+  .qa .q{color:var(--ink);font-weight:700;font-size:15.5px;margin-bottom:6px;line-height:1.5;padding-left:34px;position:relative;font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.005em}
   .qa .q::before{content:'Q';position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
-  .qa .a{color:var(--ink-2);font-size:14px;line-height:1.75;padding-left:32px;position:relative}
+  .qa .q-zh{color:var(--muted);font-size:13px;margin-bottom:14px;padding-left:34px;font-family:'PingFang TC','Noto Sans TC',sans-serif;line-height:1.55;font-weight:500}
+
+  .qa .a{color:var(--ink);font-size:14.5px;line-height:1.75;padding-left:34px;position:relative;margin-top:10px}
   .qa .a::before{content:'A';position:absolute;left:0;top:0;background:var(--accent);color:#fff;font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
   .qa .a b{color:var(--accent);font-weight:700}
   .qa .a p{margin-bottom:8px}
   .qa .a p:last-child{margin-bottom:0}
-  .qa .gambit{margin-top:12px;padding:10px 14px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.65;margin-left:32px;background:rgba(58,122,95,.08);border-left:2px solid var(--emerald);color:var(--ink-2);font-style:italic}
+  .qa .a-zh{margin-left:34px;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.02);border-left:2px solid rgba(0,0,0,.1);border-radius:0 4px 4px 0;font-family:'PingFang TC','Noto Sans TC',sans-serif;font-size:13px;line-height:1.75;color:var(--muted)}
+  .qa .a-zh b{color:var(--ink-2);font-weight:600}
+  .qa .a-zh p{margin-bottom:6px}
+  .qa .a-zh p:last-child{margin-bottom:0}
+
+  .qa .gambit{margin-top:12px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:34px;background:rgba(58,122,95,.08);border-left:2px solid var(--emerald);color:var(--ink-2);font-style:italic}
   .qa .gambit b{color:var(--emerald);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10px;margin-right:8px;font-style:normal}
-  .qa .risk{margin-top:8px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:32px;background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
+  .qa .risk{margin-top:8px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:34px;background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
   .qa .risk b{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px;color:var(--danger);margin-right:6px}
 
   .qa.critical{background:var(--paper);border:1.5px solid var(--accent)}
   .qa.critical .q::before{background:var(--accent);color:#fff}
 
-  .zh{color:var(--muted);font-size:12.5px;margin-top:4px;font-style:normal;font-family:'PingFang TC','Noto Sans TC',sans-serif}
-
   footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--muted);font-size:12px;text-align:center}
   footer b{color:var(--accent)}
 
-  .print-hint{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(200,97,59,.3);cursor:pointer;z-index:100;border:none;font-family:inherit}
-  .print-hint:hover{background:#a94f2c}
-
-  @page{size:A4 portrait;margin:12mm 14mm}
-  @media print{
-    html,body{background:#fff;color:#000;font-size:10pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .wrap{padding:0;max-width:100%}
-    nav.toc,.print-hint{display:none}
-    header{margin-bottom:4mm;padding-bottom:3mm;border-bottom:1px solid #333}
-    header h1{font-size:16pt;color:#000}
-    header h1 .accent{color:#c8613b}
-    .cheatsheet{border:1.5pt solid #c8613b;background:#fdf5eb;padding:4mm;margin-bottom:5mm;break-inside:avoid}
-    .cheatsheet h2{font-size:10pt;color:#c8613b}
-    .cheatsheet .stall{background:#fff;font-size:9pt;padding:2mm 3mm;margin-bottom:1.5mm}
-    .cheatsheet .setup{font-size:8.5pt;padding:2mm 3mm}
-    section{margin-bottom:6mm;break-inside:avoid-page}
-    section h2{font-size:12pt;color:#000;margin-bottom:3mm;break-after:avoid}
-    section h2 .idx{color:#c8613b;font-size:8pt;border-color:#c8613b}
-    section h2 .n{font-size:9pt;color:#666}
-    .qa{background:#fff;border:1px solid #bbb;padding:3mm 4mm;margin-bottom:3mm;border-radius:2mm;break-inside:avoid}
-    .qa .q{font-size:10.5pt;color:#000;padding-left:8mm}
-    .qa .q::before{background:#333;color:#fff;font-size:8pt}
-    .qa .a{font-size:9.5pt;color:#000;padding-left:8mm}
-    .qa .a::before{background:#c8613b;color:#fff;font-size:8pt}
-    .qa .a b{color:#c8613b}
-    .qa .gambit{background:#eef5f0;border-color:#3a7a5f;font-size:9pt;padding:2mm 3mm;margin-left:8mm}
-    .qa .gambit b{color:#3a7a5f}
-    .qa .risk{background:#faeeeb;border-color:#b04432;font-size:9pt;padding:2mm 3mm;margin-left:8mm}
-    .qa.critical{background:#fdf5eb;border-color:#c8613b}
-    footer{font-size:8pt}
+  @media (max-width:700px){
+    .strategies{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">HCII 2026 · Q&A Prep</div>
+  <div class="kicker">HCII 2026 · Q&A Prep · 中英對照</div>
   <h1>When they ask, <span class="accent">you answer like this</span></h1>
   <div class="meta">Chieh-An Chien (Joanne)｜NTUST Design｜Advisor: Prof. Hsuan-Hui Tang</div>
-  <div class="meta" style="margin-top:2px">15 anticipated questions · concise answers · time-buy gambits</div>
+  <div class="meta" style="margin-top:2px">15 anticipated questions · bilingual · buy-time gambits</div>
 </header>
 
-<!-- ===== CHEAT SHEET ===== -->
-<div class="cheatsheet">
-  <h2>⏱ Buy time — these phrases first</h2>
+<!-- ===== TWO STRATEGIES ===== -->
+<div class="strategies">
+  <div class="strategy can">
+    <h3>✅ Can answer · 先拖時間再答</h3>
+    <div class="en">"Thank you for that question — that's actually something we thought a lot about during the study. Let me walk you through how we approached it."</div>
+    <div class="zh">感謝這個問題，這其實是我們研究過程中反覆思考的部分。讓我從我們的做法談起。</div>
+    <div class="hint">↳ 講完這句後，眼睛掃到下面對應題目，開始 paraphrase 英文 A。</div>
+  </div>
 
-  <div class="stall"><b>1.</b>Thank you for that question — let me make sure I understand it correctly...</div>
-  <div class="stall"><b>2.</b>That's a really interesting point. Let me take a moment to answer that properly.</div>
-  <div class="stall"><b>3.</b>Could you clarify what you mean by <span style="background:#fff3d9;padding:0 4px;border-radius:2px">[keyword]</span>, just so I answer the right thing?</div>
-  <div class="stall"><b>4.</b>That's an aspect I hadn't fully considered in this study. Based on what we found, my best interpretation would be...</div>
-  <div class="stall"><b>5.</b>I don't have data to directly address that, but the closest finding we have is...</div>
+  <div class="strategy cant">
+    <h3>🛟 Can't answer · 優雅轉場</h3>
+    <div class="en">"That's a really valuable perspective — we did discuss similar directions during the research. Given the time constraint here, I'd love to continue this conversation with you after the session, if that's okay."</div>
+    <div class="zh">這是一個很好的視角，在研究中我們也有類似的討論。因為時間的關係，如果可以，我希望用會後的時間跟你有更多的討論。</div>
+    <div class="hint">↳ 講完後點頭微笑，主持人會自然接下一題。不要多解釋。</div>
+  </div>
+</div>
+
+<!-- ===== SHORT STALL PHRASES ===== -->
+<div class="cheatsheet">
+  <h2>⏱ Short stalls · 更短的緩衝句</h2>
+
+  <div class="short-stall"><b>1.</b>Let me make sure I understand it correctly...
+    <span class="zh">讓我確認一下我有沒有聽對...</span>
+  </div>
+  <div class="short-stall"><b>2.</b>Could you clarify what you mean by <span style="background:#fff3d9;padding:0 4px;border-radius:2px;font-style:normal">[keyword]</span>?
+    <span class="zh">你說的 [關鍵詞] 可以再說明一下嗎？（讓對方重講）</span>
+  </div>
+  <div class="short-stall"><b>3.</b>That's an aspect we thought carefully about — my best interpretation would be...
+    <span class="zh">這個部分我們有仔細思考過，我的看法會是...</span>
+  </div>
+  <div class="short-stall"><b>4.</b>I don't have data to directly address that, but the closest finding we have is...
+    <span class="zh">我沒有直接的數據可以回答，但我們最接近的發現是...</span>
+  </div>
 
   <div class="setup">
-    <b>SETUP</b> · Enable <b>Zoom Live Transcription</b> (View → Show Captions) so you can read the question. Keep phone next to laptop with <b>ChatGPT Voice Mode</b> ready — thesis loaded as Project — as backup. Wear one AirPod for private assistance if needed.
+    <b>SETUP</b>｜Zoom → View → <b>Show Captions</b>（開字幕能讀問題）
+    ｜手機開 <b>ChatGPT Voice Mode</b> 放旁邊（論文已載入 Project）
+    ｜戴一隻 AirPod 當私人提示器
   </div>
 </div>
 
@@ -128,7 +147,7 @@
   <a href="#s5">E · Design Practice</a>
   <a href="#s6">F · Limitations</a>
   <a href="#s7">G · Curveballs</a>
-  <span class="count">15 questions · <b>English</b></span>
+  <span class="count">15 questions · <b>中英對照</b></span>
 </nav>
 
 <!-- =============================================== -->
@@ -139,28 +158,46 @@
 
 <div class="qa critical">
   <div class="q">Why difference-analysis instead of the fidelity approach? Wouldn't a more human-like AI Persona be more useful?</div>
+  <div class="q-zh">為什麼是「差異分析取徑」而不是「擬真取徑」？越像真人的 AI Persona 不是更有用嗎？</div>
+
   <div class="a">
     <p>The fidelity approach presupposes that <b>humans are the standard AI should imitate</b>. In our data, AI Persona is <b>+43% on structural dimensions but -79% on authenticity dimensions</b> — this isn't a defect, it's a <b>structural difference</b>. Treating the gap as noise erases the signal.</p>
     <p>By analyzing the difference directly, we can position AI Persona as a <b>contrastive baseline</b> that makes the hesitation, contradiction, and emotional flow in human interviews <b>recognizable as cognitive signals rather than noise</b>.</p>
+  </div>
+  <div class="a-zh">
+    <p>擬真取徑預設「人是 AI 該模仿的標準」。但我們的資料顯示 AI 在結構性維度高 43%、真實性維度低 79%——這不是缺陷，是<b>結構性差異</b>。把差距當雜訊會抹掉訊號。</p>
+    <p>直接分析差異，可以把 AI Persona 定位成<b>對照基準</b>，讓真人訪談中的遲疑、矛盾、情緒流動被辨識為<b>認知訊號而非雜訊</b>。</p>
   </div>
   <div class="gambit"><b>opener</b>The fidelity approach quietly assumes the human is the target. We flip that — the difference itself is what's informative.</div>
 </div>
 
 <div class="qa">
   <div class="q">You call this "synthetic thinking" vs "experiential thinking." Isn't this just repackaging what we already know — that LLMs hallucinate?</div>
+  <div class="q-zh">你講「合成式思考」跟「經歷中的思考」——這不就是換個包裝在講 LLM 會幻覺嗎？</div>
+
   <div class="a">
     <p><b>Hallucination is about output accuracy</b>; synthetic thinking is about <b>cognitive process</b>. They're at different levels. Hallucination says the answer is wrong. Synthetic thinking describes how the answer is <b>assembled instantly from training patterns</b>, without the temporal, fragmented, emotion-permeated character of human cognition.</p>
     <p>This distinction matters because it reframes AI's over-completeness not as a flaw to fix, but as a <b>different mode of cognition</b> — which changes how we should use it in research.</p>
+  </div>
+  <div class="a-zh">
+    <p>幻覺是<b>輸出正確性</b>的問題；合成式思考是<b>認知過程</b>的描述——兩者不同層次。幻覺說答案錯了，合成式思考描述的是答案<b>如何從訓練模式即時組裝</b>，沒有真人認知的時間性、片段性、情緒滲透。</p>
+    <p>這個區分把 AI 的「過度完整」從缺陷重框成<b>不同的認知模式</b>——這會改變我們該怎麼在研究中使用它。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">Why do we need to interview an AI Persona at all — if we can just ask it for the answer directly?</div>
+  <div class="q-zh">為什麼要「訪談」AI Persona？如果它可以直接給答案，我直接問它不就好了？</div>
+
   <div class="a">
     <p>Two reasons. First, <b>interviewing it produces designerly artifacts</b> — narrative fragments, tone, hesitation patterns — that a direct Q&A wouldn't surface. Second, it makes the AI Persona <b>legible to a design team</b>, not just to the researcher. The team can meet the character in dialogue and form intuitions together.</p>
     <p>Direct Q&A gives you an answer; interviewing gives you a <b>character with which the team can build shared understanding</b>. That's still valuable, even if the character is AI.</p>
   </div>
-  <div class="risk"><b>risk</b>This is the sharpest question. Rehearse it. If they push, admit that direct-Q&A shortcuts many use cases, and reposition your contribution as "when the artifact of interviewing matters."</div>
+  <div class="a-zh">
+    <p>兩個理由。第一，訪談會產出<b>設計師需要的素材</b>——敘事片段、語氣、猶豫模式，直接 Q&A 不會有。第二，訪談讓 AI Persona<b>對設計團隊來說是可讀的角色</b>，不只是研究者的工具。團隊可以透過對話認識角色、一起建立直覺。</p>
+    <p>直接 Q&A 給你答案；訪談給你<b>一個角色，讓團隊可以圍繞它建立共識</b>。這仍然有價值，即使角色是 AI。</p>
+  </div>
+  <div class="risk"><b>risk</b>This is the sharpest question. If pushed, admit that direct-Q&A shortcuts many use cases, and reposition your contribution as "when the artifact of interviewing matters."</div>
 </div>
 
 </section>
@@ -173,26 +210,44 @@
 
 <div class="qa critical">
   <div class="q">Only 2 human participants — how can you make a comparison claim from that?</div>
+  <div class="q-zh">只有 2 位真人受訪者，這樣可以做比較嗎？</div>
+
   <div class="a">
     <p>This is a <b>qualitative structural analysis, not a statistical comparison</b>. Our unit of analysis isn't the person but the <b>segment</b> — three design concepts × four questions per person gave us 12 segments per participant. Combined with the six-dimension coding, that's 216 data points identifying structural patterns.</p>
     <p>The claim isn't "AI differs from all humans by 43%" — it's "in this comparable context, AI shows a consistently different cognitive profile that is worth investigating further."</p>
+  </div>
+  <div class="a-zh">
+    <p>這是<b>質性結構分析</b>不是統計比較。分析單位不是「人」而是「segment」——三個設計方案 × 四題 = 12 segments / 人。加上六維度編碼，共 216 個資料點識別結構性模式。</p>
+    <p>我們主張的不是「AI 跟所有人差 43%」，而是「在可比較的情境下，AI 展現一致的不同認知輪廓，值得進一步探討」。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">A single coder for the linguistic analysis — how do you defend the reliability?</div>
+  <div class="q-zh">語言分析只有你一個編碼者，信度怎麼確保？</div>
+
   <div class="a">
     <p>We acknowledge this is a limitation. Our mitigation: each of the six dimensions has <b>concrete behavioral indicators</b> — for example, C2 counts filler words per 100 words, C6 measures the time between question and reflection. Edge cases were re-anchored against prior examples to prevent drift.</p>
     <p>For future work, a second independent coder is the natural next step. But the effect sizes here (43% and -79%) are large enough that a second coder would likely reproduce the direction, if not the exact magnitude.</p>
+  </div>
+  <div class="a-zh">
+    <p>這是我們承認的限制。控制措施是：每個維度都有<b>具體行為指標</b>——例如 C2 算每百字語氣詞數、C6 測反思出現距離提問的時間差。邊界個案回看 anchor 校準避免漂移。</p>
+    <p>未來研究會加入第二位獨立編碼者。但目前效應量（43% 跟 -79%）夠大，第二編碼者應該會複製出方向，即使數字略有出入。</p>
   </div>
   <div class="gambit"><b>gambit</b>Acknowledge honestly, then reframe: large effects don't disappear under a second coder.</div>
 </div>
 
 <div class="qa">
   <div class="q">Your humans spoke over voice; your AI Persona typed. That's an unfair comparison — the medium alone would explain the differences.</div>
+  <div class="q-zh">你的真人用語音、AI 用打字——這比較不公平，媒介本身就能解釋差異。</div>
+
   <div class="a">
     <p>You're right that the medium is a confound, and we should surface that more clearly. But two observations: first, several of our authenticity markers — <b>emoji use in place of emotion words</b>, <b>zero latency to reflection</b>, <b>absence of self-repair</b> — reflect AI's response construction, not just the input modality.</p>
     <p>Second, this is exactly the kind of setup a designer would encounter today — a text-only AI vs a spoken interview — so the comparison reflects <b>ecological validity</b>. Still, testing an AI Persona in voice mode is important future work.</p>
+  </div>
+  <div class="a-zh">
+    <p>你說得對，媒介是 confound，這一點我們應該更清楚地說明。但兩個觀察：第一，我們幾個真實性指標——<b>用 emoji 代替情緒詞</b>、<b>零延遲反思</b>、<b>缺乏 self-repair</b>——反映的是 AI 的回應構成，不只是輸入方式。</p>
+    <p>第二，這正是設計師今天會遇到的實際情況——純文字 AI vs 語音訪談——所以這個比較反映<b>生態效度</b>。當然，未來把 AI Persona 放進語音模式測試是重要方向。</p>
   </div>
   <div class="risk"><b>risk</b>Don't deny it — concede the confound and reframe as ecological validity.</div>
 </div>
@@ -207,17 +262,29 @@
 
 <div class="qa">
   <div class="q">How does your six-dimension script differ from Park et al.'s generative agents in 2023?</div>
+  <div class="q-zh">你的六維度劇本跟 Park 2023 的 Generative Agents 差在哪？</div>
+
   <div class="a">
     <p>Three layers of difference. <b>Purpose</b> — Park's work simulated 25 agents interacting in a sandbox to produce emergent social behavior; ours builds one persona for a designer to interview in depth. <b>Framework layer</b> — Park provides an <b>agent runtime architecture</b> (memory-reflection-planning); ours provides a <b>persona construction methodology</b> for the researcher. Park's seed persona is a paragraph; ours is a systematic six-dimension framework.</p>
     <p><b>Linguistic style</b> — for Park, language style is an emergent property of the LLM; for us, it's a <b>controlled dimension</b> we intentionally source from community corpora. That's the deliberate researcher-side move.</p>
+  </div>
+  <div class="a-zh">
+    <p>三層差異。<b>目的</b>——Park 是模擬 25 個 agents 在沙盒的社群互動、產出湧現行為；我們建一個 persona 給設計師深度訪談。<b>框架層次</b>——Park 提供 <b>agent 運行架構</b>（memory-reflection-planning）；我們提供<b>研究者建 persona 的方法論</b>。Park 的 seed persona 只是一段文字；我們是系統化的六維度框架。</p>
+    <p><b>語言風格</b>——Park 讓語言風格是 LLM 的湧現屬性；我們把它獨立成<b>受控維度</b>，主動從社群語料蒐集。這是研究者端的介入。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">Recent work like PersonaCraft (Jung 2025) and Silicon Sampling (Argyle 2023) already generate personas at scale. What's new here?</div>
+  <div class="q-zh">最近 PersonaCraft (Jung 2025) 跟 Silicon Sampling (Argyle 2023) 都在做大規模 persona 生成，你的新意在哪？</div>
+
   <div class="a">
     <p>Those works focus on <b>generating personas at scale</b> or using LLMs to <b>simulate survey responses</b> — evaluated on fidelity, i.e., how closely they mirror real human data. Our contribution is orthogonal: instead of asking <b>"how close to human?"</b>, we ask <b>"where do they structurally diverge, and what does that gap mean for design research practice?"</b></p>
     <p>The novelty is in the <b>reframing</b>: AI Persona as a <b>contrastive baseline</b> rather than a substitute — which is actionable for design teams in a way "n = 1000 synthetic users" isn't.</p>
+  </div>
+  <div class="a-zh">
+    <p>那些研究專注在<b>大規模生成 persona</b> 或用 LLM <b>模擬問卷回應</b>——評估標準是擬真，也就是有多接近真人資料。我們的貢獻是正交的：不問「有多像真人」，而是問「<b>結構上在哪裡分歧？這個差距對設計研究實務意義何在？</b>」</p>
+    <p>新意在<b>重新框架</b>：AI Persona 是<b>對照基準</b>而非替代品——這對設計團隊是可行動的，而「n = 1000 synthetic users」不是。</p>
   </div>
 </div>
 
@@ -231,17 +298,29 @@
 
 <div class="qa">
   <div class="q">You claim "no better or worse" — but structural clarity is clearly a strength. Isn't your framing avoiding the hard question?</div>
+  <div class="q-zh">你說「無優劣之分」——但結構清晰明明就是優勢，你這樣說是不是在迴避難的問題？</div>
+
   <div class="a">
     <p>Structural clarity is a strength <b>for certain design tasks</b> — early exploration, hypothesis generation, concept testing. Authenticity is a strength <b>for others</b> — late-stage validation, uncovering unarticulated needs, building empathy. Neither dominates across all tasks.</p>
     <p>The "no better or worse" framing is <b>not neutrality — it's task-dependent value</b>. We're saying: match the mode to the task, don't rank the modes.</p>
+  </div>
+  <div class="a-zh">
+    <p>結構清晰在<b>某些設計任務</b>是優勢——前期探索、假設生成、概念測試。真實性在<b>其他任務</b>是優勢——後期驗證、發掘難以言說的需求、建立同理。沒有哪一個能通吃所有任務。</p>
+    <p>「無優劣之分」不是中立立場——是<b>價值取決於任務</b>。我們是說：把模式對到任務，不要排名兩種模式。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">Once LLMs improve, won't AI develop something like "experiential thinking" too? Your framework may age quickly.</div>
+  <div class="q-zh">LLM 未來會進步，AI 難道不會也發展出類似「經歷中的思考」？你的框架很快就會過時吧？</div>
+
   <div class="a">
     <p>The framework describes <b>current architectural realities</b>, not permanent limits. If future models genuinely develop temporal, embodied, emotion-permeated cognition, we'd need to re-evaluate.</p>
     <p>But note: many recent "more human-like" LLM efforts still <b>simulate hesitation</b> rather than experience it. Adding artificial delays or filler words doesn't change the underlying <b>synchronous-assembly cognition</b>. The distinction may be more architectural than trainable.</p>
+  </div>
+  <div class="a-zh">
+    <p>這個框架描述的是<b>當前架構的現實</b>，不是永久限制。如果未來模型真的發展出時間性、具身、情緒滲透的認知，我們需要重新評估。</p>
+    <p>但注意：最近很多「更像人」的 LLM 努力還是在<b>模擬猶豫</b>而不是真的經歷。加人造延遲或語氣詞不改變底層的<b>同步組裝式認知</b>。這個區別可能更是架構層次的，不是訓練層次的。</p>
   </div>
   <div class="gambit"><b>gambit</b>Concede on principle, then reassert: simulated hesitation ≠ experienced cognition.</div>
 </div>
@@ -256,17 +335,29 @@
 
 <div class="qa">
   <div class="q">Has any actual design team adopted your "AI breadth + human depth" model? Or is this still speculative?</div>
+  <div class="q-zh">有真的設計團隊用過你的「AI 廣度 + 真人深度」模式嗎？還是這只是推論？</div>
+
   <div class="a">
     <p>The complementary model is derived from our findings, and I don't yet have field-deployment evidence at scale. But <b>the pattern is already emerging in practice</b> — teams use AI to draft initial user hypotheses, then validate with a smaller number of human interviews.</p>
     <p>Our contribution is providing a <b>principled reason</b> for this split, based on the two modes of thinking — rather than treating it as a resource compromise.</p>
+  </div>
+  <div class="a-zh">
+    <p>這個互補模式是從我們的發現推導出來的，目前還沒有大規模的實地部署證據。但<b>這個模式已經在實務中浮現</b>——團隊用 AI 起草初步使用者假設，再用少量真人訪談驗證。</p>
+    <p>我們的貢獻是為這個分工<b>提供理論根據</b>（基於兩種思考模式）——而不是把它當作資源妥協。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">If designers start with AI Personas, aren't they baking in bias that shapes what they hear from real users later?</div>
+  <div class="q-zh">如果設計師先用 AI Persona，會不會產生偏見、影響後面聽真實使用者的方式？</div>
+
   <div class="a">
     <p>Yes — that's a real risk, and it's why the <b>critical stance</b> matters. In our PPS results, the credibility score was the lowest (3.67 / 4.17 out of 7). That's a <b>healthy signal</b> — testers were able to identify what AI was getting wrong.</p>
     <p>We recommend explicitly framing AI Persona output as <b>hypotheses to be tested, not conclusions</b> — which is how the "AI first, then human" sequence is meant to work. The AI's role is to <b>widen the search space</b>, not to define the answer.</p>
+  </div>
+  <div class="a-zh">
+    <p>對，這是真實的風險——所以<b>批判性立場</b>很重要。在我們的 PPS 結果裡，credibility 分數最低（3.67 / 4.17）。這是<b>健康的訊號</b>——測試者能辨識 AI 哪裡不對。</p>
+    <p>我們建議明確把 AI Persona 的產出當<b>待驗證的假設，不是結論</b>——這才是「AI 先、真人後」該有的運作方式。AI 的角色是<b>擴大探索空間</b>，不是定義答案。</p>
   </div>
 </div>
 
@@ -280,17 +371,29 @@
 
 <div class="qa">
   <div class="q">Your study is on Taiwanese Gen Z ETF investors. How does this generalize beyond that context?</div>
+  <div class="q-zh">你的研究只做台灣 Z 世代 ETF 投資者，怎麼推廣到其他情境？</div>
+
   <div class="a">
     <p>The <b>specific findings</b> — that Anne says "haha" as punctuation, that community language matters — are context-specific. But the <b>structural patterns</b> — AI's zero-latency reflection, absence of self-repair, over-complete narratives — are <b>architectural features of LLMs</b>, likely to generalize across languages and domains.</p>
     <p>Applying the six-dimension methodology to other contexts (healthcare, legal, grief work) is explicit future work — and would test whether the patterns hold.</p>
+  </div>
+  <div class="a-zh">
+    <p><b>具體發現</b>——Anne 用「哈哈」當標點、社群語言重要——是情境特定的。但<b>結構模式</b>——AI 零延遲反思、缺 self-repair、過度完整敘事——是 <b>LLM 的架構特徵</b>，應該可以跨語言跨領域推廣。</p>
+    <p>把六維度方法論應用到其他情境（醫療、法律、悲傷輔導）是明確的未來研究方向——會測試這些模式是否成立。</p>
   </div>
 </div>
 
 <div class="qa">
   <div class="q">LLMs move so fast — will your findings still be relevant in six months?</div>
+  <div class="q-zh">LLM 進步這麼快，你的發現半年後還有用嗎？</div>
+
   <div class="a">
     <p>The <b>specific effect sizes</b> may shift as models improve. But our findings are <b>a snapshot under specific technical conditions</b>, and we frame them that way.</p>
     <p>What we expect to persist is the <b>methodological approach</b> — using structural difference as a design-research lens — and the <b>conceptual framework</b> of synthetic vs experiential thinking. Even if AI closes the authenticity gap, the framework tells us <b>what to look for</b> to detect that shift.</p>
+  </div>
+  <div class="a-zh">
+    <p><b>具體的效應量</b>可能會隨模型進步而變。但我們的發現是<b>特定技術條件下的快照</b>，我們也是這樣定位它的。</p>
+    <p>我們預期會持續的是<b>方法論</b>——用結構性差異作為設計研究的視角——以及<b>概念框架</b>（合成式 vs 經歷中的思考）。即使 AI 縮小了真實性差距，框架能告訴我們<b>該觀察什麼</b>來偵測這個變化。</p>
   </div>
 </div>
 
@@ -304,9 +407,15 @@
 
 <div class="qa critical">
   <div class="q">If Anne is a "researcher-constructed artifact," how is she different from a stereotype? What makes her a persona and not a caricature?</div>
+  <div class="q-zh">如果 Anne 是「研究者建構的產物」，那她跟刻板印象差在哪？她憑什麼是 persona 而不是 caricature？</div>
+
   <div class="a">
     <p>The difference is <b>where the material comes from</b>. A stereotype pulls from cultural assumptions and researcher intuition. Anne is grounded in <b>secondary research (Gen Z ETF investor profiles) plus community corpora (30-50 first-person posts from PTT and Dcard)</b>. Her language, decision patterns, and emotional beats are traceable to source material.</p>
     <p>She's still a <b>researcher-mediated construction</b> — I don't hide that in the paper. But the mediation is <b>disciplined by real texts</b> rather than by imagination alone. That's the same discipline that separates a well-built traditional persona from a caricature.</p>
+  </div>
+  <div class="a-zh">
+    <p>差異在<b>素材來源</b>。刻板印象來自文化預設跟研究者直覺；Anne 奠基於<b>次級研究（Z 世代 ETF 投資者輪廓）+ 社群語料（30-50 則 PTT 跟 Dcard 第一人稱貼文）</b>。她的語言、決策模式、情緒節奏都可追溯到原始素材。</p>
+    <p>她仍然是<b>研究者中介的建構</b>——我在論文裡不遮掩這件事。但中介被<b>真實文本規訓</b>，不是靠想像。這也是好的傳統 persona 跟 caricature 的差別。</p>
   </div>
   <div class="gambit"><b>gambit</b>Own the construction, then defend the discipline.</div>
 </div>
@@ -314,10 +423,8 @@
 </section>
 
 <footer>
-  <b>15 questions · 5 stall phrases · print A4 for backup</b> — Cmd+P to print. Practice the openers out loud tonight.
+  <b>15 questions · 中英對照 · 2 strategies · 4 short stalls</b> — Practice the two strategy openers out loud tonight.
 </footer>
-
-<button class="print-hint" onclick="window.print()">🖨 Print A4</button>
 
 </div>
 </body>
