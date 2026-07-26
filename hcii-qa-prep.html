@@ -136,6 +136,11 @@
     ｜手機開 <b>ChatGPT Voice Mode</b> 放旁邊（論文已載入 Project）
     ｜戴一隻 AirPod 當私人提示器
   </div>
+  <div class="setup" style="margin-top:8px;border-color:var(--emerald);background:var(--emerald-soft)">
+    <b style="color:var(--emerald)">ANSWER PRINCIPLE</b>｜不要說 "Yes, you're right" 或 "Yes, this is..."（會被綁在對方的問法上）
+    ｜直接從<b>主題</b>開始講：「On [topic]...」「The way to handle X is...」「Three main differences. First...」
+    ｜這樣答案能同時 cover 不同問法的類似問題
+  </div>
 </div>
 
 <!-- ===== NAV ===== -->
@@ -227,12 +232,12 @@
   <div class="q-zh">語言分析只有你一個編碼者，信度怎麼確保？</div>
 
   <div class="a">
-    <p>Yes, that's a real limitation. To control it, <b>every dimension has a clear rule</b>. Like — C2 counts filler words per 100 words. C6 measures the time between question and reflection. For edge cases we compare back to earlier examples.</p>
-    <p>A second coder is the next step. But the effects are so big — <b>43% and 79%</b> — a second coder would likely see the same pattern.</p>
+    <p>On coding reliability — <b>every dimension has a clear rule</b>. Like — C2 counts filler words per 100 words. C6 measures the time between question and reflection. For edge cases we compare back to earlier examples.</p>
+    <p>A second coder would be the next step. But the effects are so big — <b>43% and 79%</b> — a second coder would likely see the same pattern.</p>
   </div>
   <div class="a-zh">
-    <p>這是我們承認的限制。控制措施是：每個維度都有<b>具體行為指標</b>——例如 C2 算每百字語氣詞數、C6 測反思出現距離提問的時間差。邊界個案回看 anchor 校準避免漂移。</p>
-    <p>未來研究會加入第二位獨立編碼者。但目前效應量（43% 跟 -79%）夠大，第二編碼者應該會複製出方向，即使數字略有出入。</p>
+    <p>編碼信度上——<b>每個維度都有明確的規則</b>。例如 C2 算每百字語氣詞數、C6 測反思出現距離提問的時間差。邊界個案回看 anchor 校準避免漂移。</p>
+    <p>加入第二位獨立編碼者會是下一步。但目前效應量（43% 跟 -79%）夠大，第二編碼者應該會看到相同的模式。</p>
   </div>
   <div class="gambit"><b>gambit</b>Acknowledge honestly, then reframe: large effects don't disappear under a second coder.</div>
 </div>
@@ -242,12 +247,12 @@
   <div class="q-zh">你的真人用語音、AI 用打字——這比較不公平，媒介本身就能解釋差異。</div>
 
   <div class="a">
-    <p>Yes, you're right. Voice versus text does matter. We should say this more clearly. But — using emoji for emotion, replying instantly, never correcting itself — these are <b>not about voice or text</b>. They are about <b>how AI builds an answer</b>.</p>
-    <p>And this setup — text AI, spoken humans — is what a designer would meet today. So the comparison is realistic. But yes, testing AI Persona in voice mode is on our list.</p>
+    <p>On the medium — voice versus text does matter. But some of what we see — using emoji for emotion, replying instantly, never correcting itself — these are <b>not about voice or text</b>. They are about <b>how AI builds an answer</b>.</p>
+    <p>And this setup — text AI, spoken humans — is what a designer would meet today. So the comparison is realistic. Testing AI Persona in voice mode is on our list for future work.</p>
   </div>
   <div class="a-zh">
-    <p>你說得對，媒介是 confound，這一點我們應該更清楚地說明。但兩個觀察：第一，我們幾個真實性指標——<b>用 emoji 代替情緒詞</b>、<b>零延遲反思</b>、<b>缺乏 self-repair</b>——反映的是 AI 的回應構成，不只是輸入方式。</p>
-    <p>第二，這正是設計師今天會遇到的實際情況——純文字 AI vs 語音訪談——所以這個比較反映<b>生態效度</b>。當然，未來把 AI Persona 放進語音模式測試是重要方向。</p>
+    <p>關於媒介——語音跟打字的差異確實存在。但我們看到的一些現象——<b>用 emoji 代替情緒詞</b>、<b>零延遲反思</b>、<b>缺乏 self-repair</b>——這些反映的是 <b>AI 建構回應的方式</b>，不只是輸入模態的差異。</p>
+    <p>另外，這個設定——純文字 AI vs 語音真人——正是設計師今天會遇到的實際情況，所以這個比較有實務意義。把 AI Persona 放進語音模式測試是未來研究的方向。</p>
   </div>
   <div class="risk"><b>risk</b>Don't deny it — concede the confound and reframe as ecological validity.</div>
 </div>
@@ -353,11 +358,11 @@
   <div class="q-zh">如果設計師先用 AI Persona，會不會產生偏見、影響後面聽真實使用者的方式？</div>
 
   <div class="a">
-    <p>Yes, this is a real risk. That's why <b>staying critical matters</b>. In our PPS results, credibility was actually the lowest — 3.67 and 4.17 out of 7. That's a <b>healthy sign</b>. Testers could tell what AI was getting wrong.</p>
+    <p>The way to handle bias is to <b>stay critical of the AI output</b>. In our PPS results, credibility was actually the lowest — 3.67 and 4.17 out of 7. That's a <b>healthy sign</b>. Testers could tell what AI was getting wrong.</p>
     <p>So we suggest treating AI output as <b>a hypothesis to test</b>. Not a conclusion. That's how "AI first, then human" should work. <b>AI opens the search. Humans define the answer.</b></p>
   </div>
   <div class="a-zh">
-    <p>對，這是真實的風險——所以<b>批判性立場</b>很重要。在我們的 PPS 結果裡，credibility 分數最低（3.67 / 4.17）。這是<b>健康的訊號</b>——測試者能辨識 AI 哪裡不對。</p>
+    <p>處理偏見的方式是<b>對 AI 產出保持批判</b>。在我們的 PPS 結果裡，credibility 分數最低（3.67 / 4.17）。這是<b>健康的訊號</b>——測試者能辨識 AI 哪裡不對。</p>
     <p>我們建議明確把 AI Persona 的產出當<b>待驗證的假設，不是結論</b>——這才是「AI 先、真人後」該有的運作方式。AI 的角色是<b>擴大探索空間</b>，不是定義答案。</p>
   </div>
 </div>
