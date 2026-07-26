@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HCII 2026 Q&A Prep · AI Persona vs Human Interviews</title>
+<style>
+  :root{
+    --bg:#f4efe4;--card:#faf6ec;--card2:#efe8d8;--line:rgba(40,30,20,.12);
+    --accent:#c8613b;--accent-soft:#e0a688;
+    --ink:#282420;--ink-2:#4a4139;--muted:#7a6f62;
+    --paper:#fff9ed;--warn:#a86a1f;--danger:#b04432;
+    --emerald:#3a7a5f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Helvetica Neue',ui-serif,'PingFang TC','Noto Sans TC',-apple-system,sans-serif;line-height:1.65;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:44px 28px 100px}
+
+  header{margin-bottom:28px;border-bottom:1.5px solid var(--ink);padding-bottom:20px}
+  header .kicker{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+  header h1{font-size:30px;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
+  header h1 .accent{color:var(--accent);font-style:italic}
+  header .meta{color:var(--muted);font-size:13.5px;margin-top:6px}
+
+  /* Alert box for stall phrases */
+  .cheatsheet{background:var(--paper);border:2px solid var(--accent);border-radius:10px;padding:20px 24px;margin-bottom:32px}
+  .cheatsheet h2{color:var(--accent);font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;font-family:'Inter',sans-serif}
+  .cheatsheet .stall{background:#fff;border-left:3px solid var(--accent);padding:10px 14px;margin-bottom:8px;font-size:14px;line-height:1.6;border-radius:0 4px 4px 0;font-style:italic}
+  .cheatsheet .stall b{color:var(--accent);font-style:normal;font-weight:700;margin-right:8px}
+  .cheatsheet .setup{background:#fff;border:1px dashed var(--accent-soft);padding:12px 16px;border-radius:6px;margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.7}
+  .cheatsheet .setup b{color:var(--emerald);font-weight:700}
+
+  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 28px;z-index:10;display:flex;gap:4px;overflow-x:auto;align-items:center;flex-wrap:wrap}
+  nav.toc a{color:var(--muted);text-decoration:none;font-size:12.5px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:.15s;font-weight:500}
+  nav.toc a:hover{color:var(--accent);background:var(--paper)}
+  nav.toc .count{margin-left:auto;color:var(--muted);font-size:12px}
+  nav.toc .count b{color:var(--ink);font-weight:700}
+
+  section{margin-bottom:44px;scroll-margin-top:70px}
+  section h2{color:var(--ink);font-size:22px;font-weight:700;margin-bottom:14px;font-family:ui-serif,serif;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  section h2 .idx{color:var(--accent);font-size:12px;font-weight:700;padding:2px 8px;border:1px solid var(--accent);border-radius:3px;letter-spacing:.14em;text-transform:uppercase}
+  section h2 .n{color:var(--muted);font-size:14px;margin-left:auto;font-weight:500}
+
+  .qa{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-bottom:14px;break-inside:avoid}
+  .qa .q{color:var(--ink);font-weight:700;font-size:15.5px;margin-bottom:12px;line-height:1.5;padding-left:32px;position:relative;font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.005em}
+  .qa .q::before{content:'Q';position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
+  .qa .a{color:var(--ink-2);font-size:14px;line-height:1.75;padding-left:32px;position:relative}
+  .qa .a::before{content:'A';position:absolute;left:0;top:0;background:var(--accent);color:#fff;font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
+  .qa .a b{color:var(--accent);font-weight:700}
+  .qa .a p{margin-bottom:8px}
+  .qa .a p:last-child{margin-bottom:0}
+  .qa .gambit{margin-top:12px;padding:10px 14px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.65;margin-left:32px;background:rgba(58,122,95,.08);border-left:2px solid var(--emerald);color:var(--ink-2);font-style:italic}
+  .qa .gambit b{color:var(--emerald);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10px;margin-right:8px;font-style:normal}
+  .qa .risk{margin-top:8px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:32px;background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
+  .qa .risk b{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px;color:var(--danger);margin-right:6px}
+
+  .qa.critical{background:var(--paper);border:1.5px solid var(--accent)}
+  .qa.critical .q::before{background:var(--accent);color:#fff}
+
+  .zh{color:var(--muted);font-size:12.5px;margin-top:4px;font-style:normal;font-family:'PingFang TC','Noto Sans TC',sans-serif}
+
+  footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--muted);font-size:12px;text-align:center}
+  footer b{color:var(--accent)}
+
+  .print-hint{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(200,97,59,.3);cursor:pointer;z-index:100;border:none;font-family:inherit}
+  .print-hint:hover{background:#a94f2c}
+
+  @page{size:A4 portrait;margin:12mm 14mm}
+  @media print{
+    html,body{background:#fff;color:#000;font-size:10pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .wrap{padding:0;max-width:100%}
+    nav.toc,.print-hint{display:none}
+    header{margin-bottom:4mm;padding-bottom:3mm;border-bottom:1px solid #333}
+    header h1{font-size:16pt;color:#000}
+    header h1 .accent{color:#c8613b}
+    .cheatsheet{border:1.5pt solid #c8613b;background:#fdf5eb;padding:4mm;margin-bottom:5mm;break-inside:avoid}
+    .cheatsheet h2{font-size:10pt;color:#c8613b}
+    .cheatsheet .stall{background:#fff;font-size:9pt;padding:2mm 3mm;margin-bottom:1.5mm}
+    .cheatsheet .setup{font-size:8.5pt;padding:2mm 3mm}
+    section{margin-bottom:6mm;break-inside:avoid-page}
+    section h2{font-size:12pt;color:#000;margin-bottom:3mm;break-after:avoid}
+    section h2 .idx{color:#c8613b;font-size:8pt;border-color:#c8613b}
+    section h2 .n{font-size:9pt;color:#666}
+    .qa{background:#fff;border:1px solid #bbb;padding:3mm 4mm;margin-bottom:3mm;border-radius:2mm;break-inside:avoid}
+    .qa .q{font-size:10.5pt;color:#000;padding-left:8mm}
+    .qa .q::before{background:#333;color:#fff;font-size:8pt}
+    .qa .a{font-size:9.5pt;color:#000;padding-left:8mm}
+    .qa .a::before{background:#c8613b;color:#fff;font-size:8pt}
+    .qa .a b{color:#c8613b}
+    .qa .gambit{background:#eef5f0;border-color:#3a7a5f;font-size:9pt;padding:2mm 3mm;margin-left:8mm}
+    .qa .gambit b{color:#3a7a5f}
+    .qa .risk{background:#faeeeb;border-color:#b04432;font-size:9pt;padding:2mm 3mm;margin-left:8mm}
+    .qa.critical{background:#fdf5eb;border-color:#c8613b}
+    footer{font-size:8pt}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">HCII 2026 · Q&A Prep</div>
+  <h1>When they ask, <span class="accent">you answer like this</span></h1>
+  <div class="meta">Chieh-An Chien (Joanne)｜NTUST Design｜Advisor: Prof. Hsuan-Hui Tang</div>
+  <div class="meta" style="margin-top:2px">15 anticipated questions · concise answers · time-buy gambits</div>
+</header>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="cheatsheet">
+  <h2>⏱ Buy time — these phrases first</h2>
+
+  <div class="stall"><b>1.</b>Thank you for that question — let me make sure I understand it correctly...</div>
+  <div class="stall"><b>2.</b>That's a really interesting point. Let me take a moment to answer that properly.</div>
+  <div class="stall"><b>3.</b>Could you clarify what you mean by <span style="background:#fff3d9;padding:0 4px;border-radius:2px">[keyword]</span>, just so I answer the right thing?</div>
+  <div class="stall"><b>4.</b>That's an aspect I hadn't fully considered in this study. Based on what we found, my best interpretation would be...</div>
+  <div class="stall"><b>5.</b>I don't have data to directly address that, but the closest finding we have is...</div>
+
+  <div class="setup">
+    <b>SETUP</b> · Enable <b>Zoom Live Transcription</b> (View → Show Captions) so you can read the question. Keep phone next to laptop with <b>ChatGPT Voice Mode</b> ready — thesis loaded as Project — as backup. Wear one AirPod for private assistance if needed.
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="toc">
+  <a href="#s1">A · Core Argument</a>
+  <a href="#s2">B · Method Rigor</a>
+  <a href="#s3">C · Related Work</a>
+  <a href="#s4">D · Two Modes</a>
+  <a href="#s5">E · Design Practice</a>
+  <a href="#s6">F · Limitations</a>
+  <a href="#s7">G · Curveballs</a>
+  <span class="count">15 questions · <b>English</b></span>
+</nav>
+
+<!-- =============================================== -->
+<!-- A · CORE ARGUMENT -->
+<!-- =============================================== -->
+<section id="s1">
+<h2><span class="idx">A</span> Core Argument · Difference-Analysis Positioning <span class="n">3 questions</span></h2>
+
+<div class="qa critical">
+  <div class="q">Why difference-analysis instead of the fidelity approach? Wouldn't a more human-like AI Persona be more useful?</div>
+  <div class="a">
+    <p>The fidelity approach presupposes that <b>humans are the standard AI should imitate</b>. In our data, AI Persona is <b>+43% on structural dimensions but -79% on authenticity dimensions</b> — this isn't a defect, it's a <b>structural difference</b>. Treating the gap as noise erases the signal.</p>
+    <p>By analyzing the difference directly, we can position AI Persona as a <b>contrastive baseline</b> that makes the hesitation, contradiction, and emotional flow in human interviews <b>recognizable as cognitive signals rather than noise</b>.</p>
+  </div>
+  <div class="gambit"><b>opener</b>The fidelity approach quietly assumes the human is the target. We flip that — the difference itself is what's informative.</div>
+</div>
+
+<div class="qa">
+  <div class="q">You call this "synthetic thinking" vs "experiential thinking." Isn't this just repackaging what we already know — that LLMs hallucinate?</div>
+  <div class="a">
+    <p><b>Hallucination is about output accuracy</b>; synthetic thinking is about <b>cognitive process</b>. They're at different levels. Hallucination says the answer is wrong. Synthetic thinking describes how the answer is <b>assembled instantly from training patterns</b>, without the temporal, fragmented, emotion-permeated character of human cognition.</p>
+    <p>This distinction matters because it reframes AI's over-completeness not as a flaw to fix, but as a <b>different mode of cognition</b> — which changes how we should use it in research.</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">Why do we need to interview an AI Persona at all — if we can just ask it for the answer directly?</div>
+  <div class="a">
+    <p>Two reasons. First, <b>interviewing it produces designerly artifacts</b> — narrative fragments, tone, hesitation patterns — that a direct Q&A wouldn't surface. Second, it makes the AI Persona <b>legible to a design team</b>, not just to the researcher. The team can meet the character in dialogue and form intuitions together.</p>
+    <p>Direct Q&A gives you an answer; interviewing gives you a <b>character with which the team can build shared understanding</b>. That's still valuable, even if the character is AI.</p>
+  </div>
+  <div class="risk"><b>risk</b>This is the sharpest question. Rehearse it. If they push, admit that direct-Q&A shortcuts many use cases, and reposition your contribution as "when the artifact of interviewing matters."</div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- B · METHOD RIGOR -->
+<!-- =============================================== -->
+<section id="s2">
+<h2><span class="idx">B</span> Method Rigor · Sample, Coder, Fairness <span class="n">3 questions</span></h2>
+
+<div class="qa critical">
+  <div class="q">Only 2 human participants — how can you make a comparison claim from that?</div>
+  <div class="a">
+    <p>This is a <b>qualitative structural analysis, not a statistical comparison</b>. Our unit of analysis isn't the person but the <b>segment</b> — three design concepts × four questions per person gave us 12 segments per participant. Combined with the six-dimension coding, that's 216 data points identifying structural patterns.</p>
+    <p>The claim isn't "AI differs from all humans by 43%" — it's "in this comparable context, AI shows a consistently different cognitive profile that is worth investigating further."</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">A single coder for the linguistic analysis — how do you defend the reliability?</div>
+  <div class="a">
+    <p>We acknowledge this is a limitation. Our mitigation: each of the six dimensions has <b>concrete behavioral indicators</b> — for example, C2 counts filler words per 100 words, C6 measures the time between question and reflection. Edge cases were re-anchored against prior examples to prevent drift.</p>
+    <p>For future work, a second independent coder is the natural next step. But the effect sizes here (43% and -79%) are large enough that a second coder would likely reproduce the direction, if not the exact magnitude.</p>
+  </div>
+  <div class="gambit"><b>gambit</b>Acknowledge honestly, then reframe: large effects don't disappear under a second coder.</div>
+</div>
+
+<div class="qa">
+  <div class="q">Your humans spoke over voice; your AI Persona typed. That's an unfair comparison — the medium alone would explain the differences.</div>
+  <div class="a">
+    <p>You're right that the medium is a confound, and we should surface that more clearly. But two observations: first, several of our authenticity markers — <b>emoji use in place of emotion words</b>, <b>zero latency to reflection</b>, <b>absence of self-repair</b> — reflect AI's response construction, not just the input modality.</p>
+    <p>Second, this is exactly the kind of setup a designer would encounter today — a text-only AI vs a spoken interview — so the comparison reflects <b>ecological validity</b>. Still, testing an AI Persona in voice mode is important future work.</p>
+  </div>
+  <div class="risk"><b>risk</b>Don't deny it — concede the confound and reframe as ecological validity.</div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- C · RELATED WORK -->
+<!-- =============================================== -->
+<section id="s3">
+<h2><span class="idx">C</span> Related Work Positioning <span class="n">2 questions</span></h2>
+
+<div class="qa">
+  <div class="q">How does your six-dimension script differ from Park et al.'s generative agents in 2023?</div>
+  <div class="a">
+    <p>Three layers of difference. <b>Purpose</b> — Park's work simulated 25 agents interacting in a sandbox to produce emergent social behavior; ours builds one persona for a designer to interview in depth. <b>Framework layer</b> — Park provides an <b>agent runtime architecture</b> (memory-reflection-planning); ours provides a <b>persona construction methodology</b> for the researcher. Park's seed persona is a paragraph; ours is a systematic six-dimension framework.</p>
+    <p><b>Linguistic style</b> — for Park, language style is an emergent property of the LLM; for us, it's a <b>controlled dimension</b> we intentionally source from community corpora. That's the deliberate researcher-side move.</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">Recent work like PersonaCraft (Jung 2025) and Silicon Sampling (Argyle 2023) already generate personas at scale. What's new here?</div>
+  <div class="a">
+    <p>Those works focus on <b>generating personas at scale</b> or using LLMs to <b>simulate survey responses</b> — evaluated on fidelity, i.e., how closely they mirror real human data. Our contribution is orthogonal: instead of asking <b>"how close to human?"</b>, we ask <b>"where do they structurally diverge, and what does that gap mean for design research practice?"</b></p>
+    <p>The novelty is in the <b>reframing</b>: AI Persona as a <b>contrastive baseline</b> rather than a substitute — which is actionable for design teams in a way "n = 1000 synthetic users" isn't.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- D · TWO MODES OF THINKING -->
+<!-- =============================================== -->
+<section id="s4">
+<h2><span class="idx">D</span> Synthetic vs Experiential Thinking <span class="n">2 questions</span></h2>
+
+<div class="qa">
+  <div class="q">You claim "no better or worse" — but structural clarity is clearly a strength. Isn't your framing avoiding the hard question?</div>
+  <div class="a">
+    <p>Structural clarity is a strength <b>for certain design tasks</b> — early exploration, hypothesis generation, concept testing. Authenticity is a strength <b>for others</b> — late-stage validation, uncovering unarticulated needs, building empathy. Neither dominates across all tasks.</p>
+    <p>The "no better or worse" framing is <b>not neutrality — it's task-dependent value</b>. We're saying: match the mode to the task, don't rank the modes.</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">Once LLMs improve, won't AI develop something like "experiential thinking" too? Your framework may age quickly.</div>
+  <div class="a">
+    <p>The framework describes <b>current architectural realities</b>, not permanent limits. If future models genuinely develop temporal, embodied, emotion-permeated cognition, we'd need to re-evaluate.</p>
+    <p>But note: many recent "more human-like" LLM efforts still <b>simulate hesitation</b> rather than experience it. Adding artificial delays or filler words doesn't change the underlying <b>synchronous-assembly cognition</b>. The distinction may be more architectural than trainable.</p>
+  </div>
+  <div class="gambit"><b>gambit</b>Concede on principle, then reassert: simulated hesitation ≠ experienced cognition.</div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- E · DESIGN PRACTICE -->
+<!-- =============================================== -->
+<section id="s5">
+<h2><span class="idx">E</span> Application to Design Practice <span class="n">2 questions</span></h2>
+
+<div class="qa">
+  <div class="q">Has any actual design team adopted your "AI breadth + human depth" model? Or is this still speculative?</div>
+  <div class="a">
+    <p>The complementary model is derived from our findings, and I don't yet have field-deployment evidence at scale. But <b>the pattern is already emerging in practice</b> — teams use AI to draft initial user hypotheses, then validate with a smaller number of human interviews.</p>
+    <p>Our contribution is providing a <b>principled reason</b> for this split, based on the two modes of thinking — rather than treating it as a resource compromise.</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">If designers start with AI Personas, aren't they baking in bias that shapes what they hear from real users later?</div>
+  <div class="a">
+    <p>Yes — that's a real risk, and it's why the <b>critical stance</b> matters. In our PPS results, the credibility score was the lowest (3.67 / 4.17 out of 7). That's a <b>healthy signal</b> — testers were able to identify what AI was getting wrong.</p>
+    <p>We recommend explicitly framing AI Persona output as <b>hypotheses to be tested, not conclusions</b> — which is how the "AI first, then human" sequence is meant to work. The AI's role is to <b>widen the search space</b>, not to define the answer.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- F · LIMITATIONS & GENERALIZABILITY -->
+<!-- =============================================== -->
+<section id="s6">
+<h2><span class="idx">F</span> Limitations & Generalizability <span class="n">2 questions</span></h2>
+
+<div class="qa">
+  <div class="q">Your study is on Taiwanese Gen Z ETF investors. How does this generalize beyond that context?</div>
+  <div class="a">
+    <p>The <b>specific findings</b> — that Anne says "haha" as punctuation, that community language matters — are context-specific. But the <b>structural patterns</b> — AI's zero-latency reflection, absence of self-repair, over-complete narratives — are <b>architectural features of LLMs</b>, likely to generalize across languages and domains.</p>
+    <p>Applying the six-dimension methodology to other contexts (healthcare, legal, grief work) is explicit future work — and would test whether the patterns hold.</p>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">LLMs move so fast — will your findings still be relevant in six months?</div>
+  <div class="a">
+    <p>The <b>specific effect sizes</b> may shift as models improve. But our findings are <b>a snapshot under specific technical conditions</b>, and we frame them that way.</p>
+    <p>What we expect to persist is the <b>methodological approach</b> — using structural difference as a design-research lens — and the <b>conceptual framework</b> of synthetic vs experiential thinking. Even if AI closes the authenticity gap, the framework tells us <b>what to look for</b> to detect that shift.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- =============================================== -->
+<!-- G · CURVEBALLS -->
+<!-- =============================================== -->
+<section id="s7">
+<h2><span class="idx">G</span> Curveballs · Unexpected Angles <span class="n">1 question</span></h2>
+
+<div class="qa critical">
+  <div class="q">If Anne is a "researcher-constructed artifact," how is she different from a stereotype? What makes her a persona and not a caricature?</div>
+  <div class="a">
+    <p>The difference is <b>where the material comes from</b>. A stereotype pulls from cultural assumptions and researcher intuition. Anne is grounded in <b>secondary research (Gen Z ETF investor profiles) plus community corpora (30-50 first-person posts from PTT and Dcard)</b>. Her language, decision patterns, and emotional beats are traceable to source material.</p>
+    <p>She's still a <b>researcher-mediated construction</b> — I don't hide that in the paper. But the mediation is <b>disciplined by real texts</b> rather than by imagination alone. That's the same discipline that separates a well-built traditional persona from a caricature.</p>
+  </div>
+  <div class="gambit"><b>gambit</b>Own the construction, then defend the discipline.</div>
+</div>
+
+</section>
+
+<footer>
+  <b>15 questions · 5 stall phrases · print A4 for backup</b> — Cmd+P to print. Practice the openers out loud tonight.
+</footer>
+
+<button class="print-hint" onclick="window.print()">🖨 Print A4</button>
+
+</div>
+</body>
+</html>
