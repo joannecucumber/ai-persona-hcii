@@ -14,68 +14,95 @@
     --deflect:#6b4a8c;--deflect-soft:#efe8f5;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Helvetica Neue',ui-serif,'PingFang TC','Noto Sans TC',-apple-system,sans-serif;line-height:1.65;font-size:15px}
-  .wrap{max-width:960px;margin:0 auto;padding:44px 28px 100px}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Helvetica Neue',ui-serif,'PingFang TC','Noto Sans TC',-apple-system,sans-serif;line-height:1.55;font-size:14px}
+  .wrap{max-width:1440px;margin:0 auto;padding:24px 28px 60px}
 
-  header{margin-bottom:24px;border-bottom:1.5px solid var(--ink);padding-bottom:18px}
-  header .kicker{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
-  header h1{font-size:30px;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
+  header{margin-bottom:16px;border-bottom:1.5px solid var(--ink);padding-bottom:12px}
+  header .kicker{color:var(--muted);font-weight:600;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:6px}
+  header h1{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:4px;color:var(--ink);font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.01em}
   header h1 .accent{color:var(--accent);font-style:italic}
-  header .meta{color:var(--muted);font-size:13.5px;margin-top:6px}
+  header .meta{color:var(--muted);font-size:12.5px;margin-top:2px}
 
-  /* ===== Two-strategy top bar ===== */
-  .strategies{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
-  .strategy{border-radius:10px;padding:18px 20px;font-size:14px;line-height:1.6}
-  .strategy.can{background:var(--emerald-soft);border:2px solid var(--emerald)}
-  .strategy.cant{background:var(--deflect-soft);border:2px solid var(--deflect)}
-  .strategy h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
+  /* ===== Top row: 5 dashboard tiles ===== */
+  .dashboard{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+  @media (max-width:1200px){.dashboard{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:800px){.dashboard{grid-template-columns:1fr}}
+
+  .strategy,.cheatsheet{border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.45;margin:0}
+  .strategy.can{background:var(--emerald-soft);border:1.5px solid var(--emerald)}
+  .strategy.cant{background:var(--deflect-soft);border:1.5px solid var(--deflect)}
+  .cheatsheet.stalls{background:var(--paper);border:1.5px solid var(--accent)}
+  .cheatsheet.hear{background:#fff8e8;border:1.5px solid var(--warn)}
+  .cheatsheet.universal{background:var(--emerald-soft);border:1.5px solid var(--emerald)}
+
+  .strategy h3,.cheatsheet h2{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-family:'Inter',sans-serif}
   .strategy.can h3{color:var(--emerald)}
   .strategy.cant h3{color:var(--deflect)}
-  .strategy .en{color:var(--ink);font-style:italic;padding:10px 12px;background:#fff;border-radius:6px;margin-bottom:8px;line-height:1.55}
-  .strategy .zh{color:var(--muted);font-size:12.5px;padding-left:12px;border-left:2px solid rgba(0,0,0,.08);line-height:1.7;font-family:'PingFang TC','Noto Sans TC',sans-serif}
-  .strategy .hint{margin-top:10px;font-size:12px;color:var(--ink-2);font-family:'PingFang TC','Noto Sans TC',sans-serif}
-  .strategy.can .hint{color:var(--emerald)}
-  .strategy.cant .hint{color:var(--deflect)}
+  .cheatsheet.stalls h2{color:var(--accent)}
+  .cheatsheet.hear h2{color:var(--warn)}
+  .cheatsheet.universal h2{color:var(--emerald)}
 
-  /* ===== Cheatsheet for short stalls ===== */
-  .cheatsheet{background:var(--paper);border:1.5px solid var(--accent);border-radius:10px;padding:16px 22px;margin-bottom:26px}
-  .cheatsheet h2{color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-family:'Inter',sans-serif}
-  .cheatsheet .short-stall{background:#fff;border-left:2px solid var(--accent);padding:7px 12px;margin-bottom:5px;font-size:13px;line-height:1.5;border-radius:0 4px 4px 0;font-style:italic;color:var(--ink)}
-  .cheatsheet .short-stall b{color:var(--accent);font-style:normal;font-weight:700;margin-right:6px;font-size:11px}
-  .cheatsheet .zh{color:var(--muted);font-size:12px;font-style:normal;font-family:'PingFang TC','Noto Sans TC',sans-serif;margin-top:2px;display:block}
-  .cheatsheet .setup{background:#fff;border:1px dashed var(--accent-soft);padding:10px 14px;border-radius:6px;margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.7;font-family:'PingFang TC','Noto Sans TC',sans-serif}
-  .cheatsheet .setup b{color:var(--emerald);font-weight:700}
+  .strategy .en{color:var(--ink);font-style:italic;padding:6px 8px;background:#fff;border-radius:4px;margin-bottom:4px;font-size:11.5px;line-height:1.4}
+  .strategy .zh{color:var(--muted);font-size:11px;line-height:1.55;font-family:'PingFang TC','Noto Sans TC',sans-serif;padding-left:2px}
+  .strategy .hint{margin-top:4px;font-size:10.5px;color:var(--ink-2);font-family:'PingFang TC','Noto Sans TC',sans-serif;line-height:1.4}
 
-  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 28px;margin:0 -28px 28px;z-index:10;display:flex;gap:4px;overflow-x:auto;align-items:center;flex-wrap:wrap}
-  nav.toc a{color:var(--muted);text-decoration:none;font-size:12.5px;padding:6px 12px;border-radius:4px;white-space:nowrap;transition:.15s;font-weight:500}
+  .cheatsheet details{margin-bottom:4px}
+  .cheatsheet details summary{cursor:pointer;font-size:11px;font-weight:700;color:var(--ink-2);padding:3px 0;list-style:none;position:relative;padding-left:12px}
+  .cheatsheet details summary::before{content:'▸';position:absolute;left:0;top:3px;font-size:10px;color:var(--muted)}
+  .cheatsheet details[open] summary::before{content:'▾'}
+  .cheatsheet details summary:hover{color:var(--accent)}
+  .cheatsheet.hear details summary:hover{color:var(--warn)}
+  .cheatsheet.universal details summary:hover{color:var(--emerald)}
+  .cheatsheet details summary .zh-tag{color:var(--muted);font-weight:500;font-size:10.5px;margin-left:4px;font-family:'PingFang TC','Noto Sans TC',sans-serif}
+
+  .cheatsheet .short-stall{background:#fff;padding:5px 8px;margin:3px 0;font-size:11px;line-height:1.45;border-radius:3px;font-style:italic;color:var(--ink);border-left:2px solid rgba(0,0,0,.1)}
+  .cheatsheet.stalls .short-stall{border-left-color:var(--accent)}
+  .cheatsheet.hear .short-stall{border-left-color:var(--warn)}
+  .cheatsheet.universal .short-stall{border-left-color:var(--emerald)}
+  .cheatsheet .short-stall b{font-style:normal;font-weight:700;margin-right:4px;font-size:10px}
+  .cheatsheet.stalls .short-stall b{color:var(--accent)}
+  .cheatsheet.hear .short-stall b{color:var(--warn)}
+  .cheatsheet.universal .short-stall b{color:var(--emerald)}
+  .cheatsheet .short-stall .zh{display:block;color:var(--muted);font-size:10.5px;font-style:normal;font-family:'PingFang TC','Noto Sans TC',sans-serif;margin-top:1px}
+
+  .cheatsheet .setup{background:#fff;padding:6px 8px;border-radius:4px;margin-top:6px;font-size:10.5px;color:var(--ink-2);line-height:1.5;font-family:'PingFang TC','Noto Sans TC',sans-serif;border:1px dashed rgba(0,0,0,.15)}
+  .cheatsheet .setup b{font-weight:700}
+
+  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:8px 16px;margin:0 -28px 16px;z-index:10;display:flex;gap:2px;overflow-x:auto;align-items:center;flex-wrap:wrap}
+  nav.toc a{color:var(--muted);text-decoration:none;font-size:11.5px;padding:4px 10px;border-radius:3px;white-space:nowrap;transition:.15s;font-weight:500}
   nav.toc a:hover{color:var(--accent);background:var(--paper)}
-  nav.toc .count{margin-left:auto;color:var(--muted);font-size:12px}
+  nav.toc .count{margin-left:auto;color:var(--muted);font-size:11px}
   nav.toc .count b{color:var(--ink);font-weight:700}
 
-  section{margin-bottom:44px;scroll-margin-top:70px}
-  section h2{color:var(--ink);font-size:22px;font-weight:700;margin-bottom:14px;font-family:ui-serif,serif;letter-spacing:-.01em;display:flex;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-  section h2 .idx{color:var(--accent);font-size:12px;font-weight:700;padding:2px 8px;border:1px solid var(--accent);border-radius:3px;letter-spacing:.14em;text-transform:uppercase}
-  section h2 .n{color:var(--muted);font-size:14px;margin-left:auto;font-weight:500}
+  section{margin-bottom:20px;scroll-margin-top:60px}
+  section h2{color:var(--ink);font-size:16px;font-weight:700;margin-bottom:10px;font-family:ui-serif,serif;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  section h2 .idx{color:var(--accent);font-size:10.5px;font-weight:700;padding:2px 7px;border:1px solid var(--accent);border-radius:3px;letter-spacing:.14em;text-transform:uppercase}
+  section h2 .n{color:var(--muted);font-size:11.5px;margin-left:auto;font-weight:500}
 
-  .qa{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:16px}
-  .qa .q{color:var(--ink);font-weight:700;font-size:15.5px;margin-bottom:6px;line-height:1.5;padding-left:34px;position:relative;font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.005em}
-  .qa .q::before{content:'Q';position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
-  .qa .q-zh{color:var(--muted);font-size:13px;margin-bottom:14px;padding-left:34px;font-family:'PingFang TC','Noto Sans TC',sans-serif;line-height:1.55;font-weight:500}
+  /* ===== QA 3-column grid ===== */
+  .qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media (max-width:1200px){.qa-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:800px){.qa-grid{grid-template-columns:1fr}}
 
-  .qa .a{color:var(--ink);font-size:14.5px;line-height:1.75;padding-left:34px;position:relative;margin-top:10px}
-  .qa .a::before{content:'A';position:absolute;left:0;top:0;background:var(--accent);color:#fff;font-family:ui-serif,serif;font-size:12px;font-weight:800;padding:2px 9px;border-radius:3px}
+  .qa{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:0;display:flex;flex-direction:column}
+  .qa .q{color:var(--ink);font-weight:700;font-size:12.5px;margin-bottom:4px;line-height:1.4;padding-left:22px;position:relative;font-family:ui-serif,'Times New Roman',serif;letter-spacing:-.005em}
+  .qa .q::before{content:'Q';position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:ui-serif,serif;font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:2px}
+  .qa .q-zh{color:var(--muted);font-size:11px;margin-bottom:8px;padding-left:22px;font-family:'PingFang TC','Noto Sans TC',sans-serif;line-height:1.5;font-weight:500}
+
+  .qa .a{color:var(--ink);font-size:12px;line-height:1.6;padding-left:22px;position:relative;margin-top:6px}
+  .qa .a::before{content:'A';position:absolute;left:0;top:0;background:var(--accent);color:#fff;font-family:ui-serif,serif;font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:2px}
   .qa .a b{color:var(--accent);font-weight:700}
-  .qa .a p{margin-bottom:8px}
+  .qa .a p{margin-bottom:5px}
   .qa .a p:last-child{margin-bottom:0}
-  .qa .a-zh{margin-left:34px;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.02);border-left:2px solid rgba(0,0,0,.1);border-radius:0 4px 4px 0;font-family:'PingFang TC','Noto Sans TC',sans-serif;font-size:13px;line-height:1.75;color:var(--muted)}
+  .qa .a-zh{margin-left:22px;margin-top:5px;padding:6px 8px;background:rgba(0,0,0,.02);border-left:2px solid rgba(0,0,0,.1);border-radius:0 3px 3px 0;font-family:'PingFang TC','Noto Sans TC',sans-serif;font-size:11px;line-height:1.6;color:var(--muted)}
   .qa .a-zh b{color:var(--ink-2);font-weight:600}
-  .qa .a-zh p{margin-bottom:6px}
+  .qa .a-zh p{margin-bottom:4px}
   .qa .a-zh p:last-child{margin-bottom:0}
 
-  .qa .gambit{margin-top:12px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:34px;background:rgba(58,122,95,.08);border-left:2px solid var(--emerald);color:var(--ink-2);font-style:italic}
-  .qa .gambit b{color:var(--emerald);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:10px;margin-right:8px;font-style:normal}
-  .qa .risk{margin-top:8px;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.6;margin-left:34px;background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
-  .qa .risk b{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10px;color:var(--danger);margin-right:6px}
+  .qa .gambit{margin-top:6px;padding:5px 8px;border-radius:0 3px 3px 0;font-size:10.5px;line-height:1.45;margin-left:22px;background:rgba(58,122,95,.08);border-left:2px solid var(--emerald);color:var(--ink-2);font-style:italic}
+  .qa .gambit b{color:var(--emerald);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:9px;margin-right:5px;font-style:normal}
+  .qa .risk{margin-top:5px;padding:5px 8px;border-radius:0 3px 3px 0;font-size:10.5px;line-height:1.45;margin-left:22px;background:rgba(176,68,50,.06);border-left:2px solid var(--danger);color:var(--ink-2)}
+  .qa .risk b{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:9px;color:var(--danger);margin-right:5px}
 
   .qa.critical{background:var(--paper);border:1.5px solid var(--accent)}
   .qa.critical .q::before{background:var(--accent);color:#fff}
@@ -97,194 +124,82 @@
   <div class="meta" style="margin-top:2px">15 anticipated questions · bilingual · buy-time gambits</div>
 </header>
 
-<!-- ===== TWO STRATEGIES ===== -->
-<div class="strategies">
+<!-- ===== TOP DASHBOARD · 5 tiles ===== -->
+<div class="dashboard">
+  <!-- Tile 1: Can answer -->
   <div class="strategy can">
-    <h3>✅ Can answer · 先拖時間再答</h3>
-    <div class="en">"Thank you for that question — that's actually something we thought a lot about during the study. Let me walk you through how we approached it."</div>
-    <div class="zh">感謝這個問題，這其實是我們研究過程中反覆思考的部分。讓我從我們的做法談起。</div>
-    <div class="hint">↳ 講完這句後，眼睛掃到下面對應題目，開始 paraphrase 英文 A。</div>
+    <h3>✅ Can answer 可以答</h3>
+    <div class="en">"Thank you for that question — that's actually something we thought a lot about. Let me walk you through how we approached it."</div>
+    <div class="zh">感謝這個問題，這其實是我們反覆思考過的部分。讓我從做法談起。</div>
+    <div class="hint">↳ 講完 → 掃到下面對應題目照答</div>
   </div>
 
+  <!-- Tile 2: Can't answer -->
   <div class="strategy cant">
-    <h3>🛟 Can't answer · 優雅轉場</h3>
-    <div class="en">"That's a really valuable perspective — we did discuss similar directions during the research. Given the time constraint here, I'd love to continue this conversation with you after the session, if that's okay."</div>
-    <div class="zh">這是一個很好的視角，在研究中我們也有類似的討論。因為時間的關係，如果可以，我希望用會後的時間跟你有更多的討論。</div>
-    <div class="hint">↳ 講完後點頭微笑，主持人會自然接下一題。不要多解釋。</div>
+    <h3>🛟 Can't answer 不會答</h3>
+    <div class="en">"That's a really valuable perspective — we did discuss similar directions. Given the time constraint, I'd love to continue this after the session."</div>
+    <div class="zh">這是很好的視角，研究中也有類似討論。因為時間關係，希望會後跟你有更多討論。</div>
+    <div class="hint">↳ 講完點頭微笑，主持人會接下題</div>
+  </div>
+
+  <!-- Tile 3: Short stalls -->
+  <div class="cheatsheet stalls">
+    <h2>⏱ Short stalls 短緩衝</h2>
+    <div class="short-stall">Let me make sure I understand it correctly...<span class="zh">讓我確認一下我有沒有聽對</span></div>
+    <div class="short-stall">Could you clarify what you mean by [X]?<span class="zh">[X] 可以再說明一下嗎？</span></div>
+    <div class="short-stall">That's an aspect we thought carefully about...<span class="zh">這個部分我們有仔細思考過...</span></div>
+    <div class="short-stall">The closest finding we have is...<span class="zh">我們最接近的發現是...</span></div>
+    <div class="setup"><b>SETUP</b>｜Zoom Captions 開｜手機開 ChatGPT Voice Mode｜AirPod 一隻</div>
+  </div>
+
+  <!-- Tile 4: Can't hear -->
+  <div class="cheatsheet hear">
+    <h2>🎧 Can't hear 聽不清楚</h2>
+    <details open><summary>① Blame audio 怪音訊</summary>
+      <div class="short-stall">Sorry, the audio broke up — could you repeat?<span class="zh">音訊有點斷，可以再說一次嗎？</span></div>
+      <div class="short-stall">I lost you for a second — say that again?<span class="zh">我剛沒聽到，可以再說嗎？</span></div>
+    </details>
+    <details><summary>② Confirm 確認</summary>
+      <div class="short-stall">Just to confirm — you're asking about [X]?<span class="zh">確認一下——你在問 [X] 嗎？</span></div>
+      <div class="short-stall">If I heard correctly, you're asking [X] — right?<span class="zh">如果聽對的話你問的是 [X]，對嗎？</span></div>
+    </details>
+    <details><summary>③ Rephrase 換說法</summary>
+      <div class="short-stall">Would you mind rephrasing?<span class="zh">可以換個方式問嗎？</span></div>
+      <div class="short-stall"><b>Could you type the question in the chat?</b><span class="zh">可以打在聊天室嗎？(最強招)</span></div>
+    </details>
+    <details><summary>④ Pivot 轉向</summary>
+      <div class="short-stall">Are you asking about [A] or [B]?<span class="zh">你是在問 [A] 還是 [B]？</span></div>
+      <div class="short-stall">Could we discuss this after the session?<span class="zh">可以會後討論嗎？(核彈選項)</span></div>
+    </details>
+  </div>
+
+  <!-- Tile 5: Universal patterns -->
+  <div class="cheatsheet universal">
+    <h2>🎯 Universal 萬用</h2>
+    <details open><summary>① Topic opener 主題開場</summary>
+      <div class="short-stall">On [topic], the way we think about it is...<span class="zh">關於 [主題]，我們的看法是...</span></div>
+      <div class="short-stall">There are two parts to this. First... Second...<span class="zh">這裡有兩個部分。第一... 第二...</span></div>
+      <div class="short-stall">What we found in the data is...<span class="zh">我們在資料中發現的是...</span></div>
+    </details>
+    <details><summary>② Agree + pivot 承認轉場</summary>
+      <div class="short-stall">That's a fair concern. Where we land is...<span class="zh">這是合理的顧慮。我們的立場是...</span></div>
+      <div class="short-stall">There's truth to that. What we add is...<span class="zh">確實有這個部分。我們補上的是...</span></div>
+      <div class="short-stall">I'd frame it a bit differently. Instead of X, we're doing Y.<span class="zh">我會換個角度看。不是 X，是 Y。</span></div>
+    </details>
+    <details><summary>③ Not sure 不確定</summary>
+      <div class="short-stall">I don't have a definitive answer. My best interpretation would be...<span class="zh">我沒有確定答案。我目前看法是...</span></div>
+      <div class="short-stall">We haven't tested that directly. Based on what we did find...<span class="zh">這個我們沒直接測。但根據發現...</span></div>
+    </details>
+    <details><summary>④ Wrap-up 收尾</summary>
+      <div class="short-stall">Does that address your question?<span class="zh">這樣有回答到你的問題嗎？</span></div>
+      <div class="short-stall">Happy to go deeper if useful.<span class="zh">如果有幫助可以再深入。</span></div>
+    </details>
   </div>
 </div>
 
-<!-- ===== SHORT STALL PHRASES ===== -->
-<div class="cheatsheet">
-  <h2>⏱ Short stalls · 更短的緩衝句</h2>
-
-  <div class="short-stall"><b>1.</b>Let me make sure I understand it correctly...
-    <span class="zh">讓我確認一下我有沒有聽對...</span>
-  </div>
-  <div class="short-stall"><b>2.</b>Could you clarify what you mean by <span style="background:#fff3d9;padding:0 4px;border-radius:2px;font-style:normal">[keyword]</span>?
-    <span class="zh">你說的 [關鍵詞] 可以再說明一下嗎？（讓對方重講）</span>
-  </div>
-  <div class="short-stall"><b>3.</b>That's an aspect we thought carefully about — my best interpretation would be...
-    <span class="zh">這個部分我們有仔細思考過，我的看法會是...</span>
-  </div>
-  <div class="short-stall"><b>4.</b>I don't have data to directly address that, but the closest finding we have is...
-    <span class="zh">我沒有直接的數據可以回答，但我們最接近的發現是...</span>
-  </div>
-
-  <div class="setup">
-    <b>SETUP</b>｜Zoom → View → <b>Show Captions</b>（開字幕能讀問題）
-    ｜手機開 <b>ChatGPT Voice Mode</b> 放旁邊（論文已載入 Project）
-    ｜戴一隻 AirPod 當私人提示器
-  </div>
-  <div class="setup" style="margin-top:8px;border-color:var(--emerald);background:var(--emerald-soft)">
-    <b style="color:var(--emerald)">ANSWER PRINCIPLE</b>｜不要說 "Yes, you're right" 或 "Yes, this is..."（會被綁在對方的問法上）
-    ｜直接從<b>主題</b>開始講：「On [topic]...」「The way to handle X is...」「Three main differences. First...」
-    ｜這樣答案能同時 cover 不同問法的類似問題
-  </div>
-</div>
-
-<!-- ===== CANT HEAR / CANT UNDERSTAND ===== -->
-<div class="cheatsheet" style="border-color:var(--warn);background:#fff8e8">
-  <h2 style="color:var(--warn)">🎧 聽不清楚題目 · Can't Hear / Understand</h2>
-
-  <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:10px;font-family:'PingFang TC','Noto Sans TC',sans-serif">
-    <b>國際會議 Q&A 讓對方重講是完全 OK 的</b>——委員自己也常這樣做。不要硬答。四種分級策略，從輕到重使用。
-  </div>
-
-  <!-- Level 1: Blame the tech -->
-  <div style="margin-bottom:12px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--warn);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">① Blame the audio · 怪音訊（最好用）</div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">A</b>Sorry, the audio broke up a little — could you repeat that?
-      <span class="zh">抱歉音訊有點斷，可以再說一次嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">B</b>I lost you for a second — could you say that again?
-      <span class="zh">我剛剛沒聽到，可以再說一次嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">C</b>Sorry, could you speak a bit closer to the mic?
-      <span class="zh">抱歉，可以離麥克風近一點嗎？</span>
-    </div>
-  </div>
-
-  <!-- Level 2: Confirm what you heard -->
-  <div style="margin-bottom:12px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--warn);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">② Confirm · 確認你聽到什麼（同時買時間）</div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">A</b>Just to confirm — you're asking about <span style="background:#fff3d9;padding:0 4px">[X]</span>?
-      <span class="zh">確認一下——你是在問 [X] 嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">B</b>So the question is about <span style="background:#fff3d9;padding:0 4px">[X]</span>, right?
-      <span class="zh">所以問題是關於 [X]，對嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">C</b>If I heard you correctly, you're asking <span style="background:#fff3d9;padding:0 4px">[X]</span> — is that right?
-      <span class="zh">如果我聽對的話，你問的是 [X]，對嗎？</span>
-    </div>
-  </div>
-
-  <!-- Level 3: Ask to rephrase -->
-  <div style="margin-bottom:12px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--warn);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">③ Rephrase · 請對方換句話說</div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">A</b>Would you mind rephrasing? I want to make sure I answer it well.
-      <span class="zh">可以換個方式問嗎？我想確保我回答到位。</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">B</b>Could you break it down into the key point?
-      <span class="zh">可以拆解成核心問題嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">C</b>Could you type the question in the chat as well?
-      <span class="zh">可以把問題打在聊天室嗎？</span> ← <b>最強招</b>
-    </div>
-  </div>
-
-  <!-- Level 4: Pivot to something you can talk about -->
-  <div style="padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--warn);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">④ Pivot · 完全聽不懂就轉向你能談的</div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">A</b>I want to make sure I understand — are you asking about <span style="background:#fff3d9;padding:0 4px">[topic A]</span> or <span style="background:#fff3d9;padding:0 4px">[topic B]</span>?
-      <span class="zh">我想確認——你是在問 [主題 A] 還是 [主題 B]？（給兩個你能答的選項）</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">B</b>Let me answer what I think is the core of your question — [start talking about what you can].
-      <span class="zh">讓我針對我理解到的核心來回答——（開始講你能講的）</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--warn)"><b style="color:var(--warn)">C</b>That's a great question — I want to give it the attention it deserves. Could we discuss this after the session?
-      <span class="zh">這是很好的問題，我想給它應有的深度。可以會後討論嗎？（核彈選項，優雅退場）</span>
-    </div>
-  </div>
-
-  <div class="setup" style="margin-top:12px;border-color:var(--warn);background:#fff8e8">
-    <b style="color:var(--warn)">TIPS</b>｜① 開 <b>Zoom Captions</b>（View → Show Captions）——你能<b>用讀的</b>看題目
-    ｜② 開 <b>Chat</b> 視窗——委員有時會把問題也打字
-    ｜③ <b>Repeat back</b> 你聽到的部分——「So you're asking about [X]...」買 2-3 秒
-    ｜④ <b>可以問兩次！</b>——不會扣分，反而顯示你認真聽
-  </div>
-</div>
-
-<!-- ===== UNIVERSAL PATTERNS ===== -->
-<div class="cheatsheet" style="border-color:var(--emerald);background:var(--emerald-soft)">
-  <h2 style="color:var(--emerald)">🎯 Universal patterns · 萬用回應</h2>
-
-  <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:10px;font-family:'PingFang TC','Noto Sans TC',sans-serif">四種通用句型，任何題目都可以套。找不到對應答案時，先靠句型撐住場面。</div>
-
-  <!-- Pattern 1: Topic openers -->
-  <div style="margin-bottom:14px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--emerald);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">① Topic Opener · 主題開場（取代 Yes/No）</div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">A</b>On [topic], the way we think about it is...
-      <span class="zh">關於 [主題]，我們的看法是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">B</b>There are two parts to this. First... Second...
-      <span class="zh">這裡有兩個部分。第一... 第二...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">C</b>What we found in the data is...
-      <span class="zh">我們在資料中發現的是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">D</b>The short answer is [X]. The longer answer is...
-      <span class="zh">簡短回答是 [X]。展開講的話...</span>
-    </div>
-  </div>
-
-  <!-- Pattern 2: Partial agreement + pivot -->
-  <div style="margin-bottom:14px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--emerald);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">② Partial Agreement + Pivot · 承認+轉場（尖銳問題）</div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">A</b>That's a fair concern. Where we land is...
-      <span class="zh">這是合理的顧慮。我們的立場是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">B</b>There's truth to that. What we add is...
-      <span class="zh">確實有這個部分。我們補上的是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">C</b>I'd frame it a bit differently. Instead of X, we're doing Y.
-      <span class="zh">我會換個角度看。我們做的不是 X，是 Y。</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">D</b>You're touching on something we thought a lot about. Our position is...
-      <span class="zh">這個點我們反覆思考過。我們的立場是...</span>
-    </div>
-  </div>
-
-  <!-- Pattern 3: Honest not-sure -->
-  <div style="margin-bottom:14px;padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--emerald);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">③ Honest "Not Sure" · 誠實不確定（不掉價）</div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">A</b>I don't have a definitive answer. My best interpretation would be...
-      <span class="zh">我沒有確定的答案。我目前的看法是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">B</b>We haven't tested that directly. Based on what we did find...
-      <span class="zh">這個我們沒有直接測。但根據我們的發現...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">C</b>That's beyond our scope, but the closest signal we have is...
-      <span class="zh">這超出我們的研究範圍，但最接近的訊號是...</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">D</b>That's honestly something we're still working through.
-      <span class="zh">老實說這是我們還在思考的部分。</span>
-    </div>
-  </div>
-
-  <!-- Pattern 4: Wrap-up -->
-  <div style="padding:10px 14px;background:#fff;border-radius:6px">
-    <div style="font-size:11.5px;font-weight:800;color:var(--emerald);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">④ Wrap-up · 收尾（把球丟回去）</div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">A</b>Does that address your question?
-      <span class="zh">這樣有回答到你的問題嗎？</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">B</b>Happy to go deeper if useful.
-      <span class="zh">如果有幫助，可以再深入談。</span>
-    </div>
-    <div class="short-stall" style="border-color:var(--emerald)"><b style="color:var(--emerald)">C</b>I hope that gives you a sense of where we're coming from.
-      <span class="zh">希望這讓你感受到我們的出發點。</span>
-    </div>
-  </div>
+<!-- ===== ANSWER PRINCIPLE ===== -->
+<div style="padding:8px 12px;background:var(--emerald-soft);border:1.5px solid var(--emerald);border-radius:6px;margin-bottom:14px;font-size:12px;color:var(--ink-2);line-height:1.5;font-family:'PingFang TC','Noto Sans TC',sans-serif">
+  <b style="color:var(--emerald);font-family:'Inter',sans-serif;letter-spacing:.08em">ANSWER PRINCIPLE</b>｜不要說 "Yes, you're right"（會綁在對方問法上）｜直接從<b>主題</b>開始：「On [topic]...」「The way to handle X is...」「Three main differences...」｜這樣答案能同時 cover 不同問法的類似問題
 </div>
 
 <!-- ===== NAV ===== -->
@@ -305,6 +220,7 @@
 <section id="s1">
 <h2><span class="idx">A</span> Core Argument · Difference-Analysis Positioning 核心論點 · 差異分析取徑 <span class="n">3 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa critical">
   <div class="q">Why difference-analysis instead of the fidelity approach? Wouldn't a more human-like AI Persona be more useful?</div>
   <div class="q-zh">為什麼是「差異分析取徑」而不是「擬真取徑」？越像真人的 AI Persona 不是更有用嗎？</div>
@@ -348,6 +264,7 @@
   </div>
   <div class="risk"><b>risk</b>This is the sharpest question. If pushed, admit that direct-Q&A shortcuts many use cases, and reposition your contribution as "when the artifact of interviewing matters."</div>
 </div>
+</div>
 
 </section>
 
@@ -357,6 +274,7 @@
 <section id="s2">
 <h2><span class="idx">B</span> Method Rigor · Sample, Coder, Fairness 方法嚴謹性 · 樣本、編碼、比較公平性 <span class="n">3 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa critical">
   <div class="q">Only 2 human participants — how can you make a comparison claim from that?</div>
   <div class="q-zh">只有 2 位真人受訪者，這樣可以做比較嗎？</div>
@@ -400,6 +318,7 @@
   </div>
   <div class="risk"><b>risk</b>Don't deny it — concede the confound and reframe as ecological validity.</div>
 </div>
+</div>
 
 </section>
 
@@ -409,6 +328,7 @@
 <section id="s3">
 <h2><span class="idx">C</span> Related Work Positioning 相關研究定位 <span class="n">2 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa">
   <div class="q">How does your six-dimension script differ from Park et al.'s generative agents in 2023?</div>
   <div class="q-zh">你的六維度劇本跟 Park 2023 的 Generative Agents 差在哪？</div>
@@ -437,6 +357,7 @@
     <p>新意在<b>重新框架</b>：AI Persona 是<b>對照基準</b>而非替代品——這對設計團隊是可行動的，而「n = 1000 synthetic users」不是。</p>
   </div>
 </div>
+</div>
 
 </section>
 
@@ -446,6 +367,7 @@
 <section id="s4">
 <h2><span class="idx">D</span> Synthetic vs Experiential Thinking 合成式 vs 經歷中的思考 <span class="n">2 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa">
   <div class="q">You claim "no better or worse" — but structural clarity is clearly a strength. Isn't your framing avoiding the hard question?</div>
   <div class="q-zh">你說「無優劣之分」——但結構清晰明明就是優勢，你這樣說是不是在迴避難的問題？</div>
@@ -474,6 +396,7 @@
   </div>
   <div class="gambit"><b>gambit</b>Concede on principle, then reassert: simulated hesitation ≠ experienced cognition.</div>
 </div>
+</div>
 
 </section>
 
@@ -483,6 +406,7 @@
 <section id="s5">
 <h2><span class="idx">E</span> Application to Design Practice 對設計實務的應用 <span class="n">2 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa">
   <div class="q">Has any actual design team adopted your "AI breadth + human depth" model? Or is this still speculative?</div>
   <div class="q-zh">有真的設計團隊用過你的「AI 廣度 + 真人深度」模式嗎？還是這只是推論？</div>
@@ -510,6 +434,7 @@
     <p>我們建議明確把 AI Persona 的產出當<b>待驗證的假設，不是結論</b>——這才是「AI 先、真人後」該有的運作方式。AI 的角色是<b>擴大探索空間</b>，不是定義答案。</p>
   </div>
 </div>
+</div>
 
 </section>
 
@@ -519,6 +444,7 @@
 <section id="s6">
 <h2><span class="idx">F</span> Limitations & Generalizability 研究限制與推廣性 <span class="n">2 questions</span></h2>
 
+<div class="qa-grid">
 <div class="qa">
   <div class="q">Your study is on Taiwanese Gen Z ETF investors. How does this generalize beyond that context?</div>
   <div class="q-zh">你的研究只做台灣 Z 世代 ETF 投資者，怎麼推廣到其他情境？</div>
@@ -546,6 +472,7 @@
     <p>我們預期會持續的是<b>方法論</b>——用結構性差異作為設計研究的視角——以及<b>概念框架</b>（合成式 vs 經歷中的思考）。即使 AI 縮小了真實性差距，框架能告訴我們<b>該觀察什麼</b>來偵測這個變化。</p>
   </div>
 </div>
+</div>
 
 </section>
 
@@ -555,6 +482,7 @@
 <section id="s7">
 <h2><span class="idx">G</span> Curveballs · Unexpected Angles 尖銳題 · 意外角度 <span class="n">1 question</span></h2>
 
+<div class="qa-grid">
 <div class="qa critical">
   <div class="q">If Anne is a "researcher-constructed artifact," how is she different from a stereotype? What makes her a persona and not a caricature?</div>
   <div class="q-zh">如果 Anne 是「研究者建構的產物」，那她跟刻板印象差在哪？她憑什麼是 persona 而不是 caricature？</div>
@@ -569,11 +497,12 @@
   </div>
   <div class="gambit"><b>gambit</b>Own the construction, then defend the discipline.</div>
 </div>
+</div>
 
 </section>
 
 <footer>
-  <b>15 questions · 中英對照 · 2 strategies · 4 short stalls</b> — Practice the two strategy openers out loud tonight.
+  <b>15 questions · 中英對照 · 3-column grid · Dashboard on top</b> — Cmd+F 找關鍵字最快
 </footer>
 
 </div>
