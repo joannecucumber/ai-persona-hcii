@@ -68,11 +68,12 @@
   .cheatsheet .setup{background:#fff;padding:6px 8px;border-radius:4px;margin-top:6px;font-size:10.5px;color:var(--ink-2);line-height:1.5;font-family:'PingFang TC','Noto Sans TC',sans-serif;border:1px dashed rgba(0,0,0,.15)}
   .cheatsheet .setup b{font-weight:700}
 
-  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:8px 16px;margin:0 -28px 16px;z-index:10;display:flex;gap:2px;overflow-x:auto;align-items:center;flex-wrap:wrap}
-  nav.toc a{color:var(--muted);text-decoration:none;font-size:11.5px;padding:4px 10px;border-radius:3px;white-space:nowrap;transition:.15s;font-weight:500}
-  nav.toc a:hover{color:var(--accent);background:var(--paper)}
-  nav.toc .count{margin-left:auto;color:var(--muted);font-size:11px}
-  nav.toc .count b{color:var(--ink);font-weight:700}
+  nav.toc{position:sticky;top:0;background:rgba(244,239,228,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:8px 16px;margin:0 -28px 16px;z-index:10;display:flex;flex-direction:column;gap:3px}
+  nav.toc .toc-row{display:flex;align-items:baseline;gap:4px;padding:1px 0;flex-wrap:wrap}
+  nav.toc .toc-cat{color:var(--ink);font-weight:700;font-size:11.5px;padding:3px 10px;border-radius:3px;text-decoration:none;white-space:nowrap;min-width:100px;background:var(--card2)}
+  nav.toc .toc-cat:hover{color:var(--accent);background:var(--paper)}
+  nav.toc .toc-q{color:var(--muted);text-decoration:none;font-size:11.5px;padding:3px 10px;border-radius:3px;white-space:nowrap;transition:.15s;font-weight:500;font-family:'PingFang TC','Noto Sans TC',sans-serif}
+  nav.toc .toc-q:hover{color:var(--accent);background:var(--paper)}
 
   section{margin-bottom:20px;scroll-margin-top:60px}
   section h2{color:var(--ink);font-size:16px;font-weight:700;margin-bottom:10px;font-family:ui-serif,serif;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
@@ -206,16 +207,45 @@
   <b style="color:var(--emerald);font-family:'Inter',sans-serif;letter-spacing:.08em">ANSWER PRINCIPLE</b>｜不要說 "Yes, you're right"（會綁在對方問法上）｜直接從<b>主題</b>開始：「On [topic]...」「The way to handle X is...」「Three main differences...」｜這樣答案能同時 cover 不同問法的類似問題
 </div>
 
-<!-- ===== NAV ===== -->
+<!-- ===== NAV · grouped by section with question keywords ===== -->
 <nav class="toc">
-  <a href="#s1">A · Core Argument 核心論點</a>
-  <a href="#s2">B · Method Rigor 方法嚴謹</a>
-  <a href="#s3">C · Related Work 相關研究</a>
-  <a href="#s4">D · Two Modes 兩種思考</a>
-  <a href="#s5">E · Design Practice 設計實務</a>
-  <a href="#s6">F · Limitations 研究限制</a>
-  <a href="#s7">G · Curveballs 尖銳題</a>
-  <span class="count">15 questions · <b>中英對照</b></span>
+  <div class="toc-row">
+    <a href="#s1" class="toc-cat">A 核心論點</a>
+    <a href="#a1" class="toc-q">為什麼不比擬真？</a>
+    <a href="#a2" class="toc-q">跟幻覺差在哪？</a>
+    <a href="#a3" class="toc-q">為什麼要訪談 AI？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s2" class="toc-cat">B 方法嚴謹</a>
+    <a href="#b1" class="toc-q">只有 2 位真人？</a>
+    <a href="#b2" class="toc-q">只有一個編碼者？</a>
+    <a href="#b3" class="toc-q">語音 vs 打字不公平？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s3" class="toc-cat">C 相關研究</a>
+    <a href="#c1" class="toc-q">跟 Park 2023 差在哪？</a>
+    <a href="#c2" class="toc-q">跟 PersonaCraft 差在哪？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s4" class="toc-cat">D 兩種思考</a>
+    <a href="#d1" class="toc-q">沒有優劣？</a>
+    <a href="#d2" class="toc-q">框架會過時？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s5" class="toc-cat">E 設計實務</a>
+    <a href="#e1" class="toc-q">有團隊用過嗎？</a>
+    <a href="#e2" class="toc-q">用 AI 會產生偏見？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s6" class="toc-cat">F 研究限制</a>
+    <a href="#f1" class="toc-q">怎麼推廣其他情境？</a>
+    <a href="#f2" class="toc-q">半年後還有用？</a>
+  </div>
+  <div class="toc-row">
+    <a href="#s7" class="toc-cat">G 尖銳題</a>
+    <a href="#g1" class="toc-q">Anne 是刻板印象？</a>
+    <a href="#g2" class="toc-q">為什麼做這研究？</a>
+  </div>
 </nav>
 
 <!-- =============================================== -->
@@ -225,7 +255,7 @@
 <h2><span class="idx">A</span> Core Argument · Difference-Analysis Positioning 核心論點 · 差異分析取徑 <span class="n">3 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="a1">
   <div class="q">Why difference-analysis instead of the fidelity approach? Wouldn't a more human-like AI Persona be more useful?</div>
   <div class="q-zh">為什麼是「差異分析取徑」而不是「擬真取徑」？越像真人的 AI Persona 不是更有用嗎？<span style="display:inline-block;background:rgba(0,0,0,.06);color:var(--muted);font-size:9.5px;padding:1px 5px;border-radius:2px;margin-left:4px;font-family:'Inter',sans-serif;font-weight:600">less likely</span></div>
 
@@ -240,7 +270,7 @@
   <div class="gambit"><b>opener</b>The fidelity approach quietly assumes the human is the target. We flip that — the difference itself is what's informative.</div>
 </div>
 
-<div class="qa">
+<div class="qa" id="a2">
   <div class="q">You call this "synthetic thinking" vs "experiential thinking." Isn't this just repackaging what we already know — that LLMs hallucinate?</div>
   <div class="q-zh">你講「合成式思考」跟「經歷中的思考」——這不就是換個包裝在講 LLM 會幻覺嗎？</div>
 
@@ -254,7 +284,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="a3">
   <div class="q">Why do we need to interview an AI Persona at all — if we can just ask it for the answer directly?</div>
   <div class="q-zh">為什麼要「訪談」AI Persona？如果它可以直接給答案，我直接問它不就好了？</div>
 
@@ -279,7 +309,7 @@
 <h2><span class="idx">B</span> Method Rigor · Sample, Coder, Fairness 方法嚴謹性 · 樣本、編碼、比較公平性 <span class="n">3 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="b1">
   <div class="q">Only 2 human participants — how can you make a comparison claim from that?</div>
   <div class="q-zh">只有 2 位真人受訪者，這樣可以做比較嗎？</div>
 
@@ -291,7 +321,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="b2">
   <div class="q">A single coder for the linguistic analysis — how do you defend the reliability?</div>
   <div class="q-zh">語言分析只有你一個編碼者，信度怎麼確保？</div>
 
@@ -303,7 +333,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="b3">
   <div class="q">Your humans spoke over voice; your AI Persona typed. That's an unfair comparison — the medium alone would explain the differences.</div>
   <div class="q-zh">你的真人用語音、AI 用打字——這比較不公平，媒介本身就能解釋差異。</div>
 
@@ -325,7 +355,7 @@
 <h2><span class="idx">C</span> Related Work Positioning 相關研究定位 <span class="n">2 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="c1">
   <div class="q">How does your six-dimension script differ from Park et al.'s generative agents in 2023?</div>
   <div class="q-zh">你的六維度劇本跟 Park 2023 的 Generative Agents 差在哪？</div>
 
@@ -337,7 +367,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="c2">
   <div class="q">Recent work like PersonaCraft (Jung 2025) and Silicon Sampling (Argyle 2023) already generate personas at scale. What's new here?</div>
   <div class="q-zh">最近 PersonaCraft (Jung 2025) 跟 Silicon Sampling (Argyle 2023) 都在做大規模 persona 生成，你的新意在哪？</div>
 
@@ -361,7 +391,7 @@
 <h2><span class="idx">D</span> Synthetic vs Experiential Thinking 合成式 vs 經歷中的思考 <span class="n">2 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="d1">
   <div class="q">You claim "no better or worse" — but structural clarity is clearly a strength. Isn't your framing avoiding the hard question?</div>
   <div class="q-zh">你說「無優劣之分」——但結構清晰明明就是優勢，你這樣說是不是在迴避難的問題？</div>
 
@@ -375,7 +405,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="d2">
   <div class="q">Once LLMs improve, won't AI develop something like "experiential thinking" too? Your framework may age quickly.</div>
   <div class="q-zh">LLM 未來會進步，AI 難道不會也發展出類似「經歷中的思考」？你的框架很快就會過時吧？</div>
 
@@ -397,7 +427,7 @@
 <h2><span class="idx">E</span> Application to Design Practice 對設計實務的應用 <span class="n">2 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="e1">
   <div class="q">Has any actual design team adopted your "AI breadth + human depth" model? Or is this still speculative?</div>
   <div class="q-zh">有真的設計團隊用過你的「AI 廣度 + 真人深度」模式嗎？還是這只是推論？</div>
 
@@ -413,7 +443,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="e2">
   <div class="q">If designers start with AI Personas, aren't they baking in bias that shapes what they hear from real users later?</div>
   <div class="q-zh">如果設計師先用 AI Persona，會不會產生偏見、影響後面聽真實使用者的方式？</div>
 
@@ -439,7 +469,7 @@
 <h2><span class="idx">F</span> Limitations & Generalizability 研究限制與推廣性 <span class="n">2 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa">
+<div class="qa" id="f1">
   <div class="q">Your study is on Taiwanese Gen Z ETF investors. How does this generalize beyond that context?</div>
   <div class="q-zh">你的研究只做台灣 Z 世代 ETF 投資者，怎麼推廣到其他情境？</div>
 
@@ -453,7 +483,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="f2">
   <div class="q">LLMs move so fast — will your findings still be relevant in six months?</div>
   <div class="q-zh">LLM 進步這麼快，你的發現半年後還有用嗎？</div>
 
@@ -477,7 +507,7 @@
 <h2><span class="idx">G</span> Curveballs · Unexpected Angles 尖銳題 · 意外角度 <span class="n">2 questions</span></h2>
 
 <div class="qa-grid">
-<div class="qa critical">
+<div class="qa critical" id="g1">
   <div class="q">If Anne is a "researcher-constructed artifact," how is she different from a stereotype? What makes her a persona and not a caricature?</div>
   <div class="q-zh">如果 Anne 是「研究者建構的產物」，那她跟刻板印象差在哪？她憑什麼是 persona 而不是 caricature？</div>
 
@@ -491,7 +521,7 @@
   </div>
 </div>
 
-<div class="qa">
+<div class="qa" id="g2">
   <div class="q">Why did you want to do this research?</div>
   <div class="q-zh">你為什麼會想做這個研究？</div>
 
